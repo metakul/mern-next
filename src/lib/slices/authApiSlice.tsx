@@ -2,8 +2,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCredentials } from './authSlice';
 import { ApiError, LoginData } from '../../Datatypes/interfaces/interface';
-import { ApiEndpoint } from '../../DataTypes/enums';
-import request from '../../Backend/axiosCall/apiCall';
+import { ApiEndpoint } from '@/Datatypes/enums';
+import Request from '@/Backend/axiosCall/apiCall';
 import { ApiSuccess } from '../../Datatypes/interfaces/interface';
 import { jwtDecode } from 'jwt-decode';
 
@@ -18,7 +18,7 @@ export const loginUser = createAsyncThunk(
   'auth/login',
   async ({ email, password }: LoginData, { rejectWithValue, dispatch }) => {
     try {
-      const response = await request({
+      const response = await Request({
         apiId:ApiEndpoint.LOGIN.apiId,
         url: ApiEndpoint.LOGIN.url,
         method: ApiEndpoint.LOGIN.method,

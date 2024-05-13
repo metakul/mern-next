@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import {
@@ -8,20 +9,21 @@ import {
   useContractWrite,
   ConnectWallet,
 } from "@thirdweb-dev/react";
-import { Link, useLocation } from 'react-router-dom';
-import { ClaimNftInterface } from "../../interfaces/interface";
-import { AppDispatch } from "../../redux/store";
-import { ClaimNftSlice } from "../../redux/slices/Web3Profile/NftApiSlice";
+import { usePathname } from 'next/navigation'
+ 
+import { ClaimNftInterface } from "@/Datatypes/interfaces/interface";
+import { AppDispatch } from "@/lib/store";
+import { ClaimNftSlice } from "@/lib/slices/Web3Profile/NftApiSlice";
 import { useDispatch } from "react-redux";
-import BreadCrumbs from "../../Components/elements/BreadCrumbs";
-import toast from "react-hot-toast";
-import SocialProfiles from "../../Components/SocialProfile";
+import BreadCrumbs from "@/components/Elements/BreadCrumbs";
+import SocialProfiles from "@/components/SocialProfile";
+import Link from "next/link";
 
 const myNftDropContractAddress = "0x710E9161e8A768c0605335AB632361839f761374"
 
 const MintPage = () => {
-  const location = useLocation()
-  const address = useAddress();
+  const pathname = usePathname()
+  const address = useAddress() || '';
   const { contract: nftDrop } = useContract(myNftDropContractAddress);
   const [mintMsg,] = useState("")
   const dispatch = useDispatch()
@@ -47,7 +49,6 @@ const MintPage = () => {
   };
   const handleClaimNft = async () => {
     if(!address){
-      toast.error("Wallet not Connected")
       return
     }
     (dispatch as AppDispatch)(ClaimNftSlice(claimNftHandler));
@@ -56,7 +57,7 @@ const MintPage = () => {
   return (
     <Container >
       <Container>
-        <BreadCrumbs currentPath={location.pathname} />
+        <BreadCrumbs currentPath={pathname} />
         <div className="">
           <Grid container sx={{ mt: 4 }}>
             <Grid item xs={6} sx={{
@@ -99,7 +100,7 @@ const MintPage = () => {
             {mintMsg && <p>{mintMsg}</p>}
           </Container>
           <Container className="mt-4">
-            <Link to="/earn">
+            <Link href="/earn">
               <button className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold  shadow-accent-volume transition-all hover:bg-accent-dark"
               > Already Claimed? Stake Now</button>
             </Link>
@@ -118,10 +119,11 @@ const MintPage = () => {
             }
           </Grid>
           <Grid>
-            {ownedNfts?.map((nft) => (
-              <Box>
+            {ownedNfts?.map((nft:any,index:any) => (
+              <Box
+              key={index}
+              >
                 <div
-                  key={nft.metadata.id.toString()}
                   className=""
                 >
                   <ThirdwebNftMedia

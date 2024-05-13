@@ -52,7 +52,7 @@
     js-tokens "^4.0.0"
     picocolors "^1.0.0"
 
-"@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.18.3", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.9", "@babel/runtime@^7.24.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.18.3", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.9", "@babel/runtime@^7.24.0", "@babel/runtime@^7.24.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
   version "7.24.5"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.24.5.tgz"
   integrity sha512-Nms86NXrsaeU9vbBJKni6gXiEXZ4CVpYVzEjDH9Sb8vmZ3UljyA1GSOJl/6LGPO8EHLuSF9H+IxNXHPX8QHJ4g==
@@ -1089,7 +1089,7 @@
   dependencies:
     "@babel/runtime" "^7.23.9"
 
-"@mui/material@^5.0.0", "@mui/material@^5.15.17":
+"@mui/material@^5.0.0", "@mui/material@^5.15.14", "@mui/material@^5.15.17":
   version "5.15.17"
   resolved "https://registry.npmjs.org/@mui/material/-/material-5.15.17.tgz"
   integrity sha512-ru/MLvTkCh0AZXmqwIpqGTOoVBS/sX48zArXq/DvktxXZx4fskiRA2PEc7Rk5ZlFiZhKh4moL4an+l8zZwq49Q==
@@ -1126,7 +1126,7 @@
     csstype "^3.1.3"
     prop-types "^15.8.1"
 
-"@mui/system@^5.15.15":
+"@mui/system@^5.15.14", "@mui/system@^5.15.15":
   version "5.15.15"
   resolved "https://registry.npmjs.org/@mui/system/-/system-5.15.15.tgz"
   integrity sha512-aulox6N1dnu5PABsfxVGOZffDVmlxPOVgj56HrUnJE8MCSh8lOvvkd47cebIVQQYAjpwieXQXiDPj5pwM40jTQ==
@@ -1154,6 +1154,18 @@
     "@types/prop-types" "^15.7.11"
     prop-types "^15.8.1"
     react-is "^18.2.0"
+
+"@mui/x-data-grid@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.npmjs.org/@mui/x-data-grid/-/x-data-grid-7.4.0.tgz"
+  integrity sha512-ILu0AVqqHQf4wN/nblsJ/k7PkvlB115vQ/FEiYk7neZlc/kOJOUyst3MWMVClAecZ8+JEs476q40xd4r1CtMfw==
+  dependencies:
+    "@babel/runtime" "^7.24.0"
+    "@mui/system" "^5.15.14"
+    "@mui/utils" "^5.15.14"
+    clsx "^2.1.1"
+    prop-types "^15.8.1"
+    reselect "^4.1.8"
 
 "@multiformats/base-x@^4.0.1":
   version "4.0.1"
@@ -2008,13 +2020,13 @@
   resolved "https://registry.npmjs.org/@tanstack/virtual-core/-/virtual-core-3.5.0.tgz"
   integrity sha512-KnPRCkQTyqhanNC0K63GBG3wA8I+D1fQuVnAvcBF8f13akOKeQp1gSbu6f77zCxhEk727iV5oQnbHLYzHrECLg==
 
-"@thirdweb-dev/auth@4.1.78":
-  version "4.1.78"
-  resolved "https://registry.npmjs.org/@thirdweb-dev/auth/-/auth-4.1.78.tgz"
-  integrity sha512-rEjdWV+nLRoU9W9YFzcK4paeQyKonP6KP2OceSuUSXFfp2kxUY2+dgiqX82Ybya0LgSuuAGTrfifl2Rwwtpbug==
+"@thirdweb-dev/auth@4.1.79":
+  version "4.1.79"
+  resolved "https://registry.npmjs.org/@thirdweb-dev/auth/-/auth-4.1.79.tgz"
+  integrity sha512-KBzBDkY563qu525Rvx36i1139CX5NI5cvPhF7P1pHgpe0k9EkAvVdnjKdWFcn1EZ5BaNCbYqG3DDTO0E7msSiQ==
   dependencies:
     "@fastify/cookie" "^9.3.1"
-    "@thirdweb-dev/wallets" "2.5.20"
+    "@thirdweb-dev/wallets" "2.5.21"
     cookie "^0.6.0"
     fastify-type-provider-zod "^1.1.9"
     uuid "^9.0.1"
@@ -2077,25 +2089,25 @@
   dependencies:
     ethers "^5.7.2"
 
-"@thirdweb-dev/react-core@4.6.19":
-  version "4.6.19"
-  resolved "https://registry.npmjs.org/@thirdweb-dev/react-core/-/react-core-4.6.19.tgz"
-  integrity sha512-yebvm/C5I4BKYe1dhwWEsQ+bHWC9/V7bsELEPHQ5Fj2hmblxfXW3I8CLV/7mXbzObTNE/wi5ag1PN0seltcxRA==
+"@thirdweb-dev/react-core@4.6.20":
+  version "4.6.20"
+  resolved "https://registry.npmjs.org/@thirdweb-dev/react-core/-/react-core-4.6.20.tgz"
+  integrity sha512-NbUCYA0NnQjfH/P8gMbMpHI2mdo6NkhSabDYBvKjYl657n3RRNzG1vnS12nhbwxTK544CsyrwD6JHHdC95wWYw==
   dependencies:
     "@tanstack/react-query" "^4.36.1"
-    "@thirdweb-dev/auth" "4.1.78"
+    "@thirdweb-dev/auth" "4.1.79"
     "@thirdweb-dev/chains" "0.1.108"
     "@thirdweb-dev/generated-abis" "^0.0.2"
-    "@thirdweb-dev/sdk" "4.0.80"
+    "@thirdweb-dev/sdk" "4.0.81"
     "@thirdweb-dev/storage" "2.0.15"
-    "@thirdweb-dev/wallets" "2.5.20"
+    "@thirdweb-dev/wallets" "2.5.21"
     mime "3.0.0"
     tiny-invariant "^1.3.3"
 
 "@thirdweb-dev/react@^4.6.19":
-  version "4.6.19"
-  resolved "https://registry.npmjs.org/@thirdweb-dev/react/-/react-4.6.19.tgz"
-  integrity sha512-u7EvCPM1handeeqquDIj525Vr4zO5mFLKXyhhUI0VKvs2hzfH+Tl/R8NrJqc0AaMM4ua+GuDHDma0wz1OUNURQ==
+  version "4.6.20"
+  resolved "https://registry.npmjs.org/@thirdweb-dev/react/-/react-4.6.20.tgz"
+  integrity sha512-aZqALMnTBBXl1Dx3Xzzz42WNYw39Yo4fNn+UCUn9FQSAZs2IDnmGv1tyIFGYalYq6qOMzcFyTmDBjPPa3l/ztQ==
   dependencies:
     "@emotion/css" "11.10.5"
     "@emotion/react" "^11.11.4"
@@ -2112,9 +2124,9 @@
     "@tanstack/react-query" "^4.36.1"
     "@thirdweb-dev/chains" "0.1.108"
     "@thirdweb-dev/payments" "1.0.5"
-    "@thirdweb-dev/react-core" "4.6.19"
-    "@thirdweb-dev/sdk" "4.0.80"
-    "@thirdweb-dev/wallets" "2.5.20"
+    "@thirdweb-dev/react-core" "4.6.20"
+    "@thirdweb-dev/sdk" "4.0.81"
+    "@thirdweb-dev/wallets" "2.5.21"
     buffer "^6.0.3"
     copy-to-clipboard "^3.3.3"
     detect-browser "^5.3.0"
@@ -2122,10 +2134,10 @@
     qrcode "^1.5.3"
     tiny-invariant "^1.3.3"
 
-"@thirdweb-dev/sdk@4.0.80":
-  version "4.0.80"
-  resolved "https://registry.npmjs.org/@thirdweb-dev/sdk/-/sdk-4.0.80.tgz"
-  integrity sha512-x03yaQ9RQhzxcwPMy4Hv7n48Z0rxtU8O3b5QF4jdmR40Dh0QHtoJxoErnhq4cG68avTR705LfqamlGglFrpZ9Q==
+"@thirdweb-dev/sdk@4.0.81":
+  version "4.0.81"
+  resolved "https://registry.npmjs.org/@thirdweb-dev/sdk/-/sdk-4.0.81.tgz"
+  integrity sha512-jc6u0BBecj3h08ak4XNxMkOH9zK4NL0PZEE8cYar4yhLY0+2bruVOszGF2bNdW0xcjRiLcU1pK7YLHscX/5iRQ==
   dependencies:
     "@eth-optimism/sdk" "3.3.0"
     "@thirdweb-dev/chains" "0.1.108"
@@ -2140,7 +2152,7 @@
     buffer "^6.0.3"
     eventemitter3 "^5.0.1"
     fast-deep-equal "^3.1.3"
-    thirdweb "5.19.0"
+    thirdweb "5.19.1"
     tiny-invariant "^1.3.3"
     tweetnacl "^1.0.3"
     uuid "^9.0.1"
@@ -2157,10 +2169,10 @@
     form-data "^4.0.0"
     uuid "^9.0.1"
 
-"@thirdweb-dev/wallets@2.5.20":
-  version "2.5.20"
-  resolved "https://registry.npmjs.org/@thirdweb-dev/wallets/-/wallets-2.5.20.tgz"
-  integrity sha512-32zQG3nlDWpn+JFJJdlPWSAgluzgx5/qnMeHgzzvSWb6DVqXYw5ycDjbEG6RFeLGi2GY/h006/aFT9pQKk37Yw==
+"@thirdweb-dev/wallets@2.5.21":
+  version "2.5.21"
+  resolved "https://registry.npmjs.org/@thirdweb-dev/wallets/-/wallets-2.5.21.tgz"
+  integrity sha512-jBAu3G1Mm6DMgdnRw0FDve32hji7pNOh5t7x5qO/SvXpT8q3+GH4tSoZl527ATp16HLADLB9AdyWm9jQEkouLg==
   dependencies:
     "@account-abstraction/contracts" "^0.5.0"
     "@blocto/sdk" "0.5.5"
@@ -2178,7 +2190,7 @@
     "@thirdweb-dev/chains" "0.1.108"
     "@thirdweb-dev/contracts-js" "1.3.23"
     "@thirdweb-dev/crypto" "0.2.6"
-    "@thirdweb-dev/sdk" "4.0.80"
+    "@thirdweb-dev/sdk" "4.0.81"
     "@walletconnect/core" "^2.12.1"
     "@walletconnect/ethereum-provider" "2.12.2"
     "@walletconnect/jsonrpc-utils" "^1.0.8"
@@ -2247,6 +2259,11 @@
   integrity sha512-UseG6H5vjRiNpQvrhy4VF/JXdA3V/Fp5amvveaL+fs28BZ6xIKJBPnUPRlEaZpysD9MbpfaLi8lbl7PGUAkpWw==
   dependencies:
     "@types/bn.js" "*"
+
+"@types/js-cookie@^3.0.6":
+  version "3.0.6"
+  resolved "https://registry.npmjs.org/@types/js-cookie/-/js-cookie-3.0.6.tgz"
+  integrity sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==
 
 "@types/json5@^0.0.29":
   version "0.0.29"
@@ -3812,7 +3829,7 @@ clsx@^1.2.1:
   resolved "https://registry.npmjs.org/clsx/-/clsx-1.2.1.tgz"
   integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
 
-clsx@^2.1.0:
+clsx@^2.1.0, clsx@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz"
   integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
@@ -5647,16 +5664,16 @@ glob-parent@^6.0.2:
   dependencies:
     is-glob "^4.0.3"
 
-glob@^10.3.10, glob@10.3.10:
-  version "10.3.10"
-  resolved "https://registry.npmjs.org/glob/-/glob-10.3.10.tgz"
-  integrity sha512-fa46+tv1Ak0UPK1TOy/pZrIybNNt4HCv7SDzwyfiOZkvZLEbjsZkJBPtDHVshZjbecAoAGSC20MjLDG/qr679g==
+glob@^10.3.10:
+  version "10.3.15"
+  resolved "https://registry.npmjs.org/glob/-/glob-10.3.15.tgz"
+  integrity sha512-0c6RlJt1TICLyvJYIApxb8GsXoai0KUP7AxKKAtsYXdgJR1mGEUa7DgwShbdk1nly0PYoZj01xd4hzbq3fsjpw==
   dependencies:
     foreground-child "^3.1.0"
-    jackspeak "^2.3.5"
+    jackspeak "^2.3.6"
     minimatch "^9.0.1"
-    minipass "^5.0.0 || ^6.0.2 || ^7.0.0"
-    path-scurry "^1.10.1"
+    minipass "^7.0.4"
+    path-scurry "^1.11.0"
 
 glob@^7.1.3:
   version "7.2.3"
@@ -5669,6 +5686,17 @@ glob@^7.1.3:
     minimatch "^3.1.1"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
+
+glob@10.3.10:
+  version "10.3.10"
+  resolved "https://registry.npmjs.org/glob/-/glob-10.3.10.tgz"
+  integrity sha512-fa46+tv1Ak0UPK1TOy/pZrIybNNt4HCv7SDzwyfiOZkvZLEbjsZkJBPtDHVshZjbecAoAGSC20MjLDG/qr679g==
+  dependencies:
+    foreground-child "^3.1.0"
+    jackspeak "^2.3.5"
+    minimatch "^9.0.1"
+    minipass "^5.0.0 || ^6.0.2 || ^7.0.0"
+    path-scurry "^1.10.1"
 
 global@~4.4.0:
   version "4.4.0"
@@ -6332,7 +6360,7 @@ iterator.prototype@^1.1.2:
     reflect.getprototypeof "^1.0.4"
     set-function-name "^2.0.1"
 
-jackspeak@^2.3.5:
+jackspeak@^2.3.5, jackspeak@^2.3.6:
   version "2.3.6"
   resolved "https://registry.npmjs.org/jackspeak/-/jackspeak-2.3.6.tgz"
   integrity sha512-N3yCS/NegsOBokc8GAdM8UcmfsKiSS8cipheD/nivzr700H+nsMOxJjQnvwOcRYVuFkdH0wGUvW2WbXGmrZGbQ==
@@ -6363,6 +6391,11 @@ jiti@^1.21.0:
   version "1.21.0"
   resolved "https://registry.npmjs.org/jiti/-/jiti-1.21.0.tgz"
   integrity sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==
+
+js-cookie@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.npmjs.org/js-cookie/-/js-cookie-3.0.5.tgz"
+  integrity sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==
 
 js-sha3@^0.8.0, js-sha3@0.8.0:
   version "0.8.0"
@@ -6529,6 +6562,11 @@ jws@^4.0.0:
   dependencies:
     jwa "^2.0.0"
     safe-buffer "^5.0.1"
+
+jwt-decode@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/jwt-decode/-/jwt-decode-4.0.0.tgz"
+  integrity sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==
 
 keccak@^3.0.0, keccak@^3.0.1, keccak@^3.0.3:
   version "3.0.4"
@@ -6745,7 +6783,12 @@ lodash@^4.17.21:
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
-lodash@^4.17.4, lodash@4.17.11:
+lodash@^4.17.4:
+  version "4.17.21"
+  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
+lodash@4.17.11:
   version "4.17.11"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.11.tgz"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -6937,7 +6980,7 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
 
-"minipass@^5.0.0 || ^6.0.2 || ^7.0.0":
+"minipass@^5.0.0 || ^6.0.2 || ^7.0.0", minipass@^7.0.4:
   version "7.1.1"
   resolved "https://registry.npmjs.org/minipass/-/minipass-7.1.1.tgz"
   integrity sha512-UZ7eQ+h8ywIRAW1hIEl2AqdwzJucU/Kp59+8kkZeSvafXhZjul247BvIJjEVFVeON6d7lM46XX1HXCduKAS8VA==
@@ -6990,20 +7033,20 @@ mri@^1.2.0:
   resolved "https://registry.npmjs.org/mri/-/mri-1.2.0.tgz"
   integrity sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==
 
-ms@^2.0.0:
+ms@^2.0.0, ms@^2.1.1:
   version "2.1.3"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
-
-ms@^2.1.1, ms@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
-  integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
   integrity sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==
+
+ms@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
+  integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
 multibase@^4.0.1, multibase@^4.0.2:
   version "4.0.6"
@@ -7477,7 +7520,7 @@ path-parse@^1.0.7:
   resolved "https://registry.npmjs.org/path-parse/-/path-parse-1.0.7.tgz"
   integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
-path-scurry@^1.10.1:
+path-scurry@^1.10.1, path-scurry@^1.11.0:
   version "1.11.1"
   resolved "https://registry.npmjs.org/path-scurry/-/path-scurry-1.11.1.tgz"
   integrity sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==
@@ -8174,6 +8217,11 @@ require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/require-main-filename/-/require-main-filename-2.0.0.tgz"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
+
+reselect@^4.1.8:
+  version "4.1.8"
+  resolved "https://registry.npmjs.org/reselect/-/reselect-4.1.8.tgz"
+  integrity sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==
 
 reselect@^5.1.0:
   version "5.1.0"
@@ -8955,10 +9003,10 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-thirdweb@5.19.0:
-  version "5.19.0"
-  resolved "https://registry.npmjs.org/thirdweb/-/thirdweb-5.19.0.tgz"
-  integrity sha512-gYeLqDddPBQwHDm34627G/Ybw8Q75guRfsuYlezJOVsjvK57nbvQ462BLGJ+AfXF3vS/5UE70PXMhyTHYPqp5w==
+thirdweb@5.19.1:
+  version "5.19.1"
+  resolved "https://registry.npmjs.org/thirdweb/-/thirdweb-5.19.1.tgz"
+  integrity sha512-1FCxMwSH1KyFOmXr2flIzhIJennyieEmRWt2qTDcPArkBqsAnAsEsmpSZncaHRuqzAb+Fz16VOrn/By/8JuF6g==
   dependencies:
     "@coinbase/wallet-sdk" "4.0.0-rc.2"
     "@emotion/react" "11.11.4"

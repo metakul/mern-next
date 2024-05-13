@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { useState } from "react";
 import { Container, Typography, Box, Paper } from "@mui/material";
 import { convertFileToBase64 } from "../../scripts/fileConverter";
+import Image from "next/image";
 
 export default function ImageUploader(props) {
   const { register } = props;
@@ -23,7 +24,7 @@ export default function ImageUploader(props) {
   const preview = (
     <Box key={file.name}>
       <div>
-        <img
+        <Image
           style={{
             display: "block",
             height: 150,

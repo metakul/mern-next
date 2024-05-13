@@ -1,6 +1,6 @@
 //pages interface
 import { AxiosRequestConfig } from "axios"
-import { AllowlistProofType } from "../redux/slices/Web3Profile/whitelist";
+import { AllowlistProofType } from "@/lib/slices/Web3Profile/whitelist";
 export interface Layoutprops {
 }
 
@@ -78,7 +78,7 @@ interface ClaimFunction {
   (data: ClaimArguments): Promise<unknown>;
 }
 export interface ClaimNftInterface {
-  address?: string;
+  address: string;
   claim: ClaimFunction
 }
 

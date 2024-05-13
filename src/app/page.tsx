@@ -1,13 +1,11 @@
 import React from 'react';
 import { HomePageProps } from '@/Datatypes/interfaces/interface';
-import Blogs from '@/tabs/Tab1/Blogs';
+import type { Metadata } from "next";
 
 import { Container } from '@mui/material';
 import Tab1 from '@/tabs/Tab1';
 
-const HomePage: React.FC<HomePageProps> = () => {
-
-
+export default function IndexPage(){
 
   return (
      <Container className="container">
@@ -16,4 +14,6 @@ const HomePage: React.FC<HomePageProps> = () => {
   );
 };
 
-export default HomePage;
+export const metadata: Metadata = {
+  title: "Redux Toolkit",
+};

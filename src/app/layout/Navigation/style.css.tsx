@@ -3,7 +3,6 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 const drawerWidth = 240;
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const openedMixin = (theme: Theme): CSSObject => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
@@ -14,7 +13,6 @@ export const openedMixin = (theme: Theme): CSSObject => ({
     overflowX: 'hidden',
 });
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const closedMixin = (theme: Theme): CSSObject => ({
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,

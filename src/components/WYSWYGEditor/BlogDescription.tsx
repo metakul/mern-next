@@ -4,6 +4,7 @@ import { BlogDetailsProps } from '@/Datatypes/interfaces/interface';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { Button } from '@mui/material';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
 
@@ -35,7 +36,7 @@ console.log(userType);
             </a>
           );
         case 'img':
-          return <img key={index} src={node.getAttribute('src')} alt={node.getAttribute('alt')} className="max-w-full" />;
+          return <Image key={index} src={node.getAttribute('src')} alt={node.getAttribute('alt')} className="max-w-full" />;
         case 'i':
         case 'em':
           return <em key={index}>{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</em>;

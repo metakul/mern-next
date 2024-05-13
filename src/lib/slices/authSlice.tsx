@@ -1,11 +1,12 @@
 // authSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from '../../Datatypes/interfaces/interface';
+import Cookies from 'js-cookie';
 
-const storedUser = localStorage.getItem('user');
-const storedAccessToken = localStorage.getItem('access');
-const storedRefreshToken = localStorage.getItem('refresh');
-const storedUserType = localStorage.getItem('userType');
+const storedUser = Cookies.get('user');
+const storedAccessToken = Cookies.get('access');
+const storedRefreshToken = Cookies.get('refresh');
+const storedUserType = Cookies.get('userType');
 
 const initialState: AuthState = {
   isAuthenticated: false,
@@ -28,10 +29,10 @@ const authSlice = createSlice({
       state.access = action.payload.token.access;
       state.refresh = action.payload.token.refresh;
       state.userType = action.payload.userType;
-      localStorage.setItem('user', action.payload.user);
-      localStorage.setItem('access', action.payload.token.access);
-      localStorage.setItem('refresh', action.payload.token.refresh);
-      localStorage.setItem('userType', action.payload.userType);
+      Cookies.set('user', action.payload.user);
+      Cookies.set('access', action.payload.token.access);
+      Cookies.set('refresh', action.payload.token.refresh);
+      Cookies.set('userType', action.payload.userType);
     },
     logout: (state) => {
       state.isAuthenticated = false;
@@ -39,15 +40,15 @@ const authSlice = createSlice({
       state.access = null;
       state.refresh = null;
       state.userType = null;
-      localStorage.removeItem('user');
-      localStorage.removeItem('access');
-      localStorage.removeItem('refresh');
-      localStorage.removeItem('userType');
+      Cookies.remove('user');
+      Cookies.remove('access');
+      Cookies.remove('refresh');
+      Cookies.remove('userType');
     },
     // Define a new action to refresh the access token
     refreshAccessToken: (state, action: PayloadAction<string>) => {
       state.access = action.payload;
-      localStorage.setItem('access', action.payload);
+      Cookies.set('access', action.payload);
     },
   },
 });

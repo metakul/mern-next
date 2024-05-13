@@ -16,7 +16,6 @@ import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
 import ContactEmergencyOutlinedIcon from '@mui/icons-material/ContactEmergencyOutlined';
 
-import { Inter } from "next/font/google";
 import "./globals.css";
 import MiniDrawer from "./layout/Navigation";
 import navConfig from "./layout/navConfig";
@@ -28,7 +27,7 @@ import Tab4 from "@/tabs/Tab4/temp";
 
 //provider:
 import {
-  ThirdwebProvider,
+  // ThirdwebProvider,
   metamaskWallet,
   coinbaseWallet,
   walletConnect,
@@ -56,7 +55,7 @@ export default function DashboardLayout({
   const isNonMobile = useMediaQuery("(min-width: 766px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showOutlet, setShowOutlet] = useState<boolean>(false);
-  const APP_BAR="64px"
+  const APP_BAR = "64px"
   const handleSideBarState = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -64,53 +63,55 @@ export default function DashboardLayout({
   const tabs = [
     {
       value: <OtherHousesOutlinedIcon />,
-      content: <div>{children}</div> ,
+      content: <div>{children}</div>,
       label: Tabs.tabTitle1
     },
-    { value: <StoreOutlinedIcon />,
+    {
+      value: <StoreOutlinedIcon />,
       content: <MetakulCollection />,
       label: Tabs.tabTitle2
     },
-    { value: <CategoryOutlinedIcon />,
+    {
+      value: <CategoryOutlinedIcon />,
       content: <Tab3 />,
       label: Tabs.tabTitle3
     },
     {
       value: <ContactEmergencyOutlinedIcon />,
-      content:<Tab4/> ,
+      content: <Tab4 />,
       label: Tabs.tabTitle4
     },
   ];
 
   return (
-    <html>
-      <body >
-      <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+    <StoreProvider>
+      <html lang="en">
+        <body >
+          <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
 
-        <StoreProvider>
-          <Box>
-            <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
-            <MiniDrawer
-              APP_BAR={APP_BAR}
-              setShowOutlet={setShowOutlet}
-              isNonMobile={isNonMobile}
-              isSidebarOpen={isSidebarOpen}
-              setIsSidebarOpen={handleSideBarState}
-              navConfig={navConfig}
-            />
-            <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
-              <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
-            </Container>
-          </Box>
-        </StoreProvider>
-      </ThemeProvider>
-      {/* <Analytics /> */}
-      {/* <SpeedInsights /> */}
-    </ColorModeContext.Provider>
-      </body>
+              <Box>
+                <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
+                <MiniDrawer
+                  APP_BAR={APP_BAR}
+                  setShowOutlet={setShowOutlet}
+                  isNonMobile={isNonMobile}
+                  isSidebarOpen={isSidebarOpen}
+                  setIsSidebarOpen={handleSideBarState}
+                  navConfig={navConfig}
+                />
+                <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
+                  <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
+                </Container>
+              </Box>
+            </ThemeProvider>
+            {/* <Analytics /> */}
+            {/* <SpeedInsights /> */}
+          </ColorModeContext.Provider>
+        </body>
 
-    </html>
+      </html>
+    </StoreProvider>
   );
 }

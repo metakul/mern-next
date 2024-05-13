@@ -2,8 +2,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchSingleCryptoInfo } from './CryptoSlice';
 import { ApiError, CryptoData, CryptoInfoProps } from '../../../Datatypes/interfaces/interface';
-import { ApiEndpoint } from '../../../DataTypes/enums';
-import request from '../../../Backend/axiosCall/apiCall';
+import { ApiEndpoint } from '@/Datatypes/enums';
+import Request from '@/Backend/axiosCall/apiCall';
 import { ApiSuccess } from '../../../Datatypes/interfaces/interface';
 
 export const fetchSingleCryptoDispatcher = createAsyncThunk(
@@ -17,7 +17,7 @@ export const fetchSingleCryptoDispatcher = createAsyncThunk(
     } })); // Dispatch loading as true
  
     try {
-      const response = await request({
+      const response = await Request({
         apiId:ApiEndpoint.FetchCryptoInfo.apiId,
         url: `${ApiEndpoint.FetchCryptoInfo.url}/${cryptoSymbol}/${currency}`,
         method: ApiEndpoint.FetchCryptoInfo.method,
