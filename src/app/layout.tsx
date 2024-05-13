@@ -66,16 +66,16 @@ export default function DashboardLayout({
       content: <div>{children}</div>,
       label: Tabs.tabTitle1
     },
-    {
-      value: <StoreOutlinedIcon />,
-      content: <MetakulCollection />,
-      label: Tabs.tabTitle2
-    },
-    {
-      value: <CategoryOutlinedIcon />,
-      content: <Tab3 />,
-      label: Tabs.tabTitle3
-    },
+    // {
+    //   value: <StoreOutlinedIcon />,
+    //   content: <MetakulCollection />,
+    //   label: Tabs.tabTitle2
+    // },
+    // {
+    //   value: <CategoryOutlinedIcon />,
+    //   content: <Tab3 />,
+    //   label: Tabs.tabTitle3
+    // },
     {
       value: <ContactEmergencyOutlinedIcon />,
       content: <Tab4 />,
@@ -93,14 +93,14 @@ export default function DashboardLayout({
 
               <Box>
                 <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
-                <MiniDrawer
+                {/* <MiniDrawer
                   APP_BAR={APP_BAR}
                   setShowOutlet={setShowOutlet}
                   isNonMobile={isNonMobile}
                   isSidebarOpen={isSidebarOpen}
                   setIsSidebarOpen={handleSideBarState}
                   navConfig={navConfig}
-                />
+                /> */}
                 <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
                   <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
                 </Container>

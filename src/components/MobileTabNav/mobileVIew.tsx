@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import { useMediaQuery, Tabs, Tab } from '@mui/material';
-// import { getColors } from '../../layout/Theme/themes';
 import CustomBox from '../Elements/Box';
+import { getColors } from '@/app/layout/Theme/themes';
 
 interface MobileTabNavigationProps {
   tabs: { value: ReactNode; content: ReactNode; label: string }[];
@@ -37,8 +37,8 @@ const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positio
         aria-label="mobile tabs example"
         variant="fullWidth"
         sx={{
-          // backgroundColor: getColors().blueAccent[900],
-          // color: getColors().redAccent[500],
+          backgroundColor: getColors().blueAccent[900],
+          color: getColors().redAccent[500],
         }}
         className={` ${position === "top" ? " mt-2" : "fixed bottom-0 left-0"} w-full flex flex-row  z-20`}
       >
@@ -50,18 +50,18 @@ const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positio
             sx={{
               height:"60px",
               '&.Mui-selected': {
-                // backgroundColor: getColors().greenAccent[800],
-                // color: getColors().blueAccent[100],
+                backgroundColor: getColors().greenAccent[800],
+                color: getColors().blueAccent[100],
                 borderTopLeftRadius: "10px", 
                 borderTopRightRadius: "10px", 
                 borderRight: "2px solid",
                 borderLeft: "2px solid",
                 '& .MuiSvgIcon-root': {
                   fontSize: "2rem", 
-              // color: getColors().blueAccent[500],
+              color: getColors().blueAccent[500],
                 },
               },
-              // color: getColors().secondary[100],
+              color: getColors().secondary[100],
             }}
           />
         ))}
