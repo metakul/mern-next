@@ -16,6 +16,7 @@ import {  SetStateAction, useEffect, useState } from 'react';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { BlogsStatusInfo } from '@/Datatypes/enums';
 import { getColors } from '@/app/layout/Theme/themes';
+import { usePathname } from 'next/navigation';
 const Blogs = () => {
   // const theme = useTheme()
   const dispatch = useDispatch()
@@ -37,9 +38,9 @@ const Blogs = () => {
       status: BlogsStatusInfo.APPROVED
     }));
   }
-
+const pathname=usePathname()
   // Get current domain dynamically
-  const currentDomain = window.location.origin;
+  const currentDomain =pathname
 
   useEffect(() => {
     // Load blogs when the component mounts

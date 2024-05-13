@@ -1,3 +1,4 @@
+'use client'
 import { useEffect } from "react";
 import { AppDispatch } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";

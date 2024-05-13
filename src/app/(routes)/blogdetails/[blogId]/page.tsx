@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Box, Button, Typography } from '@mui/material';
-import { useParams } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
  
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 
@@ -20,13 +20,14 @@ import { AppDispatch } from '@/lib/store';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { fetchSingleBlogApiSlice,updateBlogSlice } from '@/lib/slices/Blogs/BlogApiSlice';
+import { useRouter } from 'next/router';
 const SingleBlogDetails = () => {
 
   const { blogId } = useParams<{ blogId: string }>();
-
+  const router = useRouter()
   const dispatch = useDispatch()
-
-  const currentDomain = window.location.origin;
+const pathName=usePathname()
+  const currentDomain = pathName
   const postLink = `${currentDomain}/blogDetails/${blogId}`;
 
 
@@ -101,10 +102,7 @@ const SingleBlogDetails = () => {
                   position: "fixed",
                   background: getColors().blueAccent[800],
                   color: getColors().blueAccent[100]
-                }} onClick={() => {
-
-                  window.history.back();
-                }}>
+                }} onClick={() => router.push('/dashboard')}>
                   BACK
                 </Button>
               )
