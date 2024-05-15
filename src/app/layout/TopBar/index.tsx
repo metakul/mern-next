@@ -14,7 +14,7 @@ import {
 } from "@mui/icons-material";
 // import app
 import { ColorModeContext, getColors } from "../Theme/themes";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 // const NAV_WIDTH = 280;
 import "./style.css"
 import Link from "next/link";
@@ -73,9 +73,9 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
             border: "2px solid",
             borderColor: theme.palette.grey[100],
           }}>
-            {/* <motion.div className="handle" layout transition={spring} style={{
+            <motion.div className="handle" layout transition={spring} style={{
               background: theme.palette.grey[100],
-            }} /> */}
+            }} />
           </div>
 
         </Stack>
