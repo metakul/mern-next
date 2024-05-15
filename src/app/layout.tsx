@@ -27,7 +27,7 @@ import Tab4 from "@/tabs/Tab4/temp";
 
 //provider:
 import {
-  // ThirdwebProvider,
+  ThirdwebProvider,
   metamaskWallet,
   coinbaseWallet,
   walletConnect,
@@ -66,11 +66,11 @@ export default function DashboardLayout({
       content: <div>{children}</div>,
       label: Tabs.tabTitle1
     },
-    // {
-    //   value: <StoreOutlinedIcon />,
-    //   content: <MetakulCollection />,
-    //   label: Tabs.tabTitle2
-    // },
+    {
+      value: <StoreOutlinedIcon />,
+      content: <MetakulCollection />,
+      label: Tabs.tabTitle2
+    },
     // {
     //   value: <CategoryOutlinedIcon />,
     //   content: <Tab3 />,
@@ -90,7 +90,24 @@ export default function DashboardLayout({
           <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-
+              <ThirdwebProvider
+          activeChain="polygon"
+          clientId="ed7a4b64885c72be1dc347066f4e51ce"
+          supportedWallets={[
+            smartWallet(metamaskWallet(), smartWalletOptions),
+            smartWallet(coinbaseWallet({ recommended: true }), smartWalletOptions),
+            smartWallet(walletConnect(), smartWalletOptions),
+            smartWallet(localWallet(), smartWalletOptions),
+            smartWallet(
+              embeddedWallet({
+                auth: {
+                  options: ["email", "google", "apple", "facebook","email","phone"],
+                },
+              }),
+              smartWalletOptions
+            ),
+          ]}
+        >
               <Box>
                 <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
                 {/* <MiniDrawer
@@ -105,6 +122,7 @@ export default function DashboardLayout({
                   <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
                 </Container>
               </Box>
+              </ThirdwebProvider>
             </ThemeProvider>
             {/* <Analytics /> */}
             {/* <SpeedInsights /> */}
