@@ -104,10 +104,7 @@ const MintPage = () => {
               <button onClick={handleClaimNft} className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold  shadow-accent-volume transition-all hover:bg-accent-dark">
                 Claim NFT
               </button>
-            <Link href="/earn">
-              <button className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold  shadow-accent-volume transition-all hover:bg-accent-dark"
-              > Already Claimed? Stake Now</button>
-            </Link>
+           
 
           </Container>
          
