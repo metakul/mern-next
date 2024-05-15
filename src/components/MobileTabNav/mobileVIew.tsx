@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect } from 'react';
-import { useMediaQuery, Tabs, Tab } from '@mui/material';
-import CustomBox from '../Elements/Box';
-import { getColors } from '@/app/layout/Theme/themes';
+import React, { ReactNode, useEffect, useState } from 'react'
+import "./index.css"
+import { Box } from '@mui/material';
+
 
 interface MobileTabNavigationProps {
   tabs: { value: ReactNode; content: ReactNode; label: string }[];
@@ -9,18 +9,81 @@ interface MobileTabNavigationProps {
   showOutlet?: boolean;
 }
 
-const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, position, showOutlet }) => {
+const MobileTabNavigationTest: React.FC<MobileTabNavigationProps> = ({ tabs, position, showOutlet }) => {
+
+  const [value, setValue] = useState(0)
+  
   useEffect(() => {
     if (showOutlet) {
       setValue(0);
     }
   }, [showOutlet, tabs]);
-  
-  const [value, setValue] = React.useState(0);
-  const isNonMobile = useMediaQuery("(min-width: 766px)");
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+
+  useEffect(() => {
+
+    const menu = document.querySelector(".menu") as HTMLElement | null;
+
+    if (!menu) {
+      // Menu element not found, handle the case gracefully
+      return;
+    }
+    const menuItems = menu.querySelectorAll(".menu__item");
+    const menuBorder = menu.querySelector(".menu__border") as HTMLElement;
+    let activeItem = menu.querySelector(".active") as HTMLElement;
+
+    function clickItem(item: HTMLElement | null, index: number) {
+      if (!menu) {
+        // Menu element not found, handle the case gracefully
+        return;
+      }
+      menu.style.removeProperty("--timeOut");
+
+      if (activeItem == item) return;
+
+      if (activeItem) {
+        activeItem.classList.remove("active");
+      }
+      if (!item) {
+        // Menu element not found, handle the case gracefully
+        return;
+      }
+      item.classList.add("active");
+      // body.style.backgroundColor = bgColorsBody[index];
+      setValue(index)
+      activeItem = item;
+      offsetMenuBorder(activeItem, menuBorder);
+    }
+
+    function offsetMenuBorder(element: HTMLElement | null, menuBorder: HTMLElement | null) {
+      if (!element || !menu || !menuBorder) {
+        // Menu element not found, handle the case gracefully
+        return;
+      }
+      const offsetActiveItem = element.getBoundingClientRect();
+      const left = Math.floor(offsetActiveItem.left - menu.offsetLeft - (menuBorder.offsetWidth - offsetActiveItem.width) / 2) + "px";
+      menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
+    }
+
+    offsetMenuBorder(activeItem, menuBorder);
+
+    menuItems.forEach((item, index) => {
+      item.addEventListener("click", () => clickItem(item as HTMLElement, index));
+    });
+
+    window.addEventListener("resize", () => {
+      offsetMenuBorder(activeItem, menuBorder);
+      menu.style.setProperty("--timeOut", "none");
+    });
+
+    // Clean-up function if needed
+    return () => {
+      // Remove event listeners or perform any necessary clean-up
+      menuItems.forEach((item:any) => {
+        item.removeEventListener("click", clickItem);
+      });
+      window.removeEventListener("resize", offsetMenuBorder as any);
+    };
+  }, [showOutlet, tabs]); // empty dependency array means this effect will only run once after initial render
 
   function a11yProps(index: number) {
     return {
@@ -30,50 +93,40 @@ const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positio
   }
 
   return (
-    <CustomBox sx={{ width: '100%' }}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="mobile tabs example"
-        variant="fullWidth"
-        sx={{
-          backgroundColor: getColors().blueAccent[900],
-          color: getColors().redAccent[500],
-        }}
-        className={` ${position === "top" ? " mt-2" : "fixed bottom-0 left-0"} w-full flex flex-row  z-20`}
-      >
+    <Box>
+      <menu  className={` ${position === "top" ? " mt-2" : "fixed bottom-0 left-0"} w-full flex flex-row  z-20 menu`}>
         {tabs.map(({ value }, index) => (
-          <Tab 
-            key={index} 
-            icon={React.createElement('div', null, value)} 
-            {...a11yProps(index)} 
-            sx={{
-              height:"60px",
-              '&.Mui-selected': {
-                backgroundColor: getColors().greenAccent[800],
-                color: getColors().blueAccent[100],
-                borderTopLeftRadius: "10px", 
-                borderTopRightRadius: "10px", 
-                borderRight: "2px solid",
-                borderLeft: "2px solid",
-                '& .MuiSvgIcon-root': {
-                  fontSize: "2rem", 
-              color: getColors().blueAccent[500],
-                },
-              },
-              color: getColors().secondary[100],
-            }}
-          />
+          <div
+            className={`menu__item ${index === 0 ? "active" :"" }`} 
+            key={index}
+            {...a11yProps(index)}
+          >
+            {value}
+          </div>
         ))}
-      </Tabs>
+        <div className="menu__border"></div>
+
+      </menu>
       {tabs.map(({ content }, index) => (
-        <CustomTabPanel isNonMobile={isNonMobile} key={index} value={value} position={position} index={index}>
+        
+        <CustomTabPanel isNonMobile={true} key={index} value={value} position={position} index={index}>
           {content}
         </CustomTabPanel>
       ))}
-    </CustomBox>
-  );
-};
+
+      <div className="svg-container">
+        <svg viewBox="0 0 202.9 45.5" >
+          <clipPath id="menu" clipPathUnits="objectBoundingBox" transform="scale(0.0049285362247413 0.021978021978022)">
+            <path d="M6.7,45.5c5.7,0.1,14.1-0.4,23.3-4c5.7-2.3,9.9-5,18.1-10.5c10.7-7.1,11.8-9.2,20.6-14.3c5-2.9,9.2-5.2,15.2-7
+          c7.1-2.1,13.3-2.3,17.6-2.1c4.2-0.2,10.5,0.1,17.6,2.1c6.1,1.8,10.2,4.1,15.2,7c8.8,5,9.9,7.1,20.6,14.3c8.3,5.5,12.4,8.2,18.1,10.5
+          c9.2,3.6,17.6,4.2,23.3,4H6.7z"/>
+          </clipPath>
+        </svg>
+      </div>
+    </Box>
+  )
+}
+
 
 interface CustomTabPanelProps {
   children: React.ReactNode;
@@ -94,8 +147,8 @@ const CustomTabPanel: React.FC<CustomTabPanelProps> = ({ isNonMobile, children, 
       marginBottom: "50px",
     }}
   >
-    {value === index && <CustomBox className={` ${position === "top" ? "pt-2" : ""}`} sx={{ pl: isNonMobile ? 3 : 0 }}>{children}</CustomBox>}
+    {value === index && <Box className={` ${position === "top" ? "pt-2" : ""}`} sx={{ pl: isNonMobile ? 3 : 0 }}>{children}</Box>}
   </div>
 );
 
-export default MobileTabNavigation;
+export default MobileTabNavigationTest;
