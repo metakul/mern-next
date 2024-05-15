@@ -1,16 +1,17 @@
 import { ApiSuccess, ClaimNftInterface, ApiError} from '@/Datatypes/interfaces/interface';
 import { allowlistProof } from "./slices/Web3Profile/whitelist";
 
-export const claimNft = async ({ address, claim }: ClaimNftInterface) => {
+export const claimNft = async ({claimNftHandler,setMintMsg}: {claimNftHandler:ClaimNftInterface,setMintMsg:any},) => {
   try {
  
     // Define a separate async function to handle the claim operation
     const performClaim = async () => {
       // eslint-disable-next-line no-useless-catch
       try {
-        const res = await claim({
-          args: [address, 1, "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", 0, allowlistProof, []]
+        const res = await claimNftHandler.claim({
+          args: [claimNftHandler.address, 1, "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", 0, allowlistProof, []]
         });
+        setMintMsg("Nft minted successFully")
         return res;
       } catch (err) {
         throw err;
