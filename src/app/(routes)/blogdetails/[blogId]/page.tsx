@@ -120,7 +120,7 @@ const pathName=usePathname()
                 Share
               </Button>
 
-              {status == "pending" && userType === "SYSTEM_ADMIN" &&
+              {status == BlogsStatusInfo.PENDING && userType === "SYSTEM_ADMIN" &&
                 <Button variant='contained' sx={{
                   position: "relative",
                   right: "80px",

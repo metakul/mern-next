@@ -9,6 +9,7 @@ import {
   useContractWrite,
   ConnectWallet,
 } from "@thirdweb-dev/react";
+import {  toast, ToastContainer } from 'react-toastify';
 
 import { ClaimNftInterface } from "@/Datatypes/interfaces/interface";
 import { AppDispatch } from "@/lib/store";
@@ -17,6 +18,7 @@ import { useDispatch } from "react-redux";
 import BreadCrumbs from "@/components/Elements/BreadCrumbs";
 import SocialProfiles from "@/components/SocialProfile";
 import Link from "next/link";
+
 
 const myNftDropContractAddress = "0x710E9161e8A768c0605335AB632361839f761374"
 
@@ -44,7 +46,6 @@ const MintPage = () => {
  
 
   const handleClaimNft = async () => {
-
     if(!address){
       setErrmsg("Wallet not Connected")
       return
@@ -57,6 +58,7 @@ const MintPage = () => {
 
     (dispatch as AppDispatch)(ClaimNftSlice({claimNftHandler,setMintMsg}));
   }
+
 
   return (
     <Container >

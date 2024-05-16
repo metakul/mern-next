@@ -14,14 +14,14 @@ const Tab4 = () => {
         <div className="flex justify-center items-center space-x-4">
           <SocialProfiles />
         </div>
-        {/* <Button variant='contained' sx={{
+        <Button variant='contained' sx={{
           m: 4
         }}>
           <Link href={"/mint"}>
             Claim Free Nft Here
           </Link>
 
-        </Button> */}
+        </Button>
       </div>
     </Container>
   );
