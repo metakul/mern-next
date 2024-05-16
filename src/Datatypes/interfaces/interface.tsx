@@ -49,7 +49,9 @@ export interface RequestOptions {
   url: string;
   data?: unknown; // Allow any data type initially  // $MAJOR
   headers?: AxiosRequestConfig['headers'];
-  loadingMessage?:string
+  loadingMessage?:string;
+  successMessage:string;
+  errorMessage:string
 }
 
 // api response success

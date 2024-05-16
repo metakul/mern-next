@@ -23,6 +23,8 @@ export const fetchSingleCryptoDispatcher = createAsyncThunk(
         method: ApiEndpoint.FetchCryptoInfo.method,
         data: { cryptoSymbol },
         headers: ApiEndpoint.FetchCryptoInfo.headers,
+        successMessage:ApiEndpoint.FetchCryptoInfo.successMessage,
+        errorMessage:ApiEndpoint.FetchCryptoInfo.errorMessage,
       })
       
       //todo add propoer data for cryptoInfo

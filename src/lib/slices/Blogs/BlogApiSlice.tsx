@@ -22,7 +22,9 @@ export const fetchBlogApiSlice = createAsyncThunk(
         url: `${ApiEndpoint.GETBLOG.url}?status=${status}&pagesize=${pageSize}&page=${blogPage}`,
         method: ApiEndpoint.GETBLOG.method,
         headers: ApiEndpoint.GETBLOG.headers,
-        loadingMessage: ApiEndpoint.GETBLOG.loadingMessage
+        loadingMessage: ApiEndpoint.GETBLOG.loadingMessage,
+        successMessage:ApiEndpoint.GETBLOG.successMessage,
+        errorMessage:ApiEndpoint.GETBLOG.errorMessage,
       })
       console.log(response);
       
@@ -69,7 +71,9 @@ export const fetchSingleBlogApiSlice = createAsyncThunk(
         url: `${ApiEndpoint.GETSINGLEBLOG.url}/${blogId}`,
         method: ApiEndpoint.GETSINGLEBLOG.method,
         headers: ApiEndpoint.GETSINGLEBLOG.headers,
-        loadingMessage: ApiEndpoint.GETSINGLEBLOG.loadingMessage
+        loadingMessage: ApiEndpoint.GETSINGLEBLOG.loadingMessage,
+        successMessage:ApiEndpoint.GETSINGLEBLOG.successMessage,
+        errorMessage:ApiEndpoint.GETSINGLEBLOG.errorMessage,
       })
       const blogs: Ipost = response;
 
@@ -107,7 +111,9 @@ export const addBlogApiSlice = createAsyncThunk(
           method: ApiEndpoint.EDIT_BLOG.method,
           headers: ApiEndpoint.EDIT_BLOG.headers,
           data: newBlogData,
-          loadingMessage: ApiEndpoint.EDIT_BLOG.loadingMessage
+          loadingMessage: ApiEndpoint.EDIT_BLOG.loadingMessage,
+          successMessage:ApiEndpoint.EDIT_BLOG.successMessage,
+          errorMessage:ApiEndpoint.EDIT_BLOG.errorMessage,
         });
         const loadForUser: FetchBlogData = {
           userType
@@ -122,7 +128,9 @@ export const addBlogApiSlice = createAsyncThunk(
           method: ApiEndpoint.ADD_BLOG.method,
           headers: ApiEndpoint.ADD_BLOG.headers,
           data: newBlogData,
-          loadingMessage: ApiEndpoint.ADD_BLOG.loadingMessage
+          loadingMessage: ApiEndpoint.ADD_BLOG.loadingMessage,
+          successMessage:ApiEndpoint.ADD_BLOG.successMessage,
+          errorMessage:ApiEndpoint.ADD_BLOG.errorMessage,
         });
       }
       const newBlog: Ipost = response?.data?.newPost || response?.data
@@ -161,7 +169,9 @@ export const updateBlogSlice = createAsyncThunk(
         method: ApiEndpoint.UPDATE_BLOG.method,
         headers: ApiEndpoint.UPDATE_BLOG.headers,
         data: {status:status},
-        loadingMessage: ApiEndpoint.UPDATE_BLOG.loadingMessage
+        loadingMessage: ApiEndpoint.UPDATE_BLOG.loadingMessage,
+        successMessage:ApiEndpoint.UPDATE_BLOG.successMessage,
+        errorMessage:ApiEndpoint.UPDATE_BLOG.errorMessage,
       });
       const loadForUser: FetchBlogData = {
         userType
@@ -196,7 +206,9 @@ export const fetchCryptoDispatcher = createAsyncThunk(
         method: ApiEndpoint.FetchCryptoInfo.method,
         data: { cryptoSymbol },
         headers: ApiEndpoint.FetchCryptoInfo.headers,
-        loadingMessage: ApiEndpoint.FetchCryptoInfo.loadingMessage
+        loadingMessage: ApiEndpoint.FetchCryptoInfo.loadingMessage,
+        successMessage:ApiEndpoint.FetchCryptoInfo.successMessage,
+        errorMessage:ApiEndpoint.FetchCryptoInfo.errorMessage,
       })
 
       //todo add propoer data for cryptoInfo

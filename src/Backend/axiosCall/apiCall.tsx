@@ -38,8 +38,8 @@ const Request = async (options: RequestOptions) => {
     const response =  await toast.promise(
        fetch(fullUrl, requestOptions),{
           pending: options.loadingMessage ,
-          success: "options.successMessage" ,
-          error: "options.errorMessage",
+          success: options.successMessage ? options.successMessage : undefined,
+          error: options.errorMessage ? options.errorMessage : undefined,
        })
 
     // Parse response
