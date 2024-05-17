@@ -50,5 +50,6 @@ export enum ProtectedPageInfo{
 
   
 export enum BlogsStatusInfo {
-  APPROVED="approved"
+  APPROVED="approved",
+  PENDING="pending"
 }
