@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { useParams, usePathname } from 'next/navigation'
  
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
@@ -20,6 +20,7 @@ import { AppDispatch } from '@/lib/store';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { fetchSingleBlogApiSlice,updateBlogSlice } from '@/lib/slices/Blogs/BlogApiSlice';
+import Link from 'next/link';
 const SingleBlogDetails = () => {
 
   const { blogId } = useParams<{ blogId: string }>();
@@ -76,7 +77,7 @@ const pathName=usePathname()
   return (
     <div className='px-4 mt-4 ml-2 mr-2'>
 
-      {truncatedDescription && (
+      {truncatedDescription ? (
         <>
           <BreadCrumbs currentPath={location.pathname} />
           <div>
@@ -102,7 +103,10 @@ const pathName=usePathname()
                   background: getColors().blueAccent[800],
                   color: getColors().blueAccent[100]
                 }} >
-                  BACK
+                  <Link href="/">
+
+                  Home
+                  </Link>
                 </Button>
               )
               }
@@ -163,6 +167,18 @@ const pathName=usePathname()
 
 
           </div>
+        </>
+      ):(
+        <>
+        <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+        <Skeleton variant="rounded" sx={{
+          marginLeft:"auto",
+          marginRight:"auto",
+          marginTop:"20px"
+        }} width={"50%"} height={"400px"} />
+        <Skeleton variant="text" sx={{ fontSize: '1rem' }} height={"40px"}  />
+        <Skeleton variant="text" sx={{ fontSize: '1rem' }} height={"40px"}  />
+        <Skeleton variant="text" sx={{ fontSize: '1rem' }} height={"400px"}  />
         </>
       )}
 
