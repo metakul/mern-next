@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
           href={"/"}>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`logo.svg`} alt="logo" className="w-8 h-8 ml-4" />
+          <img src={`/logo.svg`} alt="logo" className="w-8 h-8 ml-4" />
         </Link>
 
         <Box sx={{ flexGrow: 1 }} />
