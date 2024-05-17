@@ -1,46 +1,45 @@
 import { RequestOptions } from '@/Datatypes/interfaces/interface';
 import { toast } from 'react-toastify';
+import { ApiEndpoint } from '@/Datatypes/enums';
 
-const Request = async (options: RequestOptions) => {
+const Request = async ({ endpointId, slug, data }:RequestOptions) => {
   const storedAccessToken = localStorage.getItem('access');
+  const endpoint = ApiEndpoint[endpointId];
 
-  if (options.loadingMessage) {
-    console.log(options.loadingMessage);
+  if (!endpoint) {
+    throw new Error(`Invalid API endpoint: ${endpointId}`);
   }
-  let requestOptions
-  try {
-    // Construct the full request URL, prepending the API endpoint if necessary
-    const fullUrl = `${options.url}`;
 
-    // Check if the request method is GET or HEAD
-    if (options.method === 'GET' || options.method === 'HEAD') {
-      // Exclude body for GET and HEAD requests
-      requestOptions = {
-        method: options.method,
-        headers: {
-          ...options.headers,
-          Authorization: `Bearer ${storedAccessToken}`
-        }
-      };
-    } else {
-      // Include body for other request methods
-      requestOptions = {
-        method: options.method,
-        headers: {
-          ...options.headers,
-          Authorization: `Bearer ${storedAccessToken}`
-        },
-        body: options?.data ? JSON.stringify(options.data) : undefined
-      };
+  if (endpoint.loadingMessage) {
+    console.log(endpoint.loadingMessage);
+  }
+
+  try {
+    // Construct the full request URL, appending additional data if necessary
+    let fullUrl = endpoint.url;
+    if (slug) {
+      fullUrl += slug;
     }
 
+     // Set up request options
+     const requestOptions = {
+      method: endpoint.method,
+      headers: {
+        ...endpoint.headers,
+        Authorization: `Bearer ${storedAccessToken}`
+      },
+      // Include body for non-GET requests
+      ...(endpoint.method !== 'GET' && { body: data ? JSON.stringify(data) : undefined })
+    };
+
     // Make the HTTP request using fetch
-    const response =  await toast.promise(
-       fetch(fullUrl, requestOptions),{
-          pending: options.loadingMessage ,
-          success: options.successMessage ? options.successMessage : undefined,
-          error: options.errorMessage ? options.errorMessage : undefined,
-       })
+    const response = await toast.promise(
+      fetch(fullUrl, requestOptions), {
+        pending: endpoint.loadingMessage,
+        success: endpoint.successMessage ? endpoint.successMessage : undefined,
+        error: endpoint.errorMessage ? endpoint.errorMessage : undefined,
+      }
+    );
 
     // Parse response
     const responseData = await response.json();
@@ -59,6 +58,5 @@ const Request = async (options: RequestOptions) => {
     throw error;
   }
 };
-
 
 export default Request;

@@ -18,13 +18,8 @@ export const fetchBlogApiSlice = createAsyncThunk(
     try {
       console.log("userType", fetchBlogData.userType, status)
       const response = await Request({
-        apiId: ApiEndpoint.GETBLOG.apiId,
-        url: `${ApiEndpoint.GETBLOG.url}?status=${status}&pagesize=${pageSize}&page=${blogPage}`,
-        method: ApiEndpoint.GETBLOG.method,
-        headers: ApiEndpoint.GETBLOG.headers,
-        loadingMessage: ApiEndpoint.GETBLOG.loadingMessage,
-        successMessage:ApiEndpoint.GETBLOG.successMessage,
-        errorMessage:ApiEndpoint.GETBLOG.errorMessage,
+        endpointId: "GETBLOG",
+        slug: `?status=${status}&pagesize=${pageSize}&page=${blogPage}`,
       })
       console.log(response);
       
@@ -67,13 +62,8 @@ export const fetchSingleBlogApiSlice = createAsyncThunk(
     try {
       console.log("userType", fetchBlogData.userType)
       const response = await Request({
-        apiId: ApiEndpoint.GETSINGLEBLOG.apiId,
-        url: `${ApiEndpoint.GETSINGLEBLOG.url}/${blogId}`,
-        method: ApiEndpoint.GETSINGLEBLOG.method,
-        headers: ApiEndpoint.GETSINGLEBLOG.headers,
-        loadingMessage: ApiEndpoint.GETSINGLEBLOG.loadingMessage,
-        successMessage:ApiEndpoint.GETSINGLEBLOG.successMessage,
-        errorMessage:ApiEndpoint.GETSINGLEBLOG.errorMessage,
+        endpointId: "GETSINGLEBLOG",
+        slug: `/${blogId}`,
       })
       const blogs: Ipost = response;
 
@@ -106,14 +96,9 @@ export const addBlogApiSlice = createAsyncThunk(
       let response
       if (postType == "edit") {
         response = await Request({
-          apiId: ApiEndpoint.EDIT_BLOG.apiId,
-          url: `${ApiEndpoint.EDIT_BLOG.url}/${newBlogData.postId}`,
-          method: ApiEndpoint.EDIT_BLOG.method,
-          headers: ApiEndpoint.EDIT_BLOG.headers,
+          endpointId: "EDIT_BLOG",
+          slug: `/${newBlogData.postId}`,
           data: newBlogData,
-          loadingMessage: ApiEndpoint.EDIT_BLOG.loadingMessage,
-          successMessage:ApiEndpoint.EDIT_BLOG.successMessage,
-          errorMessage:ApiEndpoint.EDIT_BLOG.errorMessage,
         });
         const loadForUser: FetchBlogData = {
           userType
@@ -123,14 +108,8 @@ export const addBlogApiSlice = createAsyncThunk(
       }
       else {
         response = await Request({
-          apiId: ApiEndpoint.ADD_BLOG.apiId,
-          url: ApiEndpoint.ADD_BLOG.url,
-          method: ApiEndpoint.ADD_BLOG.method,
-          headers: ApiEndpoint.ADD_BLOG.headers,
+          endpointId: "ADD_BLOG",
           data: newBlogData,
-          loadingMessage: ApiEndpoint.ADD_BLOG.loadingMessage,
-          successMessage:ApiEndpoint.ADD_BLOG.successMessage,
-          errorMessage:ApiEndpoint.ADD_BLOG.errorMessage,
         });
       }
       const newBlog: Ipost = response?.data?.newPost || response?.data
@@ -164,14 +143,9 @@ export const updateBlogSlice = createAsyncThunk(
     try {
 
       const response = await Request({
-        apiId: ApiEndpoint.UPDATE_BLOG.apiId,
-        url: `${ApiEndpoint.UPDATE_BLOG.url}/${postId}`,
-        method: ApiEndpoint.UPDATE_BLOG.method,
-        headers: ApiEndpoint.UPDATE_BLOG.headers,
+        endpointId: "UPDATE_BLOG",
+        slug: `/${postId}`,
         data: {status:status},
-        loadingMessage: ApiEndpoint.UPDATE_BLOG.loadingMessage,
-        successMessage:ApiEndpoint.UPDATE_BLOG.successMessage,
-        errorMessage:ApiEndpoint.UPDATE_BLOG.errorMessage,
       });
       const loadForUser: FetchBlogData = {
         userType
@@ -201,14 +175,9 @@ export const fetchCryptoDispatcher = createAsyncThunk(
   async ({ cryptoSymbol, _id, currency }: CryptoInfoProps, { rejectWithValue, dispatch }) => {
     try {
       const response = await Request({
-        apiId: ApiEndpoint.FetchCryptoInfo.apiId,
-        url: `${ApiEndpoint.FetchCryptoInfo.url}/${cryptoSymbol}/${currency}`,
-        method: ApiEndpoint.FetchCryptoInfo.method,
+        endpointId: "FetchCryptoInfo",
+        slug: `/${cryptoSymbol}/${currency}`,
         data: { cryptoSymbol },
-        headers: ApiEndpoint.FetchCryptoInfo.headers,
-        loadingMessage: ApiEndpoint.FetchCryptoInfo.loadingMessage,
-        successMessage:ApiEndpoint.FetchCryptoInfo.successMessage,
-        errorMessage:ApiEndpoint.FetchCryptoInfo.errorMessage,
       })
 
       //todo add propoer data for cryptoInfo

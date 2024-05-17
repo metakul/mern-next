@@ -20,11 +20,10 @@ import { AppDispatch } from '@/lib/store';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { fetchSingleBlogApiSlice,updateBlogSlice } from '@/lib/slices/Blogs/BlogApiSlice';
-import { useRouter } from 'next/router';
 const SingleBlogDetails = () => {
 
   const { blogId } = useParams<{ blogId: string }>();
-  const router = useRouter()
+  
   const dispatch = useDispatch()
 const pathName=usePathname()
   const currentDomain = pathName
@@ -102,7 +101,7 @@ const pathName=usePathname()
                   position: "fixed",
                   background: getColors().blueAccent[800],
                   color: getColors().blueAccent[100]
-                }} onClick={() => router.push('/dashboard')}>
+                }} >
                   BACK
                 </Button>
               )

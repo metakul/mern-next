@@ -18,13 +18,9 @@ export const fetchSingleCryptoDispatcher = createAsyncThunk(
  
     try {
       const response = await Request({
-        apiId:ApiEndpoint.FetchCryptoInfo.apiId,
-        url: `${ApiEndpoint.FetchCryptoInfo.url}/${cryptoSymbol}/${currency}`,
-        method: ApiEndpoint.FetchCryptoInfo.method,
+        endpointId:"FetchCryptoInfo",
+        slug: `/${cryptoSymbol}/${currency}`,
         data: { cryptoSymbol },
-        headers: ApiEndpoint.FetchCryptoInfo.headers,
-        successMessage:ApiEndpoint.FetchCryptoInfo.successMessage,
-        errorMessage:ApiEndpoint.FetchCryptoInfo.errorMessage,
       })
       
       //todo add propoer data for cryptoInfo

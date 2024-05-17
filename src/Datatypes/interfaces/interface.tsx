@@ -44,14 +44,9 @@ export interface apiCallEndpoint{
   data?: unknown; 
 }
 export interface RequestOptions {
-  apiId:number
-  method: AxiosRequestConfig['method'];
-  url: string;
-  data?: unknown; // Allow any data type initially  // $MAJOR
-  headers?: AxiosRequestConfig['headers'];
-  loadingMessage?:string;
-  successMessage:string;
-  errorMessage:string
+  endpointId:string;
+  slug?:string;
+  data?:object;
 }
 
 // api response success
