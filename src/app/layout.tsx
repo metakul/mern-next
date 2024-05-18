@@ -70,13 +70,13 @@ export default function DashboardLayout({
       content: <div>{children}</div>,
       label: Tabs.tabTitle1
     },
-    // {
-    //   value: <StoreOutlinedIcon sx={{
-    //    color:"white"
-    //   }}/>,
-    //   content: <MetakulCollection />,
-    //   label: Tabs.tabTitle2
-    // },
+    {
+      value: <StoreOutlinedIcon sx={{
+       color:"white"
+      }}/>,
+      content: <MetakulCollection />,
+      label: Tabs.tabTitle2
+    },
     // {
     //   value: <CategoryOutlinedIcon sx={{
     //   color:"white"

@@ -24,7 +24,8 @@ export const loginUser = createAsyncThunk(
        
       })
       // Assuming the response contains user information and a token
-      const {  access,refresh } = response.data.token;
+      console.log(response)
+      const {  access,refresh } = response.token;
       const user:JwtPayload=jwtDecode(access)
 
       // $TODO save access and refresh in cookies and apply the refresh logic
