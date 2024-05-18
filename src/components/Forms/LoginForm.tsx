@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '@/lib/slices/authApiSlice';
 import { LoginData } from '@/Datatypes/interfaces/interface';
 import { AppDispatch } from '@/lib/store';
-import toast from 'react-hot-toast';
 interface LoginProps {
   loginTitle: string;
 }
@@ -16,7 +15,6 @@ const LoginForm: React.FC<LoginProps> = () => {
   const handleLoginSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    toast.loading("loading")
     try {
       const loginData: LoginData = {
         email: user,
