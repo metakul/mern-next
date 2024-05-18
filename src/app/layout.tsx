@@ -62,7 +62,9 @@ export default function DashboardLayout({
 
   const tabs = [
     {
-      value: <OtherHousesOutlinedIcon />,
+      value: <OtherHousesOutlinedIcon  sx={{
+        color:"white"
+      }}/>,
       content: <div>{children}</div>,
       label: Tabs.tabTitle1
     },
@@ -77,7 +79,9 @@ export default function DashboardLayout({
     //   label: Tabs.tabTitle3
     // },
     {
-      value: <ContactEmergencyOutlinedIcon />,
+      value: <ContactEmergencyOutlinedIcon  sx={{
+        color:"white"
+      }}/>,
       content: <Tab4 />,
       label: Tabs.tabTitle4
     },
