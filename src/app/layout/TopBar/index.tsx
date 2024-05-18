@@ -18,6 +18,9 @@ import { motion } from "framer-motion";
 // const NAV_WIDTH = 280;
 import "./style.css"
 import Link from "next/link";
+import {
+  ConnectWallet,
+} from "@thirdweb-dev/react";
 
 interface HeaderProps {
   setIsSidebarOpen: () => void;
@@ -68,6 +71,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
             sm: 1,
           }}
         >
+          <ConnectWallet/>
           <div className="switch" data-ison={isOn} onClick={toggleSwitch} style={{
             background: theme.palette.grey[900],
             border: "2px solid",

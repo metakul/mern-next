@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import "./index.css"
 import { Box } from '@mui/material';
+import { getColors } from '@/app/layout/Theme/themes';
 
 
 interface MobileTabNavigationProps {

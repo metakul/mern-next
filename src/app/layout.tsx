@@ -64,22 +64,30 @@ export default function DashboardLayout({
 
   const tabs = [
     {
-      value: <OtherHousesOutlinedIcon />,
+      value: <OtherHousesOutlinedIcon sx={{
+        color:"white"
+      }}/>,
       content: <div>{children}</div>,
       label: Tabs.tabTitle1
     },
-    {
-      value: <StoreOutlinedIcon />,
-      content: <MetakulCollection />,
-      label: Tabs.tabTitle2
-    },
     // {
-    //   value: <CategoryOutlinedIcon />,
+    //   value: <StoreOutlinedIcon sx={{
+    //    color:"white"
+    //   }}/>,
+    //   content: <MetakulCollection />,
+    //   label: Tabs.tabTitle2
+    // },
+    // {
+    //   value: <CategoryOutlinedIcon sx={{
+    //   color:"white"
+    //   }}/>,
     //   content: <Tab3 />,
     //   label: Tabs.tabTitle3
     // },
     {
-      value: <ContactEmergencyOutlinedIcon />,
+      value: <ContactEmergencyOutlinedIcon sx={{
+        color:"white"
+      }}/>,
       content: <Tab4 />,
       label: Tabs.tabTitle4
     },
