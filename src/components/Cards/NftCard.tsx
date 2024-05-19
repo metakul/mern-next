@@ -97,7 +97,7 @@ const NftCard: React.FC<Props> = ({ loadingMessage, balance, handleNftButtonText
               <div className="mt-4 flex items-center justify-between ml-4">
                 {item && item?.metadata?.id ? (
                   <Button sx={{
-                    background:"white",
+                    backgroundColor:"white",
                     mb:2
                   }} onClick={() => item && item.metadata && onHandleButtonClick(item.metadata.id)}>
                    <Typography variant='h5'>

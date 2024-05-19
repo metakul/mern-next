@@ -32,11 +32,11 @@ export const navConfig = [
   //   icon: <ShoppingCartOutlined />,
   //   to: "metakul",
   // },
-  // {
-  //   text: "Earn With Nft",
-  //   icon: <PieChartOutlined />,
-  //   to: "earn",
-  // },
+  {
+    text: "Earn With Nft",
+    icon: <PieChartOutlined />,
+    to: "earn",
+  },
   // {
   //   text: "Metaverse",
   //   icon: null,
