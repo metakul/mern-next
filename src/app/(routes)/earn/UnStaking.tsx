@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react';
 // import { ethers } from "ethers";
 import { Box, Container, Grid, Typography } from "@mui/material";
 
-import SingleNftCard from "@/Components/Cards/SingleNftCard";
-import BreadCrumbs from "@/Components/elements/BreadCrumbs";
+import SingleNftCard from "@/components/Cards/SingleNftCard";
+import BreadCrumbs from "@/components/Elements/BreadCrumbs";
 
 const nftDropContractAddress = "0x710E9161e8A768c0605335AB632361839f761374"
 const tokenContractAddress = "0xE9fd323D7B1e4cFd07C657E218F7da16efd6532f"
@@ -56,7 +56,7 @@ const Mywallet = () => {
 
   return (
     <Container className=''>
-      <BreadCrumbs currentPath={location.pathname} />
+      <BreadCrumbs currentPath={"/earn"} />
       <Grid container sx={{ mt: 4 }}>
         <Grid item xs={6} sx={{ mb: 4 }}>
           <Typography variant="h3">

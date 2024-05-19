@@ -87,7 +87,7 @@ const Staking = () => {
   
   return (
     <Container className=''>
-      <BreadCrumbs currentPath={location.pathname} />
+      <BreadCrumbs currentPath={"/"} />
 
       <Grid container sx={{ mt: 4 }}>
         <Grid item xs={6} sx={{

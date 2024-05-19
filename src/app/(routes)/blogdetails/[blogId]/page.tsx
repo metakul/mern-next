@@ -79,7 +79,7 @@ const pathName=usePathname()
 
       {truncatedDescription ? (
         <>
-          <BreadCrumbs currentPath={location.pathname} />
+          <BreadCrumbs currentPath={`/blogdetails/${blogId}`} />
           <div>
             <div className="flex mt-6 flex-wrap justify-between items-center space-x-2 text-md mb-2 text-jacarta-400">
 
