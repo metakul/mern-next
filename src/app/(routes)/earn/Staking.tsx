@@ -60,29 +60,31 @@ const Staking = () => {
 
   async function stakeNft(id: unknown) {
     if (!address) return;
-
-    const isApproved = await nftDropContract?.isApproved(
-      address,
-      stakingContractAddress
-    );
+  
+    const isApproved = await nftDropContract?.isApproved(address, stakingContractAddress);
     if (!isApproved) {
       await nftDropContract?.setApprovalForAll(stakingContractAddress, true);
     }
-    if (nftDropContract) {
-        const stakeStart = await toast.promise(
-          contract?.call("stake", [[id]]), {
+    if (nftDropContract && contract) {
+      const response = contract.call("stake", [[id]]);
+      if (response) {
+        await toast.promise(
+          response, {
             pending: "Staking Now",
-            success: "SuccessFully Staked Nft",
+            success: "Successfully Staked Nft",
             error: "Error while staking",
           }
         );
-
+  
         ownedNfts = await nftDropContract.erc721.getOwned(address);
-    
-      console.log(stakeStart)
+      } else {
+        toast.error("Failed to initiate staking");
+      }
+    } else {
+      toast.error("Contract is not available");
     }
-
   }
+  
   return (
     <Container className=''>
       <BreadCrumbs currentPath={location.pathname} />

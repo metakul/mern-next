@@ -20,13 +20,17 @@ const SingleNftCard = ({ tokenId }: any) => {
         <article>
           <div className="block ml-2 rounded-2.5xl border border-jacarta-100 p-[1\5rem] transition-shadow hover:shadow-lg">
             <figure className="relative">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={nft.metadata.image}
-                alt={`item ${nft?.metadata?.name}`}
-                className="w-full rounded-t-2.5xl border "
-                loading="lazy"
-              />
+              {nft.metadata.image &&
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={nft.metadata.image}
+                    alt={`item ${nft?.metadata?.name}`}
+                    className="w-full rounded-t-2.5xl border "
+                    loading="lazy"
+                  />
+                </>
+              }
               <div className="absolute top-3 right-3 flex items-center space-x-1 rounded-md  p-2">
                 <span
                   className="js-likes relative cursor-pointer before:absolute before:h-4 before:w-4 before:bg-[url('')] before:bg-cover before:bg-center before:bg-no-repeat before:opacity-0"
