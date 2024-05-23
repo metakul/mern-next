@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { useParams, usePathname } from 'next/navigation'
  
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
@@ -20,11 +20,11 @@ import { AppDispatch } from '@/lib/store';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { fetchSingleBlogApiSlice,updateBlogSlice } from '@/lib/slices/Blogs/BlogApiSlice';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 const SingleBlogDetails = () => {
 
   const { blogId } = useParams<{ blogId: string }>();
-  const router = useRouter()
+  
   const dispatch = useDispatch()
 const pathName=usePathname()
   const currentDomain = pathName
@@ -77,9 +77,9 @@ const pathName=usePathname()
   return (
     <div className='px-4 mt-4 ml-2 mr-2'>
 
-      {truncatedDescription && (
+      {truncatedDescription ? (
         <>
-          <BreadCrumbs currentPath={location.pathname} />
+          <BreadCrumbs currentPath={`/blogdetails/${blogId}`} />
           <div>
             <div className="flex mt-6 flex-wrap justify-between items-center space-x-2 text-md mb-2 text-jacarta-400">
 
@@ -102,8 +102,11 @@ const pathName=usePathname()
                   position: "fixed",
                   background: getColors().blueAccent[800],
                   color: getColors().blueAccent[100]
-                }} onClick={() => router.push('/dashboard')}>
-                  BACK
+                }} >
+                  <Link href="/">
+
+                  Home
+                  </Link>
                 </Button>
               )
               }
@@ -120,7 +123,7 @@ const pathName=usePathname()
                 Share
               </Button>
 
-              {status == "pending" && userType === "SYSTEM_ADMIN" &&
+              {status == BlogsStatusInfo.PENDING && userType === "SYSTEM_ADMIN" &&
                 <Button variant='contained' sx={{
                   position: "relative",
                   right: "80px",
@@ -164,6 +167,18 @@ const pathName=usePathname()
 
 
           </div>
+        </>
+      ):(
+        <>
+        <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+        <Skeleton variant="rounded" sx={{
+          marginLeft:"auto",
+          marginRight:"auto",
+          marginTop:"20px"
+        }} width={"50%"} height={"400px"} />
+        <Skeleton variant="text" sx={{ fontSize: '1rem' }} height={"40px"}  />
+        <Skeleton variant="text" sx={{ fontSize: '1rem' }} height={"40px"}  />
+        <Skeleton variant="text" sx={{ fontSize: '1rem' }} height={"400px"}  />
         </>
       )}
 

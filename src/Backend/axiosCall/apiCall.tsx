@@ -1,34 +1,53 @@
 import { RequestOptions } from '@/Datatypes/interfaces/interface';
+import { toast } from 'react-toastify';
+import { ApiEndpoint } from '@/Datatypes/enums';
 
-const Request = async (options: RequestOptions) => {
-  let toastId;
+const Request = async ({ endpointId, slug, data }:RequestOptions) => {
   const storedAccessToken = localStorage.getItem('access');
+  const endpoint = ApiEndpoint[endpointId];
 
-  if (options.loadingMessage) {
-    console.log(options.loadingMessage);
+  if (!endpoint) {
+    throw new Error(`Invalid API endpoint: ${endpointId}`);
+  }
+
+  if (endpoint.loadingMessage) {
+    console.log(endpoint.loadingMessage);
   }
 
   try {
-    // Construct the full request URL, prepending the API endpoint if necessary
-    const fullUrl = `${options.url}`;
+    // Construct the full request URL, appending additional data if necessary
+    let fullUrl = endpoint.url;
+    if (slug) {
+      fullUrl += slug;
+    }
 
-    // Make the HTTP request using fetch
-    const response = await fetch(fullUrl, {
-      method: options.method,
+     // Set up request options
+     const requestOptions = {
+      method: endpoint.method,
       headers: {
-        ...options.headers,
+        ...endpoint.headers,
         Authorization: `Bearer ${storedAccessToken}`
       },
-      body: options?.data ? JSON.stringify(options.data) : undefined
-    });
+      // Include body for non-GET requests
+      ...(endpoint.method !== 'GET' && { body: data ? JSON.stringify(data) : undefined })
+    };
+
+    // Make the HTTP request using fetch
+    const response = await toast.promise(
+      fetch(fullUrl, requestOptions), {
+        pending: endpoint.loadingMessage,
+        success: endpoint.successMessage ? endpoint.successMessage : undefined,
+        error: endpoint.errorMessage ? endpoint.errorMessage : undefined,
+      }
+    );
 
     // Parse response
     const responseData = await response.json();
 
     // Check if response is ok
-    if (!response.ok) {
-      throw new Error(responseData.message || 'Request failed');
-    }
+    // if (!response.ok) {
+    //   throw new Error(responseData.message || 'Request failed');
+    // }
 
     // Return the parsed response data
     console.log(responseData); // Accessing response data

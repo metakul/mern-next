@@ -18,18 +18,15 @@ export const fetchBlogApiSlice = createAsyncThunk(
     try {
       console.log("userType", fetchBlogData.userType, status)
       const response = await Request({
-        apiId: ApiEndpoint.GETBLOG.apiId,
-        url: `${ApiEndpoint.GETBLOG.url}?status=${status}&pagesize=${pageSize}&page=${blogPage}`,
-        method: ApiEndpoint.GETBLOG.method,
-        headers: ApiEndpoint.GETBLOG.headers,
-        loadingMessage: ApiEndpoint.GETBLOG.loadingMessage
+        endpointId: "GETBLOG",
+        slug: `?status=${status}&pagesize=${pageSize}&page=${blogPage}`,
       })
       console.log(response);
       
       const blogs: Ipost[] = response;
       const transformedBlogs = blogs.map(blog => ({
         ...blog,
-        postId: blog._id
+        postId: blog.id
       }));
 
       dispatch(setLoadedBlogs({ blogData: transformedBlogs, loading: false }));
@@ -65,15 +62,12 @@ export const fetchSingleBlogApiSlice = createAsyncThunk(
     try {
       console.log("userType", fetchBlogData.userType)
       const response = await Request({
-        apiId: ApiEndpoint.GETSINGLEBLOG.apiId,
-        url: `${ApiEndpoint.GETSINGLEBLOG.url}/${blogId}`,
-        method: ApiEndpoint.GETSINGLEBLOG.method,
-        headers: ApiEndpoint.GETSINGLEBLOG.headers,
-        loadingMessage: ApiEndpoint.GETSINGLEBLOG.loadingMessage
+        endpointId: "GETSINGLEBLOG",
+        slug: `/${blogId}`,
       })
       const blogs: Ipost = response;
 
-      const { _id: postId, ...rest } = blogs;
+      const { id: postId, ...rest } = blogs;
       const updatedBlogs = { postId, ...rest };
 
       dispatch(setLoadedBlogs({ blogData: [updatedBlogs], loading: false }));
@@ -102,12 +96,9 @@ export const addBlogApiSlice = createAsyncThunk(
       let response
       if (postType == "edit") {
         response = await Request({
-          apiId: ApiEndpoint.EDIT_BLOG.apiId,
-          url: `${ApiEndpoint.EDIT_BLOG.url}/${newBlogData.postId}`,
-          method: ApiEndpoint.EDIT_BLOG.method,
-          headers: ApiEndpoint.EDIT_BLOG.headers,
+          endpointId: "EDIT_BLOG",
+          slug: `/${newBlogData.postId}`,
           data: newBlogData,
-          loadingMessage: ApiEndpoint.EDIT_BLOG.loadingMessage
         });
         const loadForUser: FetchBlogData = {
           userType
@@ -117,17 +108,13 @@ export const addBlogApiSlice = createAsyncThunk(
       }
       else {
         response = await Request({
-          apiId: ApiEndpoint.ADD_BLOG.apiId,
-          url: ApiEndpoint.ADD_BLOG.url,
-          method: ApiEndpoint.ADD_BLOG.method,
-          headers: ApiEndpoint.ADD_BLOG.headers,
+          endpointId: "ADD_BLOG",
           data: newBlogData,
-          loadingMessage: ApiEndpoint.ADD_BLOG.loadingMessage
         });
       }
       const newBlog: Ipost = response?.data?.newPost || response?.data
 
-      const { _id: postId, ...rest } = newBlog;
+      const { id: postId, ...rest } = newBlog;
       const updatedBlogs = { postId, ...rest };
       dispatch(addBlog(updatedBlogs)); // Dispatch addBlog action with new blog data
 
@@ -156,12 +143,9 @@ export const updateBlogSlice = createAsyncThunk(
     try {
 
       const response = await Request({
-        apiId: ApiEndpoint.UPDATE_BLOG.apiId,
-        url: `${ApiEndpoint.UPDATE_BLOG.url}/${postId}`,
-        method: ApiEndpoint.UPDATE_BLOG.method,
-        headers: ApiEndpoint.UPDATE_BLOG.headers,
+        endpointId: "UPDATE_BLOG",
+        slug: `/${postId}`,
         data: {status:status},
-        loadingMessage: ApiEndpoint.UPDATE_BLOG.loadingMessage
       });
       const loadForUser: FetchBlogData = {
         userType
@@ -191,12 +175,9 @@ export const fetchCryptoDispatcher = createAsyncThunk(
   async ({ cryptoSymbol, _id, currency }: CryptoInfoProps, { rejectWithValue, dispatch }) => {
     try {
       const response = await Request({
-        apiId: ApiEndpoint.FetchCryptoInfo.apiId,
-        url: `${ApiEndpoint.FetchCryptoInfo.url}/${cryptoSymbol}/${currency}`,
-        method: ApiEndpoint.FetchCryptoInfo.method,
+        endpointId: "FetchCryptoInfo",
+        slug: `/${cryptoSymbol}/${currency}`,
         data: { cryptoSymbol },
-        headers: ApiEndpoint.FetchCryptoInfo.headers,
-        loadingMessage: ApiEndpoint.FetchCryptoInfo.loadingMessage
       })
 
       //todo add propoer data for cryptoInfo

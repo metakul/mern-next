@@ -5,9 +5,9 @@ import { claimNft } from '../../helpers';
 
 export const ClaimNftSlice = createAsyncThunk(
   'Nft/claim',
-  async (data: ClaimNftInterface, { rejectWithValue }) => {
+  async ({claimNftHandler,setMintMsg}: {claimNftHandler:ClaimNftInterface,setMintMsg:any}, { rejectWithValue }) => {
     try {
-      return await claimNft(data);
+      return await claimNft({claimNftHandler,setMintMsg});
     } catch (error) {
       return rejectWithValue(error);
     }

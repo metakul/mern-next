@@ -44,12 +44,9 @@ export interface apiCallEndpoint{
   data?: unknown; 
 }
 export interface RequestOptions {
-  apiId:number
-  method: AxiosRequestConfig['method'];
-  url: string;
-  data?: unknown; // Allow any data type initially  // $MAJOR
-  headers?: AxiosRequestConfig['headers'];
-  loadingMessage?:unknown
+  endpointId:string;
+  slug?:string;
+  data?:object;
 }
 
 // api response success
@@ -109,6 +106,7 @@ export interface DexItem{
 //interfaces for post
 export interface Ipost  {
   _id?:string,
+  id?:string,
   postId?: string;
   title: string;
   description?: string;

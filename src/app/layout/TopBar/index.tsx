@@ -14,10 +14,13 @@ import {
 } from "@mui/icons-material";
 // import app
 import { ColorModeContext, getColors } from "../Theme/themes";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 // const NAV_WIDTH = 280;
 import "./style.css"
 import Link from "next/link";
+import {
+  ConnectWallet,
+} from "@thirdweb-dev/react";
 
 interface HeaderProps {
   setIsSidebarOpen: () => void;
@@ -51,11 +54,12 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
         >
           <MenuIcon />
         </IconButton>
+        METAKUL
         <Link
           href={"/"}>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`logo.svg`} alt="logo" className="w-8 h-8 ml-4" />
+          <img src={`/logo.svg`} alt="logo" className="w-8 h-8 ml-4" />
         </Link>
 
         <Box sx={{ flexGrow: 1 }} />
@@ -67,14 +71,15 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
             sm: 1,
           }}
         >
+          <ConnectWallet/>
           <div className="switch" data-ison={isOn} onClick={toggleSwitch} style={{
             background: theme.palette.grey[900],
             border: "2px solid",
             borderColor: theme.palette.grey[100],
           }}>
-            {/* <motion.div className="handle" layout transition={spring} style={{
+            <motion.div className="handle" layout transition={spring} style={{
               background: theme.palette.grey[100],
-            }} /> */}
+            }} />
           </div>
 
         </Stack>

@@ -1,17 +1,26 @@
-import { ApiSuccess, ClaimNftInterface, ApiError} from '@/Datatypes/interfaces/interface';
+import { ApiSuccess, ClaimNftInterface, ApiError } from '@/Datatypes/interfaces/interface';
 import { allowlistProof } from "./slices/Web3Profile/whitelist";
+import { toast } from 'react-toastify';
 
-export const claimNft = async ({ address, claim }: ClaimNftInterface) => {
+export const claimNft = async ({ claimNftHandler, setMintMsg }: { claimNftHandler: ClaimNftInterface, setMintMsg: any },) => {
   try {
- 
+
     // Define a separate async function to handle the claim operation
     const performClaim = async () => {
       // eslint-disable-next-line no-useless-catch
       try {
-        const res = await claim({
-          args: [address, 1, "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", 0, allowlistProof, []]
-        });
-        return res;
+        const response = await toast.promise(
+          claimNftHandler.claim({
+            args: [claimNftHandler.address, 1, "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", 0, allowlistProof, []]
+          }),
+          {
+            pending: 'Claiming Nft. Wait a bit.',
+            success: 'Nft Claimed Successfully 👌',
+            error: 'Error Claiming NFt. Join discord to know more 🤯'
+          }
+        )
+        setMintMsg("Nft minted successFully")
+        return response;
       } catch (err) {
         throw err;
       }
@@ -19,7 +28,7 @@ export const claimNft = async ({ address, claim }: ClaimNftInterface) => {
 
     const data = await performClaim().then((res: unknown) => {
       console.log(res);
-      
+
       const apiSuccess: ApiSuccess = {
         statusCode: 200,
         message: 'Mint Successfull',

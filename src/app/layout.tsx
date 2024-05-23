@@ -27,7 +27,7 @@ import Tab4 from "@/tabs/Tab4/temp";
 
 //provider:
 import {
-  // ThirdwebProvider,
+  ThirdwebProvider,
   metamaskWallet,
   coinbaseWallet,
   walletConnect,
@@ -38,6 +38,8 @@ import {
 import { CssBaseline, ThemeProvider } from "@mui/material";
 //theme
 import { ColorModeContext, useMode } from './layout/Theme/themes';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 // import { Analytics } from '@vercel/analytics/react';
 // import { SpeedInsights } from '@vercel/speed-insights/react';
 
@@ -62,22 +64,30 @@ export default function DashboardLayout({
 
   const tabs = [
     {
-      value: <OtherHousesOutlinedIcon />,
+      value: <OtherHousesOutlinedIcon sx={{
+        color:"white"
+      }}/>,
       content: <div>{children}</div>,
       label: Tabs.tabTitle1
     },
     {
-      value: <StoreOutlinedIcon />,
+      value: <StoreOutlinedIcon sx={{
+       color:"white"
+      }}/>,
       content: <MetakulCollection />,
       label: Tabs.tabTitle2
     },
+    // {
+    //   value: <CategoryOutlinedIcon sx={{
+    //   color:"white"
+    //   }}/>,
+    //   content: <Tab3 />,
+    //   label: Tabs.tabTitle3
+    // },
     {
-      value: <CategoryOutlinedIcon />,
-      content: <Tab3 />,
-      label: Tabs.tabTitle3
-    },
-    {
-      value: <ContactEmergencyOutlinedIcon />,
+      value: <ContactEmergencyOutlinedIcon sx={{
+        color:"white"
+      }}/>,
       content: <Tab4 />,
       label: Tabs.tabTitle4
     },
@@ -85,26 +95,46 @@ export default function DashboardLayout({
 
   return (
     <StoreProvider>
+
       <html lang="en">
         <body >
           <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-
-              <Box>
-                <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
-                <MiniDrawer
-                  APP_BAR={APP_BAR}
-                  setShowOutlet={setShowOutlet}
-                  isNonMobile={isNonMobile}
-                  isSidebarOpen={isSidebarOpen}
-                  setIsSidebarOpen={handleSideBarState}
-                  navConfig={navConfig}
-                />
-                <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
-                  <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
-                </Container>
-              </Box>
+              <ThirdwebProvider
+                activeChain="polygon"
+                clientId="ed7a4b64885c72be1dc347066f4e51ce"
+                supportedWallets={[
+                  smartWallet(metamaskWallet(), smartWalletOptions),
+                  smartWallet(coinbaseWallet({ recommended: true }), smartWalletOptions),
+                  smartWallet(walletConnect(), smartWalletOptions),
+                  smartWallet(localWallet(), smartWalletOptions),
+                  smartWallet(
+                    embeddedWallet({
+                      auth: {
+                        options: ["email", "google", "apple", "facebook", "email", "phone"],
+                      },
+                    }),
+                    smartWalletOptions
+                  ),
+                ]}
+              >
+                <Box>
+                    <ToastContainer />
+                  <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
+                  <MiniDrawer
+                    APP_BAR={APP_BAR}
+                    setShowOutlet={setShowOutlet}
+                    isNonMobile={isNonMobile}
+                    isSidebarOpen={isSidebarOpen}
+                    setIsSidebarOpen={handleSideBarState}
+                    navConfig={navConfig}
+                  />
+                  <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
+                    <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
+                  </Container>
+                </Box>
+              </ThirdwebProvider>
             </ThemeProvider>
             {/* <Analytics /> */}
             {/* <SpeedInsights /> */}

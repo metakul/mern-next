@@ -57,9 +57,11 @@ const pathname=usePathname()
 
     <div className=" sm:w-full overflow-hidden mx-auto">
 
+  
+
     {
       (blogsData as Ipost[])?.map((post: Ipost, index: number) => (
-        <section key={index} className="relative py-4 mb-4">
+        <section key={index} className="relative py-4">
 
           <Box className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
 
@@ -97,7 +99,7 @@ const pathname=usePathname()
 
                 </Grid>
                 <Grid item xs={4} md={4} lg={4} className='mx-auto flex flex-end justify-end pr-8 pb-4'>
-                  <ShareButton link={`${currentDomain}/blogDetails/${post.postId}`} />
+                  <ShareButton link={`/blogDetails/${post.postId}`} />
                   {/* <LikeButton /> */}
 
                 </Grid>
@@ -122,7 +124,7 @@ const pathname=usePathname()
     }
         {loading &&
       <>
-        {Array.from({ length: 2 }).map((_, index) => (
+        {Array.from({ length: 3 }).map((_, index) => (
           <Stack key={index} spacing={1} className='relative py-4 mt-4'>
             <Box className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
               <div className="rounded-[1.25rem] p-4 flex-row justify-center">
