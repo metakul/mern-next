@@ -37,17 +37,39 @@ export const navConfig = [
     icon: <PieChartOutlined />,
     to: "/earn",
   },
-  // {
-  //   text: "Metaverse",
-  //   icon: null,
-  //   to: "",
-  // },
+  {
+    text: "Metaverse",
+    icon: null,
+    to: "",
+  },
   // {
   //   text: "Learn Web3",
   //   icon: <ReceiptLongOutlined />,
   //   to: "blogs",
   // },
 
+
+  // {
+  //   text: "Extras",
+  //   icon:null,
+  //   to: "",
+  // },
+  // {
+  //   text: "Profile",
+  //   icon: <AdminPanelSettingsOutlined />,
+  //   to: "Profile",
+  // },
+  {
+    text: "Create Own NFT",
+    icon: <PublicOutlined />,
+    to: "CREATE_NFT",
+  },
+  // {
+  //   text: "Career",
+  //   icon: <CalendarMonthOutlined />,
+  //   to: "Career",
+  // },
+    
   // {
   //   text: "For GBPIET Student",
   //   icon:null,
@@ -58,27 +80,6 @@ export const navConfig = [
   //   icon:<Checkroom/>,
   //   to: "/laundry",
   // },
-  {
-    text: "Extras",
-    icon:null,
-    to: "",
-  },
-  // {
-  //   text: "Profile",
-  //   icon: <AdminPanelSettingsOutlined />,
-  //   to: "Profile",
-  // },
-  // {
-  //   text: "Create Own NFT",
-  //   icon: <PublicOutlined />,
-  //   to: "CREATE_NFT",
-  // },
-  // {
-  //   text: "Career",
-  //   icon: <CalendarMonthOutlined />,
-  //   to: "Career",
-  // },
-  
 ];
 
 export default navConfig;
