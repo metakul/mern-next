@@ -25,7 +25,7 @@ export const navConfig = [
   {
     text: "Claim NFT",
     icon: <TodayOutlined />,
-    to: "mint",
+    to: "/mint",
   },
   // {
   //   text: "Explore",
@@ -35,7 +35,7 @@ export const navConfig = [
   {
     text: "Earn With Nft",
     icon: <PieChartOutlined />,
-    to: "earn",
+    to: "/earn",
   },
   // {
   //   text: "Metaverse",

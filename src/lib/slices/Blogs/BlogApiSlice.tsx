@@ -67,7 +67,7 @@ export const fetchSingleBlogApiSlice = createAsyncThunk(
       })
       const blogs: Ipost = response;
 
-      const { _id: postId, ...rest } = blogs;
+      const { id: postId, ...rest } = blogs;
       const updatedBlogs = { postId, ...rest };
 
       dispatch(setLoadedBlogs({ blogData: [updatedBlogs], loading: false }));
@@ -114,7 +114,7 @@ export const addBlogApiSlice = createAsyncThunk(
       }
       const newBlog: Ipost = response?.data?.newPost || response?.data
 
-      const { _id: postId, ...rest } = newBlog;
+      const { id: postId, ...rest } = newBlog;
       const updatedBlogs = { postId, ...rest };
       dispatch(addBlog(updatedBlogs)); // Dispatch addBlog action with new blog data
 
