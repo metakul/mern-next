@@ -106,6 +106,7 @@ export interface DexItem{
 //interfaces for post
 export interface Ipost  {
   _id?:string,
+  id?:string,
   postId?: string;
   title: string;
   description?: string;

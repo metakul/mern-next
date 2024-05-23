@@ -26,7 +26,7 @@ export const fetchBlogApiSlice = createAsyncThunk(
       const blogs: Ipost[] = response;
       const transformedBlogs = blogs.map(blog => ({
         ...blog,
-        postId: blog._id
+        postId: blog.id
       }));
 
       dispatch(setLoadedBlogs({ blogData: transformedBlogs, loading: false }));
