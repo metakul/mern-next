@@ -33,7 +33,7 @@ const SingleNftCard = ({ tokenId }: any) => {
               }
               <div className="absolute top-3 right-3 flex items-center space-x-1 rounded-md  p-2">
                 <span
-                  className="js-likes relative cursor-pointer before:absolute before:h-4 before:w-4 before:bg-[url('')] before:bg-cover before:bg-center before:bg-no-repeat before:opacity-0"
+                  className="js-likes relative cursor-pointer before:absolute before:h-4 before:w-4  before:bg-cover before:bg-center before:bg-no-repeat before:opacity-0"
                   data-tippy-content="Favorite"
                 >
                   <svg
