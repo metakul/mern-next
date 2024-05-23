@@ -57,17 +57,17 @@ export const navConfig = [
   // {
   //   text: "Profile",
   //   icon: <AdminPanelSettingsOutlined />,
-  //   to: "Profile",
+  //   to: "/Profile",
   // },
   {
     text: "Create Own NFT",
     icon: <PublicOutlined />,
-    to: "CREATE_NFT",
+    to: "/create_nft",
   },
   // {
   //   text: "Career",
   //   icon: <CalendarMonthOutlined />,
-  //   to: "Career",
+  //   to: "/Career",
   // },
     
   // {

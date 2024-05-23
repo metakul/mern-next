@@ -5,9 +5,18 @@ import { Container, Typography, Box, Paper } from "@mui/material";
 import { convertFileToBase64 } from "../../scripts/fileConverter";
 import Image from "next/image";
 
-export default function ImageUploader(props) {
+interface ImageUploaderProps {
+  register: any
+}
+
+interface FilePreview {
+  preview: string;
+  name: string;
+}
+
+export default function ImageUploader(props: ImageUploaderProps) {
   const { register } = props;
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState<FilePreview | null>(null);
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
     accept: {
@@ -15,20 +24,18 @@ export default function ImageUploader(props) {
     },
     onDrop: async (acceptedFiles) => {
       const file = acceptedFiles[0];
-      const base64Image=await convertFileToBase64(file)
+      const base64Image = await convertFileToBase64(file);
       register(base64Image);
-      setFile({ preview: URL.createObjectURL(file) });
+      setFile({ preview: URL.createObjectURL(file), name: file.name });
     },
   });
 
-  const preview = (
+  const preview = file ? (
     <Box key={file.name}>
       <div>
         <Image
           style={{
             display: "block",
-            height: 150,
-            width: 150,
             objectFit: "cover",
             position: "absolute",
             top: "50%",
@@ -37,13 +44,15 @@ export default function ImageUploader(props) {
           }}
           alt={file.name}
           src={file.preview}
+          width={400}
+          height={400}
           onLoad={() => {
             URL.revokeObjectURL(file.preview);
           }}
         />
       </div>
     </Box>
-  );
+  ) : null;
 
   return (
     <Paper
@@ -72,22 +81,23 @@ export default function ImageUploader(props) {
             justifyContent: "center",
             alignItems: "center",
             border: "1px dashed #eaeaea",
-            height: 150,
-            width: 150,
+            height: 250,
+            width: 250,
             cursor: "pointer",
             borderRadius: "50%",
           }}
         >
           <Box
-            {...getRootProps({ className: "dropzone" })}
+            {...getRootProps()}
+            className= "dropzone"
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
               background: "#eaeaea75",
-              height: 120,
-              width: 120,
+              height: 200,
+              width: 200,
               cursor: "pointer",
               borderRadius: "50%",
               p: 1,
