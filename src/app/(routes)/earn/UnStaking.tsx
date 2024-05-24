@@ -8,9 +8,9 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import SingleNftCard from "@/components/Cards/SingleNftCard";
 import BreadCrumbs from "@/components/Elements/BreadCrumbs";
 
-const nftDropContractAddress = "0x710E9161e8A768c0605335AB632361839f761374"
-const tokenContractAddress = "0xE9fd323D7B1e4cFd07C657E218F7da16efd6532f"
-const stakingContractAddress = "0x7615Cc203dDe705bFD65C42CEAcA7e15eB41b11b"
+const nftDropContractAddress = process.env.NEXT_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
+const tokenContractAddress = process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
+const stakingContractAddress = process.env.NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS as string
 
 
 const Mywallet = () => {
