@@ -1,6 +1,6 @@
 import {
   HomeOutlined,
-  // ShoppingCartOutlined,
+  ShoppingCartOutlined,
   ReceiptLongOutlined,
   PublicOutlined,
   TodayOutlined,
@@ -36,6 +36,11 @@ export const navConfig = [
     text: "Earn With Nft",
     icon: <PieChartOutlined />,
     to: "/earn",
+  },
+  {
+    text: "Shopping",
+    icon: <ShoppingCartOutlined />,
+    to: "/shopping",
   },
   {
     text: "Metaverse",

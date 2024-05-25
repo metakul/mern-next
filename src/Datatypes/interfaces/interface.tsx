@@ -78,6 +78,11 @@ export interface ClaimNftInterface {
   address: string;
   claim: ClaimFunction
 }
+export interface TransferCryptoInterface {
+  to: string;
+  amount: Number;
+  transfer:any
+}
 
 export interface NFTCollectionState {
   nfts: unknown[];
