@@ -7,7 +7,7 @@ import { AppDispatch } from '@/lib/store';
 import { fetchBlogApiSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import { Ipost } from '@/Datatypes/interfaces/interface';
 import { FetchBlogData } from '@/Datatypes/interfaces/interface';
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery } from '@mui/material';
 import ShareButton from '@/components/Elements/Buttons/ShareButton';
 import BlogDetails from '@/components/BlogInfoTabs';
 import {  SetStateAction, useEffect, useState } from 'react';
@@ -25,6 +25,7 @@ const Blogs = () => {
   const [pageSize,] = useState(3);
   const [openedBlogId, setOpenedBlogId] = useState<string | null>(null);
   const userType = useSelector(selectUserType);
+  const isNonMobile = useMediaQuery("(min-width: 766px)");
   const handleLoadBlogs = () => {
 
     const loadForUser: FetchBlogData = {
@@ -72,7 +73,7 @@ const pathname=usePathname()
                 <img
                   src={`data:image/png;base64,${post.image}`}
                   alt={post.title}
-                  className="h-[320px] w-80 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-105"
+                  className={` ${isNonMobile ? "h-[320px] w-80" : "h-[220px] w-60" }  object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-105`}
                   onClick={() => handleOpenBlogs(post.postId)}
                 />
               </div>
