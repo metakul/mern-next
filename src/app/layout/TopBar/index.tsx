@@ -55,8 +55,10 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
         <Typography sx={{
           color:  getColors().primary[100]
         }}>
-
+          <Link href={"/"}>
         METAKUL
+          </Link>
+
         </Typography>
         <Link
           href={"/"}>
