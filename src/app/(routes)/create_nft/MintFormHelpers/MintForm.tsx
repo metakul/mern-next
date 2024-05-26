@@ -48,6 +48,8 @@ function Home() {
 
       alert("Successfully Saved your NFT for future Mint");
       updateFormParams({ name: '', description: '', external_url: '' });
+      setFileURL(null)
+      setExplicitContent(false)
     } catch (e) {
       alert("Upload error" + e);
     }

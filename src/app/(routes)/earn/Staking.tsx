@@ -22,7 +22,6 @@ const stakingContractAddress = process.env.NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS 
 
 const Staking = () => {
   const address = useAddress()
-console.log(nftDropContractAddress);
 
   const { contract: tokenContract } = useContract(
     tokenContractAddress,
