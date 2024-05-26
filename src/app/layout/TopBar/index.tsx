@@ -8,6 +8,7 @@ import {
   Toolbar,
   IconButton,
   useTheme,
+  Typography,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -51,7 +52,12 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
         >
           <MenuIcon />
         </IconButton> */}
+        <Typography sx={{
+          color:  getColors().primary[100]
+        }}>
+
         METAKUL
+        </Typography>
         <Link
           href={"/"}>
 
