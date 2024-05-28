@@ -98,13 +98,13 @@ const ShopPage = () => {
                 </Typography>
               </Grid>
               <Grid item xs={4}>
-                  <Typography className="mt-4" >
-                    Remaining Balance: <b>
-                      {balance}
-                      {/* {ethers.utils.formatUnits(balance, 18)} */}
-                    </b>{" "}
-                    $KULL
-                  </Typography>
+                <Typography className="mt-4" >
+                  Remaining Balance: <b>
+                    {balance}
+                    {/* {ethers.utils.formatUnits(balance, 18)} */}
+                  </b>{" "}
+                  $KULL
+                </Typography>
               </Grid >
 
             </Grid>
@@ -113,17 +113,42 @@ const ShopPage = () => {
 
 
 
-        <Box>
-          <CustomSwiper images={hotStarImages} autoplayDelay={3000}/>
-          <CustomSwiper images={images} autoplayDelay={3000}/>
-          <CustomSwiper images={linkedin} autoplayDelay={3000}/>
-          <Button
-            onClick={handleBuy}
-          >
-            Transfer
-          </Button>
+          <Box>
+            <Grid container>
 
-        </Box>
+              <Grid item xs={4} md={4} lg={4}>
+
+                <CustomSwiper images={hotStarImages} autoplayDelay={3000} />
+                <Button
+                  variant="contained"
+                  onClick={handleBuy}
+                >
+                  Transfer
+                </Button>
+              </Grid>
+              <Grid item xs={4} md={4} lg={4}>
+
+                <CustomSwiper images={images} autoplayDelay={3000} />
+                <Button
+                  variant="contained"
+                  onClick={handleBuy}
+                >
+                  Transfer
+                </Button>
+              </Grid>
+              <Grid item xs={4} md={4} lg={4}>
+                <CustomSwiper images={linkedin} autoplayDelay={3000} />
+                <Button
+                  variant="contained"
+                  onClick={handleBuy}
+                >
+                  Transfer
+                </Button>
+              </Grid>
+            </Grid>
+
+
+          </Box>
 
         </div>
       </Container>
