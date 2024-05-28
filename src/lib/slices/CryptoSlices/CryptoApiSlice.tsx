@@ -25,7 +25,7 @@ export const fetchSingleCryptoDispatcher = createAsyncThunk(
       
       //todo add propoer data for cryptoInfo
       const cryptoData: CryptoData = {
-        cryptoSymbol: response?.asset_id_base,
+        cryptoSymbol: cryptoSymbol,
         currency: response?.asset_id_quote,
         price: response?.rate,
         marketCap: response?.time
