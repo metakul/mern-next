@@ -88,7 +88,7 @@ const ShopPage = () => {
         <div className="">
           <Box sx={{
             mb: 4,
-            fidplsy: "flex",
+            display: "flex",
             flexDirection: "row"
           }}>
             <Grid >
