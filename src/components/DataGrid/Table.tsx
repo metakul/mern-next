@@ -35,6 +35,7 @@ const CustomTable: React.FC<TableInfoProps> = ({
   const handleRowClick = (index: number) => {
     setOpenRow(openRow === index ? null : index);
   };
+console.log(detaildedData);
 
   return (
     <TableContainer component={Paper}>

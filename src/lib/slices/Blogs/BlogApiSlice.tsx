@@ -194,17 +194,16 @@ export const fetchCryptoDispatcher = createAsyncThunk(
         apiId: ApiEndpoint.FetchCryptoInfo.apiId,
         url: `${ApiEndpoint.FetchCryptoInfo.url}/${cryptoSymbol}/${currency}`,
         method: ApiEndpoint.FetchCryptoInfo.method,
-        data: { cryptoSymbol },
         headers: ApiEndpoint.FetchCryptoInfo.headers,
         loadingMessage: ApiEndpoint.FetchCryptoInfo.loadingMessage
       })
 
       //todo add propoer data for cryptoInfo
       const cryptoData: CryptoData = {
-        cryptoSymbol: response.data.asset_id_base,
-        currency: response.data.asset_id_quote,
-        price: response.data.rate,
-        marketCap: response.data.time
+        cryptoSymbol: response.asset_id_base,
+        currency: response.asset_id_quote,
+        price: response.rate,
+        marketCap: response.time
       };
       dispatch(fetchCryptoInfo({ _id: _id, cryptoData: cryptoData }));
 
