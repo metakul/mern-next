@@ -38,9 +38,10 @@ const Blogs = () => {
       status: BlogsStatusInfo.APPROVED
     }));
   }
-const pathname=usePathname()
-  // Get current domain dynamically
-  const currentDomain =pathname
+
+  const pathName=usePathname()
+  const currentDomain = pathName
+  const postLink = `${window.location.origin}/${currentDomain}`;
 
   useEffect(() => {
     // Load blogs when the component mounts
@@ -99,7 +100,7 @@ const pathname=usePathname()
 
                 </Grid>
                 <Grid item xs={4} md={4} lg={4} className='mx-auto flex flex-end justify-end pr-8 pb-4'>
-                  <ShareButton link={`${currentDomain}/blogDetails/${post.postId}`} />
+                  <ShareButton link={`${postLink}`} />
                   {/* <LikeButton /> */}
 
                 </Grid>

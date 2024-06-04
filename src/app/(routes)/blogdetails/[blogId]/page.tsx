@@ -28,7 +28,7 @@ const SingleBlogDetails = () => {
   const dispatch = useDispatch()
 const pathName=usePathname()
   const currentDomain = pathName
-  const postLink = `${window.location.origin}/${currentDomain}/blogDetails/${blogId}`;
+  const postLink = `${window.location.origin}/${currentDomain}`;
 
 
   const userType = useSelector(selectUserType);

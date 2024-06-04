@@ -66,6 +66,8 @@ import React from "react";
 
   export const handleShare = (link: string) => {
     // Fallback for browsers that do not support Web Share API
+   console.log(link)
+   
     navigator.clipboard.writeText(`${link}`)
       .then(() => {
         console.log('Shareable link copied to clipboard:', link);
