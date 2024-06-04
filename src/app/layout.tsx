@@ -79,13 +79,13 @@ export default function DashboardLayout({
       content: <MetakulCollection />,
       label: Tabs.tabTitle2
     },
-    // {
-    //   value: <CategoryOutlinedIcon sx={{
-    //   color:"white"
-    //   }}/>,
-    //   content: <Tab3 />,
-    //   label: Tabs.tabTitle3
-    // },
+    {
+      value: <CategoryOutlinedIcon sx={{
+      color:"white"
+      }}/>,
+      content: <Tab3 />,
+      label: Tabs.tabTitle3
+    },
     {
       value: <ContactEmergencyOutlinedIcon sx={{
         color:"white"
@@ -121,7 +121,6 @@ export default function DashboardLayout({
                   ),
                 ]}
               >
-                <Box>
                     <ToastContainer />
                   <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
                   <MiniDrawer
@@ -135,11 +134,10 @@ export default function DashboardLayout({
                   <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
                     <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
                   </Container>
-                </Box>
-              </ThirdwebProvider>
-            </ThemeProvider>
             <Analytics />
             <SpeedInsights />
+              </ThirdwebProvider>
+            </ThemeProvider>
           </ColorModeContext.Provider>
         </body>
 
