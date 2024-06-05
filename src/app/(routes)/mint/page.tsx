@@ -47,10 +47,10 @@ const MintPage = () => {
 
   const handleClaimNft = async () => {
     if(!address){
-      setErrmsg("Wallet not Connected")
+      toast.error("Wallet not Connected")
       return
     }
-    setMintMsg("Mint Started")
+    toast("Mint Started")
     const claimNftHandler: ClaimNftInterface = {
       address,
       claim
