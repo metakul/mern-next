@@ -17,7 +17,6 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
     tempDiv.innerHTML = html;
     return Array.from(tempDiv.childNodes);
   };
-console.log(userType);
 
   const renderCustomStyles = (node: any, index: number) => {
     if (node.nodeType === 1) { // Node.ELEMENT_NODE
@@ -79,14 +78,7 @@ console.log(userType);
   }, [selectedBlog])
   
   let truncatedDescription
-  if(userType===""){
     truncatedDescription= selectedBlog?.description ? selectedBlog.description.split(' ').slice(0, 80).join(' ') + ' .....' : '';
-  }
-  else{
-    truncatedDescription=selectedBlog?.description
-  }
-  console.log(truncatedDescription);
-  
 
   return (
     <div className='px-8 mt-4'>
@@ -106,7 +98,12 @@ console.log(userType);
 
             {parseHTML(truncatedDescription).map((node, index) => renderCustomStyles(node, index))} 
 
-            
+            <Button variant='contained' sx={{
+              }}>
+                
+                <Link href={`/blogdetails/${_id}`}>
+                Read All
+                </Link> </Button>
           </div>
         </>
       )}
