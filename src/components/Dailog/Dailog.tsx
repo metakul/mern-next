@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 interface CustomDialogProps {
   open: boolean;
   onClose: () => void;
-  triggerButtonText: string;
+  triggerButtonText: string | any;
   title: string;
   description: string;
   children: ReactNode;
@@ -34,7 +34,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
           {children}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => onClose()} color="primary">
+          <Button onClick={() => onClose()} color="primary" variant='contained'>
             Close
           </Button>
         </DialogActions>

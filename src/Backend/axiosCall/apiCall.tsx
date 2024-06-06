@@ -31,6 +31,8 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
       // Include body for non-GET requests
       ...(endpoint.method !== 'GET' && { body: data ? JSON.stringify(data) : undefined })
     };
+    console.log("requestOptions",requestOptions);
+    
 
     // Make the HTTP request using fetch
     const response = await toast.promise(
@@ -41,13 +43,15 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
       }
     );
 
+    console.log(response);
+    
     // Parse response
     const responseData = await response.json();
 
     // Check if response is ok
-    // if (!response.ok) {
-    //   throw new Error(responseData.message || 'Request failed');
-    // }
+    if (!response.ok) {
+      throw new Error(responseData.message || 'Request failed');
+    }
 
     // Return the parsed response data
     console.log(responseData); // Accessing response data

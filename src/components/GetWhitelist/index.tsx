@@ -1,6 +1,8 @@
 import { getColors } from '@/app/layout/Theme/themes';
 import { Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import CustomDialog from '../Dailog/Dailog';
+import WhitelistForm from './WhitelistForm';
 
 interface RemainingTime {
   days: number;
@@ -44,7 +46,7 @@ const icoData: IcoData = {
 
 const IcoSale: React.FC<IcoSaleProps> = ({ data }) => {
   const [remainingTime, setRemainingTime] = useState<RemainingTime>(calculateRemainingTime(data.countdownDate));
-
+  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
   useEffect(() => {
     const interval = setInterval(() => {
       setRemainingTime(calculateRemainingTime(data.countdownDate));
@@ -66,14 +68,22 @@ const IcoSale: React.FC<IcoSaleProps> = ({ data }) => {
             <div className="mb-14">
               <Typography variant="h2" className="pb-8 font-display text-3xl dark:text-white">
                 Something New
-                 <span className="text-accent">Coming Soon!</span>
+                <span className="text-accent">Coming Soon!</span>
               </Typography>
-              <a
-                href="item.html"
-                className="inline-block rounded-full bg-accent py-2.5 px-8 text-center text-sm font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark"
+              <CustomDialog
+                open={isDialogOpen}
+                onClose={() => setDialogOpen(!isDialogOpen)}
+                triggerButtonText={<p
+                  className="inline-block rounded-full bg-accent py-2.5 px-8 text-center text-sm font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark"
+                >
+                  Get Whitelist Now
+                </p>}
+                title={''}
+                description={''}
               >
-                Get Whitelist Now
-              </a>
+                <WhitelistForm/>
+              </CustomDialog>
+
             </div>
             <div>
               <div
