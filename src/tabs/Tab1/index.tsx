@@ -2,6 +2,7 @@
 'use client'
 import Blogs from './Blogs';
 import MarqueeCryptoNew from '@/components/MarqueCrypto';
+import GetWhielist from '@/components/GetWhitelist';
 import Link from 'next/link';
 
 const Tab1 = () => {
@@ -14,6 +15,7 @@ const Tab1 = () => {
       </h2>
         <>
           <MarqueeCryptoNew />
+          <GetWhielist/>
           <Blogs />
         </>
     </>

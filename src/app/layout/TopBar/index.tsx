@@ -46,14 +46,14 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
       height: APP_BAR
     }} >
       <Toolbar>
-        <IconButton
+        {/* <IconButton
           onClick={() => setIsSidebarOpen()}
           sx={{
             color: getColors().blueAccent[100]
           }}
         >
           <MenuIcon />
-        </IconButton>
+        </IconButton> */}
         METAKUL
         <Link
           href={"/"}>
