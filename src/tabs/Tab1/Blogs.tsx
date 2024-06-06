@@ -42,7 +42,7 @@ const Blogs = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setCurrentDomain(window.location.origin);
+      setCurrentDomain(window.location.origin)
     }
   }, []);
 
