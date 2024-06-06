@@ -70,7 +70,7 @@ const Blogs = () => {
       (blogsData as Ipost[])?.map((post: Ipost, index: number) => (
         <section key={index} className="relative py-4">
 
-          <Box className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+          <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
 
             <div className="rounded-[1.25rem]  p-4 flex-row justify-center">
               <div className='mb-3 flex flex-wrap items-center space-x-1 text-xs flex-row justify-center'>
@@ -125,7 +125,7 @@ const Blogs = () => {
               </Grid>
             </div>
 
-          </Box>
+          </div>
         </section>
       ))
     }
@@ -133,22 +133,22 @@ const Blogs = () => {
       <>
         {Array.from({ length: 3 }).map((_, index) => (
           <Stack key={index} spacing={1} className='relative py-4 mt-4'>
-            <Box className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+            <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
               <div className="rounded-[1.25rem] p-4 flex-row justify-center">
                 <Skeleton variant="rounded" width={"100%"} height={"400px"} />
               </div>
-            </Box>
+            </div>
           </Stack>
         ))}
       </>
     }
-    <Box className="mx-auto flex flex-row justify-center">
+    <div className="mx-auto flex flex-row justify-center">
 
-    <Button variant='contained' sx={{backgroundColor:getColors().blueAccent[800]}} onClick={handleLoadBlogs} className=''>
+    <Button variant='contained' sx={{backgroundColor:getColors().blueAccent[800]}} onClick={handleLoadBlogs} >
       Load More
     </Button>
     
-    </Box>
+    </div>
   </div>
   );
 };
