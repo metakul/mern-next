@@ -16,7 +16,6 @@ import {  SetStateAction, useEffect, useState } from 'react';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { BlogsStatusInfo } from '@/Datatypes/enums';
 import { getColors } from '@/app/layout/Theme/themes';
-import { usePathname } from 'next/navigation';
 const Blogs = () => {
   // const theme = useTheme()
   const dispatch = useDispatch()
@@ -38,9 +37,17 @@ const Blogs = () => {
       status: BlogsStatusInfo.APPROVED
     }));
   }
-const pathname=usePathname()
-  // Get current domain dynamically
-  const currentDomain =pathname
+
+  const [currentDomain, setCurrentDomain] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentDomain(window.location.origin)
+    }
+  }, []);
+
+  const postLink = currentDomain ? `${currentDomain}` : '';
+
 
   useEffect(() => {
     // Load blogs when the component mounts
@@ -72,7 +79,7 @@ const pathname=usePathname()
                 <img
                   src={`data:image/png;base64,${post.image}`}
                   alt={post.title}
-                  className="h-[320px] w-80 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-105"
+                  className="h-[240px] sm:h-[320px] sm:w-80 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-105"
                   onClick={() => handleOpenBlogs(post.postId)}
                 />
               </div>
@@ -99,7 +106,7 @@ const pathname=usePathname()
 
                 </Grid>
                 <Grid item xs={4} md={4} lg={4} className='mx-auto flex flex-end justify-end pr-8 pb-4'>
-                  <ShareButton link={`/blogDetails/${post.postId}`} />
+                  <ShareButton link={`${postLink}`} />
                   {/* <LikeButton /> */}
 
                 </Grid>
