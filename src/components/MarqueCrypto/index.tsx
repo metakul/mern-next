@@ -39,7 +39,7 @@ const MarqueeCryptoNew = () => {
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={`/CryptoLogo/${crypto.cryptoData.cryptoSymbol}.png`} alt={crypto.cryptoData.cryptoSymbol} className="w-10 h-10 mb-2" />
                                 <Box className='ml-2'>
-                   A                 <div>{crypto.cryptoData.cryptoSymbol}</div>
+                                    <div>{crypto.cryptoData.cryptoSymbol}</div>
 
                                     {crypto.loading ? (
                                         <Stack spacing={1}>
