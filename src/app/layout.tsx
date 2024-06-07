@@ -77,13 +77,13 @@ export default function DashboardLayout({
     //   content: <MetakulCollection />,
     //   label: Tabs.tabTitle2
     // },
-    // {
-    //   value: <CategoryOutlinedIcon sx={{
-    //   color:"white"
-    //   }}/>,
-    //   content: <Tab3 />,
-    //   label: Tabs.tabTitle3
-    // },
+    {
+      value: <CategoryOutlinedIcon sx={{
+      color:"white"
+      }}/>,
+      content: <Tab3 />,
+      label: Tabs.tabTitle3
+    },
     {
       value: <ContactEmergencyOutlinedIcon sx={{
         color:"white"
