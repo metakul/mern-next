@@ -154,25 +154,19 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
                       },
                     }}
                   >
-                    <div className="bg-yankees-blue rounded-3xl items-center  cursor-pointer w-max mr-2 sm:mr-0  ">
-                      <div className="h-10 text-xs flex justify-items-end justify-end px-1 py-1 items-center">
-                        <div>
-                          <Avatar>
-                            <Image src="/img/21.png" alt="img"
-                            width={50}
-                            height={50}
-                            style={{
-                              display: "block",
-                              objectFit: "cover",
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                            }} />
-                          </Avatar>
-                        </div>
-                      </div>
-                    </div>
+                    <Avatar>
+                      <Image src="/img/21.png" alt="img"
+                        width={50}
+                        height={50}
+                        style={{
+                          display: "block",
+                          objectFit: "cover",
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                        }} />
+                    </Avatar>
                   </Button>
 
                   <StyledMenu
