@@ -2,7 +2,7 @@
 import { ConnectWallet, Web3Button, useAddress, useTokenBalance } from "@thirdweb-dev/react";
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 import { useState, useEffect } from 'react';
-// import { ethers } from "ethers";
+import { ethers } from "ethers";
 import { Box, Container, Grid, Typography } from "@mui/material";
 
 import SingleNftCard from "@/components/Cards/SingleNftCard";
@@ -75,7 +75,7 @@ const Mywallet = () => {
         <Typography className="mt-4" >
           Claimable Balance: <b>
             {/* {claimableRewards} */}
-            {/* {ethers.utils.formatUnits(claimableRewards, 18)} */}
+            {ethers.utils.formatUnits(claimableRewards, 18)}
           </b>{" "}
           {tokenBalance?.symbol}
         </Typography>
