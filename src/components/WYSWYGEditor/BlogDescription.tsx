@@ -79,13 +79,8 @@ console.log(userType);
   }, [selectedBlog])
   
   let truncatedDescription
-  if(userType===""){
     truncatedDescription= selectedBlog?.description ? selectedBlog.description.split(' ').slice(0, 80).join(' ') + ' .....' : '';
-  }
-  else{
-    truncatedDescription=selectedBlog?.description
-  }
-  console.log(truncatedDescription);
+
   
 
   return (
@@ -105,7 +100,12 @@ console.log(userType);
             </div>
 
             {parseHTML(truncatedDescription).map((node, index) => renderCustomStyles(node, index))} 
-
+            <Button variant='contained' sx={{
+              }}>
+                
+                <Link href={`/blogdetails/${_id}`}>
+                Read All
+                </Link> </Button>
             
           </div>
         </>
