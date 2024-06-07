@@ -6,7 +6,7 @@ interface Props {
   balance: BalanceItem[];
   loadingMessage: string;
   handleNftButtonText: string;
-  onHandleButtonClick: (id: string) => void;
+  onHandleButtonClick?: (id: string) => void;
 }
 
 const NftCard: React.FC<Props> = ({ loadingMessage, balance, handleNftButtonText, onHandleButtonClick }) => {
@@ -94,6 +94,7 @@ const NftCard: React.FC<Props> = ({ loadingMessage, balance, handleNftButtonText
                   </Menu>
                 </div>
               </div>
+              {onHandleButtonClick && 
               <div className="mt-4 flex items-center justify-between ml-4">
                 {item && item?.metadata?.id ? (
                   <Button sx={{
@@ -109,6 +110,7 @@ const NftCard: React.FC<Props> = ({ loadingMessage, balance, handleNftButtonText
                   <h3>Not Minted Yet</h3>
                 )}
               </div>
+              }
             </div>
           </article>
         ))

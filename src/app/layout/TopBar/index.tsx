@@ -138,7 +138,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
           {address ? (
             <>
               <FlexBetween>
-                <div className="flex justify-between items-center mt-11 sm:mt-11 md:mt-0 lg:mt-0 mx-2 ">
+                <div className="flex justify-between items-center mt-2 sm:mt-2 md:mt-0 lg:mt-0 mx-2 ">
                   <Button
                     className=" "
                     id="demo-customized-button"
@@ -209,7 +209,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
                             Profile</Link></Typography>
                       </StyledMenuItem>
                     </Paper>
-                    <Paper>
+                    {/* <Paper>
 
                       <StyledMenuItem >
                         <Avatar>
@@ -217,16 +217,16 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
                         </Avatar>
                       </StyledMenuItem>
 
-                    </Paper>
+                    </Paper> */}
 
-                    <Paper>
+                    {/* <Paper>
                       <StyledMenuItem >
                         <Avatar>
                           <LogoutOutlinedIcon />
                         </Avatar>
                         <Typography>Log Out</Typography>
                       </StyledMenuItem>
-                    </Paper>
+                    </Paper> */}
                   </StyledMenu>
                 </div>
               </FlexBetween>

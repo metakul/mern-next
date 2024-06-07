@@ -53,11 +53,12 @@ const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positio
             sx={{
               height:"60px",
               '&.Mui-selected': {
-                backgroundColor: getColors().greenAccent[800],
+                backgroundColor: getColors().blueAccent[900],
                 color: getColors().blueAccent[100],
                 borderTopLeftRadius: "10px", 
                 borderTopRightRadius: "10px", 
                 borderRight: "2px solid",
+                borderTop: "2px solid",
                 borderLeft: "2px solid",
                 '& .MuiSvgIcon-root': {
                   fontSize: "2rem", 
