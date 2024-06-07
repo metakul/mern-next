@@ -96,6 +96,7 @@ export interface BalanceItem {
   historyLink?: string;
 }
 
+
 // interface for dex
 export interface DexItem{
   metadata?: {

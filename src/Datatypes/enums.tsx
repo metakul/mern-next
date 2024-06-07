@@ -13,6 +13,13 @@ export enum Tabs {
   tabTitle4="PROFILE"
 }
 
+export enum NftTabs {
+  tabTitle1="Home",
+  tabTitle2="BTC",
+  tabTitle3="Wallet",
+  tabTitle4="PROFILE"
+}
+
 export enum Pages {
   HOME = '/',
   DASHBOARD = '/dashboard/app',
