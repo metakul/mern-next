@@ -26,7 +26,7 @@ const MyMetakulNft = () => {
     tokenContractAddress,
     "token"
   );
-  
+
   const { contract: nftDropContract } = useContract(
     nftDropContractAddress,
     "nft-drop"
@@ -35,30 +35,26 @@ const MyMetakulNft = () => {
   let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
 
 
-  
-  return (
-    <Container className=''>
 
-      <Grid container sx={{ mt: 4 }}>
-      
-          <Box>
-            <ConnectWallet className="max-h-[220px]" />
-          </Box>
+  return (
+
+    <Grid container sx={{ mt: 4 }}>
+
+     
       {address ? (
         <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4 mt-4">
 
-          <NftCard balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"}  loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "No Nfts Owned"} />
+          <NftCard balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "No Nfts Owned"} />
         </div>
       ) : (
-          <Typography variant='h3' sx={{
-            mt: 2
-          }}>
-            Connect Your Wallet To View your NFT&apos;s
-          </Typography>
+        <Typography variant='h3' sx={{
+          mt: 2
+        }}>
+          Connect Your Wallet To View your NFT&apos;s
+        </Typography>
       )}
-        </Grid>
+    </Grid>
 
-    </Container>
   );
 };
 

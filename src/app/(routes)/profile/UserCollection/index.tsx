@@ -70,10 +70,8 @@ export default function index({type}:any) {
             </div>
           </div>
           {/* info for {type} */}
-          <div className="grid grid-cols-1 gap-[1.875rem] md:grid-cols-2 lg:grid-cols-4">
         <MyMetakulNft/>
           
-          </div>
         </div>
     
       </div>
