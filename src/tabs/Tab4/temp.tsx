@@ -1,7 +1,8 @@
 
-import { Button, Container } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 import SocialProfiles from '@/components/SocialProfile';
 import Link from 'next/link';
+import { getColors } from '@/app/layout/Theme/themes';
 const Tab4 = () => {
 
   return (
@@ -15,10 +16,15 @@ const Tab4 = () => {
           <SocialProfiles />
         </div>
         <Button variant='contained' sx={{
-          m: 4
-        }}>
+          m: 4,
+          background:getColors().blueAccent[800]
+        }} >
           <Link href={"/mint"}>
+            <Typography sx={{
+              color:getColors().primary[100]
+            }}>
             Claim Free Nft Here
+            </Typography>
           </Link>
 
         </Button>

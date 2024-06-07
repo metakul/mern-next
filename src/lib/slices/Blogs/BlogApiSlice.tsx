@@ -24,6 +24,8 @@ export const fetchBlogApiSlice = createAsyncThunk(
       console.log(response);
       
       const blogs: Ipost[] = response;
+      console.log(blogs);
+      
       const transformedBlogs = blogs.map(blog => ({
         ...blog,
         postId: blog.id
@@ -182,7 +184,7 @@ export const fetchCryptoDispatcher = createAsyncThunk(
 
       //todo add propoer data for cryptoInfo
       const cryptoData: CryptoData = {
-        cryptoSymbol: response.data.asset_id_base,
+        cryptoSymbol: cryptoSymbol,
         currency: response.data.asset_id_quote,
         price: response.data.rate,
         marketCap: response.data.time

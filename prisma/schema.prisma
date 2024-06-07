@@ -21,6 +21,6 @@ model Post {
   author      String
   status      String
   categories  String[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  // createdAt   DateTime? @default(now())
+  // updatedAt   DateTime @updatedAt
 }

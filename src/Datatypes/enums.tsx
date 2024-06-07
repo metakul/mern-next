@@ -44,7 +44,7 @@ export enum ProtectedPageInfo{
     ADD_BLOG: { apiId:5, url: '/api/blogs/addBlog', method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Adding New Blog",successMessage:"Blog Added Successfully",errorMessage:"Error Loadinf Blogs"},
     UPDATE_BLOG: { apiId:6, url: '/api/blogs/updateStatus', method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Blog",successMessage:"Blog Approved SuccessFully",errorMessage:"Error Approving Blogs"},
     EDIT_BLOG: { apiId:7, url: '/api/blogs/singleBlog', method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Blog",successMessage:"Blog Updated successfully",errorMessage:"Error Updating Blog"},
-    FetchCryptoInfo: { apiId:8, url: "/api/v1/exchangerate", method: 'GET', headers: { "X-CoinAPI-Key":"21F0E4E9-1955-4555-A4DA-51524A1E8ED3"}, loadingMessage:"",successMessage:"",errorMessage:""},
+    FetchCryptoInfo: { apiId:8, url: "https://rest.coinapi.io/v1/exchangerate", method: 'GET', headers: { "X-CoinAPI-Key":"21F0E4E9-1955-4555-A4DA-51524A1E8ED3"}, loadingMessage:"",successMessage:"",errorMessage:""},
   };
 
   
