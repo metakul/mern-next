@@ -53,7 +53,7 @@ const StakingTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positi
             sx={{
               height:"60px",
               '&.Mui-selected': {
-                backgroundColor: getColors().greenAccent[800],
+                backgroundColor: getColors().blueAccent[900],
                 color: getColors().blueAccent[100],
                 borderTopLeftRadius: "10px", 
                 borderTopRightRadius: "10px", 

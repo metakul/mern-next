@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
     ml: 2
   };
 
-  const handleClick = (event: { currentTarget: React.SetStateAction<null>; }) => {
+  const handleClick = (event:any) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -140,14 +140,13 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
               <FlexBetween>
                 <div className="flex justify-between items-center mt-2 sm:mt-2 md:mt-0 lg:mt-0 mx-2 ">
                   <Button
-                    className=" "
-                    id="demo-customized-button"
-                    aria-controls={open}
-                    aria-haspopup="true"
-                    aria-expanded={"true"}
-                    // variant="contained"
-                    disableElevation
-                    onClick={handleClick}
+                     className=""
+                     id="demo-customized-button"
+                     aria-controls={open ? 'menu-list' : undefined}
+                     aria-haspopup="true"
+                     aria-expanded={open ? 'true' : undefined}
+                     disableElevation
+                    onClick={(event) => handleClick(event)}
                     sx={{
                       "&:hover": {
                         background: "none",
