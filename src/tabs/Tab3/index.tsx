@@ -2,11 +2,11 @@ import { Box, Container, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 import CustomDialog from '@/components/Dailog/Dailog';
-import BuyCrypto from '../BuyCrypto';
+import BuyCrypto from '@/components/BuyCrypto';
 import { getColors } from '@/app/layout/Theme/themes';
 
 import Scrollbar from "@/components/ScrollBar"
-import IcoSale from '../ICOSale';
+import IcoSale from '@/components/ICOSale';
 interface Crypto {
   id: number;
   name: string;
