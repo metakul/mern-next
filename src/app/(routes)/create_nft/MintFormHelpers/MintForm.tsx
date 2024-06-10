@@ -5,12 +5,22 @@ import * as s from "./MintFormCss";
 import { uploadJSONToIPFS } from "@/scripts/ipfsHandler";
 import ImageUploader from "@/components/ImageUploader";
 import ExplicitContent from "@/components/FormDetails/ExplicitContent";
-
+import { useAddress, useContract } from "@thirdweb-dev/react";
+import { config } from "@/config/config";
+import { mintWithSignature } from "./signature";
+import { toast } from "react-toastify";
 function Home() {
   const [formParams, updateFormParams] = useState({ name: '', description: '', external_url: '' });
   const [fileURL, setFileURL] = useState(null);
   const [disableButton, setDisableButton] = useState(true);
   const [explicitContent, setExplicitContent] = useState(false);
+  const address=useAddress()
+
+  const {marketpalceAddress}=config
+  const { contract: nftCollection } = useContract(
+    marketpalceAddress,
+    "nft-collection"
+);
 
   async function onChangeFile(e: SetStateAction<null>) {
     try {
@@ -43,10 +53,10 @@ function Home() {
     e.preventDefault();
 
     try {
-      const metadataURL = await uploadMetadataToIPFS();
+      const metadataURL = await mintWithSignature({ address, nftCollection, name: formParams.name, description: formParams.description, fileURL });
       console.log(metadataURL);
 
-      alert("Successfully Saved your NFT for future Mint");
+      toast.success("Successfully Minted NFT");
       updateFormParams({ name: '', description: '', external_url: '' });
     } catch (e) {
       alert("Upload error" + e);
