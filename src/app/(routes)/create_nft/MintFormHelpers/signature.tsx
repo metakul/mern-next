@@ -1,18 +1,20 @@
 import server from "@/scripts/signatureMint";
 import { toast } from "react-toastify";
 
-export const mintWithSignature = async ({address, nftCollection,name,description,image}:any) => {
+export const mintWithSignature = async ({authorAddress, nftCollection,name,description,image}:any) => {
     try {
-        console.log(address,nftCollection)
+        console.log(authorAddress,nftCollection)
       // Get values of all elements with specific IDs
-      if(!address){
+      if(!authorAddress){
         toast.error("Please choose a Web3 Cop name")
         return
       }
   
       // Make a request to /api/server
-      const signedPayloadReq = await server({address,description, name, image});
+      const signedPayloadReq = await server({authorAddress,description, name, image});
   
+      console.log("signedPayloadReq",signedPayloadReq);
+      
   
       // Grab the JSON from the response
       if (!signedPayloadReq) {
@@ -32,8 +34,8 @@ export const mintWithSignature = async ({address, nftCollection,name,description
   
       return nft;
     } catch (e) {
-
-     toast.error("An error occurred trying to mint the NFT:");
+      toast.error("An error occurred trying to mint the NFT:");
+throw e
     }
   };
   

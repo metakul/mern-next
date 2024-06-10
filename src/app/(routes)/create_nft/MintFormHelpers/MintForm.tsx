@@ -9,6 +9,10 @@ import { useAddress, useContract } from "@thirdweb-dev/react";
 import { config } from "@/config/config";
 import { mintWithSignature } from "./signature";
 import { toast } from "react-toastify";
+
+const marketpalceAddress=process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS as string
+
+
 function Home() {
   const [formParams, updateFormParams] = useState({ name: '', description: '', external_url: '' });
   const [fileURL, setFileURL] = useState(null);
@@ -16,7 +20,6 @@ function Home() {
   const [explicitContent, setExplicitContent] = useState(false);
   const address=useAddress()
 
-  const {marketpalceAddress}=config
   const { contract: nftCollection } = useContract(
     marketpalceAddress,
     "nft-collection"
@@ -53,13 +56,13 @@ function Home() {
     e.preventDefault();
 
     try {
-      const metadataURL = await mintWithSignature({ address, nftCollection, name: formParams.name, description: formParams.description, fileURL });
-      console.log(metadataURL);
+      const metadataURL = await mintWithSignature({ authorAddress:address, nftCollection, name: formParams.name, description: formParams.description, fileURL });
+      console.log("metadataURL",metadataURL);
 
       toast.success("Successfully Minted NFT");
       updateFormParams({ name: '', description: '', external_url: '' });
     } catch (e) {
-      alert("Upload error" + e);
+      toast.error("Upload error" + e);
     }
   }
 
