@@ -7,33 +7,26 @@ import {
   Typography,
 } from '@mui/material';
 // import { ethers } from "ethers";
-import { ConnectWallet, Web3Button, useAddress, useContract, useOwnedNFTs, useTokenBalance } from '@thirdweb-dev/react';
+import { ConnectWallet, RequiredParam, Web3Button, useAddress, useContract, useOwnedNFTs, useTokenBalance } from '@thirdweb-dev/react';
 import { toast } from 'react-toastify';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
+import PropTypes from 'prop-types';
 
 import NftCard from '@/components/Cards/NftCard';
 
 
-const nftDropContractAddress = process.env.NEXT_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
-const tokenContractAddress = process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
-const stakingContractAddress = process.env.NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS as string
 
 
-const MyMetakulNft = () => {
+
+const MyMetakulNft = ({collectionAddress}:any) => {
   const address = useAddress()
 
-  const { contract: tokenContract } = useContract(
-    tokenContractAddress,
-    "token"
-  );
 
   const { contract: nftDropContract } = useContract(
-    nftDropContractAddress,
+    collectionAddress,
     "nft-drop"
   );
-  const { contract, } = useContract(stakingContractAddress);
   let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
-
 
 
   return (
@@ -57,5 +50,7 @@ const MyMetakulNft = () => {
 
   );
 };
-
+MyMetakulNft.propTypes = {
+  collectionAddress:PropTypes.any
+};
 export default MyMetakulNft;

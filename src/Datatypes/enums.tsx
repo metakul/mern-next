@@ -14,10 +14,10 @@ export enum Tabs {
 }
 
 export enum NftTabs {
-  tabTitle1="Home",
-  tabTitle2="BTC",
-  tabTitle3="Wallet",
-  tabTitle4="PROFILE"
+  tabTitle1="Owned",
+  tabTitle2="Created",
+  tabTitle3="",
+  tabTitle4=""
 }
 
 export enum Pages {

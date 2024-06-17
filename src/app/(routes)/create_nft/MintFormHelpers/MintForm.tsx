@@ -15,7 +15,7 @@ const marketpalceAddress=process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS as string
 
 function Home() {
   const [formParams, updateFormParams] = useState({ name: '', description: '', external_url: '' });
-  const [fileURL, setFileURL] = useState(null);
+  const [fileURL, setFileURL] = useState<string | null>(null);
   const [disableButton, setDisableButton] = useState(true);
   const [explicitContent, setExplicitContent] = useState(false);
   const address=useAddress()
@@ -27,28 +27,15 @@ function Home() {
 
   async function onChangeFile(e: SetStateAction<null>) {
     try {
-      console.log("Uploaded image to Pinata: ", e);
-      setFileURL(e);
+      const base64Data = e; 
+      const dataURL = `data:image/png;base64,${base64Data}`;
+      console.log("Uploaded image to Pinata: ", dataURL);
+      
+      // Assuming setFileURL is a function that takes the data URL as an argument
+      setFileURL(dataURL);
       setDisableButton(false);
     } catch (e) {
       console.log("Error during file upload", e);
-    }
-  }
-
-  async function uploadMetadataToIPFS() {
-    const { name, description, external_url } = formParams;
-    if (!name || !description || !fileURL) return;
-
-    const nftJSON = { name, description, external_url, image: fileURL, explicitContent };
-
-    try {
-      const response = await uploadJSONToIPFS(nftJSON);
-      if (response.success === true) {
-        console.log("Uploaded JSON to Pinata: ", response);
-        return response.pinataURL;
-      }
-    } catch (e) {
-      console.log("error uploading JSON metadata:", e);
     }
   }
 
@@ -56,13 +43,19 @@ function Home() {
     e.preventDefault();
 
     try {
-      const metadataURL = await mintWithSignature({ authorAddress:address, nftCollection, name: formParams.name, description: formParams.description, fileURL });
-      console.log("metadataURL",metadataURL);
 
-      toast.success("Successfully Minted NFT");
+      const response = await toast.promise(
+        mintWithSignature({ authorAddress:address, nftCollection, name: formParams.name, description: formParams.description, fileURL }), {
+          pending:"Minting Your Nft",
+          success: "SuccessFully Minted Your Nft. Visit profile to view minted nft",
+          error: "Error While mint. Retry or Join discord",
+        }
+      );
+      console.log("metadataURL",response);
+
       updateFormParams({ name: '', description: '', external_url: '' });
     } catch (e) {
-      toast.error("Upload error" + e);
+      toast.error("Upload error");
     }
   }
 
