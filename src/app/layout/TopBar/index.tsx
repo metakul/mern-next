@@ -257,11 +257,12 @@ const StyledMenu = styled((props: any) => (
   />
 ))(({ theme }) => ({
   "& .MuiPaper-root": {
-    backgroundColor: getColors().primary[800],
+    backgroundColor: getColors().primary[900],
     borderRadius: "8px",
     marginTop: theme.spacing(1),
     padding: "16px",
     minWidth: 240,
+    border:"1px solid"
   },
 }));
 

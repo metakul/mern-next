@@ -24,14 +24,14 @@ const NftCard: React.FC<Props> = ({ loadingMessage, balance, handleNftButtonText
     <>
       {balance && balance.length > 0 ? (
         balance.map((item: BalanceItem, index: number) => (
-          <article key={index}>
-            <div className="block ml-2 rounded-2.5xl border border-jacarta-100 p-[1\5rem] transition-shadow hover:shadow-lg max-w-80">
+          <article className='flex justify-center' key={index}>
+          <div className="flex flex-col justify-center items-center ml-[auto] mr-[auto] rounded-2.5xl border border-jacarta-100 p-[1.5rem] transition-shadow hover:shadow-lg">
               <figure className="relative">
                    {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item?.metadata?.image}
                     alt={`item ${index + 1}`}
-                    className="w-full rounded-t-2.5xl border "
+                    className="w-full rounded-t-2.5xl border max-w-80"
                     loading="lazy"
                   />
                 <div className="absolute top-3 right-3 flex items-center space-x-1 rounded-md  p-2">

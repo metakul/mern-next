@@ -18,7 +18,7 @@ import NftCard from '@/components/Cards/NftCard';
 
 
 
-const MyMetakulNft = ({collectionAddress}:any) => {
+const MyMetakulNft = ({ collectionAddress }: any) => {
   const address = useAddress()
 
 
@@ -33,12 +33,14 @@ const MyMetakulNft = ({collectionAddress}:any) => {
 
     <Grid container sx={{ mt: 4 }}>
 
-     
-      {address ? (
-        <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4 mt-4">
 
-          <NftCard balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "No Nfts Owned"} />
+      {address ? (
+        <div className="flex justify-center mt-4">
+          <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4">
+            <NftCard balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "Loading Nfts"} />
+          </div>
         </div>
+
       ) : (
         <Typography variant='h3' sx={{
           mt: 2
@@ -51,6 +53,6 @@ const MyMetakulNft = ({collectionAddress}:any) => {
   );
 };
 MyMetakulNft.propTypes = {
-  collectionAddress:PropTypes.any
+  collectionAddress: PropTypes.any
 };
 export default MyMetakulNft;
