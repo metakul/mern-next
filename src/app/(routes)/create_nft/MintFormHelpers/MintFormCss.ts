@@ -30,8 +30,3 @@ export const ResponsiveWrapper = styled("div")`
   align-items: stretched;
  
 `;
-
-
-
-
-
