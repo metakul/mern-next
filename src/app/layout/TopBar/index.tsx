@@ -146,7 +146,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
                      aria-haspopup="true"
                      aria-expanded={open ? 'true' : undefined}
                      disableElevation
-                    onClick={(event) => handleClick(event)}
+                    onClick={(event: any) => handleClick(event)}
                     sx={{
                       "&:hover": {
                         background: "none",
@@ -257,11 +257,12 @@ const StyledMenu = styled((props: any) => (
   />
 ))(({ theme }) => ({
   "& .MuiPaper-root": {
-    backgroundColor: getColors().primary[800],
+    backgroundColor: getColors().primary[900],
     borderRadius: "8px",
     marginTop: theme.spacing(1),
     padding: "16px",
     minWidth: 240,
+    border:"1px"
   },
 }));
 

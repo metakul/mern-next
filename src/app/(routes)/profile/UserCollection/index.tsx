@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react'
 import MyMetakulNft from './collection/metakulNft';
 
-export default function index({type}:any) {
+export default function index({type,collectionAddress}:any) {
 
 
   return (
@@ -70,7 +70,7 @@ export default function index({type}:any) {
             </div>
           </div>
           {/* info for {type} */}
-        <MyMetakulNft/>
+        <MyMetakulNft collectionAddress={collectionAddress as string}/>
           
         </div>
     
@@ -82,4 +82,5 @@ export default function index({type}:any) {
 
 index.propTypes = {
   type: PropTypes.any,
+  collectionAddress:PropTypes.any
 };
