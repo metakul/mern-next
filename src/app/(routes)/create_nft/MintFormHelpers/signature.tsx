@@ -1,7 +1,7 @@
 import server from "@/scripts/signatureMint";
 import { toast } from "react-toastify";
 
-export const mintWithSignature = async ({ authorAddress, nftCollection, name, description, image }: any) => {
+export const mintWithSignature = async ({ authorAddress, nftCollection, name, description, fileURL:image }: any) => {
   try {
     console.log(authorAddress, nftCollection)
     // Get values of all elements with specific IDs

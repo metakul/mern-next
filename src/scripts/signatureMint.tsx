@@ -7,7 +7,7 @@ const privateKey=process.env.NEXT_PUBLIC_PRIVATE_KEY_SIGNATURE as string
 const marketpalceAddress=process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS as string
 const secretKey=process.env.NEXT_PUBLIC_SECRET_KEY as string
 
-export default async function server({authorAddress,description, nftName, image}:any) {
+export default async function server({authorAddress,description, name:nftName, image}:any) {
     try {
       
 
