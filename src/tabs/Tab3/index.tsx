@@ -38,6 +38,8 @@ const CryptoTable: React.FC = () => {
 
   return (
     <Container>
+      <IcoSale/>
+
       <Typography variant='h3' sx={{
         alignItems:"center",
         textAlign:"center",
@@ -57,7 +59,7 @@ const CryptoTable: React.FC = () => {
           <div className="rounded-lg dark:bg-jacarta-700 dark:text-jacarta-300">
             <div className="flex items-center border-b border-jacarta-100 text-sm dark:border-jacarta-600">
               <div className="hidden w-[6%] pl-4 sm:block lg:pl-10">#</div>
-              <div className="w-[36%] px-3 py-5">Name</div>
+              <div className="w-[26%] px-3 py-5">Name</div>
               <div className="w-[24%] px-3 py-5 text-right lg:w-[16%]">Price</div>
               <div className="hidden w-1/5 px-3 py-5 text-right md:block">Volume (24h)</div>
               <div className="w-[16%] px-3 py-5 text-right lg:w-[12%]">Change (24h)</div>
@@ -70,7 +72,7 @@ const CryptoTable: React.FC = () => {
                   className="flex items-center border-b border-jacarta-100 text-sm dark:border-jacarta-600"
                 >
                   <div className="hidden w-[6%] pl-4 sm:block lg:pl-10">{crypto.id}</div>
-                  <div className="w-[36%] px-3 py-5">{crypto.name}</div>
+                  <div className="w-[26%] px-3 py-5">{crypto.name}</div>
                   <div className="w-[24%] px-3 py-5 text-right lg:w-[16%]">{crypto.price}</div>
                   <div className="hidden w-1/5 pBoxx-3 py-5 text-right md:block">{crypto.volume}</div>
                   <div className="w-[16%] px-3 py-5 text-right lg:w-[12%]">{crypto.change}</div>
@@ -99,7 +101,6 @@ const CryptoTable: React.FC = () => {
         </Scrollbar>
 
       </section>
-      <IcoSale/>
     </Container>
   );
 };
