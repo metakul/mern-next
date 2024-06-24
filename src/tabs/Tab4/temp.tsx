@@ -1,30 +1,102 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useRef, useMemo } from 'react';
+import * as THREE from 'three';
+import CustomDialog from '@/components/Dailog/Dailog';
+import LoginForm from '@/components/Forms/LoginForm';
 
-import { Button, Container } from '@mui/material';
-import SocialProfiles from '@/components/SocialProfile';
-import Link from 'next/link';
-const Tab4 = () => {
+interface UserpageProps {}
+const Userpage: React.FC<UserpageProps> = () => {
+  const scene = new THREE.Scene();
+
+  // Sizes
+  const sizes = {
+    width: 800,
+    height: 600,
+  };
+
+  // Camera
+  const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+  camera.position.z = 5;
+  scene.add(camera);
+  // camera.position.set( 0, 0, 100 );
+
+  // Renderer
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(sizes.width, sizes.height);
+
+  // Ref for the mount point of the Three.js scene
+  const mount = useRef<HTMLDivElement | null>(null);
+
+  // Use useMemo for creating the mesh to prevent unnecessary recreations
+  const mesh = useMemo(() => {
+    // Object
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const newMesh = new THREE.Mesh(geometry, material);
+    scene.add(newMesh);
+    return newMesh;
+  }, [scene]);
+
+  // State for dialog open/close
+  const [bg, setBg] = React.useState(false);
+
+  // Mouse movement variables
+  const mouseX = useRef(0);
+  const mouseY = useRef(0);
+
+  useEffect(() => {
+    // Append the renderer to the mount point
+    if (mount.current) {
+      mount.current.appendChild(renderer.domElement);
+    }
+
+    // Handle mouse movement
+    const handleMouseMove = (event: MouseEvent) => {
+      mouseX.current = (event.clientX / sizes.width) * 2 - 1;
+      mouseY.current = -(event.clientY / sizes.height) * 2 + 1;
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+
+    // Animation logic
+    const animate = () => {
+      requestAnimationFrame(animate);
+
+      // Move the cube with the mouse
+      mesh.rotation.x = mouseY.current * 2;
+      mesh.rotation.y = mouseX.current * 2;
+
+      // Render the scene
+      renderer.render(scene, camera);
+    };
+
+    // Start the animation loop
+    animate();
+
+    // Clean up on component unmount
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      mount.current?.removeChild(renderer.domElement);
+    };
+  }, [renderer, scene, camera, mesh, sizes.width, sizes.height]);
 
   return (
-    <Container >
-      <div className=" flex flex-col justify-center items-center bg-gray-100">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="img/25.png" alt="Logo" className="object-cover w-40 h-40 mb-8 rounded-full" />
-        <h1 className="text-4xl font-bold mb-4">Metaverse, On a click.</h1>
-        <p className="text-lg mb-8 px-4 md:px-0">We&apos;re working hard to bring you something awesome. Stay tuned!</p>
-        <div className="flex justify-center items-center space-x-4">
-          <SocialProfiles />
-        </div>
-        <Button variant='contained' sx={{
-          m: 4
-        }}>
-          <Link href={"/mint"}>
-            Claim Free Nft Here
-          </Link>
-
-        </Button>
-      </div>
-    </Container>
+    <div>
+      <a href="#" onClick={() => setBg(!bg)}>
+        <div ref={mount}></div>
+      </a>
+  
+      <CustomDialog
+        triggerButtonText={"LOGIN"}
+        title={"Login Now"}
+        description={"This is description for Login"}
+        open={bg}
+        onClose={() => setBg(!bg)}
+      >
+        <LoginForm loginTitle='Login' />
+      </CustomDialog>
+    </div>
   );
 };
 
-export default Tab4;
+export default Userpage;

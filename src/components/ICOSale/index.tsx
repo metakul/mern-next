@@ -1,3 +1,5 @@
+/* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable react/display-name */
 import React from 'react';
 
 interface RemainingTime {
