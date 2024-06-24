@@ -100,6 +100,7 @@ export default function DashboardLayout({
 
       <html lang="en">
         <body >
+        <canvas className="webgl"></canvas>
           <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
