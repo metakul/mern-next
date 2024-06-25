@@ -122,8 +122,8 @@ export default function DashboardLayout({
                   ),
                 ]}
               >
-                    <ToastContainer />
-                  <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
+                    {/* <ToastContainer /> */}
+                  {/* <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} /> */}
                   <MiniDrawer
                     APP_BAR={APP_BAR}
                     setShowOutlet={setShowOutlet}
@@ -132,7 +132,7 @@ export default function DashboardLayout({
                     setIsSidebarOpen={handleSideBarState}
                     navConfig={navConfig}
                   />
-                  <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
+                  <Container component="main" sx={{ flexGrow: 1, mt: 2, ml: "auto", mr: "auto" }}>
                     <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
                   </Container>
             <Analytics />
