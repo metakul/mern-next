@@ -44,9 +44,20 @@ const Userpage: React.FC<UserpageProps> = () => {
 
 
  //import image
-
+//add bg
  const textureLoader=new THREE.TextureLoader()
- scene.background=textureLoader.load(nft1)
+//  scene.background=textureLoader.load(nft1)
+const cubeTexture=new THREE.CubeTextureLoader()
+scene.background=cubeTexture.load([
+  nft1,
+  nft1,
+  nft1,
+  nft1,
+  nft1,
+  nft1,
+])
+
+
   // Use useMemo for creating the mesh to prevent unnecessary recreations
   // Object
   const geometry = new THREE.SphereGeometry(2, 40, 40);
