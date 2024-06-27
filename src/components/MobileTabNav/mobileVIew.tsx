@@ -71,10 +71,10 @@ const MobileTabNavigationTest: React.FC<MobileTabNavigationProps> = ({ tabs, pos
       item.addEventListener("click", () => clickItem(item as HTMLElement, index));
     });
 
-    window.addEventListener("resize", () => {
-      offsetMenuBorder(activeItem, menuBorder);
-      menu.style.setProperty("--timeOut", "none");
-    });
+    // window.addEventListener("resize", () => {
+    //   offsetMenuBorder(activeItem, menuBorder);
+    //   menu.style.setProperty("--timeOut", "none");
+    // });
 
     // Clean-up function if needed
     return () => {
@@ -82,7 +82,7 @@ const MobileTabNavigationTest: React.FC<MobileTabNavigationProps> = ({ tabs, pos
       menuItems.forEach((item:any) => {
         item.removeEventListener("click", clickItem);
       });
-      window.removeEventListener("resize", offsetMenuBorder as any);
+      // window.removeEventListener("resize", offsetMenuBorder as any);
     };
   }, [showOutlet, tabs]); // empty dependency array means this effect will only run once after initial render
 

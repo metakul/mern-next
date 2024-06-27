@@ -40,11 +40,11 @@ const Blogs = () => {
 
   const [currentDomain, setCurrentDomain] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentDomain(window.location.origin);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     setCurrentDomain(window.location.origin);
+  //   }
+  // }, []);
 
   const postLink = currentDomain ? `${currentDomain}` : '';
 
