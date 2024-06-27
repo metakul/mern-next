@@ -9,8 +9,17 @@ export const createCube = (scene: THREE.Scene) => {
     map:loader.load("logo.svg")
   });
 
-  
-  const cube = new THREE.Mesh(geometry, material);
+  const boxMultiMaterial=[
+    new THREE.MeshBasicMaterial({map:loader.load("logo.svg")}),
+    new THREE.MeshBasicMaterial({map:loader.load("next.svg")}),
+    new THREE.MeshBasicMaterial({map:loader.load("next.svg")}),
+    new THREE.MeshBasicMaterial({map:loader.load("next.svg")}),
+    new THREE.MeshBasicMaterial({map:loader.load("vercel.svg")}),
+    new THREE.MeshBasicMaterial({map:loader.load("stars.jpg")}),
+  ]
+
+
+  const cube = new THREE.Mesh(geometry, boxMultiMaterial);
   cube.position.set(6, 5, 8);
   cube.castShadow = true;
   scene.add(cube);
