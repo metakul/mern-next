@@ -12,5 +12,7 @@ export const createSphere = (scene: THREE.Scene) => {
   sphere.castShadow = true;
   scene.add(sphere);
 
-  return sphere;
+  const sphereId=sphere.id
+
+  return {sphere,sphereId};
 };

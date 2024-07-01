@@ -24,5 +24,7 @@ export const createCube = (scene: THREE.Scene) => {
   cube.castShadow = true;
   scene.add(cube);
 
-  return cube;
+  const cubeId=cube.id
+
+  return {cube,cubeId};
 };
