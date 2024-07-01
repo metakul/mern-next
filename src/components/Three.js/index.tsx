@@ -8,20 +8,26 @@ import { createHelpers } from './helpers/camera';
 import { setupGUI } from './helpers/gui';
 import { createSphere } from './comp/sphere';
 import { createPlane } from './comp/plane';
-import * as dat from 'dat.gui';
 import { createCube } from './comp/Cube';
-import stars from "./Images/stars.jpg"
 import { setBackground } from './helpers/background';
+import { vector } from './comp/Vector';
+import { createPlane2 } from './comp/Plane2';
+import WebGL from 'three/addons/capabilities/WebGL.js'
+import CreateLine from './comp/Lines';
+import CreateText from './comp/Text';
+import { InitVr } from './helpers/VrHelper';
 
-interface ThreeSceneProps { }
+interface ThreeSceneProps {
+    xrEnabled: boolean
+}
 
-const ThreeScene: React.FC<ThreeSceneProps> = () => {
+const ThreeScene: React.FC<ThreeSceneProps> = ({ xrEnabled }) => {
     const scene = new THREE.Scene();
     let step = 0;
     // Ref for the mount point of the Three.js scene
     const mount = useRef<HTMLDivElement | null>(null);
 
-    
+
     // Sizes
     const sizes = {
         width: 600,
@@ -58,39 +64,45 @@ const ThreeScene: React.FC<ThreeSceneProps> = () => {
         intensity: 0.2,
     };
 
-    let gui = new dat.GUI();
+    const raycaster = new THREE.Raycaster()
 
-    // Create the sphere and plane
-    const sphere = createSphere(scene);
-    const newPlane = createPlane(scene);
-    createCube(scene)
+
+    if (WebGL.isWebGL2Available()) {
+        // Create the sphere and plane
+        const newPlane = createPlane(scene);
+        // const newPlane2 = createPlane2(scene);
+        // newPlane2.position.set(10,10,15)
+    }
+
+    const line = CreateLine(scene)
+
+    const { sphere, sphereId } = createSphere(scene);
+
+
+    // const { cube, cubeId } = createCube(scene)
     // set light
     const dLight = createLights(scene);
+    const mousePosition = vector(scene)
 
     // Setup GUI
-    setupGUI(gui, sphere, options, dLight);
+    setupGUI( sphere, options, dLight);
 
     // Add lights and helpers
-    const { axisHelper, dlightShadowHelper, dLightHelper } = createHelpers(scene, dLight);
+    const { axisHelper,dLightHelper } = createHelpers(scene, dLight);
 
 
+    {/*
+    Adding Text
+    */}
+    CreateText(scene);
 
-
-
-
-
-
-
-
-
-    // Mouse movement variables
-    const mouseX = useRef(0);
-    const mouseY = useRef(0);
+    {/*
+            Init Vr*/}
+    InitVr(renderer, xrEnabled)
 
     // Animation logic
     const animate = (time: number) => {
 
-        requestAnimationFrame(animate);
 
         controls.update();
 
@@ -100,35 +112,27 @@ const ThreeScene: React.FC<ThreeSceneProps> = () => {
         dLight.intensity = options.intensity;
         dLightHelper.update();
 
+        raycaster.setFromCamera(mousePosition, camera)
+        const intersects = raycaster.intersectObjects(scene.children);
+
+        for (let i = 0; i < intersects.length; i++) {
+
+            // intersects[ i ].object.material.color.set( 0xff0000 );
+
+        }
+
+
         renderer.render(scene, camera);
     };
-
+    window.requestAnimationFrame(animate);
     useEffect(() => {
         if (mount.current) {
             mount.current.appendChild(renderer.domElement);
         }
 
-        const handleMouseMove = (event: MouseEvent) => {
-            mouseX.current = (event.clientX / sizes.width) * 2 - 1;
-            mouseY.current = -(event.clientY / sizes.height) * 2 + 1;
-        };
-        const handleTouchMove = (event: TouchEvent) => {
-            const touch = event.touches[0];
-            mouseX.current = (touch.clientX / sizes.width) * 2 - 1;
-            mouseY.current = -(touch.clientY / sizes.height) * 2 + 1;
-        };
-
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('touchmove', handleTouchMove);
-
         renderer.setAnimationLoop(animate);
 
-        return () => {
-            document.removeEventListener('mousemove', handleMouseMove);
-            document.removeEventListener('touchmove', handleTouchMove);
-            mount.current?.removeChild(renderer.domElement);
-        };
-    }, [renderer, scene, camera, sphere, sizes.width, sizes.height]);
+    }, []);
 
     return <div ref={mount}></div>;
 };
