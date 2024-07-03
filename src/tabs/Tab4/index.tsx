@@ -73,7 +73,7 @@ const Userpage: React.FC<UserpageProps> = () => {
     // Start the animation loop
     animate();
 
-    // Clean up on component unmount
+    // Clean up on component unmount 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       mount.current?.removeChild(renderer.domElement);
