@@ -4,7 +4,7 @@ import SocialProfiles from '@/components/SocialProfile';
 import Link from 'next/link';
 const Tab4 = () => {
 
-  return (
+  return ( 
     <Container >
       <div className=" flex flex-col justify-center items-center bg-gray-100">
         {/* eslint-disable-next-line @next/next/no-img-element */}
