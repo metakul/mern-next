@@ -130,7 +130,7 @@ export default function DashboardLayout({
                     setIsSidebarOpen={handleSideBarState}
                     navConfig={navConfig}
                   />
-                  <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
+                  <Container component="main" sx={{ flexGrow: 1, mt: APP_BAR, ml: "auto", mr: "auto" }}>
                     <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
                   </Container>
                 </Box>
