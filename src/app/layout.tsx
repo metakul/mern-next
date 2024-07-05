@@ -62,9 +62,9 @@ export default function DashboardLayout({
 
   const tabs = [
     {
-      value: <OtherHousesOutlinedIcon  sx={{
-        color:"white"
-      }}/>,
+      value: <OtherHousesOutlinedIcon sx={{
+        color: "white"
+      }} />,
       content: <div>{children}</div>,
       label: Tabs.tabTitle1
     },
@@ -79,9 +79,9 @@ export default function DashboardLayout({
     //   label: Tabs.tabTitle3
     // },
     {
-      value: <ContactEmergencyOutlinedIcon  sx={{
-        color:"white"
-      }}/>,
+      value: <ContactEmergencyOutlinedIcon sx={{
+        color: "white"
+      }} />,
       content: <Tab4 />,
       label: Tabs.tabTitle4
     },
@@ -105,7 +105,7 @@ export default function DashboardLayout({
                   setIsSidebarOpen={handleSideBarState}
                   navConfig={navConfig}
                 /> */}
-                <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
+                <Container component="main" sx={{ flexGrow: 1, mt: APP_BAR, ml: "auto", mr: "auto" }}>
                   <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
                 </Container>
               </Box>
