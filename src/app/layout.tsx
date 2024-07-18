@@ -122,8 +122,8 @@ export default function DashboardLayout({
                   ),
                 ]}
               >
-                    {/* <ToastContainer /> */}
-                  {/* <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} /> */}
+                    <ToastContainer />
+                  <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
                   <MiniDrawer
                     APP_BAR={APP_BAR}
                     setShowOutlet={setShowOutlet}
