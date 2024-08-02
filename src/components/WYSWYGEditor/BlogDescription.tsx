@@ -17,7 +17,6 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
     tempDiv.innerHTML = html;
     return Array.from(tempDiv.childNodes);
   };
-console.log(userType);
 
   const renderCustomStyles = (node: any, index: number) => {
     if (node.nodeType === 1) { // Node.ELEMENT_NODE
@@ -85,7 +84,6 @@ console.log(userType);
   else{
     truncatedDescription=selectedBlog?.description
   }
-  console.log(truncatedDescription);
   
 
   return (

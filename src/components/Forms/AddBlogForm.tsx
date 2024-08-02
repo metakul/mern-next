@@ -55,8 +55,6 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
             cryptoSymbol: '',
         });
 
-        console.log(formData);
-        
     
         event.preventDefault();
     
@@ -121,7 +119,6 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
     };
 
     const register: (e: string) => void = (e) => {
-        console.log(e);
         
         setFormData({ ...formData, image: e });
       };

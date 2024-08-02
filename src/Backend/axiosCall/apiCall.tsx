@@ -11,7 +11,6 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
   }
 
   if (endpoint.loadingMessage) {
-    console.log(endpoint.loadingMessage);
   }
 
   try {
@@ -50,11 +49,9 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
     // }
 
     // Return the parsed response data
-    console.log(responseData); // Accessing response data
     return responseData;
   } catch (error) {
     // Handle errors gracefully, providing more informative messages if possible
-    console.error(`API request error: ${error}`);
     throw error;
   }
 };

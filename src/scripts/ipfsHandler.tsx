@@ -24,7 +24,6 @@ export const uploadJSONToIPFS = async (JSONBody: unknown) => {
             };
         })
         .catch(function (error) {
-            console.log(error)
             return {
                 success: false,
                 pinataURL: error.message,
@@ -76,14 +75,12 @@ export const uploadFileToIPFS = async (file: unknown) => {
             }
         })
         .then(function (response) {
-            console.log("image uploaded", response.data.IpfsHash)
             return {
                 success: true,
                 pinataURL: "https://gateway.pinata.cloud/ipfs/" + response.data.IpfsHash
             };
         })
         .catch(function (error) {
-            console.log(error)
             return {
                 success: false,
                 pinataURL: error.message,

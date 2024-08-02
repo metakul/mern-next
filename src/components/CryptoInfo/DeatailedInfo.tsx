@@ -18,7 +18,6 @@
 //       // Dispatch the action to fetch crypto info
 //        (dispatch as AppDispatch)(fetchCryptoDispatcher({_id, cryptoSymbol,currency:"USD" }));
 //     } catch (error) {
-//       console.error('Error fetching crypto info:', error);
 //     }
 //   };
 
@@ -37,7 +36,6 @@
 //     return row;
 //   });
 //   // Log the rowData
-//   console.log("Row Data:", rowData);
 //   return (
 //     <div>
 //       <Box sx={{ width: "100%", position: "relative" }} className="sm:w-full overflow-hidden mx-auto ">

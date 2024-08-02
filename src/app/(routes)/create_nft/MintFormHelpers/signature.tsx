@@ -25,7 +25,6 @@ export const mintWithSignature = async ({ authorAddress, nftCollection, name, de
     // Now we can call signature.mint and pass in the signed payload that we received from the server.
     // This means we provided a signature for the user to mint an NFT with.
     const nft = await nftCollection?.signature.mint(signedPayloadReq);
-    console.log(nft)
     toast.success("Minted successfully!");
 
     return nft;

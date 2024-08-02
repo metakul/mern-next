@@ -37,7 +37,6 @@ const CustomDataGrid: FC<DatagridProps> = ({getRowId, hideFooter, columns, rows,
       }}
       pageSizeOptions={[10, 25, { value: 100, label: '100' }]}
       onCellClick={(e)=>{
-        console.log(e);
         
       }}
       />

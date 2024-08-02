@@ -35,7 +35,6 @@ const Home: NextPage = () => {
   const [currentFrom, setCurrentFrom] = useState<String>("native");
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
-  console.log(tokenBalance)
   const { mutateAsync: swapNativeToken } = useContractWrite(
     dexContract,
     "swapEthTotoken"
@@ -72,7 +71,6 @@ const Home: NextPage = () => {
       const balance = await sdk?.getBalance(DEX_CONTRACT);
       setContractBalance(balance?.displayValue || "0");
     } catch (error) {
-      console.error(error);
     }
   };
 
@@ -87,7 +85,6 @@ const Home: NextPage = () => {
             value: toWei(nativeValue as string || "0"),
           }
         });
-        console.log("swapNow",swapNow);
 
         alert("Swap executed successfully");
       } else {
@@ -102,11 +99,9 @@ const Home: NextPage = () => {
             toWei(tokenValue as string || "0")
           ]
         });
-        console.log("swapNow",swapNow);
         alert("Swap executed successfully");
       }
     } catch (error) {
-      console.error(error);
       alert("An error occurred while trying to execute the swap");
     } finally {
       setIsLoading(false);

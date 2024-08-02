@@ -30,7 +30,6 @@ export async function GET(request: Request,
       return NextResponse.json({ message: 'Not Found' }, { status: 404 });
     }
   } catch (error) {
-    console.error('Error fetching posts:', error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }

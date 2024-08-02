@@ -24,7 +24,6 @@ export const loginUser = createAsyncThunk(
        
       })
       // Assuming the response contains user information and a token
-      console.log(response)
       const {  access,refresh } = response.token;
       const user:JwtPayload=jwtDecode(access)
 
@@ -43,7 +42,6 @@ export const loginUser = createAsyncThunk(
 
     } catch (error) {
       const castedError =error as ApiError
-      console.error('Login failed:', error);
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
   }

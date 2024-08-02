@@ -38,12 +38,10 @@ export const fetchSingleCryptoDispatcher = createAsyncThunk(
         data: response.data,
       };
   
-      console.log(apiSuccess);
       return apiSuccess;
 
     } catch (error) {
       const castedError =error as ApiError
-      console.error('Failed To Load:', error);
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
   }

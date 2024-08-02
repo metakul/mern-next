@@ -68,11 +68,9 @@ import React from "react";
     // Fallback for browsers that do not support Web Share API
     navigator.clipboard.writeText(`https://localhost:3000${link}`)
       .then(() => {
-        console.log('Shareable link copied to clipboard:', link);
         alert('Shareable link copied to clipboard');
       })
       .catch((error) => {
-        console.error('Error copying shareable link to clipboard:', error);
         alert('Error copying shareable link to clipboard');
       });
   };

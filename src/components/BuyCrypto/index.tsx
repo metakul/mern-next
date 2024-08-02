@@ -14,7 +14,6 @@ const BuyCrypto: React.FC<Props> = ({ price, tokenName, tokenId }) => {
 
     const buyTheCrypto = async () => {
         return new Promise<void>((resolve, reject) => {
-            console.log(tokenId);
             // Simulate an async operation
             setTimeout(() => {
                 // Simulate success
@@ -95,7 +94,6 @@ const BuyCrypto: React.FC<Props> = ({ price, tokenName, tokenId }) => {
                                     }
                                 );
                             } catch (error) {
-                                console.error(error);
                             } 
                         }}
                         contractAddress={nftDropContractAddress}

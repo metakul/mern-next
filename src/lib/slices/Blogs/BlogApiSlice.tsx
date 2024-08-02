@@ -16,12 +16,10 @@ export const fetchBlogApiSlice = createAsyncThunk(
       loading: true,
     }));
     try {
-      console.log("userType", fetchBlogData.userType, status)
       const response = await Request({
         endpointId: "GETBLOG",
         slug: `?status=${status}&pagesize=${pageSize}&page=${blogPage}`,
       })
-      console.log(response);
       
       const blogs: Ipost[] = response;
       const transformedBlogs = blogs.map(blog => ({
@@ -47,7 +45,6 @@ export const fetchBlogApiSlice = createAsyncThunk(
         loading: false,
       }));
       const castedError = error as ApiError
-      console.error('Error Fetching Blogs:', error);
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
   }
@@ -60,7 +57,6 @@ export const fetchSingleBlogApiSlice = createAsyncThunk(
       loading: true,
     }));
     try {
-      console.log("userType", fetchBlogData.userType)
       const response = await Request({
         endpointId: "GETSINGLEBLOG",
         slug: `/${blogId}`,
@@ -82,7 +78,6 @@ export const fetchSingleBlogApiSlice = createAsyncThunk(
 
     } catch (error) {
       const castedError = error as ApiError
-      console.error('Error Fetching Blogs:', error);
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
   }
@@ -130,7 +125,6 @@ export const addBlogApiSlice = createAsyncThunk(
 
     } catch (error) {
       const castedError = error as ApiError;
-      console.error('Error Adding Blog:', error);
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
   }
@@ -162,7 +156,6 @@ export const updateBlogSlice = createAsyncThunk(
 
     } catch (error) {
       const castedError = error as ApiError;
-      console.error('Error Adding Blog:', error);
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
   }
@@ -195,12 +188,10 @@ export const fetchCryptoDispatcher = createAsyncThunk(
         data: response.data,
       };
 
-      console.log(apiSuccess);
       return apiSuccess;
 
     } catch (error) {
       const castedError = error as ApiError
-      console.error('Failed To Load:', error);
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
   }
