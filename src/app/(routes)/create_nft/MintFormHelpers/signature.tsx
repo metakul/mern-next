@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 
 export const mintWithSignature = async ({ authorAddress, nftCollection, name, description, fileURL:image }: any) => {
   try {
-    console.log(authorAddress, nftCollection)
     // Get values of all elements with specific IDs
     if (!authorAddress) {
       toast.error("Please Connect Wallet")
@@ -12,7 +11,6 @@ export const mintWithSignature = async ({ authorAddress, nftCollection, name, de
 
     // Make a request to /api/server
     const signedPayloadReq = await server({ authorAddress, description, name, image });
-    console.log("signedPayloadReq", signedPayloadReq);
 
     // Grab the JSON from the response
     if (!signedPayloadReq) {

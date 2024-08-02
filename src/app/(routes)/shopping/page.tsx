@@ -37,7 +37,6 @@ const ShopPage = () => {
 
           const userBalance = await contract?.erc20.balance();
 
-          console.log(userBalance.displayValue);
           setBalance(userBalance?.displayValue);
         }
       } catch (error) {

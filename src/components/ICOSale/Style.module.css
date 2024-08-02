@@ -1,5 +1,4 @@
 .container {
-    width: 100%;
     max-width: 1440px;
     padding: 0 1rem;
     margin: 0 auto;
@@ -80,7 +79,6 @@
   }
   
   .card {
-    background-color: #131313;
     text-align: left;
     color: inherit;
     text-decoration: none;
@@ -107,7 +105,6 @@
   .card:hover,
   .card:focus,
   .card:active {
-    background-color: #272c34;
     opacity: 80%;
   }
   
@@ -142,22 +139,17 @@
   
   .card,
   .footer {
-    border-color: #222;
   }
   .logo img {
     filter: invert(1);
   }
   
   .swapInputContainer {
-    position: relative;
     width: 100%;
-    background-color: #111;
     border-radius: 8px;
   }
   .swapInput {
     position: relative;
-    background-color: #151515;
-    color: #fff;
     width: 100%;
     height: 100px;
     font-size: 20px;
@@ -181,7 +173,6 @@
     border: 2px solid royalblue;
   }
   .swapInput:disabled {
-    background-color: #151515;
     color: #FFF;
   }
   .maxButton {
@@ -212,7 +203,6 @@
   .toggleButton {
     height: 36px;
     font-size: 14px;
-    border: 2px solid #000;
     border-radius: 5px;
     padding: 5px 15px;
     background-color: #151515;

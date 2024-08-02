@@ -8,7 +8,6 @@ export async function GET(request: Request,
   try {
     
     const blogId = params.blogId
-    console.log(blogId);
     
 
     let getPosts;
@@ -24,7 +23,6 @@ export async function GET(request: Request,
       getPosts = await prisma.post.findMany();
     }
 
-    console.log('Number of posts fetched:', getPosts.length);
 
     if (getPosts.length > 0) {
       return NextResponse.json(getPosts[0], { status: 200 });

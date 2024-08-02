@@ -61,11 +61,9 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ setIsSidebarOpen, isNonMobile, 
                         variant="persistent"
                         open={isSidebarOpen} onClose={function (event: React.SyntheticEvent<{}, Event>): void {
                             isSidebarOpen
-                            console.log(event);
                             
                         } } onOpen={function (event: React.SyntheticEvent<{}, Event>): void {
                             isSidebarOpen
-                            console.log(event);
 
                         } }                >
                     <DrawerHeader>

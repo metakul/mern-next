@@ -28,13 +28,12 @@ function Home() {
     try {
       const base64Data = e; 
       const dataURL = `data:image/png;base64,${base64Data}`;
-      console.log("Uploaded image to Pinata: ", dataURL);
       
       // Assuming setFileURL is a function that takes the data URL as an argument
       setFileURL(dataURL);
       setDisableButton(false);
     } catch (e) {
-      console.log("Error during file upload", e);
+      toast.error("Upload error");
     }
   }
 
@@ -50,7 +49,6 @@ function Home() {
           error: "Error While mint. Retry or Join discord",
         }
       );
-      console.log("metadataURL",response);
 
       updateFormParams({ name: '', description: '', external_url: '' });
     } catch (e) {

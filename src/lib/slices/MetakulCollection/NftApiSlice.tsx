@@ -32,12 +32,10 @@ export const LoadNftSlice = createAsyncThunk(
         message: 'Fetch Nft Request successful',
         data: nfts,
       };
-      console.log(apiSuccess);
       return apiSuccess;
 
     } catch (error) {
       const castedError = error as ApiError;
-      console.error('Fetch NFT Fails failed:', error);
 
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
@@ -66,12 +64,10 @@ export const FetchMyNftSlice = createAsyncThunk(
         message: 'Fetch Owner Nft Request successful',
         data: nfts,
       };
-      console.log(apiSuccess);
       return apiSuccess;
 
     } catch (error) {
       const castedError = error as ApiError;
-      console.error('Fetch NFT Fails:', error);
 
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }

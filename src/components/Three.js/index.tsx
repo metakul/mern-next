@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import nft1 from "./Images/3.svg";
 import { createLights } from './helpers/lights';
 import { createHelpers } from './helpers/camera';
-import { setupGUI } from './helpers/gui';
+// import { setupGUI } from './helpers/gui';
 import { createSphere } from './comp/sphere';
 import { createPlane } from './comp/plane';
 import { createCube } from './comp/Cube';
@@ -85,7 +85,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ xrEnabled }) => {
     const mousePosition = vector(scene)
 
     // Setup GUI
-    setupGUI( sphere, options, dLight);
+    // setupGUI( sphere, options, dLight);
 
     // Add lights and helpers
     const { axisHelper,dLightHelper } = createHelpers(scene, dLight);

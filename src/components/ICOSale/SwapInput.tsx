@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Style.module.css";
+import { TextField } from "@mui/material";
 
 
 type Props = {
@@ -31,7 +32,7 @@ export default function SwapInput({
 
     return (
         <div className={styles.swapInputContainer}>
-           <input 
+           <TextField 
                 type="number"
                 placeholder="0.0"
                 value={value}

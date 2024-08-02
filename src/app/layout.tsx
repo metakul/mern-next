@@ -22,8 +22,8 @@ import navConfig from "./layout/navConfig";
 
 // home page tabs
 import MetakulCollection from "@/tabs/Tab2/MetakulCollection";
-import Tab3 from "@/tabs/Tab3";
-import Tab4 from "@/tabs/Tab4/temp";
+import Tab3 from "@/tabs/Tab3/temp";
+import Tab4 from "@/tabs/Tab3/temp";
 
 //provider:
 import {
@@ -100,7 +100,7 @@ export default function DashboardLayout({
 
       <html lang="en">
         <body >
-        <canvas className="webgl"></canvas>
+        {/* <canvas className="webgl"></canvas> */}
           <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
@@ -132,7 +132,7 @@ export default function DashboardLayout({
                     setIsSidebarOpen={handleSideBarState}
                     navConfig={navConfig}
                   />
-                  <Container component="main" sx={{ flexGrow: 1, mt: 2, ml: "auto", mr: "auto" }}>
+                  <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
                     <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
                   </Container>
             <Analytics />

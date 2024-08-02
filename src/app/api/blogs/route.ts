@@ -8,7 +8,6 @@ export async function GET() {
         status: 'approved',
       },
     });
-    console.log(approvedPosts.length);
 
     if (approvedPosts.length > 0) {
       return NextResponse.json(approvedPosts, { status: 200 });

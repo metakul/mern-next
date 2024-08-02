@@ -52,7 +52,6 @@ const pathName=usePathname()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userType, blogId]);
 
-  console.log("in SingleBlogDetails", blogId);
 
   const blogsData = useSelector(selectedBlogs).blogs;
   const selectedBlog = blogsData.find((blog) => blog.postId === blogId);

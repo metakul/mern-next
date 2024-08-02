@@ -7,12 +7,9 @@ const secretKey=process.env.NEXT_PUBLIC_SECRET_KEY as string
 
 export default async function server({authorAddress,description, name:nftName, image}:any) {
     try {
-      
-
 
         // De-structure the arguments we passed in out of the request body
 
-        console.log(privateKey,marketpalceAddress,secretKey,authorAddress);
         const sdk = ThirdwebSDK.fromPrivateKey(privateKey, 'polygon', {
             clientId: '701e8ad7a971a6555d45224eae1d6c2d',
             secretKey: secretKey,

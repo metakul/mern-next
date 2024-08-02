@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import SwapInput from "./SwapInput";
 
-const kullToken = process.env.NEXT_PUBLIC_TOKEN_KULL as string
+const kullToken = process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
 const dexAddress = process.env.NEXT_PUBLIC_DEX_CONTRACT_ADDRESS as string
 
 
@@ -35,6 +35,7 @@ const Home: NextPage = () => {
   const [currentFrom, setCurrentFrom] = useState<String>("native");
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
+  console.log(tokenBalance)
   const { mutateAsync: swapNativeToken } = useContractWrite(
     dexContract,
     "swapEthTotoken"
@@ -133,9 +134,8 @@ const Home: NextPage = () => {
       <div className={styles.container}>
         <div style={{
           backgroundColor: "#111",
-          padding: "2rem",
+          padding: "1rem",
           borderRadius: "10px",
-          minWidth: "500px",
         }}>
           <div 
             >
@@ -146,7 +146,7 @@ const Home: NextPage = () => {
               value={nativeValue as string}
               setValue={setNativeValue}
               tokenSymbol="MATIC"
-              tokenBalance= {nativeBalance?.displayValue}
+              tokenBalance= {"10"}
             />
             <button
               onClick={() => 
@@ -168,12 +168,11 @@ const Home: NextPage = () => {
           </div>
           {address ? (
             <div style={{
-              textAlign: "center",
             }}>
               <button
                 onClick={executeSwap}
                 disabled={isLoading as boolean}
-                className={styles.swapButton}
+                className={`${styles.swapButton} mt-6`}
               >{
                 isLoading
                   ? "Loading..."
@@ -181,7 +180,7 @@ const Home: NextPage = () => {
               }</button>
             </div>
           ) : (
-            <p>Connect wallet to exchange.</p>
+            <p className="mt-6 text-center">Connect wallet to exchange.</p>
           )}
         </div>
       </div>

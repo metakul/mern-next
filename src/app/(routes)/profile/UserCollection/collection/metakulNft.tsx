@@ -27,8 +27,6 @@ const MyMetakulNft = ({ collectionAddress }: any) => {
     "nft-drop"
   );
   let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
-console.log(ownedNfts);
-
 
   return (
 

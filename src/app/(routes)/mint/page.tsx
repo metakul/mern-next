@@ -29,11 +29,9 @@ const MintPage = () => {
   const dispatch = useDispatch()
   const [errmsg, setErrmsg]=useState("")
   const { data: ownedNfts } = useOwnedNFTs(nftDrop, address);
-  console.log(ownedNfts);
 
   async function opensea(id: string) {
     const nft = id;
-    console.log(`https://www.opensea.io/${nftDropContractAddress}/${nft}`);
     // window.open(
     //   `https://opensea.io/assets/matic/${nftDropContractAddress}/${nft}`
     // );
