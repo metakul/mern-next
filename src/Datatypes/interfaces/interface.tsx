@@ -21,6 +21,7 @@ export interface ProtectedPageProps {
 export interface LoginData {
   email: string;
   password: string;
+  OnFormSuccess:any
 }
 
 export interface CollectionInfo {

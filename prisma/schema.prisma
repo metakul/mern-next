@@ -24,3 +24,20 @@ model Post {
   // createdAt   DateTime @default(now())
   // updatedAt   DateTime @updatedAt
 }
+
+
+model User {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  firstName         String
+  lastName          String
+  email             String   @unique
+  password          String
+  walletAddress     String
+  smartWalletAddress String
+  encryptedPrivateKey String
+  user_type         String
+  user_country      String
+  emailPending      Boolean  @default(false)
+
+  @@map("users") // Map to the 'users' collection in MongoDB
+}

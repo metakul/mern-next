@@ -42,6 +42,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import Head from "next/head";
 
 const smartWalletOptions = {
   factoryAddress: "0x2ace847964fe70d38ea6dad726e3a230dca244bd",
@@ -99,6 +100,9 @@ export default function DashboardLayout({
     <StoreProvider>
 
       <html lang="en">
+      <Head>
+        <title>Metakul</title>
+      </Head>
         <body >
         {/* <canvas className="webgl"></canvas> */}
           <ColorModeContext.Provider value={colorMode}>
@@ -122,7 +126,7 @@ export default function DashboardLayout({
                   ),
                 ]}
               >
-                    <ToastContainer />
+                  <ToastContainer />
                   <Header APP_BAR={APP_BAR} setIsSidebarOpen={handleSideBarState} />
                   <MiniDrawer
                     APP_BAR={APP_BAR}
@@ -132,7 +136,7 @@ export default function DashboardLayout({
                     setIsSidebarOpen={handleSideBarState}
                     navConfig={navConfig}
                   />
-                  <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" }}>
+                  <Container component="main" sx={{ flexGrow: 1, mt: 12, ml: "auto", mr: "auto" ,ml: isNonMobile ? "40px" : 0  }}>
                     <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
                   </Container>
             <Analytics />
@@ -141,7 +145,6 @@ export default function DashboardLayout({
             </ThemeProvider>
           </ColorModeContext.Provider>
         </body>
-
       </html>
     </StoreProvider>
   );

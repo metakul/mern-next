@@ -2,6 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from '../../Datatypes/interfaces/interface';
 import Cookies from 'js-cookie';
+import { JwtPayload } from 'jwt-decode';
 
 const storedUser = Cookies.get('user');
 const storedAccessToken = Cookies.get('access');
@@ -9,7 +10,7 @@ const storedRefreshToken = Cookies.get('refresh');
 const storedUserType = Cookies.get('userType');
 
 const initialState: AuthState = {
-  isAuthenticated: false,
+  isAuthenticated:storedAccessToken ? true : false,
   user: storedUser ? storedUser : null,
   access: storedAccessToken ? storedAccessToken : null,
   refresh: storedRefreshToken ? storedRefreshToken : null,
@@ -20,14 +21,14 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<{ user: string; token: { access: string, refresh: string }; userType: string }>) => {
+    setCredentials: (state, action: PayloadAction<{ user: any; token: { access: string, refresh: string }; userType: string }>) => {
 
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.access = action.payload.token.access;
       state.refresh = action.payload.token.refresh;
       state.userType = action.payload.userType;
-      Cookies.set('user', action.payload.user);
+      Cookies.set('user', JSON.stringify(action.payload.user));
       Cookies.set('access', action.payload.token.access);
       Cookies.set('refresh', action.payload.token.refresh);
       Cookies.set('userType', action.payload.userType);

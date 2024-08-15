@@ -4,6 +4,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import { Box } from '@mui/material';
 
 interface CustomDialogProps {
   open: boolean;
@@ -12,6 +13,7 @@ interface CustomDialogProps {
   title: string;
   description: string;
   children: ReactNode;
+  className:any
 }
 
 const CustomDialog: React.FC<CustomDialogProps> = ({
@@ -21,9 +23,10 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
   title,
   description,
   children,
+  className
 }) => {
   return (
-    <>
+    <Box className={className}>
       <Button variant="outlined" onClick={() => onClose()}>
         {triggerButtonText}
       </Button>
@@ -39,7 +42,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </Box>
   );
 };
 

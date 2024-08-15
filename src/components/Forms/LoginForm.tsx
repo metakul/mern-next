@@ -25,8 +25,9 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 interface LoginProps {
   loginTitle: string;
+  OnFormSuccess:any
 }
-const LoginForm: React.FC<LoginProps> = () => {
+const LoginForm: React.FC<LoginProps> = ({OnFormSuccess}) => {
   const dispatch = useDispatch(); // Explicitly type dispatch
 
   const [checked, setChecked] = useState(false);
@@ -42,6 +43,7 @@ const LoginForm: React.FC<LoginProps> = () => {
       const loginData: LoginData = {
         email: email,
         password: password,
+        OnFormSuccess
       };
 
       // Dispatch the login action with correct action type

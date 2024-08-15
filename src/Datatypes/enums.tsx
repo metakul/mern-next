@@ -44,7 +44,7 @@ export enum ProtectedPageInfo{
 
 // define endpoints here
   export const ApiEndpoint: Record<string, any> = {
-    LOGIN: {apiId:1, url: '/auth/user/login', method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Logging In",successMessage:"Logged In",errorMessage:"Error While Login"},
+    LOGIN: {apiId:1, url: '/api/login', method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Logging In",successMessage:"Logged In",errorMessage:"Error While Login"},
     ADMINLOGGIN: {apiId:2, url: '/auth/systemAdmin/login', method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Logging In",successMessage:"Logged In",errorMessage:"Error While Admin Login"},
     GETBLOG: { apiId:3,url: '/api/blogs', method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"SuccessFully Loaded website",errorMessage:""},
     GETSINGLEBLOG: { apiId:4, url: 'api/', method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Loading Current Blogs",successMessage:"Blog Loaded SuccessFully",errorMessage:"Error Loading Blog"},

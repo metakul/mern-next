@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
 import { Button, Menu, MenuItem, Typography } from '@mui/material';
+import Link from 'next/link';
 
 interface Props {
+  isLoading?:boolean
   balance: BalanceItem[];
   loadingMessage: string;
   handleNftButtonText: string;
   onHandleButtonClick?: (id: string) => void;
 }
 
-const NftCard: React.FC<Props> = ({ loadingMessage, balance, handleNftButtonText, onHandleButtonClick }) => {
+const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,7 +24,10 @@ const NftCard: React.FC<Props> = ({ loadingMessage, balance, handleNftButtonText
 
   return (
     <>
-      {balance && balance.length > 0 ? (
+    {isLoading ? (
+  // Show loading spinner or message
+  <div className="spinner">{loadingMessage}</div>
+    ): balance && balance.length > 0 ? (
         balance.map((item: BalanceItem, index: number) => (
           <article className='flex justify-center ' key={index}>
           <div className="flex flex-col justify-center items-center ml-[auto] mr-[auto] rounded-2.5xl border border-jacarta-100 p-[1.5rem] transition-shadow hover:shadow-lg">
@@ -115,10 +120,17 @@ const NftCard: React.FC<Props> = ({ loadingMessage, balance, handleNftButtonText
           </article>
         ))
       ) : (
-        <div>
-          <Typography variant='h3' className='w-[100%]'>{loadingMessage}</Typography>
-        </div>
+        <div className='text-center'>
+          <Typography >
+            Visit to Mint Your Own NFT
+          </Typography>
+          <Link color="primary" href="/create_nft">
+          <Button >
+          Claim Now
 
+          </Button>
+          </Link>
+        </div>
       )}
     </>
   );

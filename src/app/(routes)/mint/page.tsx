@@ -8,8 +8,11 @@ import {
   useOwnedNFTs,
   useContractWrite,
   ConnectWallet,
+  useContractRead
 } from "@thirdweb-dev/react";
 import {  toast, ToastContainer } from 'react-toastify';
+import { readContract } from "thirdweb";
+
 
 import { ClaimNftInterface } from "@/Datatypes/interfaces/interface";
 import { AppDispatch } from "@/lib/store";
@@ -41,20 +44,24 @@ const MintPage = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { mutateAsync: claim } = useContractWrite(contract, "claim");
 
- 
+  const { data:totalSupply, isLoading } = useContractRead( 
+    contract, 
+    "totalSupply", 
+    [] 
+  );
+console.log(totalSupply);
 
   const handleClaimNft = async () => {
     if(!address){
-      setErrmsg("Wallet not Connected")
+     toast.error("Wallet Not connected")
       return
     }
-    setMintMsg("Mint Started")
     const claimNftHandler: ClaimNftInterface = {
       address,
       claim
     };
 
-    (dispatch as AppDispatch)(ClaimNftSlice({claimNftHandler,setMintMsg}));
+    (dispatch as AppDispatch)(ClaimNftSlice({claimNftHandler}));
   }
 
 
@@ -99,14 +106,17 @@ const MintPage = () => {
 
           <Container sx={{
             display:"flex",
-            justifyContent:"center"
+            justifyContent:"center",
+            mb:4
           }}>
               <button onClick={handleClaimNft} className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold  shadow-accent-volume transition-all hover:bg-accent-dark">
                 Claim NFT
               </button>
-           
 
           </Container>
+           <Typography variant="h5" className="item-center mt-6 text-center">
+            Total Claimed NFT : {isLoading ? "Loading" : parseInt(totalSupply._hex, 16).toString()}
+           </Typography>
          
         </div>
         <Box sx={{

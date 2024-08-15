@@ -148,7 +148,7 @@ const CustomTabPanel: React.FC<CustomTabPanelProps> = ({ isNonMobile, children, 
       marginBottom: "50px",
     }}
   >
-    {value === index && <Box className={` ${position === "top" ? "pt-2" : ""}`} sx={{ pl: isNonMobile ? 3 : 0 }}>{children}</Box>}
+    {value === index && <Box className={` ${position === "top" ? "pt-2" : ""}`} sx={{ }}>{children}</Box>}
   </div>
 );
 

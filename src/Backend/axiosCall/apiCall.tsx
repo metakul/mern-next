@@ -39,6 +39,8 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
         error: endpoint.errorMessage ? endpoint.errorMessage : undefined,
       }
     );
+    console.log(response);
+    
 
     // Parse response
     const responseData = await response.json();

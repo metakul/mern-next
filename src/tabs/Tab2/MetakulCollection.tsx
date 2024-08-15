@@ -11,6 +11,8 @@ import CustomDialog from '@/components/Dailog/Dailog';
 import LoginForm from '@/components/Forms/LoginForm';
 import { useState } from 'react';
 import SocialProfiles from '@/components/SocialProfile';
+import { isAuthenticated } from '@/lib/slices/authSlice';
+import LogoutButton from '@/components/Elements/Buttons/LogoutButton';
 
 export const svgStyle = {
   fill: '#5893f9', // Set your desired fill color here
@@ -19,7 +21,7 @@ export const svgStyle = {
 const MetakulCollection = () => {
   const dispatch = useDispatch()
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
-
+  const isUserAuthenticated=useSelector(isAuthenticated)
   const balance = useSelector(selectNftCollection).nfts as BalanceItem[]
 
   const handleLoadNft = () => {
@@ -82,17 +84,25 @@ const MetakulCollection = () => {
           <div className="mb-2">
             <span className="text-sm font-bold text-jacarta-400">Created by </span>
             <a href="https://www.linkedin.com/in/shubham-kunwar-90ba441ba/" target="_balnk" className="text-sm font-bold text-accent">Kunwar.eth</a>
-            <CustomDialog
-              open={isDialogOpen}
-              onClose={() => setDialogOpen(!isDialogOpen)}
-              triggerButtonText={"Admin Login"}
-              title={"Login Now"}
-              description={"This is description for Login"}
-            >
-              <LoginForm
-                loginTitle="Admin Login"
-              />
-            </CustomDialog>
+            {isUserAuthenticated ? (
+
+                <LogoutButton/>
+             
+              ):(
+                <CustomDialog
+                className="ml-2"
+                open={isDialogOpen}
+                onClose={() => setDialogOpen(!isDialogOpen)}
+                triggerButtonText={"Admin Login"}
+                title={"Login Now"}
+                description={"Only admin are availabale to login for now"}
+                >
+                <LoginForm
+                  loginTitle="Admin Login"
+                  OnFormSuccess={() => setDialogOpen(!isDialogOpen)}
+                  />
+              </CustomDialog>
+              )}
           </div>
 
           <div

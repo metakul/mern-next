@@ -2,7 +2,7 @@ import { ApiSuccess, ClaimNftInterface, ApiError,TransferCryptoInterface } from 
 import { allowlistProof } from "./slices/Web3Profile/whitelist";
 import { toast } from 'react-toastify';
 
-export const claimNft = async ({ claimNftHandler, setMintMsg }: { claimNftHandler: ClaimNftInterface, setMintMsg: any },) => {
+export const claimNft = async ({ claimNftHandler }: { claimNftHandler: ClaimNftInterface },) => {
   try {
 
     // Define a separate async function to handle the claim operation
@@ -19,7 +19,6 @@ export const claimNft = async ({ claimNftHandler, setMintMsg }: { claimNftHandle
             error: 'Error Claiming NFt. Join discord to know more 🤯'
           }
         )
-        setMintMsg("Nft minted successFully")
         return response;
       } catch (err) {
         throw err;

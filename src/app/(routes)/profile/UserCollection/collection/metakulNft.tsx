@@ -26,8 +26,9 @@ const MyMetakulNft = ({ collectionAddress }: any) => {
     collectionAddress,
     "nft-drop"
   );
-  let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
+  let { data: ownedNfts,isLoading } = useOwnedNFTs(nftDropContract, address);
 
+  console.log(ownedNfts)
   return (
 
     <Grid container sx={{ mt: 4 }}>
@@ -36,7 +37,7 @@ const MyMetakulNft = ({ collectionAddress }: any) => {
       {address ? (
         <div className="flex justify-center mt-4">
           <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4">
-            <NftCard balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "Loading Nfts"} />
+            <NftCard  isLoading={isLoading} balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "Loading Nfts"} />
           </div>
         </div>
 

@@ -16,21 +16,23 @@ interface JwtPayload {
 
 export const loginUser = createAsyncThunk(
   'auth/login',
-  async ({ email, password }: LoginData, { rejectWithValue, dispatch }) => {
+  async ({ email, password, OnFormSuccess }: LoginData, { rejectWithValue, dispatch }) => {
     try {
+      console.log("email",email);
       const response = await Request({
         endpointId:"LOGIN",
         data: { email, password },
        
       })
+      
       // Assuming the response contains user information and a token
       const {  access,refresh } = response.token;
       const user:JwtPayload=jwtDecode(access)
 
       // $TODO save access and refresh in cookies and apply the refresh logic
       // Dispatch the setCredentials action to update the authentication state
-      dispatch(setCredentials({ user:user.walletAddress, token:{access,refresh}, userType:user.user_type }));
-
+      dispatch(setCredentials({ user:user, token:{access,refresh}, userType:user.user_type }));
+      OnFormSuccess()
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'Login Request successful',
