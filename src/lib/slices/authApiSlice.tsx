@@ -17,6 +17,8 @@ interface JwtPayload {
 export const loginUser = createAsyncThunk(
   'auth/login',
   async ({ email, password, OnFormSuccess }: LoginData, { rejectWithValue, dispatch }) => {
+    dispatch(setCredentials({ user:"", token:{access:"",refresh:""}, userType:"",isLoading:true }));
+
     try {
       const response = await Request({
         endpointId:"LOGIN",
@@ -31,7 +33,7 @@ export const loginUser = createAsyncThunk(
 
       // $TODO save access and refresh in cookies and apply the refresh logic
       // Dispatch the setCredentials action to update the authentication state
-      dispatch(setCredentials({ user:user, token:{access,refresh}, userType:user.user_type }));
+      dispatch(setCredentials({ user:user, token:{access,refresh}, userType:user.user_type,isLoading:false }));
       OnFormSuccess()
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
@@ -43,6 +45,8 @@ export const loginUser = createAsyncThunk(
       return apiSuccess;
 
     } catch (error) {
+    dispatch(setCredentials({ user:"", token:{access:"",refresh:""}, userType:"",isLoading:false }));
+
       const castedError =error as ApiError
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }

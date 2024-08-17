@@ -36,6 +36,7 @@ export interface AuthState {
   access: string | null;
   refresh: string | null;
   userType: string | null;
+  isLoading:boolean
 }
 
 // api request

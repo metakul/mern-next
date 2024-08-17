@@ -10,6 +10,7 @@ interface ExtendedTheme extends Theme {
         greenAccent: Record<number, string>;
         redAccent: Record<number, string>;
         blueAccent: Record<number, string>;
+        backgroundUrl:string
     };
 }
 
@@ -86,6 +87,7 @@ export const tokens = (mode: string) => ({
                 800: "#2a2d64",
                 900: "#151632",
             },
+            backgroundUrl:"/img/gradient_dark.jpg"
         }
         : {
             grey: {
@@ -155,6 +157,7 @@ export const tokens = (mode: string) => ({
                 800: "#c3c6fd",
                 900: "#ffffff",
             },
+            backgroundUrl:"/img/gradient.jpg"
         }),
 });
 
@@ -188,6 +191,9 @@ export const themeSettings = (mode: PaletteMode): ExtendedTheme => {
                         background: {
                             default: colors.primary[900],
                         },
+                        backgroundUrl: {
+                            default:  "/img/gradient_dark.jpg",
+                        },
                     }
                     : {
                         // palette values for light mode
@@ -208,6 +214,9 @@ export const themeSettings = (mode: PaletteMode): ExtendedTheme => {
                         },
                         background: {
                             default:  colors.primary[900],
+                        },
+                        backgroundUrl: {
+                            default:  "/img/gradient.jpg",
                         },
                     }),
             },

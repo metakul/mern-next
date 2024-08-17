@@ -15,19 +15,21 @@ const initialState: AuthState = {
   access: storedAccessToken ? storedAccessToken : null,
   refresh: storedRefreshToken ? storedRefreshToken : null,
   userType: storedUserType ? storedUserType : null,
+  isLoading:false
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<{ user: any; token: { access: string, refresh: string }; userType: string }>) => {
+    setCredentials: (state, action: PayloadAction<{ user: any; token: { access: string, refresh: string }; userType: string;isLoading:boolean }>) => {
 
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.access = action.payload.token.access;
       state.refresh = action.payload.token.refresh;
       state.userType = action.payload.userType;
+      state.isLoading=action.payload.isLoading
       Cookies.set('user', JSON.stringify(action.payload.user));
       Cookies.set('access', action.payload.token.access);
       Cookies.set('refresh', action.payload.token.refresh);
@@ -61,3 +63,5 @@ export const selectUser = (state: { auth: { user: string } }) => state.auth.user
 export const selectToken = (state: { auth: { access: string } }) => state.auth.access;
 export const isAuthenticated = (state: { auth: { isAuthenticated: boolean } }) => state.auth.isAuthenticated;
 export const selectUserType = (state: { auth: { userType: string } }) => state.auth.userType;
+export const authLoading = (state: { auth: { isLoading: boolean } }) => state.auth.isLoading;
+

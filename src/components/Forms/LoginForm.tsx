@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '@/lib/slices/authApiSlice';
 import { LoginData } from '@/Datatypes/interfaces/interface';
 import { AppDispatch } from '@/lib/store';
@@ -22,6 +22,7 @@ import Link from 'next/link';
 
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import { authLoading } from '@/lib/slices/authSlice';
 
 interface LoginProps {
   loginTitle: string;
@@ -35,7 +36,8 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess}) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState('');
-
+  const isAuthLoading=useSelector(authLoading)
+  
   const handleLoginSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -57,7 +59,7 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess}) => {
     setShowPassword(!showPassword);
   };
 
-  const handleMouseDownPassword = (event) => {
+  const handleMouseDownPassword = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
   };
 
@@ -131,7 +133,7 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess}) => {
                 }
                 label={<Typography variant="h6">Keep me sign in</Typography>}
               />
-              <Link variant="h6" target="_blank" href="https://discord.gg/cAtWtdxnEt" color="text.primary">
+              <Link  target="_blank" href="https://discord.gg/cAtWtdxnEt" color="text.primary">
                 Forgot Password?
               </Link>
             </Stack>
@@ -150,6 +152,7 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess}) => {
                 onClick={handleLoginSubmit}
                 variant="contained"
                 color="primary"
+                disabled={isAuthLoading}
               >
                 Login
               </Button>

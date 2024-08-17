@@ -41,7 +41,7 @@ function Home() {
     e.preventDefault();
 
     try {
-
+      setDisableButton(true)
       const response = await toast.promise(
         mintWithSignature({ authorAddress:address, nftCollection, name: formParams.name, description: formParams.description, fileURL }), {
           pending:"Minting Your Nft",
@@ -49,9 +49,12 @@ function Home() {
           error: "Error While mint. Retry or Join discord",
         }
       );
+      setDisableButton(false)
 
       updateFormParams({ name: '', description: '', external_url: '' });
     } catch (e) {
+      setDisableButton(false)
+
       toast.error("Upload error");
     }
   }
