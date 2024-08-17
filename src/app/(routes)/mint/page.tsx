@@ -49,8 +49,6 @@ const MintPage = () => {
     "totalSupply", 
     [] 
   );
-console.log(totalSupply);
-
   const handleClaimNft = async () => {
     if(!address){
      toast.error("Wallet Not connected")

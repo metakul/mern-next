@@ -21,6 +21,7 @@ model Post {
   author      String
   status      String
   categories  String[]
+  cryptoSymbol String
   // createdAt   DateTime @default(now())
   // updatedAt   DateTime @updatedAt
 }

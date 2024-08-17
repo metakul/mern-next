@@ -23,7 +23,7 @@ const HomePage: React.FC<HomePageProps> = () => {
     if (isUserAuthenticated) {
       router.push('/admin/home')
     } else {
-      console.log("User is not authenticated");
+      console.error("User is not authenticated");
     }
   }, [isUserAuthenticated]);
   

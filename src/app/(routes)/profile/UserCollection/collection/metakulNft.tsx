@@ -28,7 +28,6 @@ const MyMetakulNft = ({ collectionAddress }: any) => {
   );
   let { data: ownedNfts,isLoading } = useOwnedNFTs(nftDropContract, address);
 
-  console.log(ownedNfts)
   return (
 
     <Grid container sx={{ mt: 4 }}>

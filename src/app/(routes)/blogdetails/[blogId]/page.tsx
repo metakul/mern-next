@@ -9,7 +9,7 @@ import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 
 import AddBlogForm from '@/components/Forms/AddBlogForm';
 
-import { FetchBlogData } from '@/Datatypes/interfaces/interface';
+import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
 import { BlogsStatusInfo } from '@/Datatypes/enums';
 import { handleShare, parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
 
@@ -35,7 +35,7 @@ const pathName=usePathname()
 
   const handleLoadBlogs = () => {
 
-    const loadForUser: FetchBlogData = {
+    const loadForUser: IFetchBlogData = {
       userType: userType,
     };
     if (blogId) {
@@ -45,6 +45,7 @@ const pathName=usePathname()
       }));
     }
   }
+
 
   useEffect(() => {
     // Load blogs when the component mounts
@@ -122,7 +123,7 @@ const pathName=usePathname()
                 Share
               </Button>
 
-              {status == BlogsStatusInfo.PENDING && userType === "SYSTEM_ADMIN" &&
+              {status == BlogsStatusInfo.PENDING && userType === "METAKUL_OWNER" &&
                 <Button variant='contained' sx={{
                   position: "relative",
                   right: "80px",

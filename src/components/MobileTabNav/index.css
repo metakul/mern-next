@@ -1,8 +1,9 @@
 html {
 
     box-sizing: border-box;
-    --bgColorMenu : #1d1d27;
+    --bgColorMenu : #2a5786;
     --duration: .7s;    
+
 
 }
 
@@ -18,6 +19,7 @@ html *::after {
 
     margin: 0;
     display: flex;
+    height: 70px;
     /* Works well with 100% width  */
     width: 32.05em;
     font-size: 1.5em;
@@ -52,8 +54,7 @@ html *::after {
     content: "";
     z-index: -1;
     width: 4.2em;
-    height: 4.2em;
-    border-radius: 50%;
+    height: 2.2em;
     position: absolute;
     transform: scale(0);
     
@@ -63,13 +64,15 @@ html *::after {
 .menu__item.active {
 
     transform: translate3d(0, -.8em , 0);
+    
 
 }
 
 .menu__item.active::before{
     
-    transform: scale(1);
+    transform: scale(2);
     background-color: var(--bgColorItem);
+
 
 }
 
@@ -87,6 +90,7 @@ html *::after {
 }
 
 .menu__item.active .icon {
+    background-color: #2a5786;
 
     animation: strok 1.5s reverse;
     

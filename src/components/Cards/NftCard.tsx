@@ -36,7 +36,7 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                   <img
                     src={item?.metadata?.image}
                     alt={`item ${index + 1}`}
-                    className=" rounded-t-2.5xl border "
+                    className=" rounded-t-2.5xl border sm:max-w-[180px]"
                     loading="lazy"
                   />
                 <div className="absolute top-3 right-3 flex items-center space-x-1 rounded-md  p-2">

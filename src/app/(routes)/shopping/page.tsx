@@ -107,8 +107,8 @@ const ShopPage = () => {
               </Grid >
 
             </Grid>
-            <SocialProfiles />
           </Box>
+            <SocialProfiles />
 
 
 

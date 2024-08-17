@@ -13,8 +13,6 @@ export async function POST(req: NextRequest) {
       where: { user_type: 'METAKUL_OWNER' },
     });
 
-    console.log(existingAdmin);
-    
     if (existingAdmin) {
       return NextResponse.json({ error: 'A system admin already exists' }, { status: 409 });
     }

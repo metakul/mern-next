@@ -13,7 +13,7 @@ interface CustomDialogProps {
   title: string;
   description: string;
   children: ReactNode;
-  className:any
+  className?:any
 }
 
 const CustomDialog: React.FC<CustomDialogProps> = ({

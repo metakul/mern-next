@@ -8,7 +8,6 @@ export async function POST(req: NextRequest) {
     
     const body = await req.json(); 
     const { email, password } = body;
-    console.log(email);
 
     const user = await prisma.user.findUnique({
       where: { email },
@@ -24,8 +23,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid password" }, { status: 401 });
     }
 
-    console.log(user.user_type);
-    
     // Check if user_type is "METAKUL_USER" (Assuming user.user_type is in the user object)
     if (user?.user_type !==  "METAKUL_OWNER") {
       return NextResponse.json({ error: "Do not have enough Permission" }, { status: 403 });

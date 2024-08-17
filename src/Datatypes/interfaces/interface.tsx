@@ -155,7 +155,7 @@ export interface SocialProfileProps{
 }
 
 // todo later fetch based on userType
-export interface FetchBlogData{
+
+export interface IFetchBlogData{
   userType:string
 }
-

@@ -18,7 +18,6 @@ export const loginUser = createAsyncThunk(
   'auth/login',
   async ({ email, password, OnFormSuccess }: LoginData, { rejectWithValue, dispatch }) => {
     try {
-      console.log("email",email);
       const response = await Request({
         endpointId:"LOGIN",
         data: { email, password },
@@ -28,6 +27,7 @@ export const loginUser = createAsyncThunk(
       // Assuming the response contains user information and a token
       const {  access,refresh } = response.token;
       const user:JwtPayload=jwtDecode(access)
+
 
       // $TODO save access and refresh in cookies and apply the refresh logic
       // Dispatch the setCredentials action to update the authentication state

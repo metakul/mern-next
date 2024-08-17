@@ -5,13 +5,13 @@ import { ApiError, CryptoData, CryptoInfoProps } from '../../../Datatypes/interf
 import { ApiEndpoint } from '@/Datatypes/enums';
 import Request from '@/Backend/axiosCall/apiCall';
 import { ApiSuccess } from '../../../Datatypes/interfaces/interface';
-import { FetchBlogData } from '../../../Datatypes/interfaces/interface';
+import { IFetchBlogData } from '../../../Datatypes/interfaces/interface';
 import { Ipost } from '../../../Datatypes/interfaces/interface';
 
 export const fetchBlogApiSlice = createAsyncThunk(
   'blogCollection/setLoadedBlogs',
   // eslint-disable-next-line no-empty-pattern
-  async ({ fetchBlogData, pageSize, blogPage, setBlogPage, status }: { fetchBlogData: FetchBlogData, pageSize?: number, blogPage?: number, setBlogPage?: (page: number) => void, status: string }, { rejectWithValue, dispatch }) => {
+  async ({ fetchBlogData, pageSize, blogPage, setBlogPage, status }: { fetchBlogData: IFetchBlogData, pageSize?: number, blogPage?: number, setBlogPage?: (page: number) => void, status: string }, { rejectWithValue, dispatch }) => {
     dispatch(setLoadedBlogs({
       loading: true,
     }));
@@ -52,7 +52,7 @@ export const fetchBlogApiSlice = createAsyncThunk(
 export const fetchSingleBlogApiSlice = createAsyncThunk(
   'blogCollection/setLoadedBlogs',
   // eslint-disable-next-line no-empty-pattern
-  async ({ fetchBlogData, blogId }: { fetchBlogData: FetchBlogData, blogId?: string }, { rejectWithValue, dispatch }) => {
+  async ({ fetchBlogData, blogId }: { fetchBlogData: IFetchBlogData, blogId?: string }, { rejectWithValue, dispatch }) => {
     dispatch(setLoadedBlogs({
       loading: true,
     }));
@@ -95,7 +95,7 @@ export const addBlogApiSlice = createAsyncThunk(
           slug: `/${newBlogData.postId}`,
           data: newBlogData,
         });
-        const loadForUser: FetchBlogData = {
+        const loadForUser: IFetchBlogData = {
           userType
         }
         dispatch(fetchSingleBlogApiSlice({ fetchBlogData: loadForUser, blogId: newBlogData.postId })); // Dispatch addBlog action with new blog data
@@ -141,7 +141,7 @@ export const updateBlogSlice = createAsyncThunk(
         slug: `/${postId}`,
         data: {status:status},
       });
-      const loadForUser: FetchBlogData = {
+      const loadForUser: IFetchBlogData = {
         userType
       }
 

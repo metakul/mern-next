@@ -14,9 +14,9 @@ export const makeStore = () => {
         cryptoCollection:cryptoCollectionRedcuer
         
     }, 
-    // middleware:getDefaultMiddlerware =>
-    //   getDefaultMiddlerware().concat(logger),
-    //   devTools:true
+    middleware:getDefaultMiddlerware =>
+      getDefaultMiddlerware().concat(logger),
+      devTools:true
   })
 }
 

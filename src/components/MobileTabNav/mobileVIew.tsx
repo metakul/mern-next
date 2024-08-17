@@ -1,3 +1,4 @@
+'use client'
 import React, { ReactNode, useEffect, useState } from 'react'
 import "./index.css"
 import { Box } from '@mui/material';
@@ -10,7 +11,7 @@ interface MobileTabNavigationProps {
   showOutlet?: boolean;
 }
 
-const MobileTabNavigationTest: React.FC<MobileTabNavigationProps> = ({ tabs, position, showOutlet }) => {
+const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, position, showOutlet }) => {
 
   const [value, setValue] = useState(0)
   
@@ -152,4 +153,4 @@ const CustomTabPanel: React.FC<CustomTabPanelProps> = ({ isNonMobile, children, 
   </div>
 );
 
-export default MobileTabNavigationTest;
+export default MobileTabNavigation;
