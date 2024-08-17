@@ -112,11 +112,7 @@ export default function DashboardLayout({
 
   return (
     <StoreProvider>
-      <html lang="en">
-        <Head>
-          <title>Metakul</title>
-        </Head>
-        <body>
+ 
           {/* <canvas className="webgl"></canvas> */}
           <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
@@ -180,8 +176,6 @@ export default function DashboardLayout({
               {/* </Box> */}
             </ThemeProvider>
           </ColorModeContext.Provider>
-        </body>
-      </html>
     </StoreProvider>
   );
 }
