@@ -6,7 +6,7 @@ import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { AppDispatch } from '@/lib/store';
 import { fetchBlogApiSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import { Ipost } from '@/Datatypes/interfaces/interface';
-import { FetchBlogData } from '@/Datatypes/interfaces/interface';
+import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
 import { Grid } from '@mui/material';
 import ShareButton from '@/components/Elements/Buttons/ShareButton';
 import BlogDetails from '@/components/BlogInfoTabs';
@@ -26,7 +26,7 @@ const Blogs = () => {
   const userType = useSelector(selectUserType);
   const handleLoadBlogs = () => {
 
-    const loadForUser: FetchBlogData = {
+    const loadForUser: IFetchBlogData = {
       userType: userType,
     };
     (dispatch as AppDispatch)(fetchBlogApiSlice({

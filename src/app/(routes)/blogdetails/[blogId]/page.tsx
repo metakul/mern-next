@@ -65,11 +65,12 @@ const pathName=usePathname()
   const cryptoSymbol = selectedBlog?.cryptoSymbol ?? '';
   const status = selectedBlog?.status ?? '';
   const categories = selectedBlog?.categories ?? [];
+console.log(userType);
 
   const approveBlog = () => {
     (dispatch as AppDispatch)(updateBlogSlice({
       userType,
-      postId: blogId,
+      blogId: blogId,
       status: BlogsStatusInfo.APPROVED
     }));
   }
@@ -110,14 +111,17 @@ const pathName=usePathname()
                 </Button>
               )
               }
+              <Box  sx={{
+                  position: "fixed",
+                  right: "40px",
+                }}>
+
               <Button
                 variant='contained'
                 sx={{
-                  position: "fixed",
-                  right: "40px", // Aligning the button to the right edge
                   background: getColors().blueAccent[800],
                   color: getColors().blueAccent[100]
-                }}
+                }} 
                 onClick={() => handleShare(postLink)}
               >
                 Share
@@ -125,14 +129,13 @@ const pathName=usePathname()
 
               {status == BlogsStatusInfo.PENDING && userType === "METAKUL_OWNER" &&
                 <Button variant='contained' sx={{
-                  position: "relative",
-                  right: "80px",
                   background: getColors().blueAccent[800],
                   color: getColors().blueAccent[100]
                 }} onClick={approveBlog}>
                   Approve
                 </Button>
               }
+              </Box>
 
             </div>
             <Typography variant='h3' sx={{

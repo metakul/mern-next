@@ -47,7 +47,7 @@ const Staking = () => {
           setClaimableRewards(stakeInfo[1]);
         }
       } catch (error) {
-        console.error("Error fetching balance:", error);
+        toast.error("Error Loading Rewards")
       }
     };
 

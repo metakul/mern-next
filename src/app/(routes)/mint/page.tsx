@@ -1,36 +1,25 @@
 'use client'
-import { useState } from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import {
-  useContract,
   useAddress,
+  useContract,
   ThirdwebNftMedia,
   useOwnedNFTs,
-  useContractWrite,
   ConnectWallet,
-  useContractRead
 } from "@thirdweb-dev/react";
-import {  toast, ToastContainer } from 'react-toastify';
-import { readContract } from "thirdweb";
 
 
-import { ClaimNftInterface } from "@/Datatypes/interfaces/interface";
-import { AppDispatch } from "@/lib/store";
-import { ClaimNftSlice } from "@/lib/slices/Web3Profile/NftApiSlice";
-import { useDispatch } from "react-redux";
 import BreadCrumbs from "@/components/Elements/BreadCrumbs";
 import SocialProfiles from "@/components/SocialProfile";
-import Link from "next/link";
+import HolderBenifits from "@/components/Sections/HolderSection";
 
 
 const nftDropContractAddress = process.env.NEXT_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 
 const MintPage = () => {
-  const address = useAddress();
   const { contract: nftDrop } = useContract(nftDropContractAddress);
-  const [mintMsg,setMintMsg] = useState("")
-  const dispatch = useDispatch()
-  const [errmsg, setErrmsg]=useState("")
+  const address=useAddress()
+  // const [errmsg, setErrmsg]=useState("")
   const { data: ownedNfts } = useOwnedNFTs(nftDrop, address);
 
   async function opensea(id: string) {
@@ -39,29 +28,6 @@ const MintPage = () => {
     //   `https://opensea.io/assets/matic/${nftDropContractAddress}/${nft}`
     // );
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { contract } = useContract(nftDropContractAddress);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { mutateAsync: claim } = useContractWrite(contract, "claim");
-
-  const { data:totalSupply, isLoading } = useContractRead( 
-    contract, 
-    "totalSupply", 
-    [] 
-  );
-  const handleClaimNft = async () => {
-    if(!address){
-     toast.error("Wallet Not connected")
-      return
-    }
-    const claimNftHandler: ClaimNftInterface = {
-      address,
-      claim
-    };
-
-    (dispatch as AppDispatch)(ClaimNftSlice({claimNftHandler}));
-  }
-
 
   return (
     <Container >
@@ -102,22 +68,10 @@ const MintPage = () => {
             </Grid>
           </Grid>
 
-          <Container sx={{
-            display:"flex",
-            justifyContent:"center",
-            mb:4
-          }}>
-              <button onClick={handleClaimNft} className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold  shadow-accent-volume transition-all hover:bg-accent-dark">
-                Claim NFT
-              </button>
-
-          </Container>
-           <Typography variant="h5" className="item-center mt-6 text-center">
-            Total Claimed NFT : {isLoading ? "Loading" : parseInt(totalSupply._hex, 16).toString()}
-           </Typography>
+      
          
         </div>
-        <Box sx={{
+        {/* <Box sx={{
           display:"flex",
           justifyContent:'center',
           mt:4,
@@ -125,7 +79,8 @@ const MintPage = () => {
               {mintMsg && <p>{mintMsg}</p>}
               {errmsg && !mintMsg && <p>{errmsg}</p>}
 
-        </Box>
+        </Box> */}
+        <HolderBenifits/>
 
         <Grid container className="flex items-center justify-center mt-16">
           <Grid>

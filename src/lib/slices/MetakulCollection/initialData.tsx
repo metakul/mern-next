@@ -7,7 +7,7 @@ export const nftData = [
     "id": "0",
       "name": "METAKUL #1",
       "description": "The Innovative Polygon Metaverse Reforming Vedic Education via blockchain. All holders from 1st Gen will take major decision for the METAKUL DAO Org.",
-      "image": "https://ed7a4b64885c72be1dc347066f4e51ce.ipfscdn.io/ipfs/bafybeibagl7z4riq6k5dqzeh2liwvz2gncew7jeq6iceajn3ghb47gkwdy/1.png"
+      "image": "/img/1.png"
     },
     "attributes": [
       {
@@ -39,7 +39,7 @@ export const nftData = [
     "id": "1",
 
       "description": "The Innovative Polygon Metaverse Reforming Vedic Education via blockchain. All holders from 1st Gen will take major decision for the METAKUL DAO Org.",
-      "image": "https://ed7a4b64885c72be1dc347066f4e51ce.ipfscdn.io/ipfs/bafybeibagl7z4riq6k5dqzeh2liwvz2gncew7jeq6iceajn3ghb47gkwdy/3.png"
+      "image": "/img/2.png"
     },
     "attributes": [
       {
@@ -70,7 +70,7 @@ export const nftData = [
     "id": "2",
 
       "description": "The Innovative Polygon Metaverse Reforming Vedic Education via blockchain. All holders from 1st Gen will take major decision for the METAKUL DAO Org.",
-      "image": "https://ed7a4b64885c72be1dc347066f4e51ce.ipfscdn.io/ipfs/bafybeibagl7z4riq6k5dqzeh2liwvz2gncew7jeq6iceajn3ghb47gkwdy/1.png"
+      "image": "/img/3.png"
     },
     "attributes": [
       {

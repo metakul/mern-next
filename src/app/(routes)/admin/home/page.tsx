@@ -12,6 +12,7 @@ import {
 // import { LogoutRounded } from '@mui/icons-material';
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { Container } from "@mui/material";
 
 // Lazy load BlogsPage to avoid server-side rendering issues
 const BlogsPage = dynamic(() => import("@/components/LoginPagesComp/Blogs"), {
@@ -68,9 +69,9 @@ const ProtectedPage: React.FC<ProtectedPageProps> = () =>
     }, [isUserAuthenticated]);
 
     return (
-      <div>
+      <Container>
         <BlogsPage />
-      </div>
+      </Container>
     );
   };
 

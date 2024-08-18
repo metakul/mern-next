@@ -169,7 +169,6 @@ export default function DashboardLayout({
                       flexGrow: 1,
                       mt: 12,
                       mr: "auto",
-                      ml: isNonMobile ? "40px" : "auto",
                     }}
                   >
                     <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />

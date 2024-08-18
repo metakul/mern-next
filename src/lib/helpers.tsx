@@ -9,6 +9,8 @@ export const claimNft = async ({ claimNftHandler }: { claimNftHandler: ClaimNftI
     const performClaim = async () => {
       // eslint-disable-next-line no-useless-catch
       try {
+        console.log("response","response");
+        
         const response = await toast.promise(
           claimNftHandler.claim({
             args: [claimNftHandler.address, 1, "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", 0, allowlistProof, []]
@@ -19,8 +21,12 @@ export const claimNft = async ({ claimNftHandler }: { claimNftHandler: ClaimNftI
             error: 'Error Claiming NFt. Join discord to know more 🤯'
           }
         )
+        console.log("response",response);
+        
         return response;
       } catch (err) {
+        console.log("error",err);
+        
         throw err;
       }
     };
