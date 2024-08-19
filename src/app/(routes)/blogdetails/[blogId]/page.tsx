@@ -21,6 +21,10 @@ import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { fetchSingleBlogApiSlice,updateBlogSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import Link from 'next/link';
+import { seoConfigurer } from '@/app/SEO/seoConfigurer';
+import {Helmet} from "react-helmet";
+
+
 const SingleBlogDetails = () => {
 
   const { blogId } = useParams<{ blogId: string }>();
@@ -78,6 +82,13 @@ console.log(userType);
   return (
     <div className='px-4 mt-4 ml-2 mr-2'>
 
+<Helmet>
+                <meta charSet="utf-8" />
+                <title>{title}</title>
+                <link rel="canonical" href="https://metakul.live/" />
+                <meta name="description" content={truncatedDescription} />
+  
+            </Helmet>
       {truncatedDescription ? (
         <>
           <BreadCrumbs currentPath={`/blogdetails/${blogId}`} />

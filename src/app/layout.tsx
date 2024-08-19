@@ -115,6 +115,10 @@ export default function DashboardLayout({
       <html lang="en">
         <Head>
           <title>Metakul</title>
+          
+          <meta name="robots" content="all" />
+          {/* Googlebot tag */}
+          <meta name="googlebot" content="noindex,nofollow" />
         </Head>
         <body>
           {/* <canvas className="webgl"></canvas> */}
@@ -122,60 +126,60 @@ export default function DashboardLayout({
             <ThemeProvider theme={theme}>
               <CssBaseline />
               {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
-                <ThirdwebProvider
-                  activeChain="polygon"
-                  clientId={apikey}
-                  supportedWallets={[
-                    smartWallet(metamaskWallet(), smartWalletOptions),
-                    smartWallet(
-                      coinbaseWallet({ recommended: true }),
-                      smartWalletOptions
-                    ),
-                    smartWallet(walletConnect(), smartWalletOptions),
-                    smartWallet(localWallet(), smartWalletOptions),
-                    smartWallet(
-                      embeddedWallet({
-                        auth: {
-                          options: [
-                            "email",
-                            "google",
-                            "apple",
-                            "facebook",
-                            "email",
-                            "phone",
-                          ],
-                        },
-                      }),
-                      smartWalletOptions
-                    ),
-                  ]}
+              <ThirdwebProvider
+                activeChain="polygon"
+                clientId={apikey}
+                supportedWallets={[
+                  smartWallet(metamaskWallet(), smartWalletOptions),
+                  smartWallet(
+                    coinbaseWallet({ recommended: true }),
+                    smartWalletOptions
+                  ),
+                  smartWallet(walletConnect(), smartWalletOptions),
+                  smartWallet(localWallet(), smartWalletOptions),
+                  smartWallet(
+                    embeddedWallet({
+                      auth: {
+                        options: [
+                          "email",
+                          "google",
+                          "apple",
+                          "facebook",
+                          "email",
+                          "phone",
+                        ],
+                      },
+                    }),
+                    smartWalletOptions
+                  ),
+                ]}
+              >
+                <ToastContainer />
+                <Header
+                  APP_BAR={APP_BAR}
+                  setIsSidebarOpen={handleSideBarState}
+                />
+                <MiniDrawer
+                  APP_BAR={APP_BAR}
+                  setShowOutlet={setShowOutlet}
+                  isNonMobile={isNonMobile}
+                  isSidebarOpen={isSidebarOpen}
+                  setIsSidebarOpen={handleSideBarState}
+                  navConfig={navConfig}
+                />
+                <Container
+                  component="main"
+                  sx={{
+                    flexGrow: 1,
+                    mt: 12,
+                    mr: "auto",
+                  }}
                 >
-                  <ToastContainer />
-                  <Header
-                    APP_BAR={APP_BAR}
-                    setIsSidebarOpen={handleSideBarState}
-                  />
-                  <MiniDrawer
-                    APP_BAR={APP_BAR}
-                    setShowOutlet={setShowOutlet}
-                    isNonMobile={isNonMobile}
-                    isSidebarOpen={isSidebarOpen}
-                    setIsSidebarOpen={handleSideBarState}
-                    navConfig={navConfig}
-                  />
-                  <Container
-                    component="main"
-                    sx={{
-                      flexGrow: 1,
-                      mt: 12,
-                      mr: "auto",
-                    }}
-                  >
-                    <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
-                  </Container>
-                  <Analytics />
-                  <SpeedInsights />
-                </ThirdwebProvider>
+                  <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
+                </Container>
+                <Analytics />
+                <SpeedInsights />
+              </ThirdwebProvider>
               {/* </Box> */}
             </ThemeProvider>
           </ColorModeContext.Provider>
