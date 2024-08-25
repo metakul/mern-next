@@ -17,7 +17,6 @@ interface JwtPayload {
 export const loginUser = createAsyncThunk(
   'auth/login',
   async ({ email, password, OnFormSuccess }: LoginData, { rejectWithValue, dispatch }) => {
-    dispatch(setCredentials({ user:"", token:{access:"",refresh:""}, userType:"",isLoading:true }));
 
     try {
       const response = await Request({

@@ -26,4 +26,12 @@ const nextConfig = {
     //   },
 };
 
-export default nextConfig;
+
+const nextConfigFunction = async (phase) => {
+      const withPWA = (await import("next-pwa")).default({
+        dest: "public",
+      });
+      return withPWA(nextConfig);
+  };
+
+  export default nextConfigFunction;

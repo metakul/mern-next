@@ -1,7 +1,7 @@
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import StorageIcon from '@mui/icons-material/Storage';
-import { Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -53,8 +53,10 @@ export default function HolderBenifits() {
               <p className="text-base font-semibold leading-7 text-indigo-600">EXCLUSIVE </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">NFT HOLDER&apos;S BENIFITS</h1>
               <p className="mt-6 text-xl leading-8 text-gray-700">
-                Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam
-                eget aliquam. Quisque id at vitae feugiat egestas.
+                Students moving to web3 are our number-one priority, so we like to take care of them!
+              </p>
+              <p className='mt-4'>
+                Discover. Collect. Buy Now. Without hassle of Gas Fees
               </p>
             </div>
           </div>
@@ -68,7 +70,7 @@ export default function HolderBenifits() {
           <a href='discord' target='_blank'>
             Join discord to get all benefits
           </a>
-          <Container sx={{
+          <Box sx={{
             display:"flex",
             justifyContent:"center",
             mb:4
@@ -77,7 +79,7 @@ export default function HolderBenifits() {
                 Claim NFT
               </button>
 
-          </Container>
+          </Box>
            <Typography variant="h5" className="item-center mt-6 text-center">
             Total Claimed NFT : {isLoading ? "Loading" : parseInt(totalSupply._hex, 16).toString()}/777
            </Typography>
