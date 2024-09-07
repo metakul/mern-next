@@ -43,12 +43,13 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Head from "next/head";
 
+const NEXT_PUBLIC_THIRDWEB_SMART_WALLET=process.env.NEXT_PUBLIC_THIRDWEB_SMART_WALLET
 const smartWalletOptions = {
-  factoryAddress: "0x2ace847964fe70d38ea6dad726e3a230dca244bd",
+  factoryAddress: NEXT_PUBLIC_THIRDWEB_SMART_WALLET,
   gasless: true,
 };
 
-const apikey = process.env.NEXT_PUBLIC_THIRDWEB_APIKEY;
+const NEXT_THIRDWEB_CLIENT_ID = process.env.NEXT_THIRDWEB_CLIENT_ID;
 
 export default function DashboardLayout({
   children,
@@ -128,7 +129,7 @@ export default function DashboardLayout({
               {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
               <ThirdwebProvider
                 activeChain="polygon"
-                clientId={apikey}
+                clientId={"ea8fb2ecfe653862c19dfa15f23c54d4"}
                 supportedWallets={[
                   smartWallet(metamaskWallet(), smartWalletOptions),
                   smartWallet(

@@ -69,11 +69,11 @@ export const navConfig = [
     icon: <PublicOutlined />,
     to: "/create_nft",
   },
-  // {
-  //   text: "Career",
-  //   icon: <CalendarMonthOutlined />,
-  //   to: "/Career",
-  // },
+  {
+    text: "Marketplace",
+    icon: <CalendarMonthOutlined />,
+    to: "/marketplace",
+  },
     
   // {
   //   text: "For GBPIET Student",

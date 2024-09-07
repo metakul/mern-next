@@ -7,9 +7,10 @@ import { toast } from 'react-toastify';
 
 // $TODO : set Sdk based on user choice from wallet
 
+const NEXT_THIRDWEB_CLIENT_ID=process.env.NEXT_THIRDWEB_CLIENT_ID
 // If used on the FRONTEND pass your 'clientId'
 const sdk = new ThirdwebSDK("polygon", {
-  clientId: "ed7a4b64885c72be1dc347066f4e51ce",
+  clientId: NEXT_THIRDWEB_CLIENT_ID,
 });
 
 export const LoadNftSlice = createAsyncThunk(

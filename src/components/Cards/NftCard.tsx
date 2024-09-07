@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
-import { Button, Menu, MenuItem, Typography } from '@mui/material';
+import { Button, Grid, Menu, MenuItem, Skeleton, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 
 interface Props {
-  isLoading?:boolean
+  isLoading?: boolean
   balance: BalanceItem[];
   loadingMessage: string;
   handleNftButtonText: string;
   onHandleButtonClick?: (id: string) => void;
 }
 
-const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick }) => {
+const NftCard: React.FC<Props> = ({ isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -21,24 +21,25 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const skeletonArray = [1, 2, 3, 4]; // You can adjust the number of skeletons as needed
 
   return (
     <>
-    {isLoading ? (
-  // Show loading spinner or message
-  <div className="spinner">{loadingMessage}</div>
-    ): balance && balance.length > 0 ? (
+      {isLoading ? (
+        // Show loading spinner or message
+        <div className="spinner">{loadingMessage}</div>
+      ) : balance && balance.length > 0 ? (
         balance.map((item: BalanceItem, index: number) => (
           <article className='flex justify-center ' key={index}>
-          <div className="flex flex-col justify-center items-center ml-[auto] mr-[auto] rounded-2.5xl border border-jacarta-100 p-[1.5rem] transition-shadow hover:shadow-lg">
+            <div className="flex flex-col justify-center items-center ml-[auto] mr-[auto] rounded-2.5xl border border-jacarta-100 p-[1.5rem] transition-shadow hover:shadow-lg">
               <figure className="relative">
-                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item?.metadata?.image}
-                    alt={`item ${index + 1}`}
-                    className=" rounded-t-2.5xl border sm:max-w-[180px]"
-                    loading="lazy"
-                  />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item?.metadata?.image}
+                  alt={`item ${index + 1}`}
+                  className=" rounded-t-2.5xl border sm:max-w-[180px]"
+                  loading="lazy"
+                />
                 <div className="absolute top-3 right-3 flex items-center space-x-1 rounded-md  p-2">
                   <span
                     className="js-likes relative cursor-pointer before:absolute before:h-4 before:w-4 before:bg-cover before:bg-center before:bg-no-repeat before:opacity-0"
@@ -61,7 +62,7 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                 </div>
               </figure>
               <div className="mt-4 ml-4 flex items-center justify-between">
-                  <span className="font-display text-base hover:text-accent">{item?.metadata?.name}</span>
+                <span className="font-display text-base hover:text-accent">{item?.metadata?.name}</span>
                 <div>
                   <Button
                     id={`itemActions${index}`}
@@ -100,37 +101,40 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                 </div>
               </div>
               {onHandleButtonClick &&
-              <div className="mt-4 flex items-center justify-between ml-4">
-                {item && item?.metadata?.id ? (
-                  <Button sx={{
-                    backgroundColor:"white",
-                    mb:2
-                  }} onClick={() => item && item.metadata && onHandleButtonClick(item.metadata.id)}>
-                   <Typography variant='h5'>
+                <div className="mt-4 flex items-center justify-between ml-4">
+                  {item && item?.metadata?.id ? (
+                    <Button sx={{
+                      backgroundColor: "white",
+                      mb: 2
+                    }} onClick={() => item && item.metadata && onHandleButtonClick(item.metadata.id)}>
+                      <Typography variant='h5'>
 
-                    {handleNftButtonText}
-                   </Typography>
+                        {handleNftButtonText}
+                      </Typography>
                     </Button>
-                ) : (
-                  <h3>Not Minted Yet</h3>
-                )}
-              </div>
+                  ) : (
+                    <h3>Not Minted Yet</h3>
+                  )}
+                </div>
               }
             </div>
           </article>
         ))
       ) : (
-        <div className='text-center'>
-          <Typography >
-            Visit to Mint Your Own NFT
-          </Typography>
-          <Link color="primary" href="/create_nft">
-          <Button >
-          Claim Now
-
-          </Button>
-          </Link>
-        </div>
+        <Grid container spacing={2}>
+        {skeletonArray.map((item, index) => (
+          <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
+            <Skeleton
+              variant="rectangular"
+              width={200}
+              height={200}
+              sx={{
+                borderRadius: 2,
+              }}
+            />
+          </Grid>
+        ))}
+      </Grid>
       )}
     </>
   );
