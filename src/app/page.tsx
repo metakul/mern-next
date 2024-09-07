@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 import { isAuthenticated,  } from '@/lib/slices/authSlice';
 import AdminHomePage from './(routes)/admin/home/page';
 import { useRouter } from 'next/navigation';
+import PWA_MANAGER from '@/PWA/Installprompt';
+import InstallPWA from '@/PWA/InstallPWA';
 
 
 
@@ -25,10 +27,12 @@ const HomePage: React.FC<HomePageProps> = () => {
     } else {
       console.error("User is not authenticated");
     }
-  }, [isUserAuthenticated]);
+  }, [isUserAuthenticated,router]);
   
   return (
      <Container className="container">
+      {/* <PWA_MANAGER/> */}
+      <InstallPWA />
    <Tab1/>
      </Container>
   );

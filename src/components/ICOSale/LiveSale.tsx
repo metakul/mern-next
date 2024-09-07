@@ -108,11 +108,11 @@ const Home: NextPage = () => {
     }
   };
 
-  // Fetch the contract balance and update it every 10 seconds
+  // Fetch the contract balance and update it every 20 seconds
   useEffect(() => {
     fetchContractBalance();
-    setInterval(fetchContractBalance, 10000);
-  }, []);
+    setInterval(fetchContractBalance, 20000);
+  }, [fetchContractBalance]);
 
   // Update the amount to get based on the value
   useEffect(() => {
@@ -122,7 +122,7 @@ const Home: NextPage = () => {
     } else {
       setNativeValue(toEther(amountToGet));
     }
-  }, [amountToGet]);
+  }, [amountToGet, currentFrom]);
 
   return (
     <main className={styles.main}>

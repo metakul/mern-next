@@ -42,6 +42,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Head from "next/head";
+import Offline from "@/PWA/offline";
 
 const smartWalletOptions = {
   factoryAddress: "0x2ace847964fe70d38ea6dad726e3a230dca244bd",
@@ -111,71 +112,78 @@ export default function DashboardLayout({
   ];
 
   return (
-    <StoreProvider>
- 
-          {/* <canvas className="webgl"></canvas> */}
-          <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
-                <ThirdwebProvider
-                  activeChain="polygon"
-                  clientId={apikey}
-                  supportedWallets={[
-                    smartWallet(metamaskWallet(), smartWalletOptions),
-                    smartWallet(
-                      coinbaseWallet({ recommended: true }),
-                      smartWalletOptions
-                    ),
-                    smartWallet(walletConnect(), smartWalletOptions),
-                    smartWallet(localWallet(), smartWalletOptions),
-                    smartWallet(
-                      embeddedWallet({
-                        auth: {
-                          options: [
-                            "email",
-                            "google",
-                            "apple",
-                            "facebook",
-                            "email",
-                            "phone",
-                          ],
-                        },
-                      }),
-                      smartWalletOptions
-                    ),
-                  ]}
-                >
-                  <ToastContainer />
-                  <Header
-                    APP_BAR={APP_BAR}
-                    setIsSidebarOpen={handleSideBarState}
-                  />
-                  <MiniDrawer
-                    APP_BAR={APP_BAR}
-                    setShowOutlet={setShowOutlet}
-                    isNonMobile={isNonMobile}
-                    isSidebarOpen={isSidebarOpen}
-                    setIsSidebarOpen={handleSideBarState}
-                    navConfig={navConfig}
-                  />
-                  <Container
-                    component="main"
-                    sx={{
-                      flexGrow: 1,
-                      mt: 12,
-                      mr: "auto",
-                      ml: isNonMobile ? "40px" : "auto",
-                    }}
-                  >
-                    <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
-                  </Container>
-                  <Analytics />
-                  <SpeedInsights />
-                </ThirdwebProvider>
-              {/* </Box> */}
-            </ThemeProvider>
-          </ColorModeContext.Provider>
-    </StoreProvider>
-  );
+    <html>
+          <body>
+            <StoreProvider>
+              {/* <canvas className="webgl"></canvas> */}
+              <ColorModeContext.Provider value={colorMode}>
+                <ThemeProvider theme={theme}>
+                  <CssBaseline />
+                  {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
+                  <Offline>
+                    <ThirdwebProvider
+                      activeChain="polygon"
+                      clientId={apikey}
+                      supportedWallets={[
+                        smartWallet(metamaskWallet(), smartWalletOptions),
+                        smartWallet(
+                          coinbaseWallet({ recommended: true }),
+                          smartWalletOptions
+                        ),
+                        smartWallet(walletConnect(), smartWalletOptions),
+                        smartWallet(localWallet(), smartWalletOptions),
+                        smartWallet(
+                          embeddedWallet({
+                            auth: {
+                              options: [
+                                "email",
+                                "google",
+                                "apple",
+                                "facebook",
+                                "email",
+                                "phone",
+                              ],
+                            },
+                          }),
+                          smartWalletOptions
+                        ),
+                      ]}
+                    >
+                      <ToastContainer />
+                      <Header
+                        APP_BAR={APP_BAR}
+                        setIsSidebarOpen={handleSideBarState}
+                      />
+                      <MiniDrawer
+                        APP_BAR={APP_BAR}
+                        setShowOutlet={setShowOutlet}
+                        isNonMobile={isNonMobile}
+                        isSidebarOpen={isSidebarOpen}
+                        setIsSidebarOpen={handleSideBarState}
+                        navConfig={navConfig}
+                      />
+                      <Container
+                        component="main"
+                        sx={{
+                          flexGrow: 1,
+                          mt: 12,
+                          mr: "auto",
+                          ml: isNonMobile ? "40px" : "auto",
+                        }}
+                      >
+                        <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
+                      </Container>
+                      <Analytics />
+                      <SpeedInsights />
+                    </ThirdwebProvider>
+                  </Offline>
+                  {/* </Box> */}
+                </ThemeProvider>
+              </ColorModeContext.Provider>
+            </StoreProvider>
+
+          </body>
+        </html>
+
+        );
 }

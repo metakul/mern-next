@@ -24,3 +24,8 @@ bun dev
 # then 
     npm prisma db push
 ```
+
+### Implementing push notification
+    Generating VAPID Keys
+        1. Generate [VAPID](https://vapidkeys.com/) keys
+        2. Run scripts/generate-vapid-keys.js via node
