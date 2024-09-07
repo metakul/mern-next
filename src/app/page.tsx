@@ -30,13 +30,15 @@ const HomePage = () => {
   }, [isUserAuthenticated, router]);
 
   return (
-    <Container className="container">
-      <Offline>
+    <Container>
+      <Container className="container">
+        <Offline>
 
-      {/* <PWA_MANAGER/> */}
-      <InstallPWA />
-      <Tab1 />
-      </Offline>
+          {/* <PWA_MANAGER/> */}
+          <InstallPWA />
+          <Tab1 />
+        </Offline>
+      </Container>
     </Container>
   );
 };

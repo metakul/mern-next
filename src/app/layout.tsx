@@ -48,7 +48,7 @@ const smartWalletOptions = {
   gasless: true,
 };
 
-const apikey = process.env.NEXT_PUBLIC_THIRDWEB_APIKEY;
+const clientId = process.env.NEXT_THIRDWEB_CLIENT_ID;
 
 export default function DashboardLayout({
   children,
@@ -121,7 +121,7 @@ export default function DashboardLayout({
                   {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
                     <ThirdwebProvider
                       activeChain="polygon"
-                      clientId={apikey}
+                      clientId={clientId}
                       supportedWallets={[
                         smartWallet(metamaskWallet(), smartWalletOptions),
                         smartWallet(
