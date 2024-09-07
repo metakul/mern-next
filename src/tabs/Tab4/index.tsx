@@ -86,7 +86,7 @@ const Userpage: React.FC<UserpageProps> = () => {
         <div ref={mount}></div>
       </a>
   
-      <CustomDialog
+      {/* <CustomDialog
         triggerButtonText={""}
         title={"Login Now"}
         description={"This is description for Login"}
@@ -94,7 +94,7 @@ const Userpage: React.FC<UserpageProps> = () => {
         onClose={() => setBg(!bg)}
       >
         <LoginForm loginTitle='Login' />
-      </CustomDialog>
+      </CustomDialog> */}
     </div>
   );
 };

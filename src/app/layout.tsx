@@ -42,7 +42,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Head from "next/head";
-import Offline from "@/PWA/offline";
 
 const smartWalletOptions = {
   factoryAddress: "0x2ace847964fe70d38ea6dad726e3a230dca244bd",
@@ -120,7 +119,6 @@ export default function DashboardLayout({
                 <ThemeProvider theme={theme}>
                   <CssBaseline />
                   {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
-                  <Offline>
                     <ThirdwebProvider
                       activeChain="polygon"
                       clientId={apikey}
@@ -176,7 +174,6 @@ export default function DashboardLayout({
                       <Analytics />
                       <SpeedInsights />
                     </ThirdwebProvider>
-                  </Offline>
                   {/* </Box> */}
                 </ThemeProvider>
               </ColorModeContext.Provider>

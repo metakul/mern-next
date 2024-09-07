@@ -18,7 +18,7 @@ const BlogsPage = dynamic(() => import("@/components/LoginPagesComp/Blogs"), {
   ssr: false, // Disable server-side rendering for this component
 });
 
-const ProtectedPage: React.FC<ProtectedPageProps> = () =>
+const ProtectedPage = () =>
   // props
   {
     // const userType = useSelector(selectUserType);

@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/initPrisma';
 import { PostValidation } from '@/validations/PostValidation';
 import { BlogsStatusInfo } from '@/Datatypes/enums';
 import { Ipost } from '@/Datatypes/interfaces/interface';
 
-export async function GET(request: { url: string | URL; }) {
+export async function GET(request: Request | NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
@@ -59,7 +59,7 @@ const addPost = async (postModelValidation:Ipost) => {
  * Create a new post
  * @param req
  */
-export async function POST(request: { json: () => any; }) {
+export async function POST(request: Request | NextRequest) {
   try {
     const postModelValidation = await PostValidation.validateAsync(
       await request.json()

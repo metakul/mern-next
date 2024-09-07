@@ -34,7 +34,7 @@ const InstallPWA = () => {
   }
   return (
     <button
-      className="link-button absolute right-8 top-4"
+      className="link-button absolute right-8 top-4 z-100"
       id="setup_button"
       aria-label="Install app"
       title="Install app"

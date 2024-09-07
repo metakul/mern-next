@@ -66,12 +66,12 @@ import React from "react";
 
   export const handleShare = (link: string) => {
     // Fallback for browsers that do not support Web Share API
-    navigator.clipboard.writeText(`https://localhost:3000${link}`)
-      .then(() => {
-        alert('Shareable link copied to clipboard');
-      })
-      .catch((error) => {
-        alert('Error copying shareable link to clipboard');
-      });
+    // navigator.clipboard.writeText(`https://localhost:3000${link}`)
+    //   .then(() => {
+    //     alert('Shareable link copied to clipboard');
+    //   })
+    //   .catch((error) => {
+    //     alert('Error copying shareable link to clipboard');
+    //   });
   };
   

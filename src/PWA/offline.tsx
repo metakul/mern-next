@@ -47,7 +47,7 @@ const OfflineOverlay = styled(Backdrop)(() => ({
 }));
 
 export default function Offline({ children }:OfflineProps) {
-  const [online, setOnline] = useState(navigator.onLine);
+  const [online, setOnline] = useState(true);
   const previousOnline = usePrevious(online);
 
 //   useEffect(() => {
