@@ -44,24 +44,8 @@ export default function manifest(): any {
         form_factor:"wide"
       },
       {
-        src: '/pwa/Screenshot/ss1.svg',
-        sizes: '1155x967',
-        type: 'image/svg',
-      },
-      {
         src: '/pwa/Screenshot/ss2.svg',
         sizes: '957x957',
-        type: 'image/svg',
-        form_factor:"wide"
-      },
-      {
-        src: '/pwa/Screenshot/ss2.svg',
-        sizes: '957x957',
-        type: 'image/svg',
-      },
-      {
-        src: '/pwa/Screenshot/ss3.svg',
-        sizes: '1260x964',
         type: 'image/svg',
         form_factor:"wide"
       },
@@ -69,6 +53,7 @@ export default function manifest(): any {
         src: '/pwa/Screenshot/ss3.svg',
         sizes: '1260x964',
         type: 'image/svg',
+        form_factor:"wide"
       },
     ],
     shortcuts: [
