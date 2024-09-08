@@ -76,7 +76,7 @@ export default function Offline({ children }:OfflineProps) {
     }
   return (
     <>
-      <Slide direction={online ? 'up' : 'down'} in={!online} mountOnEnter unmountOnExit>
+      <Slide direction={online ? 'up' : 'down'} in={!online} mountOnEnter unmountOnExit className='flex justify-center'>
         <OfflineContainer style={previousOnline === online && online ? { display: 'none' } : undefined}>
           <OfflineContent>
           <img src="offlineLogo.png" alt="METAKUL" height={100} width={100} />

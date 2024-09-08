@@ -22,7 +22,7 @@ import navConfig from "./layout/navConfig";
 // home page tabs
 import MetakulCollection from "@/tabs/Tab2/MetakulCollection";
 import Tab3 from "@/tabs/Tab3/temp";
-import Tab4 from "@/tabs/Tab3/temp";
+import Tab4 from "@/tabs/Tab4";
 
 //provider:
 import {

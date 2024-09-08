@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 // import PWA_MANAGER from '@/PWA/Installprompt';
 import InstallPWA from '@/PWA/InstallPWA';
 import Offline from '@/PWA/offline';
+import Head from 'next/head';
 
 
 
@@ -30,16 +31,22 @@ const HomePage = () => {
   }, [isUserAuthenticated, router]);
 
   return (
-    <Container>
-      <Container className="container">
-        <Offline>
+    <>
+      <Head>
+        <title>Home Page</title>
+        <meta name="description" content="Metakul Home Page" />
+      </Head>
+      <Container>
+        <Container className="container">
+          <Offline>
 
-          {/* <PWA_MANAGER/> */}
-          <InstallPWA />
-          <Tab1 />
-        </Offline>
+            {/* <PWA_MANAGER/> */}
+            <InstallPWA />
+            <Tab1 />
+          </Offline>
+        </Container>
       </Container>
-    </Container>
+    </>
   );
 };
 
