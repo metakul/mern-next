@@ -9,7 +9,7 @@ import { useAddress, useContract } from "@thirdweb-dev/react";
 import { mintWithSignature } from "./signature";
 import { toast } from "react-toastify";
 
-const marketpalceAddress=process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS as string
+const marketpalceAddress=process.env.NEXT_PUBLIC_NFT_MINTER as string
 
 
 function Home() {

@@ -11,7 +11,7 @@ import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import StakingTabNavigation from '@/components/MobileTabNav/StakingTab';
 
 const nftDropContractAddress = process.env.NEXT_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
-const ownerCreatedNftCollection = process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS as string
+const ownerCreatedNftCollection = process.env.NEXT_PUBLIC_NFT_MINTER as string
 
 
 export default function profilePage() {

@@ -48,7 +48,6 @@ const smartWalletOptions = {
   gasless: true,
 };
 
-const clientId = process.env.NEXT_THIRDWEB_CLIENT_ID;
 
 export default function DashboardLayout({
   children,
@@ -169,7 +168,9 @@ export default function DashboardLayout({
                           ml: isNonMobile ? "40px" : "auto",
                         }}
                       >
-                        <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
+                        <Container>
+                          <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
+                        </Container>
                       </Container>
                       <Analytics />
                       <SpeedInsights />
