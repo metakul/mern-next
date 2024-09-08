@@ -4,7 +4,7 @@ import FormData from 'form-data'
 
 //require('dotenv').config();
 const key = "d99730e010f73478ad6a"
-const secret = "5945b45be19c1c151c2f5b9791c214551c7a513f22b5bb3402d75f087a33cb46";
+const secret = "zf6J5cxeuIa8IuFhIZC9zDJEQvWF2tSbDnAouL4sAj99_YIWGA1hMR0ejoN-XDTaIPTci12ZJ_7WYOJ_w1sckw";
 
 
 export const uploadJSONToIPFS = async (JSONBody: unknown) => {

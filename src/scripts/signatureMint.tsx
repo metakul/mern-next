@@ -11,7 +11,7 @@ export default async function server({authorAddress,description, name:nftName, i
         // De-structure the arguments we passed in out of the request body
 
         const sdk = ThirdwebSDK.fromPrivateKey(privateKey, 'polygon', {
-            clientId: 'ea8fb2ecfe653862c19dfa15f23c54d4',
+            clientId: '07cf4631d08f1e16216c6ca7bb35d392',
             secretKey: secretKey,
         });
         // Load the NFT Collection via it's contract address using the SDK

@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 // If used on the FRONTEND pass your 'clientId'
 const sdk = new ThirdwebSDK("polygon", {
-  clientId: "ea8fb2ecfe653862c19dfa15f23c54d4",
+  clientId: "07cf4631d08f1e16216c6ca7bb35d392",
 });
 
 export const LoadNftSlice = createAsyncThunk(
