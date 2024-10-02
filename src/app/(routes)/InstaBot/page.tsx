@@ -21,7 +21,7 @@ const InstaBot = () => {
                     </>
                 ) : (
                     <>
-                        <h3>Welcome </h3> : <RegisterPage />
+                        <h3>Welcome </h3>  <RegisterPage />
                     </>
                 )
                 }

@@ -118,6 +118,9 @@ const RegisterPage = () => {
             <Button variant="contained" color="primary" onClick={handleRegister}>
               Register
             </Button>
+            <Button variant="contained" color="primary">
+              Login
+            </Button>
           </Grid>
         </Grid>
       </form>
