@@ -45,10 +45,12 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
     // Parse response
     const responseData = await response.json();
 
+    console.log("responseData",responseData);
+    
     // Check if response is ok
-    // if (!response.ok) {
-    //   throw new Error(responseData.message || 'Request failed');
-    // }
+    if (!response.ok) {
+      throw new Error(responseData.message || 'Request failed');
+    }
 
     // Return the parsed response data
     return responseData;
