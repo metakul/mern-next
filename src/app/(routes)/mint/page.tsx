@@ -24,9 +24,9 @@ const MintPage = () => {
 
   async function opensea(id: string) {
     const nft = id;
-    // window.open(
-    //   `https://opensea.io/assets/matic/${nftDropContractAddress}/${nft}`
-    // );
+    window.open(
+      `https://opensea.io/assets/matic/${nftDropContractAddress}/${nft}`
+    );
   }
 
   return (
