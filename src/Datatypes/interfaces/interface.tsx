@@ -160,3 +160,39 @@ export interface SocialProfileProps{
 export interface IFetchBlogData{
   userType:string
 }
+
+
+
+// via backend
+export enum accountStatus {
+  Approved = 'approved',
+  Rejected = 'rejected',
+  Pending = 'pending',
+  Blocked='blocked'
+}
+
+export enum UserCategory {
+  Verifier = 'verifier',
+  Holder = 'holder',
+  User = 'user',
+  SUPER_ADMIN = 'SUPER_ADMIN',
+}
+
+export type AccountStatusType = accountStatus
+export type CategoryType = UserCategory
+
+export interface IloginUser {
+    email: string;
+    password?: string;
+    accountStatus?: AccountStatusType;
+}
+
+export interface IUser extends IloginUser {
+    id?: any;
+    name: string;
+    phoneNumber: string;
+    address: string;
+    category: CategoryType;
+    subcategory?: string;
+    permissions?: string[];
+}

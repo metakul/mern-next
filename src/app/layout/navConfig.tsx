@@ -9,6 +9,7 @@ import {
   PieChartOutlined,
   // Checkroom
 } from "@mui/icons-material";
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 
 export const navConfig = [
   {
@@ -75,11 +76,16 @@ export const navConfig = [
   //   to: "/Career",
   // },
     
-  // {
-  //   text: "For GBPIET Student",
-  //   icon:null,
-  //   to: "",
-  // },
+  {
+    text: "Metakul utilities",
+    icon:null,
+    to: "",
+  },
+  {
+    text: "InstaBot",
+    icon:<SmartToyIcon/>,
+    to: "/InstaBot",
+  },
   // {
   //   text: "LAUNDRY",
   //   icon:<Checkroom/>,

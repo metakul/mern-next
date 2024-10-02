@@ -41,6 +41,7 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
+const base_url_backend="http://localhost:5000/v1"
 
 // define endpoints here
   export const ApiEndpoint: Record<string, any> = {
@@ -52,6 +53,13 @@ export enum ProtectedPageInfo{
     UPDATE_BLOG: { apiId:6, url: '/blogdetails/api', method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Blog",successMessage:"Blog Approved SuccessFully",errorMessage:"Error Approving Blogs"},
     EDIT_BLOG: { apiId:7, url: '/api/blogs/singleBlog', method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Blog",successMessage:"Blog Updated successfully",errorMessage:"Error Updating Blog"},
     FetchCryptoInfo: { apiId:8, url: "https://rest.coinapi.io/v1/exchangerate", method: 'GET', headers: { "X-CoinAPI-Key":"21F0E4E9-1955-4555-A4DA-51524A1E8ED3"}, loadingMessage:"",successMessage:"",errorMessage:""},
+    
+    
+    // main backend 
+    // register user
+    
+    RegisterUser: { apiId:9, url: `${base_url_backend}/register`, method: 'POST', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Registering",successMessage:"Register SuccessFull. Login To Enter", errorMessage:"Oho, Retry or Join discord to get in touch."},
+    
   }
 
   
