@@ -128,7 +128,7 @@ export default function DashboardLayout({
               {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
               <ThirdwebProvider
                 activeChain="polygon"
-                clientId={"ea8fb2ecfe653862c19dfa15f23c54d4"}
+                clientId={"07cf4631d08f1e16216c6ca7bb35d392"}
                 supportedWallets={[
                   smartWallet(metamaskWallet(), smartWalletOptions),
                   smartWallet(

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUserDispatcher } from '@/lib/slices/RegisterUsers/RegisterApiSlice';
 import { AppDispatch } from '@/lib/store';
 import { accountStatus, UserCategory } from '@/Datatypes/interfaces/interface';
+import { Container } from '@mui/material';
 
 const RegisterPage = () => {
   const dispatch = useDispatch<AppDispatch>(); 
@@ -24,9 +25,9 @@ const RegisterPage = () => {
     };
 
     return (
-        <div>
+        <Container>
              <button onClick={handleRegister}>Register</button>
-        </div>
+        </Container>
     );
 };
 
