@@ -32,13 +32,8 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
     };
 
     // Make the HTTP request using fetch
-    const response = await toast.promise(
-      fetch(fullUrl, requestOptions), {
-        pending: endpoint.loadingMessage,
-        success: endpoint.successMessage ? endpoint.successMessage : undefined,
-        error: endpoint.errorMessage ? endpoint.errorMessage : undefined,
-      }
-    );
+    const response = await
+      fetch(fullUrl, requestOptions);
     console.log(response);
     
 
@@ -49,8 +44,10 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
     
     // Check if response is ok
     if (!response.ok) {
+      toast.error(endpoint.errorMessage)
       throw new Error(responseData.message || 'Request failed');
     }
+    toast.success(endpoint.successMessage)
 
     // Return the parsed response data
     return responseData;
