@@ -1,9 +1,10 @@
 import { RequestOptions } from '@/Datatypes/interfaces/interface';
 import { toast } from 'react-toastify';
 import { ApiEndpoint } from '@/Datatypes/enums';
+import Cookies from 'js-cookie';
 
 const Request = async ({ endpointId, slug, data }:RequestOptions) => {
-  const storedAccessToken = localStorage.getItem('access');
+  const storedAccessToken = Cookies.get('access');
   const endpoint = ApiEndpoint[endpointId];
 
   if (!endpoint) {
@@ -25,7 +26,7 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
       method: endpoint.method,
       headers: {
         ...endpoint.headers,
-        Authorization: `Bearer ${storedAccessToken}`
+        Authorization: endpoint.withAuth ? `Bearer ${storedAccessToken}` : ""
       },
       // Include body for non-GET requests
       ...(endpoint.method !== 'GET' && { body: data ? JSON.stringify(data) : undefined })
