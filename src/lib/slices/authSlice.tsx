@@ -31,8 +31,8 @@ const authSlice = createSlice({
       state.userType = action.payload.userType;
       state.isLoading=action.payload.isLoading
       Cookies.set('user', JSON.stringify(action.payload.user));
-      Cookies.set('access', action.payload.token.accessToken);
-      Cookies.set('refresh', action.payload.token.refreshToken);
+      Cookies.set('access', action.payload.token.accessToken.token);
+      Cookies.set('refresh', action.payload.token.refreshToken.token);
       Cookies.set('userType', action.payload.userType);
     },
     logout: (state) => {

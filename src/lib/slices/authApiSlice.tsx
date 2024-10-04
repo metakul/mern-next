@@ -27,22 +27,20 @@ export const loginUser = createAsyncThunk(
       })
       
       // Assuming the response contains user information and a token
-      const {  accessToken,refreshToken } = response.token;
-      const user:JwtPayload=jwtDecode(accessToken)
-
+      const {  accessToken,refreshToken } = response.data.token;
 
       // $TODO save access and refresh in cookies and apply the refresh logic
       // Dispatch the setCredentials action to update the authentication state
-      const apiSuccess: ApiSuccess = {
-        statusCode: response.status,
-        message: 'Login Request successful',
-        data: response.data,
-      };
+      // const apiSuccess: ApiSuccess = {
+      //   statusCode: response?.status,
+      //   message: 'Login Request successful',
+      //   data: response?.data,
+      // };
       
-      dispatch(setCredentials({ user:user, token:{accessToken,refreshToken}, userType:user.user_type,isLoading:false }));
+      
+      dispatch(setCredentials({ user:response?.data?.email, token:{accessToken,refreshToken}, userType:response?.data?.category,isLoading:false }));
       OnFormSuccess()
-
-      return apiSuccess;
+      return response.data;
 
     } catch (error) {
 

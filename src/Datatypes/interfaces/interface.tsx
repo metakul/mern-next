@@ -33,7 +33,7 @@ export interface CollectionInfo {
 //logged in state
 export interface AuthState {
   isAuthenticated: boolean;
-  user: string | null;
+  user: any | null;
   access: string | null;
   refresh: string | null;
   userType: string | null;
