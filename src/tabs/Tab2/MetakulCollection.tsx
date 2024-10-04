@@ -99,6 +99,7 @@ const MetakulCollection = () => {
                 >
                 <LoginForm
                   loginTitle="Admin Login"
+                  userType='ADMIN'
                   OnFormSuccess={() => setDialogOpen(!isDialogOpen)}
                   />
               </CustomDialog>

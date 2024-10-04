@@ -16,35 +16,35 @@ interface JwtPayload {
 
 export const loginUser = createAsyncThunk(
   'auth/login',
-  async ({ email, password, OnFormSuccess }: LoginData, { rejectWithValue, dispatch }) => {
+  async ({ email, password, OnFormSuccess,userType }: LoginData, { rejectWithValue, dispatch }) => {
 
     try {
       const response = await Request({
-        endpointId:"LOGIN",
-        data: { email, password },
+        endpointId: userType== "ADMIN" ? "LOGIN" : "USER_LOGIN",
+        data: { email, password,deviceId:"550e8400-e29b-41d4-a716-446655440000" },
+        
        
       })
       
       // Assuming the response contains user information and a token
-      const {  access,refresh } = response.token;
-      const user:JwtPayload=jwtDecode(access)
+      const {  accessToken,refreshToken } = response.token;
+      const user:JwtPayload=jwtDecode(accessToken)
 
 
       // $TODO save access and refresh in cookies and apply the refresh logic
       // Dispatch the setCredentials action to update the authentication state
-      dispatch(setCredentials({ user:user, token:{access,refresh}, userType:user.user_type,isLoading:false }));
-      OnFormSuccess()
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'Login Request successful',
         data: response.data,
       };
-  
+      
+      dispatch(setCredentials({ user:user, token:{accessToken,refreshToken}, userType:user.user_type,isLoading:false }));
+      OnFormSuccess()
 
       return apiSuccess;
 
     } catch (error) {
-    dispatch(setCredentials({ user:"", token:{access:"",refresh:""}, userType:"",isLoading:false }));
 
       const castedError =error as ApiError
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');

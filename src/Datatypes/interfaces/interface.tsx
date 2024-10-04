@@ -22,6 +22,7 @@ export interface LoginData {
   email: string;
   password: string;
   OnFormSuccess:any
+  userType: "ADMIN" | "USER"
 }
 
 export interface CollectionInfo {

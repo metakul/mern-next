@@ -4,6 +4,7 @@ import authReducer from "./slices/authSlice"
 import NftCollectionReducer from "./slices/MetakulCollection/NftSlice"
 import blogCollectionReducer from "./slices/Blogs/BlogSlice"
 import cryptoCollectionRedcuer from "./slices/CryptoSlices/CryptoSlice"
+import userReducer from "./slices/RegisterUsers/RegisterSlice"
 
 export const makeStore = () => {
   return configureStore({
@@ -11,7 +12,8 @@ export const makeStore = () => {
         auth:authReducer,
         nftCollection:NftCollectionReducer,
         blogsCollection:blogCollectionReducer,
-        cryptoCollection:cryptoCollectionRedcuer
+        cryptoCollection:cryptoCollectionRedcuer,
+        user:userReducer
         
     }, 
     middleware:getDefaultMiddlerware =>

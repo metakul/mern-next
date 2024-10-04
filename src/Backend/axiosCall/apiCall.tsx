@@ -44,7 +44,7 @@ const Request = async ({ endpointId, slug, data }:RequestOptions) => {
     
     // Check if response is ok
     if (!response.ok) {
-      toast.error(endpoint.errorMessage)
+      toast.error(responseData?.error || responseData?.message || endpoint.errorMessage)
       throw new Error(responseData.message || 'Request failed');
     }
     toast.success(endpoint.successMessage)

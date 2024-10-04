@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import { selectLoggedInUser } from '@/lib/slices/RegisterUsers/RegisterSlice';
 import RegisterPage from '../register/page';
 import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
-import { Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
+import { isAuthenticated } from '@/lib/slices/authSlice';
 
 const InstaBot = () => {
-    // const { user, loading, error } = useSelector(selectLoggedInUser);
+    const isUserAuthenticated = useSelector(isAuthenticated);
+
     const address = useAddress()
 
 
@@ -21,7 +23,20 @@ const InstaBot = () => {
                     </>
                 ) : (
                     <>
-                        <h3>Welcome </h3>  <RegisterPage />
+                        <h3>Welcome </h3>
+
+                        {!isUserAuthenticated ? (
+                            <RegisterPage />
+                        ) : (
+                            <>
+                                <Box>
+                                    <Typography>
+                                        My Bots Bots
+                                    </Typography>
+                                </Box>
+                                Create New Bot
+                            </>
+                        )}
                     </>
                 )
                 }

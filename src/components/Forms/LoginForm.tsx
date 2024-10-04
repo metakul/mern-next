@@ -26,9 +26,10 @@ import { authLoading } from '@/lib/slices/authSlice';
 
 interface LoginProps {
   loginTitle: string;
-  OnFormSuccess:any
+  OnFormSuccess?:any;
+  userType:"ADMIN" | "USER"
 }
-const LoginForm: React.FC<LoginProps> = ({OnFormSuccess}) => {
+const LoginForm: React.FC<LoginProps> = ({OnFormSuccess,userType}) => {
   const dispatch = useDispatch(); // Explicitly type dispatch
 
   const [checked, setChecked] = useState(false);
@@ -45,7 +46,8 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess}) => {
       const loginData: LoginData = {
         email: email,
         password: password,
-        OnFormSuccess
+        OnFormSuccess,
+        userType
       };
 
       // Dispatch the login action with correct action type

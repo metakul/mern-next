@@ -22,17 +22,17 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<{ user: any; token: { access: string, refresh: string }; userType: string;isLoading:boolean }>) => {
+    setCredentials: (state, action: PayloadAction<{ user: any; token: { accessToken: any, refreshToken: any }; userType: string;isLoading:boolean }>) => {
 
       state.isAuthenticated = true;
       state.user = action.payload.user;
-      state.access = action.payload.token.access;
-      state.refresh = action.payload.token.refresh;
+      state.access = action.payload.token.accessToken.token;
+      state.refresh = action.payload.token.refreshToken;
       state.userType = action.payload.userType;
       state.isLoading=action.payload.isLoading
       Cookies.set('user', JSON.stringify(action.payload.user));
-      Cookies.set('access', action.payload.token.access);
-      Cookies.set('refresh', action.payload.token.refresh);
+      Cookies.set('access', action.payload.token.accessToken);
+      Cookies.set('refresh', action.payload.token.refreshToken);
       Cookies.set('userType', action.payload.userType);
     },
     logout: (state) => {

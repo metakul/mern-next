@@ -93,7 +93,7 @@ const Userpage: React.FC<UserpageProps> = () => {
         open={bg}
         onClose={() => setBg(!bg)}
       >
-        <LoginForm loginTitle='Login' />
+        <LoginForm loginTitle='Login' userType='ADMIN' />
       </CustomDialog>
     </div>
   );

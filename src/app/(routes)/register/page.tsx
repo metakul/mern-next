@@ -6,9 +6,13 @@ import { registerUserDispatcher } from '@/lib/slices/RegisterUsers/RegisterApiSl
 import { AppDispatch } from '@/lib/store';
 import { accountStatus, UserCategory } from '@/Datatypes/interfaces/interface';
 import { Container, TextField, Button, Grid, Typography, MenuItem } from '@mui/material';
+import CustomDialog from '@/components/Dailog/Dailog';
+import LoginForm from '@/components/Forms/LoginForm';
 
 const RegisterPage = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -118,9 +122,20 @@ const RegisterPage = () => {
             <Button variant="contained" color="primary" onClick={handleRegister}>
               Register
             </Button>
-            <Button variant="contained" color="primary">
-              Login
-            </Button>
+            <CustomDialog
+                className="ml-2"
+                open={isDialogOpen}
+                onClose={() => setDialogOpen(!isDialogOpen)}
+                triggerButtonText={"Admin Login"}
+                title={"Login Now"}
+                description={"Only admin are availabale to login for now"}
+                >
+                <LoginForm
+                  loginTitle="User Login"
+                  userType="USER"
+                  OnFormSuccess={() => setDialogOpen(!isDialogOpen)}
+                  />
+              </CustomDialog>
           </Grid>
         </Grid>
       </form>
