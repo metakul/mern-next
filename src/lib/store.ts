@@ -18,9 +18,9 @@ export const makeStore = () => {
         botsSlice:botsSlice,
         
     }, 
-    middleware:getDefaultMiddlerware =>
-      getDefaultMiddlerware().concat(logger),
-      devTools:true
+    // middleware:getDefaultMiddlerware =>
+    //   getDefaultMiddlerware().concat(logger),
+    //   devTools:true
   })
 }
 

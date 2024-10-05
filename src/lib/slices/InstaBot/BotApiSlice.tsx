@@ -51,3 +51,29 @@ export const fetchBotsDispatcher = () => async (dispatch: Dispatch) => {
     dispatch(fetchBotsFailure(castedError?.error === "string" ? castedError?.error : 'Unknown Error'));
   }
 };
+export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
+  try {
+    // Dispatch request action to update state before the async call
+    dispatch(fetchBotsRequest());
+
+    const response = await Request({
+      endpointId: "create_bot",
+      data:data
+    });
+
+    const apiSuccess: ApiSuccess = {
+      statusCode: response.status,
+      message: 'Bots Added successfully.',
+      data: response.data, 
+    };
+
+    // Dispatch success action with the fetched data
+    dispatch(fetchBotsSuccess({ data: response.data as BotData[], message: apiSuccess.message }));
+
+  } catch (error) {
+    const castedError = error as ApiError;
+
+    // Dispatch failure action with the error message
+    dispatch(fetchBotsFailure(castedError?.error === "string" ? castedError?.error : 'Unknown Error'));
+  }
+};

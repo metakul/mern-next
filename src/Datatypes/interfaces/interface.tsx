@@ -127,6 +127,18 @@ export interface Ipost  {
   status?:string
 }
 
+  export interface IBot {
+    botFile: File | string; 
+    _alias: string;
+    episode: string;
+    mediaName: string;
+    videoTocut: string;
+    accessToken: string;
+    location: string;
+    hashtags: string; 
+    caption: string;
+  }
+
 export interface CryptoData {
   cryptoSymbol?:string;
   currency?: string;

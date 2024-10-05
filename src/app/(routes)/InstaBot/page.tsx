@@ -8,6 +8,7 @@ import { isAuthenticated } from '@/lib/slices/authSlice';
 import { selectBots } from '@/lib/slices/InstaBot/BotSlice';
 import { fetchBotsDispatcher } from '@/lib/slices/InstaBot/BotApiSlice';
 import { AppDispatch } from '@/lib/store';
+import AddBotForm from '@/components/Forms/CreateBotForm';
 
 const InstaBot = () => {
     const isUserAuthenticated = useSelector(isAuthenticated);
@@ -21,6 +22,7 @@ const InstaBot = () => {
     useEffect(() => {
         (dispatch as AppDispatch)(fetchBotsDispatcher());
     }, [dispatch]);
+
     return (
         <Container>
             <Container>
@@ -43,7 +45,6 @@ const InstaBot = () => {
                                     </Typography>
                                     <div>
                                         {loading && <p>Loading...</p>}
-                                        {error && <p>Error: {error}</p>}
                                         <p>{message}</p>
                                         <ul>
                                             {bots.map((bot) => (
@@ -55,6 +56,8 @@ const InstaBot = () => {
                                     </div>
                                 </Box>
                                 Create New Bot
+
+                                <AddBotForm/>
                             </>
                         )}
                     </>

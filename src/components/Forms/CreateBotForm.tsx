@@ -1,20 +1,17 @@
 'use client'
 import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBlogApiSlice } from '@/lib/slices/Blogs/BlogApiSlice';
+import { createBotDispatcher } from '@/lib/slices/InstaBot/BotApiSlice';
 import { AppDispatch } from '@/lib/store';
-import { Ipost } from '@/Datatypes/interfaces/interface';
+import { IBot, Ipost } from '@/Datatypes/interfaces/interface';
 import { Typography, Button, Grid } from '@mui/material';
 import CustomDialog from '../Dailog/Dailog';
 import ImageUploader from '../ImageUploader';
 import 'react-quill/dist/quill.snow.css';
 import CustomTextField from './../Elements/TextFeild/index';
 
-interface AddBlogProps {
-    postInfo?:Ipost;
-    postType?:string;
-    formEvent:string;
-    userType:string
+interface AddBotProps {
+
 }
 
 interface ErrorMessages {
@@ -22,54 +19,58 @@ interface ErrorMessages {
 }
 
 const newErrors: ErrorMessages = {
-    title: '',
-    image: '',
-    author: '',
-    categories: '',
-    cryptoSymbol: '',
+    botFile: '',
+    _alias: '',
+    episode: '',
+    mediaName: '',
+    videoTocut: '',
+    accessToken: '',
+    location: '',
+    hashtags: '',
+    caption: ''
 };
 
-const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userType}) => {
+const AddBotForm: React.FC<AddBotProps> = () => {
     const dispatch = useDispatch();
     const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
-    const [formData, setFormData] = useState<Ipost>(postInfo ? postInfo : {
-        title: '',
-        image: '',
-        author: '',
-        categories: [],
-        cryptoSymbol: '',
+    const [formData, setFormData] = useState({
+        botFile: '',
+        _alias: '',
+        episode: '',
+        mediaName: '',
+        videoTocut: '',
+        accessToken: '',
+        location: '',
+        hashtags: [] as string[],
+        caption: ''
     });
-        
-   
+
+
     const [errors, setErrors] = useState<ErrorMessages>(newErrors);
 
     const handleFormSubmit = async (event: React.FormEvent) => {
         // Reset errors to null or empty string
         setErrors({
-            title: '',
-            image: '',
-            author: '',
-            categories: '',
-            cryptoSymbol: '',
+            botFile: '',
+            _alias: '',
+            episode: '',
+            mediaName: '',
+            videoTocut: '',
+            accessToken: '',
+            location: '',
+            hashtags:'',
+            caption: '',
         });
 
-    
+
         event.preventDefault();
-    
+
         // Validate form fields
         Object.keys(formData).forEach((key) => {
-            const formValue = formData[key as keyof Ipost];
+            const formValue = formData[key as keyof IBot];
             if (typeof formValue === 'string') {
                 if (formValue.trim() === '' && key !== 'description') {
-                
-                    // Update the errors state if the field is empty
-                    setErrors((prevErrors) => ({
-                        ...prevErrors,
-                        [key]: `${key.charAt(0).toUpperCase() + key.slice(1)} is required`,
-                    }));
-                }
-            } else if (Array.isArray(formValue) && key !== 'description') {
-                if (formValue.length === 0) {
+
                     // Update the errors state if the field is empty
                     setErrors((prevErrors) => ({
                         ...prevErrors,
@@ -78,33 +79,34 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
                 }
             }
         });
-    
-        // If there are no errors, dispatch action to add blog
+
+        // If there are no errors, dispatch action to add Bot
         const hasErrors = Object.values(errors).some((error) => !!error);
+
+        console.log("Dispatching");
+        
         if (!hasErrors) {
-            // Dispatch action to add blog
+            // Dispatch action to add Bot
             (dispatch as AppDispatch)(
-                addBlogApiSlice({
-                    newBlogData: { ...formData },
+                createBotDispatcher({
+                    newBotData: { ...formData },
                     setDialogOpen,
-                    postType,
-                    userType
                 })
             );
         }
     };
-    
 
-    const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>, field: keyof Ipost) => {
-        if (field === 'categories') {
+
+    const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>, field: keyof IBot) => {
+        if (field === 'hashtags') {
             // Check if the input value is empty
             if (e.currentTarget.value.trim() === '') {
-                // If it's empty, set categories to an empty array
+                // If it's empty, set hashtags to an empty array
                 setFormData({ ...formData, [field]: [] });
             } else {
                 // Otherwise, split the input value by comma and trim each category
-                const categoriesArray = e.currentTarget.value.split(',').map((category) => category.trim());
-                setFormData({ ...formData, [field]: categoriesArray });
+                const hashtagArray = e.currentTarget.value.split(',').map((hashtags) => hashtags.trim());
+                setFormData({ ...formData, [field]: hashtagArray });
             }
         } else {
             setFormData({ ...formData, [field]: e.currentTarget.value });
@@ -113,88 +115,135 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
 
 
     const register: (e: string) => void = (e) => {
-        
-        setFormData({ ...formData, image: e });
-      };
-      
+
+        setFormData({ ...formData, botFile: e });
+    };
+
 
     return (
         <CustomDialog
             open={isDialogOpen}
             onClose={() => setDialogOpen(!isDialogOpen)}
-            triggerButtonText={formEvent}
-            title={'New Blog'}
-            description={'This is adding for New Blog Page'}
+            triggerButtonText={'Create new Bot Trigger'}
+            title={'New Bot'}
+            description={'This is adding for New Bot Page'}
         >
             <form onSubmit={handleFormSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Typography variant="h3">Title</Typography>
+                        <Typography variant="h3">Alias</Typography>
                         <CustomTextField
-                            id="title"
+                            id="_alias"
                             type="text"
-                            label="Title"
-                            value={formData.title}
-                            onChange={(e) => handleChange(e, 'title')}
-                            placeholder="Enter title"
-                            error={errors.title}
-                            isError={errors.title ? true :false}
+                            label="Alias"
+                            value={formData._alias}
+                            onChange={(e) => handleChange(e, '_alias')}
+                            placeholder="Enter Alias Name"
+                            error={errors._alias}
+                            isError={errors._alias ? true : false}
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h3">Image</Typography>
+                        <Typography variant="h3">BotFile</Typography>
                         <ImageUploader register={register} />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h3">Author</Typography>
+                        <Typography variant="h3">Episode</Typography>
                         <CustomTextField
-                            id="author"
+                            id="episode"
                             type="text"
-                            label="Author"
-                            value={formData.author}
-                            onChange={(e) => handleChange(e, 'author')}
-                            placeholder="Enter author"
-                            error={errors.author}
-                            isError={errors.author ? true :false}
+                            label="Episode"
+                            value={formData.episode}
+                            onChange={(e) => handleChange(e, 'episode')}
+                            placeholder="Enter episode"
+                            error={errors.episode}
+                            isError={errors.episode ? true : false}
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h3">Categories</Typography>
+                        <Typography variant="h3">MediaName</Typography>
                         <CustomTextField
-                            id="categories"
+                            id="mediaName"
                             type="text"
-                            label="Categories (comma separated)"
-                            value={formData.categories.join(',')}
-                            onChange={(e) => handleChange(e, 'categories')}
-                            placeholder="Enter categories"
-                            error={errors.categories}
-                            isError={errors.categories ? true :false}
+                            label="MediaName"
+                            value={formData.mediaName}
+                            onChange={(e) => handleChange(e, 'mediaName')}
+                            placeholder="Enter mediaName"
+                            error={errors.mediaName}
+                            isError={errors.mediaName ? true : false}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Typography variant="h3">accessToken</Typography>
+                        <CustomTextField
+                            id="accessToken"
+                            type="text"
+                            label="accessToken "
+                            value={formData.accessToken}
+                            onChange={(e) => handleChange(e, 'accessToken')}
+                            placeholder="Enter accessToken"
+                            error={errors.accessToken}
+                            isError={errors.accessToken ? true : false}
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h3">Crypto Symbol</Typography>
+                        <Typography variant="h3">caption</Typography>
                         <CustomTextField
-                            id="cryptoSymbol"
+                            id="caption"
                             type="text"
-                            label="Crypto Symbol"
-                            value={formData.cryptoSymbol}
-                            onChange={(e) => handleChange(e, 'cryptoSymbol')}
-                            placeholder="Enter crypto symbol"
-                            error={errors.cryptoSymbol}
-                            isError={errors.cryptoSymbol ? true :false}
+                            label="caption "
+                            value={formData.caption}
+                            onChange={(e) => handleChange(e, 'caption')}
+                            placeholder="Enter caption"
+                            error={errors.caption}
+                            isError={errors.caption ? true : false}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="h3">videoTocut</Typography>
+                        <CustomTextField
+                            id="videoTocut"
+                            type="text"
+                            label="videoTocut "
+                            value={formData.videoTocut}
+                            onChange={(e) => handleChange(e, 'videoTocut')}
+                            placeholder="Enter videoTocut"
+                            error={errors.videoTocut}
+                            isError={errors.videoTocut ? true : false}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="h3">location</Typography>
+                        <CustomTextField
+                            id="location"
+                            type="text"
+                            label="location "
+                            value={formData.location}
+                            onChange={(e) => handleChange(e, 'location')}
+                            placeholder="Enter location"
+                            error={errors.location}
+                            isError={errors.location ? true : false}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="h3">Hashtags</Typography>
+                        <CustomTextField
+                            id="Hashtags"
+                            type="text"
+                            label="hashtags (comma separated)"
+                            value={formData.hashtags.join(',')}
+                            onChange={(e) => handleChange(e, 'hashtags')}
+                            placeholder="Enter hashtags"
+                            error={errors.hashtags}
+                            isError={errors.hashtags ? true :false}
                         />
                     </Grid>
                 </Grid>
-                {postType==="edit"?(
-                    <Button type="submit">Edit</Button>
-
-                ):(
-                    <Button type="submit">Save</Button>
-
-                )}
+                <Button type="submit">Save</Button>
             </form>
         </CustomDialog>
     );
 };
 
-export default AddBlogForm;
+export default AddBotForm;
