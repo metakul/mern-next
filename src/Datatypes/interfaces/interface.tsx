@@ -50,6 +50,7 @@ export interface RequestOptions {
   endpointId:string;
   slug?:string;
   data?:object;
+  isFormData?:any
 }
 
 // api response success

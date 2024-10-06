@@ -55,10 +55,12 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
   try {
     // Dispatch request action to update state before the async call
     dispatch(fetchBotsRequest());
+    const isFormData = data instanceof FormData;
 
     const response = await Request({
       endpointId: "create_bot",
-      data:data
+      data: data,
+      isFormData: isFormData  // Pass whether data is FormData
     });
 
     const apiSuccess: ApiSuccess = {

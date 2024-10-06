@@ -3,58 +3,53 @@ import { toast } from 'react-toastify';
 import { ApiEndpoint } from '@/Datatypes/enums';
 import Cookies from 'js-cookie';
 
-const Request = async ({ endpointId, slug, data }:RequestOptions) => {
-  const storedAccessToken = Cookies.get('access');
+const Request = async ({ endpointId, slug, data, isFormData }: RequestOptions) => {
+  const storedAccessToken = Cookies.get('access');  // Retrieve stored access token
   const endpoint = ApiEndpoint[endpointId];
 
   if (!endpoint) {
     throw new Error(`Invalid API endpoint: ${endpointId}`);
   }
 
-  if (endpoint.loadingMessage) {
+  let fullUrl = endpoint.url;
+  if (slug) {
+    fullUrl += `${slug}`;  // Append additional slug to URL if provided
+  }
+
+  const requestOptions: RequestInit = {
+    method: endpoint.method,
+    headers: {
+      ...endpoint.headers,
+      Authorization: endpoint.withAuth ? `Bearer ${storedAccessToken}` : ""
+    }
+  };
+
+  // Check and set appropriate body for non-GET requests
+  if (endpoint.method !== 'GET') {
+    requestOptions.body = (isFormData && data instanceof FormData) ? data : JSON.stringify(data);
   }
 
   try {
-    // Construct the full request URL, appending additional data if necessary
-    let fullUrl = endpoint.url;
-    if (slug) {
-      fullUrl += slug;
-    }
-
-     // Set up request options
-     const requestOptions = {
-      method: endpoint.method,
-      headers: {
-        ...endpoint.headers,
-        Authorization: endpoint.withAuth ? `Bearer ${storedAccessToken}` : ""
-      },
-      // Include body for non-GET requests
-      ...(endpoint.method !== 'GET' && { body: data ? JSON.stringify(data) : undefined })
-    };
-
-    // Make the HTTP request using fetch
-    const response = await
-      fetch(fullUrl, requestOptions);
-    console.log(response);
-    
-
-    // Parse response
+    const response = await fetch(fullUrl, requestOptions);
     const responseData = await response.json();
 
-    console.log("responseData",responseData);
-    
-    // Check if response is ok
-    if (!response.ok) {
-      toast.error(responseData?.error || responseData?.message || endpoint.errorMessage)
-      throw new Error(responseData.message || 'Request failed');
-    }
-    toast.success(endpoint.successMessage)
+    // Log response data for debugging
+    console.log("Response:", response);
+    console.log("Response Data:", responseData);
 
-    // Return the parsed response data
-    return responseData;
+    // Handle unsuccessful response
+    if (!response.ok) {
+      const errorText = responseData?.error || responseData?.message || endpoint.errorMessage || "Unexpected error occurred.";
+      toast.error(errorText);  // Display error notification
+      throw new Error(errorText);
+    }
+
+    toast.success(endpoint.successMessage); // Show success message
+    return responseData;  // Return the response data for further processing
   } catch (error) {
-    // Handle errors gracefully, providing more informative messages if possible
-    throw error;
+    console.error("Request error:", error);
+    toast.error("An error occurred while processing your request.");
+    throw error;  // Re-throw the error for further handling
   }
 };
 
