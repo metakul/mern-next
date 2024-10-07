@@ -53,7 +53,7 @@ const AddBlogComp: React.FC<BlogInfo>=({status}) => {
 
     const handleRefresh = () => {
         blogs=[]
-        fetchData("all"); // assuming "all" is a status indicating to fetch all blogs
+        fetchData("pending"); 
     };
 
     const filteredRows = blogs.filter((row) =>
