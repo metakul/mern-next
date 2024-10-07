@@ -60,6 +60,10 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
       const formData = new FormData();
 
       const userData = data
+
+      Object.keys(userData).forEach((key) => {
+        formData.append(`userData[${key}]`, userData[key]);
+      });
       // Append the photo with its name
       formData.append("botFile", data.botFile);
 

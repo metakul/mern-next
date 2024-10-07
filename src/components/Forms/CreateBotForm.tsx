@@ -9,6 +9,7 @@ import CustomDialog from '../Dailog/Dailog';
 import ImageUploader from '../ImageUploader';
 import 'react-quill/dist/quill.snow.css';
 import CustomTextField from './../Elements/TextFeild/index';
+import Previews from '../ImageUploader/preview';
 
 interface AddBotProps {
 
@@ -114,10 +115,9 @@ const AddBotForm: React.FC<AddBotProps> = () => {
     };
 
 
-    const register: (e: any) => void = (e) => {
-
-        setFormData({ ...formData, botFile: e });
-    };
+    const handleFileChange = (file: any) => {
+        setFormData((prevData) => ({ ...prevData, botFile: file }));
+      };
 
 
     return (
@@ -145,7 +145,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h3">BotFile</Typography>
-                        <ImageUploader register={register}  uploadFormat={"File"}/>
+                        <Previews onFileChange={handleFileChange} />
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h3">Episode</Typography>
