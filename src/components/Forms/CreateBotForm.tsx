@@ -20,7 +20,6 @@ interface ErrorMessages {
 }
 
 const newErrors: ErrorMessages = {
-    botFile: '',
     _alias: '',
     episode: '',
     mediaName: '',
@@ -34,8 +33,10 @@ const newErrors: ErrorMessages = {
 const AddBotForm: React.FC<AddBotProps> = () => {
     const dispatch = useDispatch();
     const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
+    
+    const [file, setFile] = useState(null);
+
     const [formData, setFormData] = useState({
-        botFile: null,
         _alias: '',
         episode: '',
         mediaName: '',
@@ -52,7 +53,6 @@ const AddBotForm: React.FC<AddBotProps> = () => {
     const handleFormSubmit = async (event: React.FormEvent) => {
         // Reset errors to null or empty string
         setErrors({
-            botFile: '',
             _alias: '',
             episode: '',
             mediaName: '',
@@ -69,12 +69,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
         // Validate form fields
         Object.keys(formData).forEach((key) => {
             const formValue = formData[key as keyof IBot];
-            if (key === 'botFile' && !formValue) {
-                setErrors((prevErrors) => ({
-                    ...prevErrors,
-                    botFile: 'Bot file is required',
-                }));
-            } else if (typeof formValue === 'string' && formValue.trim() === '') {
+            if (typeof formValue === 'string' && formValue.trim() === '') {
                 setErrors((prevErrors) => ({
                     ...prevErrors,
                     [key]: `${key.charAt(0).toUpperCase() + key.slice(1)} is required`,
@@ -92,7 +87,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
             // Dispatch action to add Bot
             (dispatch as AppDispatch)(
                 createBotDispatcher({
-                    newBotData: { ...formData },
+                    newBotData: { ...formData,botFile:file },
                     setDialogOpen,
                 })
             );
@@ -100,26 +95,15 @@ const AddBotForm: React.FC<AddBotProps> = () => {
     };
 
 
-    const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>, field: keyof IBot) => {
-        // if (field === 'hashtags') {
-        //     // Check if the input value is empty
-        //     if (e.currentTarget.value.trim() === '') {
-        //         // If it's empty, set hashtags to an empty array
-        //         setFormData({ ...formData, [field]: [] });
-        //     } else {
-        //         // Otherwise, split the input value by comma and trim each category
-        //         const hashtagArray = e.currentTarget.value.split(',').map((hashtags) => hashtags.trim());
-        //         setFormData({ ...formData, [field]: hashtagArray });
-        //     }
-        // } else {
-            setFormData({ ...formData, [field]: e.currentTarget.value });
-        // }
+    const handleFileChange = (event: { target: { files: React.SetStateAction<null>[]; }; }) => {
+        setFile(event.target.files[0]);
     };
 
+    const handleChange = (event:any) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
-    const handleFileChange = (file: any) => {
-        setFormData((prevData) => ({ ...prevData, botFile: file }));
-      };
 
 
     return (
@@ -136,10 +120,11 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <Typography variant="h3">Alias</Typography>
                         <CustomTextField
                             id="_alias"
+                            name="_alias"
                             type="text"
                             label="Alias"
                             value={formData._alias}
-                            onChange={(e) => handleChange(e, '_alias')}
+                            onChange={handleChange}
                             placeholder="Enter Alias Name"
                             error={errors._alias}
                             isError={errors._alias ? true : false}
@@ -153,10 +138,11 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <Typography variant="h3">Episode</Typography>
                         <CustomTextField
                             id="episode"
+                            name="episode"
                             type="text"
                             label="Episode"
                             value={formData.episode}
-                            onChange={(e) => handleChange(e, 'episode')}
+                            onChange={handleChange}
                             placeholder="Enter episode"
                             error={errors.episode}
                             isError={errors.episode ? true : false}
@@ -166,10 +152,11 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <Typography variant="h3">MediaName</Typography>
                         <CustomTextField
                             id="mediaName"
+                            name="mediaName"
                             type="text"
                             label="MediaName"
                             value={formData.mediaName}
-                            onChange={(e) => handleChange(e, 'mediaName')}
+                            onChange={handleChange}
                             placeholder="Enter mediaName"
                             error={errors.mediaName}
                             isError={errors.mediaName ? true : false}
@@ -180,10 +167,11 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <Typography variant="h3">accessToken</Typography>
                         <CustomTextField
                             id="accessToken"
+                            name="accessToken"
                             type="text"
                             label="accessToken "
                             value={formData.accessToken}
-                            onChange={(e) => handleChange(e, 'accessToken')}
+                            onChange={handleChange}
                             placeholder="Enter accessToken"
                             error={errors.accessToken}
                             isError={errors.accessToken ? true : false}
@@ -193,10 +181,11 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <Typography variant="h3">caption</Typography>
                         <CustomTextField
                             id="caption"
+                            name="caption"
                             type="text"
                             label="caption "
                             value={formData.caption}
-                            onChange={(e) => handleChange(e, 'caption')}
+                            onChange={handleChange}
                             placeholder="Enter caption"
                             error={errors.caption}
                             isError={errors.caption ? true : false}
@@ -206,10 +195,11 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <Typography variant="h3">videoTocut</Typography>
                         <CustomTextField
                             id="videoTocut"
+                            name="videoTocut"
                             type="text"
                             label="videoTocut "
                             value={formData.videoTocut}
-                            onChange={(e) => handleChange(e, 'videoTocut')}
+                            onChange={handleChange}
                             placeholder="Enter videoTocut"
                             error={errors.videoTocut}
                             isError={errors.videoTocut ? true : false}
@@ -219,10 +209,11 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <Typography variant="h3">location</Typography>
                         <CustomTextField
                             id="location"
+                            name="location"
                             type="text"
                             label="location "
                             value={formData.location}
-                            onChange={(e) => handleChange(e, 'location')}
+                            onChange={handleChange}
                             placeholder="Enter location"
                             error={errors.location}
                             isError={errors.location ? true : false}
@@ -232,10 +223,11 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <Typography variant="h3">Hashtags</Typography>
                         <CustomTextField
                             id="Hashtags"
+                            name="hashtags"
                             type="text"
                             label="hashtags "
                             value={formData.hashtags}
-                            onChange={(e) => handleChange(e, 'hashtags')}
+                            onChange={handleChange}
                             placeholder="Enter hashtags"
                             error={errors.hashtags}
                             isError={errors.hashtags ? true :false}
