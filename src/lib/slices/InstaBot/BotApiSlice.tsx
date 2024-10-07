@@ -87,10 +87,12 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
       data: response.data, 
     };
 
+    data.setDialogOpen()
+
     // Dispatch success action with the fetched data
-    dispatch(fetchBotsSuccess({ data: response.data as BotData[], message: apiSuccess.message }));
+    // dispatch(fetchBotsSuccess({ data: response.data as BotData[], message: apiSuccess.message }));
  // Dispatch request action to update state after the async call
-    dispatch(fetchBotsRequest());
+    // dispatch(fetchBotsRequest());
   } catch (error) {
     const castedError = error as ApiError;
 
