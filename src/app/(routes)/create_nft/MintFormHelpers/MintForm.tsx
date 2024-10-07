@@ -67,7 +67,7 @@ function Home() {
         </Typography>
         <s.TextInfo> File types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</s.TextInfo>
 
-        <ImageUploader register={onChangeFile} />
+        <ImageUploader register={onChangeFile} uploadFormat={"BASE64"} />
         <s.TextSubTitle>Name *</s.TextSubTitle>
         <TextField
           type="text"

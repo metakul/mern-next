@@ -6,7 +6,8 @@ import { convertFileToBase64 } from "../../scripts/fileConverter";
 import Image from "next/image";
 
 interface ImageUploaderProps {
-  register: any
+  register: any;
+  uploadFormat : "BASE64" | "File"
 }
 
 interface FilePreview {
@@ -25,7 +26,12 @@ export default function ImageUploader(props: ImageUploaderProps) {
     onDrop: async (acceptedFiles) => {
       const file = acceptedFiles[0];
       const base64Image = await convertFileToBase64(file);
-      register(base64Image);
+      if(props.uploadFormat== "BASE64" ){
+        register(base64Image);
+      }
+      else {
+        register(base64Image);
+      }
       setFile({ preview: URL.createObjectURL(file), name: file.name });
     },
   });

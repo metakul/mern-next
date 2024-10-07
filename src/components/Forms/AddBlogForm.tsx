@@ -155,7 +155,7 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h3">Image</Typography>
-                        <ImageUploader register={register} />
+                        <ImageUploader register={register}  uploadFormat={"BASE64"}/>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h3">Author</Typography>

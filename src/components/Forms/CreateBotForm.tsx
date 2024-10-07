@@ -114,7 +114,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
     };
 
 
-    const register: (e: string) => void = (e) => {
+    const register: (e: any) => void = (e) => {
 
         setFormData({ ...formData, botFile: e });
     };
@@ -145,7 +145,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h3">BotFile</Typography>
-                        <ImageUploader register={register} />
+                        <ImageUploader register={register}  uploadFormat={"BASE64"}/>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h3">Episode</Typography>
