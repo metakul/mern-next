@@ -54,6 +54,8 @@ export const fetchBotsDispatcher = () => async (dispatch: Dispatch) => {
 export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
   try {
 
+    console.log(data);
+    
     const transformFormData = () => {
       const formData = new FormData();
      
