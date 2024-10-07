@@ -35,7 +35,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
     const dispatch = useDispatch();
     const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
     const [formData, setFormData] = useState({
-        botFile: undefined,
+        botFile: null,
         _alias: '',
         episode: '',
         mediaName: '',
