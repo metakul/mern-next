@@ -132,8 +132,8 @@ export interface Ipost  {
     botFile: File | string; 
     _alias: string;
     episode: string;
-    mediaName: string;
-    videoTocut: string;
+    videoNumber: string;
+    videoDuration: string;
     accessToken: string;
     location: string;
     hashtags: string; 

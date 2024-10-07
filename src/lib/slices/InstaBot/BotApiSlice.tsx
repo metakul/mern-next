@@ -63,8 +63,7 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
       formData.append('botFile', data.newBotData.botFile); // Attach the file (ensure data.botFile is a file or valid URL)
       formData.append('_alias', data.newBotData._alias);
       formData.append('episode', data.newBotData.episode);
-      formData.append('mediaName', data.newBotData.mediaName);
-      formData.append('videoTocut', data.newBotData.videoTocut);
+      formData.append('videoNumber', data.newBotData.videoNumber);
       formData.append('accessToken', data.newBotData.accessToken);
       formData.append('location', data.newBotData.location);
       formData.append('hashtags', data.newBotData.hashtags);

@@ -23,8 +23,8 @@ const newErrors: ErrorMessages = {
     botFile: '',
     _alias: '',
     episode: '',
-    mediaName: '',
-    videoTocut: '',
+    videoNumber: '',
+    videoDuration: '',
     accessToken: '',
     location: '',
     hashtags: '',
@@ -38,8 +38,8 @@ const AddBotForm: React.FC<AddBotProps> = () => {
         botFile: null,
         _alias: '',
         episode: '',
-        mediaName: '',
-        videoTocut: '',
+        videoNumber: '',
+        videoDuration: '',
         accessToken: '',
         location: '',
         hashtags: "",
@@ -55,8 +55,8 @@ const AddBotForm: React.FC<AddBotProps> = () => {
             botFile: '',
             _alias: '',
             episode: '',
-            mediaName: '',
-            videoTocut: '',
+            videoNumber: '',
+            videoDuration: '',
             accessToken: '',
             location: '',
             hashtags:'',
@@ -163,16 +163,16 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h3">MediaName</Typography>
+                        <Typography variant="h3">videoNumber</Typography>
                         <CustomTextField
-                            id="mediaName"
+                            id="videoNumber"
                             type="text"
-                            label="MediaName"
-                            value={formData.mediaName}
-                            onChange={(e) => handleChange(e, 'mediaName')}
-                            placeholder="Enter mediaName"
-                            error={errors.mediaName}
-                            isError={errors.mediaName ? true : false}
+                            label="videoNumber"
+                            value={formData.videoNumber}
+                            onChange={(e) => handleChange(e, 'videoNumber')}
+                            placeholder="Enter videoNumber"
+                            error={errors.videoNumber}
+                            isError={errors.videoNumber ? true : false}
                         />
                     </Grid>
 
@@ -203,16 +203,16 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h3">videoTocut</Typography>
+                        <Typography variant="h3">videoDuration</Typography>
                         <CustomTextField
-                            id="videoTocut"
+                            id="videoDuration"
                             type="text"
-                            label="videoTocut "
-                            value={formData.videoTocut}
-                            onChange={(e) => handleChange(e, 'videoTocut')}
-                            placeholder="Enter videoTocut"
-                            error={errors.videoTocut}
-                            isError={errors.videoTocut ? true : false}
+                            label="videoDuration "
+                            value={formData.videoDuration}
+                            onChange={(e) => handleChange(e, 'videoDuration')}
+                            placeholder="Enter videoDuration"
+                            error={errors.videoDuration}
+                            isError={errors.videoDuration ? true : false}
                         />
                     </Grid>
                     <Grid item xs={12}>
