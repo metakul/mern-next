@@ -41,7 +41,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
         videoTocut: '',
         accessToken: '',
         location: '',
-        hashtags: [] as string[],
+        hashtags: "",
         caption: ''
     });
 
@@ -69,7 +69,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
         Object.keys(formData).forEach((key) => {
             const formValue = formData[key as keyof IBot];
             if (typeof formValue === 'string') {
-                if (formValue.trim() === '' && key !== 'description') {
+                if (formValue.trim() === '' ) {
 
                     // Update the errors state if the field is empty
                     setErrors((prevErrors) => ({
@@ -98,19 +98,19 @@ const AddBotForm: React.FC<AddBotProps> = () => {
 
 
     const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>, field: keyof IBot) => {
-        if (field === 'hashtags') {
-            // Check if the input value is empty
-            if (e.currentTarget.value.trim() === '') {
-                // If it's empty, set hashtags to an empty array
-                setFormData({ ...formData, [field]: [] });
-            } else {
-                // Otherwise, split the input value by comma and trim each category
-                const hashtagArray = e.currentTarget.value.split(',').map((hashtags) => hashtags.trim());
-                setFormData({ ...formData, [field]: hashtagArray });
-            }
-        } else {
+        // if (field === 'hashtags') {
+        //     // Check if the input value is empty
+        //     if (e.currentTarget.value.trim() === '') {
+        //         // If it's empty, set hashtags to an empty array
+        //         setFormData({ ...formData, [field]: [] });
+        //     } else {
+        //         // Otherwise, split the input value by comma and trim each category
+        //         const hashtagArray = e.currentTarget.value.split(',').map((hashtags) => hashtags.trim());
+        //         setFormData({ ...formData, [field]: hashtagArray });
+        //     }
+        // } else {
             setFormData({ ...formData, [field]: e.currentTarget.value });
-        }
+        // }
     };
 
 
@@ -231,8 +231,8 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                         <CustomTextField
                             id="Hashtags"
                             type="text"
-                            label="hashtags (comma separated)"
-                            value={formData.hashtags.join(',')}
+                            label="hashtags "
+                            value={formData.hashtags}
                             onChange={(e) => handleChange(e, 'hashtags')}
                             placeholder="Enter hashtags"
                             error={errors.hashtags}
