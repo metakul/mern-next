@@ -88,7 +88,7 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
             // Dispatch action to add blog
             (dispatch as AppDispatch)(
                 addBlogApiSlice({
-                    newBlogData: { ...formData, description, postId: postInfo?.postId },
+                    newBlogData: { ...formData, description, postId: postInfo?.postId, status:"pending" },
                     setDialogOpen,
                     postType,
                     userType
