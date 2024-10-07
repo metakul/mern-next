@@ -76,7 +76,6 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
     const response = await Request({
       endpointId: 'create_bot',
       data: dataT,
-      isFormData: true, // Indicate that this is FormData
     });
 
     const apiSuccess: ApiSuccess = {
