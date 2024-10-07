@@ -53,19 +53,20 @@ export const fetchBotsDispatcher = () => async (dispatch: Dispatch) => {
 };
 export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
   try {
-    // Dispatch request action to update state before the async call
-    dispatch(fetchBotsRequest());
 
     const transformFormData = () => {
       const formData = new FormData();
-
-      const userData = data
-
-      Object.keys(userData).forEach((key) => {
-        formData.append(`userData[${key}]`, userData[key]);
-      });
-      // Append the photo with its name
-      formData.append("botFile", data.botFile);
+     
+      // Append the botFile and other data fields to the formData
+      formData.append('botFile', data.botFile); // Attach the file (ensure data.botFile is a file or valid URL)
+      formData.append('_alias', data._alias);
+      formData.append('episode', data.episode);
+      formData.append('mediaName', data.mediaName);
+      formData.append('videoTocut', data.videoTocut);
+      formData.append('accessToken', data.accessToken);
+      formData.append('location', data.location);
+      formData.append('hashtags', data.hashtags);
+      formData.append('caption', data.caption);
 
       return formData;
     };
@@ -73,8 +74,9 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
     const dataT = await transformFormData();
 
     const response = await Request({
-      endpointId: "create_bot",
+      endpointId: 'create_bot',
       data: dataT,
+      isFormData: true, // Indicate that this is FormData
     });
 
     const apiSuccess: ApiSuccess = {
@@ -85,7 +87,8 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
 
     // Dispatch success action with the fetched data
     dispatch(fetchBotsSuccess({ data: response.data as BotData[], message: apiSuccess.message }));
-
+ // Dispatch request action to update state after the async call
+    dispatch(fetchBotsRequest());
   } catch (error) {
     const castedError = error as ApiError;
 

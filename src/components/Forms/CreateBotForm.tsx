@@ -69,17 +69,19 @@ const AddBotForm: React.FC<AddBotProps> = () => {
         // Validate form fields
         Object.keys(formData).forEach((key) => {
             const formValue = formData[key as keyof IBot];
-            if (typeof formValue === 'string') {
-                if (formValue.trim() === '' ) {
-
-                    // Update the errors state if the field is empty
-                    setErrors((prevErrors) => ({
-                        ...prevErrors,
-                        [key]: `${key.charAt(0).toUpperCase() + key.slice(1)} is required`,
-                    }));
-                }
+            if (key === 'botFile' && !formValue) {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    botFile: 'Bot file is required',
+                }));
+            } else if (typeof formValue === 'string' && formValue.trim() === '') {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    [key]: `${key.charAt(0).toUpperCase() + key.slice(1)} is required`,
+                }));
             }
         });
+        
 
         // If there are no errors, dispatch action to add Bot
         const hasErrors = Object.values(errors).some((error) => !!error);
