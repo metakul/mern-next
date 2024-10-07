@@ -145,7 +145,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h3">BotFile</Typography>
-                        <ImageUploader register={register}  uploadFormat={"BASE64"}/>
+                        <ImageUploader register={register}  uploadFormat={"File"}/>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h3">Episode</Typography>
