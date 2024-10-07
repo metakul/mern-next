@@ -22,6 +22,7 @@ export default function ImageUploader(props: ImageUploaderProps) {
     multiple: false,
     accept: {
       "image/*": [],
+      "video/*": [],
     },
     onDrop: async (acceptedFiles) => {
       const file = acceptedFiles[0];

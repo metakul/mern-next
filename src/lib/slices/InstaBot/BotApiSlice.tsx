@@ -55,12 +55,22 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
   try {
     // Dispatch request action to update state before the async call
     dispatch(fetchBotsRequest());
-    const isFormData = data instanceof FormData;
+
+    const transformFormData = () => {
+      const formData = new FormData();
+
+      const userData = data
+      // Append the photo with its name
+      formData.append("botFile", data.botFile);
+
+      return formData;
+    };
+
+    const dataT = await transformFormData();
 
     const response = await Request({
       endpointId: "create_bot",
-      data: data,
-      isFormData: isFormData  // Pass whether data is FormData
+      data: dataT,
     });
 
     const apiSuccess: ApiSuccess = {
