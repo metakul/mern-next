@@ -54,8 +54,6 @@ export const fetchBotsDispatcher = () => async (dispatch: Dispatch) => {
 export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
   try {
 
-    console.log(data);
-    
     const transformFormData = () => {
       const formData = new FormData();
      
@@ -64,6 +62,7 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
       formData.append('_alias', data.newBotData._alias);
       formData.append('episode', data.newBotData.episode);
       formData.append('videoNumber', data.newBotData.videoNumber);
+      formData.append('videoDuration', data.newBotData.videoDuration);
       formData.append('accessToken', data.newBotData.accessToken);
       formData.append('location', data.newBotData.location);
       formData.append('hashtags', data.newBotData.hashtags);
