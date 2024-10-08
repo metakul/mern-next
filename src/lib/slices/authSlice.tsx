@@ -2,7 +2,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from '../../Datatypes/interfaces/interface';
 import Cookies from 'js-cookie';
-import { JwtPayload } from 'jwt-decode';
 
 const storedUser = Cookies.get('user');
 const storedAccessToken = Cookies.get('access');

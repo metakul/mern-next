@@ -3,7 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBotDispatcher } from '@/lib/slices/InstaBot/BotApiSlice';
 import { AppDispatch } from '@/lib/store';
-import { IBot, Ipost } from '@/Datatypes/interfaces/interface';
+import { IBot, Iblog } from '@/Datatypes/interfaces/interface';
 import { Typography, Button, Grid } from '@mui/material';
 import CustomDialog from '../Dailog/Dailog';
 import ImageUploader from '../ImageUploader';

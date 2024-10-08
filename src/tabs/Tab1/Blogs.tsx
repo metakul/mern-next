@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { AppDispatch } from '@/lib/store';
 import { fetchBlogApiSlice } from '@/lib/slices/Blogs/BlogApiSlice';
-import { Ipost } from '@/Datatypes/interfaces/interface';
+import { Iblog } from '@/Datatypes/interfaces/interface';
 import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
 import { Grid } from '@mui/material';
 import ShareButton from '@/components/Elements/Buttons/ShareButton';
@@ -46,7 +46,7 @@ const Blogs = () => {
   //   }
   // }, []);
 
-  const postLink = currentDomain ? `${currentDomain}` : '';
+  const blogLink = currentDomain ? `${currentDomain}` : '';
 
 
   useEffect(() => {
@@ -54,8 +54,8 @@ const Blogs = () => {
     handleLoadBlogs();
   }, []);
 
-  const handleOpenBlogs = (postId: SetStateAction<string | null> = null) => {
-    setOpenedBlogId(postId === openedBlogId ? null : postId);
+  const handleOpenBlogs = (blogId: SetStateAction<string | null> = null) => {
+    setOpenedBlogId(blogId === openedBlogId ? null : blogId);
   };
 
 
@@ -66,7 +66,7 @@ const Blogs = () => {
   
 
     {
-      (blogsData as Ipost[])?.map((post: Ipost, index: number) => (
+      (blogsData as Iblog[])?.map((blog: Iblog, index: number) => (
         <section key={index} className="relative py-4">
 
           <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
@@ -75,10 +75,10 @@ const Blogs = () => {
               <div className='mb-3 flex flex-wrap items-center space-x-1 text-xs flex-row justify-center'>
 
                 <img
-                  src={`data:image/png;base64,${post.image}`}
-                  alt={post.title}
+                  src={`data:image/png;base64,${blog.image}`}
+                  alt={blog.title}
                   className="h-[240px] sm:h-[320px] sm:w-80 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-105"
-                  onClick={() => handleOpenBlogs(post.postId)}
+                  onClick={() => handleOpenBlogs(blog.blogId)}
                 />
               </div>
               <Grid container className='mt-8'>
@@ -89,11 +89,11 @@ const Blogs = () => {
                       href="#"
                       className="font-display hover:text-accent"
                     >
-                      {post.author}
+                      {blog.author}
                     </a> */}
                   {/* <span >in</span> */}
                   <span className="inline-flex flex-wrap items-center space-x-1 text-accent">
-                    {post.categories.map((category, index) => (
+                    {blog.categories.map((category, index) => (
                       <h5 key={index} >
                         {category}
                       </h5>
@@ -104,21 +104,21 @@ const Blogs = () => {
 
                 </Grid>
                 <Grid item xs={4} md={4} lg={4} className='mx-auto flex flex-end justify-end pr-8 pb-4'>
-                  <ShareButton link={`${postLink}`} />
+                  <ShareButton link={`${blogLink}`} />
                   {/* <LikeButton /> */}
 
                 </Grid>
                 <h2
                   className="mb-4 font-display text-md "
-                  onClick={() => handleOpenBlogs(post.postId)}
+                  onClick={() => handleOpenBlogs(blog.blogId)}
                 >
-                  {post.title
+                  {blog.title
                     .split(' ')
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                     .join(' ')}
-                  {/* <Link target='_blank' to={`/singleBlog/${post.id}`}>{post.title}</Link> */}
+                  {/* <Link target='_blank' to={`/singleBlog/${blog.id}`}>{blog.title}</Link> */}
                 </h2>
-                <BlogDetails isBlogInfoOpen={openedBlogId === post.postId} cryptoSymbol={post.cryptoSymbol} _blogId={post.postId || ''} />
+                <BlogDetails isBlogInfoOpen={openedBlogId === blog.blogId} cryptoSymbol={blog.cryptoSymbol} _blogId={blog.blogId || ''} />
 
               </Grid>
             </div>

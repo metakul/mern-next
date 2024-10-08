@@ -2,10 +2,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCredentials } from './authSlice';
 import { ApiError, LoginData } from '../../Datatypes/interfaces/interface';
-import { ApiEndpoint } from '@/Datatypes/enums';
 import Request from '@/Backend/axiosCall/apiCall';
-import { ApiSuccess } from '../../Datatypes/interfaces/interface';
-import { jwtDecode } from 'jwt-decode';
+// import { ApiSuccess } from '../../Datatypes/interfaces/interface';
 
 interface JwtPayload {
   sub: string;

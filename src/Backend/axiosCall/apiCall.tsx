@@ -41,15 +41,20 @@ const Request = async ({ endpointId, slug, data }: RequestOptions) => {
     // Handle unsuccessful response
     if (response.status < 200 || response.status >= 300) {
       const errorText = response.data?.error || response.data?.message || endpoint.errorMessage || "Unexpected error occurred.";
-      toast.error(errorText);  // Display error notification
+      if (endpoint.showmsg) {
+        toast.error(errorText);  // Display error notification if showmsg is true
+      }
       throw new Error(errorText);
     }
 
-    toast.success(endpoint.successMessage); // Show success message
+    // Show success message if the response is successful
+    if (endpoint.showmsg && endpoint.successMessage) {
+      toast.success(endpoint.successMessage);
+    }
+
     return response.data;  // Return the response data for further processing
   } catch (error) {
     console.error("Request error:", error);
-    toast.error("An error occurred while processing your request.");
     throw error;  // Re-throw the error for further handling
   }
 };

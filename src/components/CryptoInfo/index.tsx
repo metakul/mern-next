@@ -25,7 +25,7 @@ const CryptoInfoPage: React.FC<CryptoInfoProps> = ({ _id, cryptoSymbol }) => {
     fetchCryptoInfo();
   }, []);
 
-  const filteredBlogs = cryptoData.blogs.filter(blog => blog.postId === _id);
+  const filteredBlogs = cryptoData.blogs.filter(blog => blog.blogId === _id);
   
   const rowData: RowData[] = filteredBlogs.map(blog => {
     const row: RowData = { ...blog.cryptoData };

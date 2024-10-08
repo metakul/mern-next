@@ -91,7 +91,7 @@ export interface NFTCollectionState {
   nfts: unknown[];
 }
 export interface BlogsState {
-  blogs: Ipost[];
+  blogs: Iblog[];
   loading?:boolean
 }
 
@@ -111,11 +111,11 @@ export interface DexItem{
     id: string;
   };
 }
-//interfaces for post
-export interface Ipost  {
+//interfaces for blog
+export interface Iblog  {
   _id?:string,
   id?:string,
-  postId?: string;
+  blogId?: string;
   title: string;
   description?: string;
   image:string;

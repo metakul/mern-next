@@ -8,7 +8,7 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
 
   
   const {blogs:blogsData} = useSelector(selectedBlogs);
-  const selectedBlog = blogsData.find((blog) => blog.postId === _id);
+  const selectedBlog = blogsData.find((blog) => blog.blogId === _id);
   const [timeToRead,setTimeToRead]=useState<number>()
   const parseHTML = (html: string) => {
     const tempDiv = document.createElement('div');

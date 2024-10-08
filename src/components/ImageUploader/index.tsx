@@ -30,7 +30,7 @@ export default function ImageUploader(props: ImageUploaderProps) {
         register(base64Image);
       }
       else {
-        register(file);
+        register(convertFileToBase64(file));
       }
       setFile({ preview: URL.createObjectURL(file), name: file.name });
     },

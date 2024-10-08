@@ -25,16 +25,15 @@ import { useLocation, useParams } from 'react-router-dom';
 
 const SingleBlogDetails = () => {
 
-  const { blogId } = useParams<{ blogId: string }>();
+  const { id:blogId } = useParams<{ id: string }>();
 
   const dispatch = useDispatch()
   const location = useLocation();
 
-
   const currentDomain = location.pathname; // Get the current pathname
 
 
-  const postLink = `${currentDomain}/blogDetails/${blogId}`;
+  const blogLink = `${currentDomain}/blogDetails/${blogId}`;
 
 
   const userType = useSelector(selectUserType);
@@ -45,10 +44,10 @@ const SingleBlogDetails = () => {
       userType: userType,
     };
     if (blogId) {
-      (dispatch as AppDispatch)(fetchSingleBlogApiSlice({
+      (dispatch as AppDispatch)(fetchSingleBlogApiSlice({fetchBlogData:{
         fetchBlogData: loadForUser,
         blogId
-      }));
+      }}));
     }
   }
 
@@ -60,7 +59,10 @@ const SingleBlogDetails = () => {
 
 
   const blogsData = useSelector(selectedBlogs).blogs;
-  const selectedBlog = blogsData.find((blog) => blog.postId === blogId);
+  const selectedBlog = blogsData.find((blog) => blog.blogId === blogId);
+
+  console.log(blogsData);
+  
 
   // Perform null checks before accessing properties
   const truncatedDescription = selectedBlog?.description ?? '';
@@ -98,15 +100,15 @@ const SingleBlogDetails = () => {
 
               {userType === "SYSTEM_ADMIN" ? (
                 <>
-                  <AddBlogForm formEvent={"EDIT"} postInfo={{
-                    postId: blogId,
+                  <AddBlogForm formEvent={"EDIT"} blogInfo={{
+                    blogId: blogId,
                     title,
                     description: truncatedDescription,
                     image: image,
                     author: author,
                     categories: categories,
                     cryptoSymbol: cryptoSymbol,
-                  }} userType={userType} postType="edit" />
+                  }} userType={userType} blogType="edit" />
 
                 </>
               ) : (
@@ -134,7 +136,7 @@ const SingleBlogDetails = () => {
                     background: getColors().blueAccent[800],
                     color: getColors().blueAccent[100]
                   }}
-                  onClick={() => handleShare(postLink)}
+                  onClick={() => handleShare(blogLink)}
                 >
                   Share
                 </Button>

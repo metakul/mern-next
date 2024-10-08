@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useMediaQuery } from '@mui/material';
-import { getColors } from '@/app/layout/Theme/themes';
+import { getColors } from '@/layout/Theme/themes';
 interface MobileTabNavigationProps {
   tabs: { value: ReactNode; content: ReactNode; label: string }[];
   position?: string;

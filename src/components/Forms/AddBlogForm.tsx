@@ -3,7 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBlogApiSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import { AppDispatch } from '@/lib/store';
-import { Ipost } from '@/Datatypes/interfaces/interface';
+import { Iblog } from '@/Datatypes/interfaces/interface';
 import { Typography, Button, Grid } from '@mui/material';
 import CustomDialog from '../Dailog/Dailog';
 import ImageUploader from '../ImageUploader';
@@ -12,8 +12,8 @@ import 'react-quill/dist/quill.snow.css';
 import CustomTextField from './../Elements/TextFeild/index';
 
 interface AddBlogProps {
-    postInfo?:Ipost;
-    postType?:string;
+    blogInfo?:Iblog;
+    blogType?:string;
     formEvent:string;
     userType:string
 }
@@ -30,10 +30,10 @@ const newErrors: ErrorMessages = {
     cryptoSymbol: '',
 };
 
-const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userType}) => {
+const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userType}) => {
     const dispatch = useDispatch();
     const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
-    const [formData, setFormData] = useState<Ipost>(postInfo ? postInfo : {
+    const [formData, setFormData] = useState<Iblog>(blogInfo ? blogInfo : {
         title: '',
         image: '',
         author: '',
@@ -42,7 +42,7 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
     });
         
    
-    const [description, setDescription] = useState(postInfo ? postInfo.description : "");
+    const [description, setDescription] = useState(blogInfo ? blogInfo.description : "");
 
     const [errors, setErrors] = useState<ErrorMessages>(newErrors);
 
@@ -61,7 +61,7 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
     
         // Validate form fields
         Object.keys(formData).forEach((key) => {
-            const formValue = formData[key as keyof Ipost];
+            const formValue = formData[key as keyof Iblog];
             if (typeof formValue === 'string') {
                 if (formValue.trim() === '' && key !== 'description') {
                 
@@ -88,9 +88,9 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
             // Dispatch action to add blog
             (dispatch as AppDispatch)(
                 addBlogApiSlice({
-                    newBlogData: { ...formData, description, postId: postInfo?.postId, status:"pending" },
+                    newBlogData: { ...formData, description, blogId: blogInfo?.blogId, status:"pending" },
                     setDialogOpen,
-                    postType,
+                    blogType,
                     userType
                 })
             );
@@ -98,7 +98,7 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
     };
     
 
-    const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>, field: keyof Ipost) => {
+    const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>, field: keyof Iblog) => {
         if (field === 'categories') {
             // Check if the input value is empty
             if (e.currentTarget.value.trim() === '') {
@@ -197,7 +197,7 @@ const AddBlogForm: React.FC<AddBlogProps> = ({postInfo,postType, formEvent,userT
                         />
                     </Grid>
                 </Grid>
-                {postType==="edit"?(
+                {blogType==="edit"?(
                     <Button type="submit">Edit</Button>
 
                 ):(

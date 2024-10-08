@@ -58,7 +58,7 @@ const AddBlogComp: React.FC<BlogInfo>=({status}) => {
 
     const filteredRows = blogs.filter((row) =>
         row?.status === status && 
-        row?.postId?.toLowerCase().includes(searchQuery.toLowerCase())
+        row?.blogId?.toLowerCase().includes(searchQuery.toLowerCase())
     );
     
         
@@ -80,7 +80,7 @@ const AddBlogComp: React.FC<BlogInfo>=({status}) => {
                 <RefreshOutlined sx={{mb:2}} onClick={handleRefresh} />
                 </Container>
                 
-                <CustomDataGrid loading={ loading} getRowId={(row: { postId?: string }) => row.postId || ''} columns={columns} rows={filteredRows} />
+                <CustomDataGrid loading={ loading} getRowId={(row: { blogId?: string }) => row.blogId || ''} columns={columns} rows={filteredRows} />
                 {/* <UserOptionsMenu
                     openMenu={openMenu}
                     setOpenMenu={setOpenMenu}
