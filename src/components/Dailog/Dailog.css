@@ -1,0 +1,8 @@
+.custom-dailog{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+}
