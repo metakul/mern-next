@@ -47,7 +47,7 @@ const smartWalletOptions = {
   gasless: true,
 };
 
-const apikey = import.meta.env.VITE_PUBLIC_THIRDWEB_APIKEY;
+// const apikey = import.meta.env.VITE_PUBLIC_THIRDWEB_APIKEY;
 
 export default function DashboardLayout() {
   const [theme, colorMode] = useMode();

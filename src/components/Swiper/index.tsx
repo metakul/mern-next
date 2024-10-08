@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 
 import './style.css';
 // import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 interface CustomSwiperProps {
   images: string[];
@@ -20,6 +20,7 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({ images, autoplayDelay = 250
   const progressContent = useRef<HTMLSpanElement | null>(null);
 
   const onAutoplayTimeLeft = (s: any, time: number, progress: number) => {
+    console.debug(s)
     if (progressCircle.current && progressContent.current) {
       progressCircle.current.style.setProperty('--progress', `${1 - progress}`);
       progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;

@@ -25,7 +25,6 @@ import {
   Avatar,
   Typography,
   Menu,
-  MenuItem,
   styled,
 } from "@mui/material";
 import Person4OutlinedIcon from "@mui/icons-material/Person4Outlined";
@@ -279,9 +278,5 @@ const StyledMenuItem = styled("div")(({ theme }) => ({
   },
 }));
 
-const Menus = styled(MenuItem)`
-  padding-left: 0px !important;
-  padding-top: 20px !important;
-`;
 
 export default Header;

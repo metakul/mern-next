@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -7,7 +6,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import NavItem from './NavItem/NavItem';
 //css
-import { CustomDrawer, DrawerHeader } from './style.css';
+import { DrawerHeader } from './style.css';
 import { SwipeableDrawer } from '@mui/material';
 import {
     Menu as MenuIcon,
@@ -28,17 +27,16 @@ export interface MiniDrawerProps {
 
 
 const MiniDrawer: React.FC<MiniDrawerProps> = ({ setIsSidebarOpen, isNonMobile, isSidebarOpen, navConfig, setShowOutlet }) => {
-    const theme = useTheme();
 
     return (
         <>
            
                 <SwipeableDrawer
                         variant="persistent"
-                        open={isSidebarOpen} onClose={function (event: React.SyntheticEvent<{}, Event>): void {
+                        open={isSidebarOpen} onClose={function (_event: React.SyntheticEvent<{}, Event>): void {
                             isSidebarOpen
                             
-                        } } onOpen={function (event: React.SyntheticEvent<{}, Event>): void {
+                        } } onOpen={function (_event: React.SyntheticEvent<{}, Event>): void {
                             isSidebarOpen
 
                         } }                >
