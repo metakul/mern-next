@@ -1,4 +1,6 @@
 {
+   "include": ["global.d.ts","vite-plugin-pwa/vanillajs",
+    "vite-plugin-pwa/info"],
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

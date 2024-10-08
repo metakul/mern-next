@@ -3,6 +3,7 @@
 import { Link } from '@mui/material';
 import Blogs from './Blogs';
 import MarqueeCryptoNew from '@/components/MarqueCrypto';
+import InstallPWA from '@/PWA/InstallPwa';
 
 const Tab1 = () => {
   return (
@@ -13,6 +14,7 @@ const Tab1 = () => {
         </Link>
       </h2>
         <>
+      <InstallPWA/>
           <MarqueeCryptoNew />
           <Blogs />
         </>
