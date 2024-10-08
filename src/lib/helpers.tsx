@@ -39,6 +39,7 @@ export const claimNft = async ({ claimNftHandler }: { claimNftHandler: ClaimNftI
       };
       return apiSuccess;
     }).catch((err: unknown) => {
+      throw err
     });
     return data;
   } catch (error) {
@@ -78,6 +79,8 @@ export const transferCrypto = async ({ transferCryptoHandler }: { transferCrypto
       };
       return apiSuccess;
     }).catch((err: unknown) => {
+      throw err
+      
     });
     return data;
   } catch (error) {

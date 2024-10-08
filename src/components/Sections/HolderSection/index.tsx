@@ -1,8 +1,7 @@
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import StorageIcon from '@mui/icons-material/Storage';
-import { Box, Container, Typography } from '@mui/material';
-import { useState } from 'react';
+import { Box,  Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import {
   useContract,
@@ -18,7 +17,7 @@ import { ClaimNftSlice } from '@/lib/slices/Web3Profile/NftApiSlice';
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 
 export default function HolderBenifits() {
-  const [mintMsg,setMintMsg] = useState("")
+  // const [mintMsg,setMintMsg] = useState("")
   const dispatch = useDispatch()
   const address =useAddress()
 

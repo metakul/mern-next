@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import nft1 from "./Images/3.svg";
+// import nft1 from "./Images/3.svg";
 import { createLights } from './helpers/lights';
 import { createHelpers } from './helpers/camera';
 // import { setupGUI } from './helpers/gui';
 import { createSphere } from './comp/sphere';
 import { createPlane } from './comp/plane';
-import { createCube } from './comp/Cube';
+// import { createCube } from './comp/Cube';
 import { setBackground } from './helpers/background';
 import { vector } from './comp/Vector';
 import { createPlane2 } from './comp/Plane2';
 import WebGL from 'three/addons/capabilities/WebGL.js'
-import CreateLine from './comp/Lines';
+// import CreateLine from './comp/Lines';
 import CreateText from './comp/Text';
 import { InitVr } from './helpers/VrHelper';
 
@@ -70,13 +70,14 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ xrEnabled }) => {
     if (WebGL.isWebGL2Available()) {
         // Create the sphere and plane
         const newPlane = createPlane(scene);
-        // const newPlane2 = createPlane2(scene);
-        // newPlane2.position.set(10,10,15)
+        const newPlane2 = createPlane2(scene);
+        newPlane.position.set(10,10,15)
+        newPlane2.position.set(10,10,15)
     }
 
-    const line = CreateLine(scene)
+    // const line = CreateLine(scene)
 
-    const { sphere, sphereId } = createSphere(scene);
+    const { sphere/*, sphereId*/ } = createSphere(scene);
 
 
     // const { cube, cubeId } = createCube(scene)
@@ -88,7 +89,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ xrEnabled }) => {
     // setupGUI( sphere, options, dLight);
 
     // Add lights and helpers
-    const { axisHelper,dLightHelper } = createHelpers(scene, dLight);
+    const { /*axisHelper,*/ dLightHelper } = createHelpers(scene, dLight);
 
 
     {/*
@@ -103,7 +104,8 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ xrEnabled }) => {
     // Animation logic
     const animate = (time: number) => {
 
-
+        console.log(time);
+        
         controls.update();
 
         step += options.speed;

@@ -1,7 +1,5 @@
 import * as THREE from "three"
 
-import React from 'react'
-
 function CreateLine(scene: THREE.Scene) {
 
     // TODO get points, axis, material and length from outside

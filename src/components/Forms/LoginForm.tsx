@@ -7,7 +7,6 @@ import { AppDispatch } from '@/lib/store';
 import {
   Button,
   Checkbox,
-  Divider,
   FormControlLabel,
   FormHelperText,
   Grid,
@@ -53,6 +52,7 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess,userType}) => {
       (dispatch as AppDispatch)(loginUser(loginData));
 
     } catch (error) {
+      setError("Unknown error detected.")
       console.error('Login failed In LoginPage:', error);
     }
   };

@@ -2,7 +2,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchSingleCryptoInfo } from './CryptoSlice';
 import { ApiError, CryptoData, CryptoInfoProps } from '../../../Datatypes/interfaces/interface';
-import { ApiEndpoint } from '@/Datatypes/enums';
 import Request from '@/Backend/axiosCall/apiCall';
 import { ApiSuccess } from '../../../Datatypes/interfaces/interface';
 

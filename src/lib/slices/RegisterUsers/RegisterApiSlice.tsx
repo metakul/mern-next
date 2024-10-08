@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ApiError, ApiSuccess, IUser } from '../../../Datatypes/interfaces/interface';
-import { ApiEndpoint } from '@/Datatypes/enums';
 import Request from '@/Backend/axiosCall/apiCall';
 import { registerUserRequest, registerUserSuccess, registerUserFailure } from './RegisterSlice';
 

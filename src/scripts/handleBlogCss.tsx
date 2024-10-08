@@ -70,6 +70,8 @@ import React from "react";
         alert('Shareable link copied to clipboard');
       })
       .catch((error) => {
+        console.error(error);
+        
         alert('Error copying shareable link to clipboard');
       });
   };

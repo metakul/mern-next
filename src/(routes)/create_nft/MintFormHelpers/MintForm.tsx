@@ -1,8 +1,8 @@
 "use client"
 import { SetStateAction, useState } from "react";
-import { Button, Container, TextField, Typography } from "@mui/material";
+import {  Container, TextField, Typography } from "@mui/material";
 import * as s from "./MintFormCss";
-import { uploadJSONToIPFS } from "@/scripts/ipfsHandler";
+// import { uploadJSONToIPFS } from "@/scripts/ipfsHandler";
 import ImageUploader from "@/components/ImageUploader";
 import ExplicitContent from "@/components/FormDetails/ExplicitContent";
 import { useAddress, useContract } from "@thirdweb-dev/react";
@@ -42,7 +42,7 @@ function Home() {
 
     try {
       setDisableButton(true)
-      const response = await toast.promise(
+      await toast.promise(
         mintWithSignature({ authorAddress:address, nftCollection, name: formParams.name, description: formParams.description, fileURL }), {
           pending:"Minting Your Nft",
           success: "SuccessFully Minted Your Nft. Visit profile to view minted nft",

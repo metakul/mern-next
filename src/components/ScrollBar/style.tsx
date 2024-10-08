@@ -1,6 +1,6 @@
 import SimpleBar from "simplebar-react";
 import { alpha, styled } from "@mui/material/styles";
-import { getColors } from '@/app/layout/Theme/themes';
+import { getColors } from "@/layout/Theme/themes";
 
 
 export const StyledRootScrollbar = styled("div")(() => ({

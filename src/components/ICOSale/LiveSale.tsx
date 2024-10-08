@@ -79,7 +79,7 @@ const Home = () => {
     setIsLoading(true);
     try {
       if(currentFrom === "native") {
-        const swapNow=await swapNativeToken({
+        await swapNativeToken({
           overrides: {
             value: toWei(nativeValue as string || "0"),
           }
@@ -93,7 +93,7 @@ const Home = () => {
             toWei(tokenValue as string || "0"),
           ]
         });
-       const swapNow= await swapTokenToNative({
+       await swapTokenToNative({
           args: [
             toWei(tokenValue as string || "0")
           ]

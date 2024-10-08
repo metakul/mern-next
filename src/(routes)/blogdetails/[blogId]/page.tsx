@@ -141,7 +141,7 @@ const SingleBlogDetails = () => {
                   Share
                 </Button>
 
-                {status == BlogsStatusInfo.PENDING && userType === "METAKUL_OWNER" &&
+                {status == BlogsStatusInfo.PENDING && userType === "SUPER_ADMIN" &&
                   <Button variant='contained' sx={{
                     background: getColors().blueAccent[800],
                     color: getColors().blueAccent[100]

@@ -5,10 +5,6 @@ import {
   Container,
   Typography,
   Box,
-  Button,
-  Dialog,
-  DialogContent,
-  DialogActions,
 } from "@mui/material";
 
 export default function Previews(props: { onFileChange: any; }) {

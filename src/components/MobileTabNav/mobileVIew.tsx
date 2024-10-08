@@ -2,7 +2,7 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import "./index.css"
 import { Box } from '@mui/material';
-import { getColors } from '@/app/layout/Theme/themes';
+
 
 
 interface MobileTabNavigationProps {
@@ -145,7 +145,7 @@ const CustomTabPanel: React.FC<CustomTabPanelProps> = ({ isNonMobile, children, 
     id={`simple-tabpanel-${index}`}
     aria-labelledby={`simple-tab-${index}`}
     style={{
-      paddingBottom: "50px",
+      paddingBottom: isNonMobile ? "50px" : "40px",
       marginBottom: "50px",
     }}
   >

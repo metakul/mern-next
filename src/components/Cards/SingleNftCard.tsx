@@ -1,7 +1,7 @@
 import {
   useContract,
   useNFT,
-  useAddress,
+  // useAddress,
   Web3Button,
 } from "@thirdweb-dev/react";
 import { toast } from 'react-toastify';
@@ -12,7 +12,7 @@ const stakingContractAddress = "0x7615Cc203dDe705bFD65C42CEAcA7e15eB41b11b"
 const SingleNftCard = ({ tokenId }: any) => {
   const { contract } = useContract(nftDropContractAddress, "nft-drop");
   const { data: nft } = useNFT(contract, tokenId);
-  const address = useAddress()
+  // const address = useAddress()
 
   return (
     <>

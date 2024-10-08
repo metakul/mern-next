@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RegisterPage from '../register/page';
 import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
@@ -12,7 +12,7 @@ import AddBotForm from '@/components/Forms/CreateBotForm';
 
 const InstaBot = () => {
     const isUserAuthenticated = useSelector(isAuthenticated);
-    const { bots, loading, error, message } = useSelector(selectBots);
+    const { bots, loading,  message } = useSelector(selectBots);
 
     const dispatch = useDispatch();
     console.log(bots);

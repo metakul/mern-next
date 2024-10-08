@@ -10,6 +10,7 @@ import {
 import { ConnectWallet, Web3Button, useAddress, useContract, useOwnedNFTs, useTokenBalance } from '@thirdweb-dev/react';
 import { toast } from 'react-toastify';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
+import { ethers } from "ethers";
 
 import NftCard from '@/components/Cards/NftCard';
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
@@ -33,6 +34,7 @@ const Staking = () => {
     nftDropContractAddress,
     "nft-drop"
   );
+  
   const { contract, } = useContract(stakingContractAddress);
   let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
 
@@ -104,7 +106,24 @@ const Staking = () => {
         </Grid>
       </Grid>
 
- 
+      {address && claimableRewards &&
+      <>
+        <Typography className="mt-4" >
+          Claimable Balance: <b>
+            {/* {claimableRewards} */}
+            {ethers.utils.formatUnits(claimableRewards, 18)}
+          </b>{" "}
+          {tokenBalance?.symbol}
+        </Typography>
+          <Web3Button
+          action={(contract: { call: (arg0: string) => unknown; }) => contract.call("claimRewards")}
+          contractAddress={stakingContractAddress}
+        >
+          Claim Rewards
+        </Web3Button>
+      </>
+        
+        }
 
       {address ? (
         <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4 mt-4">

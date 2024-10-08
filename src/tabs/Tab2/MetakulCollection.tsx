@@ -34,7 +34,7 @@ const MetakulCollection = () => {
   const buyNft = (id: string | undefined) => {
     if (id) {
       const url = `https://opensea.io/assets/matic/0x710e9161e8a768c0605335ab632361839f761374/${id}`;
-      // window.open(url, '_blank');
+      window.open(url, '_blank');
       return true;
     } else {
       return false;

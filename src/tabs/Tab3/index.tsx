@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import CustomDialog from '@/components/Dailog/Dailog';
 import BuyCrypto from '@/components/BuyCrypto';
-import { getColors } from '@/app/layout/Theme/themes';
+import { getColors } from "@/layout/Theme/themes";
 
 import Scrollbar from "@/components/ScrollBar"
 import IcoSale from '@/components/ICOSale';

@@ -4,11 +4,11 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import {
   useContract,
   useAddress,
-  useTransferToken,
+  // useTransferToken,
   useContractWrite,
-  Web3Button,
+  // Web3Button,
 } from "@thirdweb-dev/react";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { transferCrypto } from "@/lib/helpers";
 
 import BreadCrumbs from "@/components/Elements/BreadCrumbs";
@@ -23,8 +23,8 @@ const ShopPage = () => {
 
   const { contract } = useContract(tokenContractAddress);
   const [balance, setBalance] = useState<string>()
-  const [to, setAddressTo] = useState("0x9808A1AD4f7DF5992e22F7e21C12819fa98Ee54e")
-  const [amount, setAmount] = useState<Number>(20)
+  const [to, _setAddressTo] = useState("0x9808A1AD4f7DF5992e22F7e21C12819fa98Ee54e")
+  const [amount, _setAmount] = useState<Number>(20)
 
   const { mutateAsync: transfer } = useContractWrite(contract, "transfer");
 

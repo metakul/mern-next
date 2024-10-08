@@ -12,13 +12,17 @@ const nftDropContractAddress = "0x710E9161e8A768c0605335AB632361839f761374"
 
 const BuyCrypto: React.FC<Props> = ({ price, tokenName, tokenId }) => {
 
+
     const buyTheCrypto = async () => {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>((resolve, ) => {
             // Simulate an async operation
             setTimeout(() => {
                 // Simulate success
                 resolve();
             }, 2000);
+
+            console.log(tokenId);
+            
         });
     };
 
@@ -82,7 +86,7 @@ const BuyCrypto: React.FC<Props> = ({ price, tokenName, tokenId }) => {
             <div className="mt-4">
                 <div className="flex items-center justify-center space-x-4">
                     <Web3Button
-                        action={async (contract) => {
+                        action={async () => {
                             try {
                                 // await contract?.call("withdraw", [[1]]);  // todo remove withdraw
                                 await toast.promise(

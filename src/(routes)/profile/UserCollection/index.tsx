@@ -3,6 +3,8 @@ import MyMetakulNft from './collection/metakulNft';
 
 export default function index({type,collectionAddress}:any) {
 
+  console.log(type);
+  
 
   return (
     <div>

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { useState } from 'react'
-import BannerInfo from './bannerInfo'
+import  { useState } from 'react'
+// import BannerInfo from './bannerInfo'
 import UserCollection from './UserCollection/index'
 import CreatedNft from './UserCollection/index'
 import { NftTabs } from "@/Datatypes/enums";
@@ -15,7 +15,7 @@ const ownerCreatedNftCollection = import.meta.env.VITE_PUBLIC_MARKETPLACE_ADDRES
 
 
 export default function ProfilePage() {
-  const [showOutlet, setShowOutlet] = useState<boolean>(false);
+  const [showOutlet/*, setShowOutlet*/] = useState<boolean>(false);
   const address = useAddress()
 
   const tabs = [

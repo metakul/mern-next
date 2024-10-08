@@ -1,14 +1,10 @@
 
-import { useEffect, useState } from 'react';
 import {
-  Box,
-  Container,
   Grid,
   Typography,
 } from '@mui/material';
 // import { ethers } from "ethers";
-import { ConnectWallet, RequiredParam, Web3Button, useAddress, useContract, useOwnedNFTs, useTokenBalance } from '@thirdweb-dev/react';
-import { toast } from 'react-toastify';
+import {  useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
 import PropTypes from 'prop-types';
 

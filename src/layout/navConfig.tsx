@@ -1,10 +1,8 @@
 import {
   HomeOutlined,
   ShoppingCartOutlined,
-  ReceiptLongOutlined,
   PublicOutlined,
   TodayOutlined,
-  CalendarMonthOutlined,
   // AdminPanelSettingsOutlined,
   PieChartOutlined,
   // Checkroom

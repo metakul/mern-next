@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function BannerInfo() {
   const [userData, setUserData] = useState({

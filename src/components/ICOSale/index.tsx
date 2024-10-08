@@ -2,7 +2,8 @@
 /* eslint-disable react/display-name */
 import React from 'react';
 import LiveSale from "./LiveSale"
-import { getColors } from '@/app/layout/Theme/themes';
+import { getColors } from "@/layout/Theme/themes";
+
 import { Typography } from '@mui/material';
 interface RemainingTime {
   days: number;

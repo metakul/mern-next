@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 import authReducer from "./slices/authSlice"
 import NftCollectionReducer from "./slices/MetakulCollection/NftSlice"
 import blogCollectionReducer from "./slices/Blogs/BlogSlice"
