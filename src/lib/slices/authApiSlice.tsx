@@ -5,11 +5,11 @@ import { ApiError, LoginData } from '../../Datatypes/interfaces/interface';
 import Request from '@/Backend/axiosCall/apiCall';
 // import { ApiSuccess } from '../../Datatypes/interfaces/interface';
 
-interface JwtPayload {
-  sub: string;
-  walletAddress: string;
-  user_type: string; 
-}
+// interface JwtPayload {
+//   sub: string;
+//   walletAddress: string;
+//   user_type: string; 
+// }
 // TODO create custom Payload
 
 export const loginUser = createAsyncThunk(
@@ -19,7 +19,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await Request({
         endpointId: "MAIN_LOGIN",
-        data: { email, password,deviceId:"550e8400-e29b-41d4-a716-446655440000" },
+        data: { userType,email, password,deviceId:"550e8400-e29b-41d4-a716-446655440000" },
         
        
       })

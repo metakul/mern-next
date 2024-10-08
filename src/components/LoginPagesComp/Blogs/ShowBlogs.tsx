@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { AppDispatch } from '@/lib/store';
 import { fetchBlogApiSlice } from '@/lib/slices/Blogs/BlogApiSlice';
-import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
+// import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
 import BlogColumn from './blogColumn';
 import CustomDataGrid from '../../DataGrid';
 import SearchBar from '@/components/SearchBar';
@@ -38,10 +38,10 @@ const AddBlogComp: React.FC<BlogInfo>=({status}) => {
     let {blogs,loading} = useSelector(selectedBlogs)
 
     const fetchData = (status: string) => {
-        const userType: IFetchBlogData = {
-            userType: "user",
-        };
-        (dispatch as AppDispatch)(fetchBlogApiSlice({ fetchBlogData: userType,status:status }));
+        // const userType: IFetchBlogData = {
+        //     userType: "user",
+        // };
+        (dispatch as AppDispatch)(fetchBlogApiSlice({ status:status }));
 
     };
     

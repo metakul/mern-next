@@ -36,9 +36,9 @@ const CustomDataGrid: FC<DatagridProps> = ({getRowId, hideFooter, columns, rows,
         pagination: { paginationModel: { pageSize: 10 } },
       }}
       pageSizeOptions={[10, 25, { value: 100, label: '100' }]}
-      onCellClick={(e)=>{
+      // onCellClick={(e)=>{
         
-      }}
+      // }}
       />
       <LoadingOverlay loading={loading}/>
       </>

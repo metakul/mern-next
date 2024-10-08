@@ -2,7 +2,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setLoadedBlogs, addBlog, fetchCryptoInfo } from './BlogSlice';
 import { ApiError, CryptoData, CryptoInfoProps } from '../../../Datatypes/interfaces/interface';
-import { ApiEndpoint } from '@/Datatypes/enums';
 import Request from '@/Backend/axiosCall/apiCall';
 import { ApiSuccess } from '../../../Datatypes/interfaces/interface';
 import { IFetchBlogData } from '../../../Datatypes/interfaces/interface';
@@ -10,7 +9,7 @@ import { Iblog } from '../../../Datatypes/interfaces/interface';
 
 export const fetchBlogApiSlice = createAsyncThunk(
   'blogCollection/setLoadedBlogs',
-  async ({ fetchBlogData, pageSize, blogPage, setBlogPage, status }: { fetchBlogData: IFetchBlogData, pageSize?: number, blogPage?: number, setBlogPage?: (page: number) => void, status: string }, { rejectWithValue, dispatch }) => {
+  async ({ pageSize, blogPage, setBlogPage, status }: {  pageSize?: number, blogPage?: number, setBlogPage?: (page: number) => void, status: string }, { rejectWithValue, dispatch }) => {
     dispatch(setLoadedBlogs({
       loading: true,
     }));

@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect } from 'react';
 import { HomePageProps } from '@/Datatypes/interfaces/interface';
-import Blogs from '@/tabs/Tab1/Blogs';
 
 import { Container } from '@mui/material';
 import Tab1 from '@/tabs/Tab1';

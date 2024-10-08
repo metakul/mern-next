@@ -1,19 +1,19 @@
 
 
-import { Button, Box, Stack, Skeleton } from '@mui/material';
+import { Button,  Stack, Skeleton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { AppDispatch } from '@/lib/store';
 import { fetchBlogApiSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import { Iblog } from '@/Datatypes/interfaces/interface';
-import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
+// import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
 import { Grid } from '@mui/material';
 import ShareButton from '@/components/Elements/Buttons/ShareButton';
 import BlogDetails from '@/components/BlogInfoTabs';
 import {  SetStateAction, useEffect, useState } from 'react';
 
 // import LikeButton from '../Buttons/LikeButton';
-import { selectUserType } from '@/lib/slices/authSlice';
+// import { selectUserType } from '@/lib/slices/authSlice';
 import { BlogsStatusInfo } from '@/Datatypes/enums';
 import { getColors } from '@/layout/Theme/themes';
 const Blogs = () => {
@@ -23,14 +23,14 @@ const Blogs = () => {
   const [blogPage, setBlogPage] = useState(1);
   const [pageSize,] = useState(3);
   const [openedBlogId, setOpenedBlogId] = useState<string | null>(null);
-  const userType = useSelector(selectUserType);
+  // const userType = useSelector(selectUserType);
   const handleLoadBlogs = () => {
 
-    const loadForUser: IFetchBlogData = {
-      userType: userType,
-    };
+    // const loadForUser: IFetchBlogData = {
+    //   userType: userType,
+    // };
     (dispatch as AppDispatch)(fetchBlogApiSlice({
-      fetchBlogData: loadForUser,
+      // fetchBlogData: loadForUser,
       pageSize,
       blogPage,
       setBlogPage,
@@ -40,11 +40,11 @@ const Blogs = () => {
 
   const [currentDomain, setCurrentDomain] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     setCurrentDomain(window.location.origin);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentDomain(window.location.origin);
+    }
+  }, []);
 
   const blogLink = currentDomain ? `${currentDomain}` : '';
 

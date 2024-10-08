@@ -1,5 +1,4 @@
 //pages interface
-import { AxiosRequestConfig } from "axios"
 import { AllowlistProofType } from "@/lib/slices/Web3Profile/whitelist";
 export interface Layoutprops {
 }
