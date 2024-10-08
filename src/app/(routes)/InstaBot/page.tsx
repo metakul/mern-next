@@ -20,8 +20,8 @@ const InstaBot = () => {
     const address = useAddress()
 
     useEffect(() => {
-        (dispatch as AppDispatch)(fetchBotsDispatcher());
-    }, [dispatch]);
+        isUserAuthenticated && (dispatch as AppDispatch)(fetchBotsDispatcher());
+    }, [dispatch,isUserAuthenticated]);
 
     return (
         <Container>
