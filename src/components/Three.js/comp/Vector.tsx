@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const vector = (scene: THREE.Scene) => {
+export const vector = (scene: any) => {
   
     const mousePosition=new THREE.Vector2()
 

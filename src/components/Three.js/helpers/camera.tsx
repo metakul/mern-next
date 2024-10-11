@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const createHelpers = (scene: THREE.Scene, dLight: THREE.DirectionalLight) => {
+export const createHelpers = (scene: any, dLight: any) => {
   const axisHelper = new THREE.AxesHelper(10);
   scene.add(axisHelper);
 

@@ -1,8 +1,8 @@
 // import { GUI } from "dat.gui";
-import { Mesh, SphereGeometry, MeshStandardMaterial, Object3DEventMap, DirectionalLight } from "three";
+// import { Mesh, SphereGeometry, MeshStandardMaterial, Object3DEventMap, DirectionalLight } from "three";
 import * as dat from 'dat.gui';
 
-export const setupGUI = (sphere: Mesh<SphereGeometry, MeshStandardMaterial, Object3DEventMap>, options: { sphereColor: string; spherewireframe: boolean; speed: number; angle: number; penumbra: number; intensity: number; }, dLight: DirectionalLight) => {
+export const setupGUI = (sphere: any, options: { sphereColor: string; spherewireframe: boolean; speed: number; angle: number; penumbra: number; intensity: number; }, dLight: any) => {
   let gui = new dat.GUI();
 
   console.log(dLight);

@@ -3,7 +3,7 @@ import * as THREE from "three"
 // import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 // import React from 'react'
 
-async function CreateText(scene: THREE.Scene) {
+async function CreateText(scene: any) {
 
     // const text = "My Text"
 

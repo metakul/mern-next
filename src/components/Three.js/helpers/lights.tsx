@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const createLights = (scene: THREE.Scene) => {
+export const createLights = (scene: any) => {
   const ambientLight = new THREE.AmbientLight(0x333333);
   scene.add(ambientLight);
 

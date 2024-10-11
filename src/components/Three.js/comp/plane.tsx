@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const createPlane = (scene: THREE.Scene) => {
+export const createPlane = (scene: any) => {
   const planeGeometry = new THREE.PlaneGeometry(30, 30);
   const materialForPlane = new THREE.MeshStandardMaterial({
     color: 0xffffff,

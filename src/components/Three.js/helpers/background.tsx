@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const setBackground = (scene: THREE.Scene) => {
+export const setBackground = (scene: any) => {
 
     //add background
 

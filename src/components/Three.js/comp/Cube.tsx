@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const createCube = (scene: THREE.Scene) => {
+export const createCube = (scene: any) => {
   const geometry = new THREE.BoxGeometry(2, 4, 4);
   const loader = new THREE.TextureLoader();
   // const material = new THREE.MeshStandardMaterial({

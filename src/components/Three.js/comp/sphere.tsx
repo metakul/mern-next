@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const createSphere = (scene: THREE.Scene) => {
+export const createSphere = (scene: any) => {
   const geometry = new THREE.SphereGeometry(2, 40, 40);
   const material = new THREE.MeshStandardMaterial({
     color: 0xffff00,

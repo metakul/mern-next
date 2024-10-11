@@ -1,6 +1,6 @@
 import * as THREE from "three"
 
-function CreateLine(scene: THREE.Scene) {
+function CreateLine(scene: any) {
 
     // TODO get points, axis, material and length from outside
     {/*
