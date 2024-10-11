@@ -10,7 +10,7 @@ export interface BotData {
   userId: string;
   filePath: string;
   episode: string;
-  mediaName: string;
+  videoNumber: string;
   videoDuration: number;
   videoQuantity: number;
   videoTocut: number;
@@ -38,7 +38,8 @@ export const fetchBotsDispatcher = () => async (dispatch: Dispatch) => {
     const apiSuccess: ApiSuccess = {
       statusCode: response.status,
       message: 'Bots retrieved successfully.',
-      data: response.data,  // Assuming the response contains `data`
+      data: response
+      
     };
 
     // Dispatch success action with the fetched data
@@ -81,13 +82,13 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
     const apiSuccess: ApiSuccess = {
       statusCode: response.status,
       message: 'Bots Added successfully.',
-      data: response.data, 
+      data: response, 
     };
 
     data.setDialogOpen()
 
     // Dispatch success action with the fetched data
-    // dispatch(fetchBotsSuccess({ data: response.data as BotData[], message: apiSuccess.message }));
+    // dispatch(fetchBotsSuccess({ data: response as BotData[], message: apiSuccess.message }));
  // Dispatch request action to update state after the async call
     // dispatch(fetchBotsRequest());
 

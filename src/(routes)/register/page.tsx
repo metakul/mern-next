@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUserDispatcher } from '@/lib/slices/RegisterUsers/RegisterApiSlice';
 import { AppDispatch } from '@/lib/store';
-import { accountStatus, UserCategory } from '@/Datatypes/interfaces/interface';
+import { accountStatus, UserCategory } from '@/Datatypes/enums';
 import { Container, TextField, Button, Grid, Typography, MenuItem } from '@mui/material';
 import CustomDialog from '@/components/Dailog/Dailog';
 import LoginForm from '@/components/Forms/LoginForm';

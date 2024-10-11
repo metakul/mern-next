@@ -4,7 +4,8 @@ import { ProtectedPageProps } from "@/Datatypes/interfaces/interface";
 import { useSelector } from "react-redux";
 // import { useDispatch } from 'react-redux';
 import {
-  isAuthenticated /*, logout , selectUserType*/,
+  isAuthenticated, /*, logout , selectUserType*/
+  selectUserType,
 } from "@/lib/slices/authSlice";
 // import { AppDispatch } from '@/lib/store.js';
 // import Userpage from '../../Components/LoginPagesComp/Three.js/index.tsx';
@@ -13,7 +14,7 @@ import {
 import { Container } from "@mui/material";
 import BlogsPage from "@/components/LoginPagesComp/Blogs"; // Regular import for BlogsPage
 import { useNavigate } from "react-router-dom";
-
+import { UserCategory } from "@/Datatypes/enums";
 
 const ProtectedPage: React.FC<ProtectedPageProps> = () =>
   // props
@@ -35,7 +36,7 @@ const ProtectedPage: React.FC<ProtectedPageProps> = () =>
     //   console.log(userType)
     //   switch (userType) {
     //     // TODO create /root admin
-    //     case 'SYSTEM_ADMIN':
+    //     case UserCategory.SUPER_ADMIN :
     //       return <BlogsPage />;
     //     default:
     //       return <BlogsPage />;
@@ -55,10 +56,11 @@ const ProtectedPage: React.FC<ProtectedPageProps> = () =>
     // ];
 
     const isUserAuthenticated = useSelector(isAuthenticated);
+    const selectedUserType = useSelector(selectUserType);
     const navigation = useNavigate(); 
 
     useEffect(() => {
-      if (!isUserAuthenticated) {
+      if (!isUserAuthenticated && selectedUserType!==UserCategory.SUPER_ADMIN) {
         navigation("/"); 
       }
     }, [isUserAuthenticated, history]);

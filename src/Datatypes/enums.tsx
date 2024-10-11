@@ -1,10 +1,21 @@
 // import { RequestOptions } from "../interfaces/interface";
 // enums.ts
-export enum UserType {
-  ADMIN = 'admin',
-  USER = 'user',
-  RANDOM = 'random',
+
+// via backend
+export enum accountStatus {
+  Approved = 'approved',
+  Rejected = 'rejected',
+  Pending = 'pending',
+  Blocked='blocked'
 }
+
+export enum UserCategory {
+  Verifier = 'verifier',
+  Holder = 'holder',
+  User = 'user',
+  SUPER_ADMIN = 'SUPER_ADMIN',
+}
+
 
 export enum Tabs {
   tabTitle1="Home",
@@ -52,8 +63,8 @@ const base_url_backend="http://localhost:5000/v1"
     GETBLOG: { apiId:3, withAuth:false, url: `${base_url_backend}/blogs/blogType`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"SuccessFully Loaded website",errorMessage:""},
     GETSINGLEBLOG: { apiId:4, withAuth:false, url: `${base_url_backend}/blogs`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Loading Current Blogs",successMessage:"Blog Loaded SuccessFully",errorMessage:"Error Loading Blog"},
     ADD_BLOG: { apiId:5, withAuth:true, url: `${base_url_backend}/blogs`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Adding New Blog",successMessage:"Blog Added Successfully",errorMessage:"Error Loadinf Blogs"},
-    UPDATE_BLOG: { apiId:6, withAuth:true, url: `${base_url_backend}/blogs`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Blog",successMessage:"Blog Approved SuccessFully",errorMessage:"Error Approving Blogs"},
-    EDIT_BLOG: { apiId:7, withAuth:true, url: `${base_url_backend}/blogs/updateStatus`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Blog",successMessage:"Blog Updated successfully",errorMessage:"Error Updating Blog"},
+    UPDATE_BLOG_STATUS: { apiId:6, withAuth:true, url: `${base_url_backend}/updateStatus/blogs`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Blog",successMessage:"Blog Approved SuccessFully",errorMessage:"Error Approving Blogs"},
+    EDIT_BLOG: { apiId:7, withAuth:true, url: `${base_url_backend}/blogs`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Blog",successMessage:"Blog Updated successfully",errorMessage:"Error Updating Blog"},
     FetchCryptoInfo: { apiId:8, withAuth:false, url: "https://rest.coinapi.io/v1/exchangerate", method: 'GET', headers: { "X-CoinAPI-Key":"21F0E4E9-1955-4555-A4DA-51524A1E8ED3"}, loadingMessage:"",successMessage:"",errorMessage:"",showmsg:true},
     
     

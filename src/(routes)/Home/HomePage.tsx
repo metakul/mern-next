@@ -7,7 +7,7 @@ import Tab1 from '@/tabs/Tab1';
 import { useSelector } from 'react-redux';
 import { isAuthenticated, selectUserType,  } from '@/lib/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
-import { Pages } from '@/Datatypes/enums';
+import { Pages, UserCategory } from '@/Datatypes/enums';
 
 
 
@@ -20,7 +20,7 @@ const HomePage: React.FC<HomePageProps> = () => {
  
 
   useEffect(() => {
-    if (isUserAuthenticated && userType == "SUPER_ADMIN") {
+    if (isUserAuthenticated && userType == UserCategory.SUPER_ADMIN) {
         navigation(Pages.DASHBOARD)
     } else {
       console.error("User is not authenticated");

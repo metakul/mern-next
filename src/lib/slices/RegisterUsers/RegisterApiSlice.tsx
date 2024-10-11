@@ -36,7 +36,7 @@ export const registerUserDispatcher = createAsyncThunk(
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'User Registered Successfully',
-        data: response.data,
+        data: response,
       };
       return apiSuccess;
 

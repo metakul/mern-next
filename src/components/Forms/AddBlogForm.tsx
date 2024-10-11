@@ -40,12 +40,30 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
         categories: [],
         cryptoSymbol: '',
     });
-        
+    const [isSaving,setIsSaving]=useState<boolean>(false)
+
    
     const [description, setDescription] = useState(blogInfo ? blogInfo.description : "");
 
     const [errors, setErrors] = useState<ErrorMessages>(newErrors);
 
+    const closeDialog = () => {
+        setDialogOpen(false); // Close the dialog
+    };
+    
+    const clearForm = () => {
+        setFormData({
+            title: '',
+            image: '',
+            author: '',
+            categories: [],
+            cryptoSymbol: '',
+        }); 
+        setDescription('');
+        setErrors(newErrors);
+    };
+
+    
     const handleFormSubmit = async (event: React.FormEvent) => {
         // Reset errors to null or empty string
         setErrors({
@@ -55,6 +73,8 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
             categories: '',
             cryptoSymbol: '',
         });
+
+        setIsSaving(true)
 
     
         event.preventDefault();
@@ -88,10 +108,12 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
             // Dispatch action to add blog
             (dispatch as AppDispatch)(
                 addBlogApiSlice({
-                    newBlogData: { ...formData, description, blogId: blogInfo?.blogId, status:"pending" },
-                    setDialogOpen,
+                    newBlogData: { ...formData, description,id:blogInfo?.blogId, blogId: blogInfo?.blogId, status:"pending" },
+                    closeDialog,
                     blogType,
-                    userType
+                    userType,
+                    clearForm,
+                    setIsSaving
                 })
             );
         }
@@ -123,7 +145,9 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
         
         setFormData({ ...formData, image: e });
       };
-      
+      const areAllFieldsFilled = () => {
+        return formData.title.trim() && formData.image && formData.author.trim() && formData.categories.length && formData.cryptoSymbol.trim();
+    };
 
     return (
         <CustomDialog
@@ -131,7 +155,7 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
             onClose={() => setDialogOpen(!isDialogOpen)}
             triggerButtonText={formEvent}
             title={'New Blog'}
-            description={'This is adding for New Blog Page'}
+            description={''}
         >
             <form onSubmit={handleFormSubmit}>
                 <Grid container spacing={2}>
@@ -197,12 +221,10 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
                         />
                     </Grid>
                 </Grid>
-                {blogType==="edit"?(
-                    <Button type="submit">Edit</Button>
-
-                ):(
-                    <Button type="submit">Save</Button>
-
+                {areAllFieldsFilled() && (
+                    <Button type="submit" disabled={isSaving}>
+                        {blogType === "edit" ? "UPDATE" : "Save"}
+                    </Button>
                 )}
             </form>
         </CustomDialog>

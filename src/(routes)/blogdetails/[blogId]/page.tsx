@@ -9,7 +9,7 @@ import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import AddBlogForm from '@/components/Forms/AddBlogForm';
 
 import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
-import { BlogsStatusInfo } from '@/Datatypes/enums';
+import { BlogsStatusInfo, UserCategory } from '@/Datatypes/enums';
 import { handleShare, parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
 
 //theme
@@ -98,7 +98,7 @@ const SingleBlogDetails = () => {
           <div>
             <div className="flex mt-6 flex-wrap justify-between items-center space-x-2 text-md mb-2 text-jacarta-400">
 
-              {userType === "SYSTEM_ADMIN" ? (
+              {userType === UserCategory.SUPER_ADMIN ? (
                 <>
                   <AddBlogForm formEvent={"EDIT"} blogInfo={{
                     blogId: blogId,
@@ -141,7 +141,7 @@ const SingleBlogDetails = () => {
                   Share
                 </Button>
 
-                {status == BlogsStatusInfo.PENDING && userType === "SUPER_ADMIN" &&
+                {status == BlogsStatusInfo.PENDING && userType === UserCategory.SUPER_ADMIN &&
                   <Button variant='contained' sx={{
                     background: getColors().blueAccent[800],
                     color: getColors().blueAccent[100]

@@ -16,7 +16,7 @@ function BlogsPage() {
 
     return (
         <div>
-            <AddBlogForm userType={userType} formEvent={"ADD BLOG"} />
+            <AddBlogForm  userType={userType} formEvent={"ADD BLOG"} />
 
             <MobileTabNavigation2 tabs={tabs} position='top' />
         </div>

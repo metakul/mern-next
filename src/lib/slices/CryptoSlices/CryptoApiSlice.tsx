@@ -34,7 +34,7 @@ export const fetchSingleCryptoDispatcher = createAsyncThunk(
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'Crypto Info Fetched SuccessFully',
-        data: response.data,
+        data: response
       };
   
       return apiSuccess;

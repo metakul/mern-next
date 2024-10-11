@@ -30,7 +30,7 @@ export const fetchBlogApiSlice = createAsyncThunk(
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'Blogs Fetched SuccessFully',
-        data: response.data,
+        data: response,
       };
       if (blogPage && setBlogPage) {
         setBlogPage(blogPage + 1)
@@ -71,7 +71,7 @@ export const fetchSingleBlogApiSlice = createAsyncThunk(
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'Blogs Fetched SuccessFully',
-        data: response.data,
+        data: response,
       };
 
       return apiSuccess;
@@ -85,7 +85,7 @@ export const fetchSingleBlogApiSlice = createAsyncThunk(
 
 export const addBlogApiSlice = createAsyncThunk(
   'blogCollection/addBlog',
-  async ({ newBlogData, setDialogOpen, blogType,userType }: { newBlogData: Iblog, setDialogOpen: (open: boolean) => void, blogType?: string, userType:string }, { rejectWithValue, dispatch }) => {
+  async ({ newBlogData, closeDialog, blogType,userType,clearForm,setIsSaving }: { newBlogData: Iblog, closeDialog: any, blogType?: string, userType:string, clearForm:any, setIsSaving:any }, { rejectWithValue, dispatch }) => {
     try {
 
       let response
@@ -107,23 +107,27 @@ export const addBlogApiSlice = createAsyncThunk(
           data: newBlogData,
         });
       }
-      const newBlog: Iblog = response?.data?.newBlog || response?.data
+      const newBlog: Iblog = response?.newBlog || response
 
       const { id: blogId, ...rest } = newBlog;
       const updatedBlogs = { blogId, ...rest };
-      dispatch(addBlog(updatedBlogs)); // Dispatch addBlog action with new blog data
+      dispatch(addBlog(updatedBlogs));
 
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'Blog Added Successfully',
-        data: response.data,
+        data: response,
       };
 
-      setDialogOpen(false)
-
+      console.log("apiSuccess",apiSuccess);
+      
+      closeDialog()
+      clearForm()
+      setIsSaving(false)
       return apiSuccess;
 
     } catch (error) {
+      setIsSaving(false)
       const castedError = error as ApiError;
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }
@@ -137,7 +141,7 @@ export const updateBlogSlice = createAsyncThunk(
     try {
 
       const response = await Request({
-        endpointId: "UPDATE_BLOG",
+        endpointId: "UPDATE_BLOG_STATUS",
         slug: `/${blogId}`,
         data: {status:status,id:blogId},
       });
@@ -150,7 +154,7 @@ export const updateBlogSlice = createAsyncThunk(
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'Blog Updated Successfully',
-        data: response.data,
+        data: response,
       };
       return apiSuccess;
 
@@ -175,17 +179,17 @@ export const fetchCryptoDispatcher = createAsyncThunk(
 
       //todo add propoer data for cryptoInfo
       const cryptoData: CryptoData = {
-        cryptoSymbol: response.data.asset_id_base,
-        currency: response.data.asset_id_quote,
-        price: response.data.rate,
-        marketCap: response.data.time
+        cryptoSymbol: response.asset_id_base,
+        currency: response.asset_id_quote,
+        price: response.rate,
+        marketCap: response.time
       };
       dispatch(fetchCryptoInfo({ _id: _id, cryptoData: cryptoData }));
 
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,
         message: 'Crypto Info Fetched SuccessFully',
-        data: response.data,
+        data: response,
       };
 
       return apiSuccess;
