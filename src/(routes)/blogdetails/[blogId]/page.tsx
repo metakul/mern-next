@@ -16,9 +16,9 @@ import { handleShare, parseHTML, renderCustomStyles } from '@/scripts/handleBlog
 import { getColors } from '@/layout/Theme/themes';
 //redux
 import { AppDispatch } from '@/lib/store';
-import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
+import {  useSelectedBlog } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
-import { fetchSingleBlogApiSlice, updateBlogSlice } from '@/lib/slices/Blogs/BlogApiSlice';
+import { fetchSingleBlogApiSlice, updateBlogStatusSlice} from '@/lib/slices/Blogs/BlogApiSlice';
 import { Helmet } from "react-helmet";
 import { useLocation, useParams } from 'react-router-dom';
 
@@ -26,7 +26,10 @@ import { useLocation, useParams } from 'react-router-dom';
 const SingleBlogDetails = () => {
 
   const { id:blogId } = useParams<{ id: string }>();
+  const selectedBlog = useSelector(useSelectedBlog(blogId));
 
+  console.log("selectedBlog",selectedBlog);
+  
   const dispatch = useDispatch()
   const location = useLocation();
 
@@ -58,12 +61,6 @@ const SingleBlogDetails = () => {
   }, [userType, blogId]);
 
 
-  const blogsData = useSelector(selectedBlogs).blogs;
-  const selectedBlog = blogsData.find((blog) => blog.blogId === blogId);
-
-  console.log(blogsData);
-  
-
   // Perform null checks before accessing properties
   const truncatedDescription = selectedBlog?.description ?? '';
   const image = selectedBlog?.image ?? '';
@@ -72,13 +69,19 @@ const SingleBlogDetails = () => {
   const cryptoSymbol = selectedBlog?.cryptoSymbol ?? '';
   const status = selectedBlog?.status ?? '';
   const categories = selectedBlog?.categories ?? [];
-  console.log(userType);
 
   const approveBlog = () => {
-    (dispatch as AppDispatch)(updateBlogSlice({
+    (dispatch as AppDispatch)(updateBlogStatusSlice({
       userType,
       blogId: blogId,
       status: BlogsStatusInfo.APPROVED
+    }));
+  }
+  const pauseBlog = () => {
+    (dispatch as AppDispatch)(updateBlogStatusSlice({
+      userType,
+      blogId: blogId,
+      status: BlogsStatusInfo.PENDING
     }));
   }
 
@@ -149,6 +152,14 @@ const SingleBlogDetails = () => {
                     Approve
                   </Button>
                 }
+                {status == BlogsStatusInfo.APPROVED && userType === UserCategory.SUPER_ADMIN &&
+                  <Button variant='contained' sx={{
+                    background: getColors().blueAccent[800],
+                    color: getColors().blueAccent[100]
+                  }} onClick={pauseBlog}>
+                    Pause
+                  </Button>
+                }
               </Box>
 
             </div>
@@ -169,7 +180,7 @@ const SingleBlogDetails = () => {
               <img
                 src={`data:image/png;base64,${image}`}
                 alt={"Post image"}
-                className=" w-80 sm:h-3/4 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-105"
+                className=" w-[80%] lg:w-[70%] sm:h-3/4 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
               />
             </Box>
             <span className="inline-flex flex-wrap items-center space-x-1 text-accent">

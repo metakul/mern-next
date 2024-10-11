@@ -4,11 +4,11 @@ import {
   // MoreVert as MoreIcon,
   PreviewOutlined,
 } from "@mui/icons-material";
-import { Link } from '@mui/material';
 
 const BlogColumn = (
   setOpenMenu: (value: React.SetStateAction<HTMLElement | null>) => void,
-  setSelectedRowId: (value: React.SetStateAction<string | null>) => void
+  setSelectedRowId: (value: React.SetStateAction<string | null>) => void,
+  handleNavigate: { (href: string): void; (arg0: string): void; }
 ) => [
     { field: "blogId", headerName: "Id", width: 120, editable: false },
     { field: "author", headerName: "Author Name", width: 120, editable: false },
@@ -53,15 +53,16 @@ const BlogColumn = (
           >
             <MoreIcon />
           </Button> */}
-          
-          <Link  onClick={(event) => {
-              setOpenMenu(event.currentTarget);
-              setSelectedRowId(params.row.blogId);
-            }} href={`/blogdetails/${params.row.blogId}`}>
-        <Button variant="contained">
-          <PreviewOutlined />
-        </Button>
-      </Link>
+
+          <div onClick={(event) => {
+            setOpenMenu(event.currentTarget);
+            setSelectedRowId(params.row.blogId);
+            handleNavigate(`/blogdetails/${params.row.blogId}`)
+          }}>
+            <Button variant="contained">
+              <PreviewOutlined />
+            </Button>
+          </div>
         </div>
       ),
     },

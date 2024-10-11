@@ -16,6 +16,8 @@ const blogCollectionSlice = createSlice({
   initialState,
   reducers:(create)=>({
     setLoadedBlogs: create.reducer ((state, action: PayloadAction<{ blogData?: Iblog[],loading:boolean }>) => {
+      console.log(" action.payload.blogData;", action.payload.blogData);
+      
       const loadedBlogs = action.payload.blogData;
       loadedBlogs && loadedBlogs.forEach(blog => {
         if (!state.blogs.some(existingBlog => existingBlog.blogId === blog.blogId)) {
@@ -43,3 +45,7 @@ export default blogCollectionSlice.reducer;
 
 export const selectedBlogs = (state: { blogsCollection: BlogsState }) =>
   state.blogsCollection;
+
+export const useSelectedBlog = (blogId: string | undefined) => (state: { blogsCollection: BlogsState }) => {
+  return state.blogsCollection.blogs.find(blog => blog.blogId === blogId);
+};

@@ -36,14 +36,14 @@ export const fetchBotsDispatcher = () => async (dispatch: Dispatch) => {
     });
 
     const apiSuccess: ApiSuccess = {
-      statusCode: response.status,
+      statusCode: response,
       message: 'Bots retrieved successfully.',
       data: response
       
     };
 
     // Dispatch success action with the fetched data
-    dispatch(fetchBotsSuccess({ data: apiSuccess.data as BotData[], message: apiSuccess.message }));
+    dispatch(fetchBotsSuccess({ data: response as BotData[], message: apiSuccess.message }));
 
   } catch (error) {
     const castedError = error as ApiError;

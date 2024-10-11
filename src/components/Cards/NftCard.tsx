@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
 import { Button, Menu, MenuItem, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   isLoading?:boolean
@@ -12,7 +13,11 @@ interface Props {
 
 const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate(); 
 
+  const handleNavigate = (href: string) => {
+    navigate(href);
+  };
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -122,12 +127,12 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
           <Typography >
             Visit to Mint Your Own NFT
           </Typography>
-          <a color="primary" href="/create_nft">
+          <Typography color="primary" onClick={() => handleNavigate('/')}>
           <Button >
           Claim Now
 
           </Button>
-          </a>
+          </Typography>
         </div>
       )}
     </>

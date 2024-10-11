@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BlogDetailsProps } from '@/Datatypes/interfaces/interface';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
 
@@ -10,6 +11,12 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
   const {blogs:blogsData} = useSelector(selectedBlogs);
   const selectedBlog = blogsData.find((blog) => blog.blogId === _id);
   const [timeToRead,setTimeToRead]=useState<number>()
+  const navigate = useNavigate(); 
+
+  const handleNavigate = (href: string) => {
+    navigate(href);
+  };
+
   const parseHTML = (html: string) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
@@ -95,9 +102,9 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
               <Button variant='contained' sx={{
               }}>
                 
-                <a href={`/blogdetails/${_id}`}>
+                <Typography  onClick={() => handleNavigate(`/blogdetails/${_id}`)}>
                 Read All
-                </a> </Button>
+                </Typography> </Button>
             </div>
 
             {parseHTML(truncatedDescription).map((node, index) => renderCustomStyles(node, index))} 

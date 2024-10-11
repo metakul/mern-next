@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import { Link } from '@mui/material';
+import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface BreadcrumbItem {
   label: string;
@@ -15,6 +16,7 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 function generateBreadcrumbItems(currentPath: string): BreadcrumbItem[] {
   const paths = currentPath.split('/').filter(Boolean);
   let accumulatedPath = '';
+
   return paths.map((path) => {
     accumulatedPath += `/${path}`;
     return {
@@ -30,21 +32,34 @@ interface BasicBreadcrumbsProps {
 
 export default function BreadCrumbs({ currentPath }: BasicBreadcrumbsProps) {
   const breadcrumbItems = generateBreadcrumbItems(currentPath);
+  const navigate = useNavigate(); 
+
+  const handleNavigate = (href: string) => {
+    navigate(href);
+  };
 
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link key={-1} color="inherit" href="/">
+        {/* Home link */}
+        <Typography
+          color="inherit"
+          sx={{ cursor: 'pointer' }} // Make it clickable
+          onClick={() => handleNavigate('/')}
+        >
           HOME
-        </Link>
+        </Typography>
+        
+        {/* Dynamic breadcrumb items */}
         {breadcrumbItems.map((item, index) => (
-          <Link
+          <Typography
             key={index}
             color="inherit"
-            href={item.href}
+            sx={{ cursor: 'pointer' }} // Make it clickable
+            onClick={() => handleNavigate(item.href)}
           >
             {item.label}
-          </Link>
+          </Typography>
         ))}
       </Breadcrumbs>
     </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useMemo } from 'react';
 import * as THREE from 'three';
 import CustomDialog from '@/components/Dailog/Dailog';
 import LoginForm from '@/components/Forms/LoginForm';
+import { Box } from '@mui/material';
 
 interface UserpageProps {}
 const Userpage: React.FC<UserpageProps> = () => {
@@ -82,9 +83,9 @@ const Userpage: React.FC<UserpageProps> = () => {
 
   return (
     <div>
-      <a href="#" onClick={() => setBg(!bg)}>
+      <Box onClick={() => setBg(!bg)}>
         <div ref={mount}></div>
-      </a>
+      </Box>
   
       <CustomDialog
         triggerButtonText={""}

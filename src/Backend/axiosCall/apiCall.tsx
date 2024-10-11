@@ -35,25 +35,26 @@ const Request = async ({ endpointId, slug, data }: RequestOptions) => {
     const response = await axios(axiosConfig);
 
     // Log response data for debugging
-    console.log("Response:", response);
     console.log("Response Data:", response.data);
 
     // Handle unsuccessful response
     if (response.status < 200 || response.status >= 300) {
       const errorText = response.data?.error || response.data?.message || endpoint.errorMessage || "Unexpected error occurred.";
-      if (endpoint.showmsg) {
-        toast.error(errorText);  // Display error notification if showmsg is true
-      }
       throw new Error(errorText);
     }
 
     // Show success message if the response is successful
-    if (endpoint.showmsg && endpoint.successMessage) {
+    if (endpoint?.successMessage) {
       toast.success(endpoint.successMessage);
     }
 
     return response.data;  // Return the response data for further processing
   } catch (error) {
+
+    if ( endpoint?.errorMessage) {
+      toast.error(endpoint?.errorMessage);
+    }
+
     console.error("Request error:", error);
     throw error;  // Re-throw the error for further handling
   }

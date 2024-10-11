@@ -1,5 +1,6 @@
 import React from "react";
-import { ListItemText, ListItem, ListItemButton, ListItemIcon, Link } from "@mui/material";
+import { ListItemText, ListItem, ListItemButton, ListItemIcon, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
  
 interface NavItemProps {
     item: {
@@ -14,12 +15,16 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({ item, isSidebarOpen,setShowOutlet }) => {
     const { text, icon, to } = item;
+    const navigate = useNavigate()
     const handleClick = () => {
         setShowOutlet(true); 
     };
     return (
         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <Link href={to}>
+            <Box
+                onClick={() => navigate(to)} // Add this onClick handler
+                sx={{ cursor: "pointer" }}     // Add cursor styling to indicate clickable element
+            >
             <ListItemButton
                 onClick={handleClick}
                 sx={{
@@ -41,7 +46,7 @@ const NavItem: React.FC<NavItemProps> = ({ item, isSidebarOpen,setShowOutlet }) 
                 )}
                 <ListItemText primary={text} sx={{ opacity: isSidebarOpen ? 1 : 0 }} />
             </ListItemButton>
-            </Link>
+            </Box>
 
         </ListItem>
     );

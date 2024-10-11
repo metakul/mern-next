@@ -80,7 +80,7 @@ const BuyCrypto: React.FC<Props> = ({ price, tokenName, tokenId }) => {
                     className="h-5 w-5 self-start rounded border-jacarta-200 text-accent checked:bg-accent focus:ring-accent/20 focus:ring-offset-0 dark:border-jacarta-500 dark:bg-jacarta-600"
                 />
                 <label htmlFor="terms" className="text-sm dark:text-jacarta-200">
-                    By checking this box, I agree to Metakul&apos;s <a href="#" className="text-accent">Terms of Service</a>
+                    By checking this box, I agree to Metakul&apos;s <a href="#" target='_blank' className="text-accent">Terms of Service</a>
                 </label>
             </div>
             <div className="mt-4">

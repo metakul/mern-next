@@ -8,7 +8,6 @@ import {
   Toolbar,
   IconButton,
   useTheme,
-  Link,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -34,6 +33,7 @@ import FlexBetween from "./FlexBetween";
 import React from "react";
 import { toast } from "react-toastify";
 import copy from "clipboard-copy";
+import { useNavigate } from "react-router-dom";
 
 
 interface HeaderProps {
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
   const [isOn, setIsOn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isIconClicked, setIsIconClicked] = useState(false);
-
+  const navigate = useNavigate()
   if (!colorMode) {
     // Handle the case where colorMode is undefined (e.g., context not yet initialized)
     return null; // or render a loading state or default content
@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
     ml: 2
   };
 
-  const handleClick = (event:any) => {
+  const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -83,9 +83,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
           toast.error("Copy failed");
         });
       // Reset the animation after a brief delay
-      setTimeout(() => {
-        setIsIconClicked(false);
-      }, 200);
+      setIsIconClicked(false);
     }
   };
 
@@ -103,11 +101,12 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Link
-          href={"/"}>
-
+        <Box
+          onClick={() => navigate("/")}
+          sx={{ cursor: "pointer" }}
+        >
           <img src={`/logo.svg`} alt="logo" className="w-8 h-8 ml-4" />
-        </Link>
+        </Box>
 
         <Box sx={{ flexGrow: 1 }} />
         <Stack
@@ -133,12 +132,12 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
               <FlexBetween>
                 <div className="flex justify-between items-center mt-2 sm:mt-2 md:mt-0 lg:mt-0 mx-2 ">
                   <Button
-                     className=""
-                     id="demo-customized-button"
-                     aria-controls={open ? 'menu-list' : undefined}
-                     aria-haspopup="true"
-                     aria-expanded={open ? 'true' : undefined}
-                     disableElevation
+                    className=""
+                    id="demo-customized-button"
+                    aria-controls={open ? 'menu-list' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    disableElevation
                     onClick={(event: any) => handleClick(event)}
                     sx={{
                       "&:hover": {
@@ -195,10 +194,10 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
                         <Avatar>
                           <Person4OutlinedIcon />
                         </Avatar>
-                        <Typography >
-                          <Link href={"/profile"}>
+                        <Typography onClick={() => navigate("/profile")} >
 
-                            Profile</Link></Typography>
+                          Profile
+                        </Typography>
                       </StyledMenuItem>
                     </Paper>
                     {/* <Paper>
@@ -255,7 +254,7 @@ const StyledMenu = styled((props: any) => (
     marginTop: theme.spacing(1),
     padding: "16px",
     minWidth: 240,
-    border:"1px"
+    border: "1px"
   },
 }));
 

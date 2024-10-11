@@ -11,6 +11,7 @@ import BlogColumn from './blogColumn';
 import CustomDataGrid from '../../DataGrid';
 import SearchBar from '@/components/SearchBar';
 import { RefreshOutlined } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 // import UserOptionsMenu from '@/components/OptionMenu';
 // import { Person as PersonIcon, DeleteOutline as DeleteIcon } from "@mui/icons-material";
 
@@ -27,12 +28,17 @@ const AddBlogComp: React.FC<BlogInfo>=({status}) => {
     //     { label: "Edit", value: "suspend", icon: DeleteIcon },
     //     { label: "Revoke Post", value: "suspend/revoke", icon: DeleteIcon }
     // ];
+    
 
     const [searchQuery, setSearchQuery] = useState("");
     const [/*openMenu*/, setOpenMenu] = useState<HTMLElement | null>(null);
     const [/*selectedRowId*/, setSelectedRowId] = useState<string | null>(null);
+    const navigate = useNavigate(); 
 
-    const columns = BlogColumn(setOpenMenu, setSelectedRowId)
+    const handleNavigate = (href: string) => {
+      navigate(href);
+    };
+    const columns = BlogColumn(setOpenMenu, setSelectedRowId,handleNavigate)
 
     const dispatch = useDispatch()
     let {blogs,loading} = useSelector(selectedBlogs)
@@ -46,14 +52,13 @@ const AddBlogComp: React.FC<BlogInfo>=({status}) => {
     };
     
     useEffect(() => {
-        fetchData(status);
-    }, [dispatch, status]);
-
-
+        console.log("fethcing fetchData");
+        (dispatch as AppDispatch)(fetchBlogApiSlice({ status:status }));
+    }, []);
 
     const handleRefresh = () => {
         blogs=[]
-        fetchData("pending"); 
+        fetchData(status =="pending" ? "pending" : status); 
     };
 
     const filteredRows = blogs.filter((row) =>
