@@ -190,7 +190,7 @@ export default defineConfig(({ mode }) => {
           rewrite: (path) => path.replace(/^\/credapi/, ""),
         },
         "/verifierApi": {
-          target: "https://vc-dev-verifier-router-tk4tru7hdq-em.a.run.app",
+          target: "https://backend-everything-37ada44e5086.herokuapp.com/v1",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/verifierApi/, ""),
         },
