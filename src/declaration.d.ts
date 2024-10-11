@@ -4,3 +4,4 @@ declare module 'three/addons/capabilities/WebGL.js';
 declare module 'react-helmet';
 declare module 'js-cookie';
 declare module 'three';
+declare module 'dat.gui';
