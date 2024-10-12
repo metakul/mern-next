@@ -43,6 +43,7 @@ export enum Pages {
   CREATE_ORDER = "/createOrder",
   SINGLE_BLOG = "/blogDetails/:id" ,
   INSTA_BOT = "/instabot" ,
+  SHOPPING = "/shopping" ,
 }
 
 export enum HomePageInfo{

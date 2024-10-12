@@ -9,6 +9,9 @@ import MintPage from "./(routes)/mint/page";
 import HomePage from "./(routes)/Home/HomePage";
 import ProtectedPage from "./(routes)/admin/home/page";
 import SingleBlogDetails from "./(routes)/blogdetails/[blogId]/page";
+import EarnPage from "./(routes)/earn/page";
+import CreateNft from "./(routes)/create_nft/page";
+import ShopPage from "./(routes)/shopping/page";
 
 
 
@@ -44,6 +47,18 @@ const Router: React.FC = () => {
         {
           path: Pages.SINGLE_BLOG,
           element:  <SingleBlogDetails/>,
+        },
+        {
+          path: Pages.EARN,
+          element:  <EarnPage/>,
+        },
+        {
+          path: Pages.CREATE_NFT,
+          element:  <CreateNft/>,
+        },
+        {
+          path: Pages.SHOPPING,
+          element:  <ShopPage/>,
         },
       
       ],
