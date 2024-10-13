@@ -89,10 +89,23 @@ const SingleBlogDetails = () => {
     <div className='px-4 mt-4 ml-2 mr-2'>
 
       <Helmet>
-        <meta charSet="utf-8" />
+      <meta charSet="utf-8" />
         <title>{title}</title>
         <link rel="canonical" href="https://metakul.live/" />
         <meta name="description" content={truncatedDescription} />
+        <meta name="keywords" content={ categories.join(', ')} />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={truncatedDescription} />
+        <meta property="og:url" content="https://metakul.live/" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={truncatedDescription} />
 
       </Helmet>
       {truncatedDescription ? (
@@ -117,7 +130,6 @@ const SingleBlogDetails = () => {
               ) : (
 
                 <Button variant='contained' sx={{
-                  position: "fixed",
                   background: getColors().blueAccent[800],
                   color: getColors().blueAccent[100]
                 }} >
@@ -130,7 +142,7 @@ const SingleBlogDetails = () => {
               }
               <Box sx={{
                 position: "fixed",
-                right: "40px",
+                right: "2em",
               }}>
 
                 <Button

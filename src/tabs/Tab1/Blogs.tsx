@@ -1,6 +1,6 @@
 
 
-import { Button,  Stack, Skeleton } from '@mui/material';
+import { Button,  Stack, Skeleton, Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
 import { AppDispatch } from '@/lib/store';
@@ -72,15 +72,17 @@ const Blogs = () => {
           <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
 
             <div className="rounded-[1.25rem]  p-4 flex-row justify-center">
-              <div className='mb-3 flex flex-wrap items-center space-x-1 text-xs flex-row justify-center'>
-
-                <img
-                  src={`data:image/png;base64,${blog.image}`}
-                  alt={blog.title}
-                  className="h-[240px] sm:h-[320px] sm:w-80 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-105"
-                  onClick={() => handleOpenBlogs(blog.blogId)}
-                />
-              </div>
+            <Box sx={{
+              display: "flex",
+              justifyContent: "center",
+              mb: 4
+            }}>
+              <img
+                src={`data:image/png;base64,${blog.image}`}
+                alt={"Post image"}
+                className=" w-[80%] lg:w-[70%] sm:h-[20em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
+              />
+            </Box>
               <Grid container className='mt-8'>
 
                 <Grid item xs={8} md={8} lg={8}>
