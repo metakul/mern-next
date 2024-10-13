@@ -28,8 +28,6 @@ const SingleBlogDetails = () => {
   const { id:blogId } = useParams<{ id: string }>();
   const selectedBlog = useSelector(useSelectedBlog(blogId));
 
-  console.log("selectedBlog",selectedBlog);
-  
   const dispatch = useDispatch()
   const location = useLocation();
 
@@ -67,9 +65,10 @@ const SingleBlogDetails = () => {
   const title = selectedBlog?.title ?? '';
   const author = selectedBlog?.author ?? '';
   const cryptoSymbol = selectedBlog?.cryptoSymbol ?? '';
-  const status = selectedBlog?.status ?? '';
   const categories = selectedBlog?.categories ?? [];
 
+  console.log(status,"status");
+  
   const approveBlog = () => {
     (dispatch as AppDispatch)(updateBlogStatusSlice({
       userType,
@@ -156,20 +155,13 @@ const SingleBlogDetails = () => {
                   Share
                 </Button>
 
-                {status == BlogsStatusInfo.PENDING && userType === UserCategory.SUPER_ADMIN &&
+                { userType === UserCategory.SUPER_ADMIN &&
                   <Button variant='contained' sx={{
                     background: getColors().blueAccent[800],
                     color: getColors().blueAccent[100]
-                  }} onClick={approveBlog}>
-                    Approve
-                  </Button>
-                }
-                {status == BlogsStatusInfo.APPROVED && userType === UserCategory.SUPER_ADMIN &&
-                  <Button variant='contained' sx={{
-                    background: getColors().blueAccent[800],
-                    color: getColors().blueAccent[100]
-                  }} onClick={pauseBlog}>
-                    Pause
+                  }} onClick={selectedBlog?.status == BlogsStatusInfo.PENDING ? approveBlog : pauseBlog }>
+
+                    {selectedBlog?.status == BlogsStatusInfo.PENDING ? 'Approve' : 'Pause'}
                   </Button>
                 }
               </Box>

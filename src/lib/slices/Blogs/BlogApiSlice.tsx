@@ -1,6 +1,6 @@
 // blogAction.tsx
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setLoadedBlogs, addBlog, fetchCryptoInfo } from './BlogSlice';
+import { setLoadedBlogs, addBlog, fetchCryptoInfo, updateBlog } from './BlogSlice';
 import { ApiError, CryptoData, CryptoInfoProps } from '../../../Datatypes/interfaces/interface';
 import Request from '@/Backend/axiosCall/apiCall';
 import { ApiSuccess } from '../../../Datatypes/interfaces/interface';
@@ -98,7 +98,7 @@ export const addBlogApiSlice = createAsyncThunk(
         const { ...rest } = blogs;
         const updatedBlogs = { blogId:newBlogData.blogId,userType, ...rest };
   
-        dispatch(setLoadedBlogs({ blogData: [updatedBlogs], loading: false }));
+        dispatch(updateBlog(updatedBlogs));
   
       }
       else {
@@ -152,7 +152,7 @@ export const updateBlogStatusSlice = createAsyncThunk(
       const { ...rest } = blogs;
       const updatedBlogs = { blogId,userType, ...rest };
 
-      dispatch(setLoadedBlogs({ blogData: [updatedBlogs], loading: false }));
+      dispatch(updateBlog(updatedBlogs));
 
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,

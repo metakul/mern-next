@@ -29,6 +29,13 @@ const blogCollectionSlice = createSlice({
     addBlog: create.reducer ((state, action: PayloadAction<Iblog>) => {
       state.blogs.push(action.payload);
     }),
+    updateBlog: (state, action: PayloadAction<Iblog>) => {
+      const updatedBlog = action.payload;
+      const blogIndex = state.blogs.findIndex(blog => blog.blogId === updatedBlog.blogId);
+      if (blogIndex !== -1) {
+        state.blogs[blogIndex] = updatedBlog;
+      }
+    },
     fetchCryptoInfo: create.reducer ((state, action: PayloadAction<CryptoInfo>) => {
       const { _id, cryptoData } = action.payload;
       const index = state.blogs.findIndex(blog => blog.blogId === _id);
@@ -39,7 +46,7 @@ const blogCollectionSlice = createSlice({
   }),
 });
 
-export const { setLoadedBlogs, addBlog, fetchCryptoInfo } = blogCollectionSlice.actions;
+export const { setLoadedBlogs, addBlog, fetchCryptoInfo, updateBlog } = blogCollectionSlice.actions;
 
 export default blogCollectionSlice.reducer;
 
