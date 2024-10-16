@@ -51,7 +51,7 @@ const IcoSale: React.FC<IcoSaleProps> = ({ data }) => {
       <div className="mt-8">
         <div style={{
           background:getColors().primary[900],
-        }} className="rounded-2.5xl border-2 px-6 py-16 shadow-sm dark:bg-jacarta-700 md:px-16 lg:px-24">
+        }} className="rounded-2.5xl border-2 px-6 py-6 shadow-sm dark:bg-jacarta-700 md:px-6 lg:px-4">
           <div className="flex-wrap justify-between lg:flex">
             <div className="mb-6">
               <h2 style={{

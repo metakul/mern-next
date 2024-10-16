@@ -20,7 +20,8 @@ const InstallPWA = () => {
     };
     window.addEventListener("beforeinstallprompt", handler);
 
-    return () => window.removeEventListener("transitionend", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+
   }, []);
 
   const onClick = (evt:any) => {
@@ -28,9 +29,13 @@ const InstallPWA = () => {
     if (!promptInstall) {
       return;
     }
+    console.log("installing");
+    
     promptInstall.prompt();
   };
   if (!supportsPWA) {
+    console.log("not");
+    
     return null;
   }
   return (

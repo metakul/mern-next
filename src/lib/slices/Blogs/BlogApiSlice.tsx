@@ -139,9 +139,10 @@ export const addBlogApiSlice = createAsyncThunk(
 
 export const updateBlogStatusSlice = createAsyncThunk(
   'blogCollection/addBlog',
-  async ({ blogId, status, userType }: { status: string, blogId?: string, userType: string }, { rejectWithValue, dispatch }) => {
+  async ({setIsUpdating, blogId, status, userType }: {setIsUpdating:any, status: string, blogId?: string, userType: string }, { rejectWithValue, dispatch }) => {
     try {
 
+      setIsUpdating(true);
       const response = await Request({
         endpointId: "UPDATE_BLOG_STATUS",
         slug: `/${blogId}`,
@@ -159,9 +160,11 @@ export const updateBlogStatusSlice = createAsyncThunk(
         message: 'Blog Updated Successfully',
         data: response,
       };
+      setIsUpdating(false)
       return apiSuccess;
 
     } catch (error) {
+      setIsUpdating(false)
       const castedError = error as ApiError;
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
     }

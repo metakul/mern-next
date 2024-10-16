@@ -12,6 +12,7 @@ import SingleBlogDetails from "./(routes)/blogdetails/[blogId]/page";
 import EarnPage from "./(routes)/earn/page";
 import CreateNft from "./(routes)/create_nft/page";
 import ShopPage from "./(routes)/shopping/page";
+import AddBlogPage from "./(routes)/addBlog/page";
 
 
 
@@ -59,6 +60,10 @@ const Router: React.FC = () => {
         {
           path: Pages.SHOPPING,
           element:  <ShopPage/>,
+        },
+        {
+          path: Pages.ADD_BLOG,
+          element:  <AddBlogPage/>,
         },
       
       ],

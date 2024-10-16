@@ -15,6 +15,7 @@ import { Container } from "@mui/material";
 import BlogsPage from "@/components/LoginPagesComp/Blogs"; // Regular import for BlogsPage
 import { useNavigate } from "react-router-dom";
 import { UserCategory } from "@/Datatypes/enums";
+import BreadCrumbs from "@/components/Elements/BreadCrumbs";
 
 const ProtectedPage: React.FC<ProtectedPageProps> = () =>
   // props
@@ -67,6 +68,8 @@ const ProtectedPage: React.FC<ProtectedPageProps> = () =>
 
     return (
       <Container>
+          <BreadCrumbs currentPath={`/`} />
+
         <BlogsPage />
       </Container>
     );

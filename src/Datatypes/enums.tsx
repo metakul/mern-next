@@ -44,6 +44,7 @@ export enum Pages {
   SINGLE_BLOG = "/blogDetails/:id" ,
   INSTA_BOT = "/instabot" ,
   SHOPPING = "/shopping" ,
+  ADD_BLOG = "/addblog" ,
 }
 
 export enum HomePageInfo{

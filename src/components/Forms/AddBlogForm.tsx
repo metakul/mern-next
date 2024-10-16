@@ -10,6 +10,7 @@ import ImageUploader from '../ImageUploader';
 import WYSIWYGEditor from '../WYSWYGEditor';
 import 'react-quill/dist/quill.snow.css';
 import CustomTextField from './../Elements/TextFeild/index';
+import { parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
 
 interface AddBlogProps {
     blogInfo?:Iblog;
@@ -148,15 +149,8 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
       const areAllFieldsFilled = () => {
         return formData.title.trim() && formData.image && formData.author.trim() && formData.categories.length && formData.cryptoSymbol.trim();
     };
-
     return (
-        <CustomDialog
-            open={isDialogOpen}
-            onClose={() => setDialogOpen(!isDialogOpen)}
-            triggerButtonText={formEvent}
-            title={'New Blog'}
-            description={''}
-        >
+   
             <form onSubmit={handleFormSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -177,6 +171,11 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
                         {/* Use the WYSIWYGEditor component and pass the callback function to update description */}
                         <WYSIWYGEditor value={description} onChange={handleDescriptionChange} />
                     </Grid>
+                    {/* <Grid item xs={12}>
+                        <Typography variant="h3">Description</Typography>
+                        {parseHTML(description as string).map((node, index) => renderCustomStyles(node, index))}
+
+                    </Grid> */}
                     <Grid item xs={12}>
                         <Typography variant="h3">Image</Typography>
                         <ImageUploader register={register}  uploadFormat={"BASE64"}/>
@@ -227,7 +226,6 @@ const AddBlogForm: React.FC<AddBlogProps> = ({blogInfo,blogType, formEvent,userT
                     </Button>
                 )}
             </form>
-        </CustomDialog>
     );
 };
 
