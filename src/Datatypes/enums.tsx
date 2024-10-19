@@ -68,7 +68,7 @@ const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1
     ADD_BLOG: { apiId:5, withAuth:true, url: `${base_url_backend}/blogs`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Adding New Blog",successMessage:"Blog Added Successfully",errorMessage:"Error Loadinf Blogs"},
     UPDATE_BLOG_STATUS: { apiId:6, withAuth:true, url: `${base_url_backend}/blogs/updateStatus`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Blog",successMessage:"Blog Status Updates SuccessFully",errorMessage:"Error Approving Blogs"},
     EDIT_BLOG: { apiId:7, withAuth:true, url: `${base_url_backend}/blogs`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Blog",successMessage:"Blog Updated successfully",errorMessage:"Error Updating Blog"},
-    FetchCryptoInfo: { apiId:8, withAuth:false, url: "https://rest.coinapi.io/v1/exchangerate", method: 'GET', headers: { "X-CoinAPI-Key":"21F0E4E9-1955-4555-A4DA-51524A1E8ED3"}, loadingMessage:"",successMessage:"",errorMessage:"",showmsg:false},
+    FetchCryptoInfo: { apiId:8, withAuth:false, url: "https://rest.coinapi.io/v1/exchangerate", method: 'GET', headers: { "X-CoinAPI-Key":"7bcdeaf0-f41c-4538-ad46-e7a15d4da51c"}, loadingMessage:"",successMessage:"",errorMessage:"",showmsg:false},
     
     
     // main backend 
