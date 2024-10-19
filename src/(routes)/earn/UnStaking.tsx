@@ -41,7 +41,6 @@ const Mywallet = () => {
           setClaimableRewards(stakeInfo[1]);
         }
       } catch (error) {
-        console.error("Error fetching balance:", error);
         setLoading(false); // Set loading to false in case of an error
       }
     };

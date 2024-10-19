@@ -22,8 +22,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<{ user: any; token: { accessToken: any, refreshToken: any }; userType: string;isLoading:boolean }>) => {
-console.log(action.payload.isLoading, "action.payload.isLoading"); // Add console to debug
-
 
       state.isAuthenticated = true;
       state.user = action.payload.user;
@@ -37,7 +35,6 @@ console.log(action.payload.isLoading, "action.payload.isLoading"); // Add consol
       Cookies.set('userType', action.payload.userType);
     },
     setLoading: (state, action: PayloadAction<{ isLoading: boolean }>) => {
-      console.log(action.payload.isLoading, "action.payload.isLoading"); // Add console to debug
       state.isLoading = action.payload.isLoading;
     },
     logout: (state) => {

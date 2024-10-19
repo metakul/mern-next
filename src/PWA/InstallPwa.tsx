@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import  { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 type BeforeInstallPromptEvent = Event & {
     prompt: () => void;
@@ -14,7 +15,6 @@ const InstallPWA = () => {
   useEffect(() => {
     const handler = (e:any) => {
       e.preventDefault();
-      console.log("we are being triggered :D");
       setSupportsPWA(true);
       setPromptInstall(e);
     };
@@ -29,13 +29,11 @@ const InstallPWA = () => {
     if (!promptInstall) {
       return;
     }
-    console.log("installing");
+    toast.success("installing");
     
     promptInstall.prompt();
   };
   if (!supportsPWA) {
-    console.log("not");
-    
     return null;
   }
   return (

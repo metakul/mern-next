@@ -8,7 +8,6 @@ export const claimNft = async ({ claimNftHandler }: { claimNftHandler: ClaimNftI
     // Define a separate async function to handle the claim operation
     const performClaim = async () => {
       try {
-        console.log("response","response");
         
         const response = await toast.promise(
           claimNftHandler.claim({
@@ -24,7 +23,7 @@ export const claimNft = async ({ claimNftHandler }: { claimNftHandler: ClaimNftI
         
         return response;
       } catch (err) {
-        console.log("error",err);
+        console.error("error",err);
         
         throw err;
       }

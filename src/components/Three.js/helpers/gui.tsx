@@ -5,7 +5,6 @@ import * as dat from 'dat.gui';
 export const setupGUI = (sphere: any, options: { sphereColor: string; spherewireframe: boolean; speed: number; angle: number; penumbra: number; intensity: number; }, dLight: any) => {
   let gui = new dat.GUI();
 
-  console.log(dLight);
   
   gui.add(options, "spherewireframe").onChange((e:any) => {
     sphere.material.wireframe = e;

@@ -122,8 +122,6 @@ export const addBlogApiSlice = createAsyncThunk(
         data: response,
       };
 
-      console.log("apiSuccess",apiSuccess);
-      
       closeDialog()
       setIsSaving(false)
       return apiSuccess;

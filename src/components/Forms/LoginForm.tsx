@@ -37,7 +37,6 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess,userType}) => {
   const [error, setError] = useState('');
   const isAuthLoading=useSelector(authLoading)
   
-  console.log("isAuthLoading",isAuthLoading);
   useEffect(() => {
  
   }, [isAuthLoading]);
@@ -57,7 +56,6 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess,userType}) => {
 
     } catch (error) {
       setError("Unknown error detected.")
-      console.error('Login failed In LoginPage:', error);
     }
   };
   const handleClickShowPassword = () => {

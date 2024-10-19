@@ -86,8 +86,6 @@ const AddBotForm: React.FC<AddBotProps> = () => {
 
         // If there are no errors, dispatch action to add Bot
         const hasErrors = Object.values(errors).some((error) => !!error);
-
-        console.log("Dispatching");
         
         if (!hasErrors) {
             // Dispatch action to add Bot

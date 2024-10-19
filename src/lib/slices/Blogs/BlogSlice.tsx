@@ -16,7 +16,6 @@ const blogCollectionSlice = createSlice({
   initialState,
   reducers:(create)=>({
     setLoadedBlogs: create.reducer ((state, action: PayloadAction<{ blogData?: Iblog[],loading:boolean }>) => {
-      console.log(" action.payload.blogData;", action.payload.blogData);
       
       const loadedBlogs = action.payload.blogData;
       loadedBlogs && loadedBlogs.forEach(blog => {

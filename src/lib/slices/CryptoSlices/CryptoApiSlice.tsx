@@ -2,9 +2,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchSingleCryptoInfo } from './CryptoSlice';
 import { ApiError, CryptoData, CryptoInfoProps } from '../../../Datatypes/interfaces/interface';
-import Request from '@/Backend/axiosCall/apiCall';
 import { ApiSuccess } from '../../../Datatypes/interfaces/interface';
+import axios from 'axios';
 
+const COINMARKET_API_KEY = import.meta.env.VITE_COIN_MARKET_CAP_API;
 export const fetchSingleCryptoDispatcher = createAsyncThunk(
   'FetchCryptoInfo',
   async ({ cryptoSymbol,currency }: CryptoInfoProps, { rejectWithValue,dispatch }) => {
@@ -16,18 +17,24 @@ export const fetchSingleCryptoDispatcher = createAsyncThunk(
     } })); // Dispatch loading as true
  
     try {
-      const response = await Request({
-        endpointId:"FetchCryptoInfo",
-        slug: `/${cryptoSymbol}/${currency}`,
-        data: { cryptoSymbol },
-      })
+    
+      const response = await axios.get('https://pro-api.coinmarketcap.com/v1/exchange/map', {
+        headers: {
+          'X-CMC_PRO_API_KEY': COINMARKET_API_KEY,
+          'Accept': 'application/json',
+        },
+        params: {
+          CMC_PRO_API_KEY: COINMARKET_API_KEY,
+
+        },
+      });
       
       //todo add propoer data for cryptoInfo
       const cryptoData: CryptoData = {
         cryptoSymbol:cryptoSymbol,
-        currency: response?.asset_id_quote,
-        price: response?.rate,
-        marketCap: response?.time
+        currency: response.data?.asset_id_quote,
+        price: response?.data?.rate,
+        marketCap: response?.data?.time
       };
       dispatch(fetchSingleCryptoInfo({_id:cryptoSymbol || "",cryptoData,loading:false}));
 

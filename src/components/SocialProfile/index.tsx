@@ -14,7 +14,6 @@ const SocialProfiles: React.FC<SocialProfileProps> = ({ cryptoSymbol }) => {
   
   const selectedBlog = blogsData.find(blog => blog.cryptoSymbol === cryptoSymbol);
   
-  console.log(selectedBlog?._id);
   return (
     <div className="mt-2 flex items-center justify-center space-x-2.5">
       <a href="https://discord.gg/wMcv6HW6VJ" target="_blank" rel="noopener noreferrer" aria-label="Discord">

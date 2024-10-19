@@ -21,8 +21,6 @@ const BuyCrypto: React.FC<Props> = ({ price, tokenName, tokenId }) => {
                 resolve();
             }, 2000);
 
-            console.log(tokenId);
-            
         });
     };
 

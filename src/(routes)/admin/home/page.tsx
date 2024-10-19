@@ -37,7 +37,6 @@ const ProtectedPage: React.FC<ProtectedPageProps> = () =>
     // };
 
     // const renderPageBasedOnUserType = () => {
-    //   console.log(userType)
     //   switch (userType) {
     //     // TODO create /root admin
     //     case UserCategory.SUPER_ADMIN :

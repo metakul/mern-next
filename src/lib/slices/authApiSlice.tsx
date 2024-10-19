@@ -18,7 +18,6 @@ export const loginUser = createAsyncThunk(
     try {
       
       dispatch(setLoading({ isLoading: true }));
-console.log("Loading state set to true");
 
       const response = await Request({
         endpointId: "MAIN_LOGIN",

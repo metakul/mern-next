@@ -104,8 +104,6 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({ xrEnabled }) => {
     // Animation logic
     const animate = (time: number) => {
 
-        console.log(time);
-        
         controls.update();
 
         step += options.speed;

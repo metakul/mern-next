@@ -8,7 +8,6 @@ const chatGptApiKey = import.meta.env.VITE_OPENAI_API_KEY;
 const Request = async ({ endpointId, slug, data, headers }: RequestOptions) => {
   const storedAccessToken = Cookies.get('access');  // Retrieve stored access token
   const endpoint = ApiEndpoint[endpointId];
-  console.log(headers);
 
   if (!endpoint) {
     throw new Error(`Invalid API endpoint: ${endpointId}`);

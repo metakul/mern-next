@@ -52,7 +52,6 @@ const AddBlogComp: React.FC<BlogInfo>=({status}) => {
     };
     
     useEffect(() => {
-        console.log("fethcing fetchData");
         (dispatch as AppDispatch)(fetchBlogApiSlice({ status:status }));
     }, []);
 

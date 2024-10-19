@@ -14,11 +14,7 @@ const CryptoInfoPage: React.FC<CryptoInfoProps> = ({ _id, cryptoSymbol }) => {
   const cryptoData = useSelector(selectedBlogs);
 
   const fetchCryptoInfo = async () => {
-    try {
       (dispatch as AppDispatch)(fetchCryptoDispatcher({_id, cryptoSymbol,currency:"USD" }));
-    } catch (error) {
-      console.error('Error fetching crypto info:', error);
-    }
   };
 
   useEffect(() => {
