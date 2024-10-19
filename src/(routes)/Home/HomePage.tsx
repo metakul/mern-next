@@ -32,28 +32,56 @@ const HomePage: React.FC<HomePageProps> = () => {
     <Container className="container">
 
       <Helmet>
-        <meta charSet="utf-8" />
-        <title>Metakul</title>
-        <link rel="canonical" href="https://metakul.live/" />
-        <meta name="description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
-        <meta name="robots" content="index, follow" />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="metakul" />
-        <meta property="og:description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
-
-        <meta property="og:url" content="https://metakul.live/" />
-
-        {/* Twitter */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Metakul- A next gen education plateform in Blockchain." />
+        <meta name="keywords" content="metakul, web3, blockchain, quantum" />
+        <meta property="og:title" content="Metakul" />
+        <meta property="og:description" content="Metakul- A next gen education plateform in Blockchain." />
+        <meta property="og:image" content="/logo.svg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="metakul" />
-        <meta name="twitter:description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
-      </Helmet>
+        <meta
+          name="description"
+          content="Metakul- A next gen education plateform in Blockchain."
+          data-react-helmet="true"
+        />
 
-      <Tab1 />
-    </Container>
-  );
+        <meta
+          property="og:url"
+          content="https://metakul.live/"
+          data-react-helmet="true"
+        />
+          <meta
+            property="og:image"
+            content="https://c3ihub.org/assets/images/png/gallery/7-c24.png"
+            data-react-helmet="true"
+          />
+          <meta
+            name="twitter:card"
+            content="summary"
+            data-react-helmet="true"
+          />
+
+
+            <title>Metakul</title>
+            <meta name="description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+            <meta name="robots" content="index, follow" />
+
+            {/* Open Graph / Facebook */}
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="metakul" />
+            <meta property="og:description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+
+            <meta property="og:url" content="https://metakul.live/" />
+
+            {/* Twitter */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="metakul" />
+            <meta name="twitter:description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+          </Helmet>
+
+          <Tab1 />
+        </Container>
+        );
 };
 
-export default HomePage;
+        export default HomePage;

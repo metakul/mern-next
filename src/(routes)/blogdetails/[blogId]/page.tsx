@@ -9,7 +9,7 @@ import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import AddBlogForm from '@/components/Forms/AddBlogForm';
 
 import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
-import { BlogsStatusInfo, UserCategory } from '@/Datatypes/enums';
+import { BlogsStatusInfo, Pages, UserCategory } from '@/Datatypes/enums';
 import {  parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
 
 //theme
@@ -20,7 +20,7 @@ import { useSelectedBlog } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { fetchSingleBlogApiSlice, updateBlogStatusSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import { Helmet } from "react-helmet";
-import {  useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 
 
 const SingleBlogDetails = () => {
@@ -29,6 +29,7 @@ const SingleBlogDetails = () => {
 
   const selectedBlog = useSelector(useSelectedBlog(blogId));
   const dispatch = useDispatch()
+  const navigate=useNavigate();
   // const location = useLocation();
 
   const [isUpdating,setIsUpdating]=useState(false);
@@ -56,6 +57,9 @@ const SingleBlogDetails = () => {
     }
   }
 
+  const navigateToHome = () => {
+    navigate(Pages.HOME)
+  }
 
   useEffect(() => {
     // Load blogs when the component mounts
@@ -142,11 +146,12 @@ const SingleBlogDetails = () => {
               <Box >
                 <Button variant='contained' sx={{
                   background: getColors().blueAccent[800],
-                  color: getColors().blueAccent[100]
-                }} >
-                  <a href="/">
+                  color: getColors().blueAccent[100],
+                }}
+                onClick={navigateToHome}
+                >
+                  
                     Home
-                  </a>
                 </Button>
                 {/* <Button
                   variant='contained'

@@ -24,7 +24,7 @@ export interface SingleBlogInfoProps{
 
   const tabs = [
     { value: <OtherHousesOutlinedIcon />, content: <BlogDescription userType={userType} _id={_blogId}/>, label: "Read More" },
-    { value: <StoreOutlinedIcon />, content: <CryptoInfoPage _id={_blogId} cryptoSymbol={cryptoSymbol}/>, label: "Information" },
+    // { value: <StoreOutlinedIcon />, content: <CryptoInfoPage _id={_blogId} cryptoSymbol={cryptoSymbol}/>, label: "Information" },
     { value: <CategoryOutlinedIcon />, content:<SocialProfiles cryptoSymbol={cryptoSymbol}/>, label: "Socials" },
   ];
 
