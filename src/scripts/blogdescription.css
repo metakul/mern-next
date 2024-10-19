@@ -119,3 +119,9 @@
   margin-top: 1rem; /* Tailwind's my-4 (margin-top: 1rem and margin-bottom: 1rem) */
   margin-bottom: 1rem; /* Tailwind's my-4 (margin-bottom: 1rem) */
 }
+.blockquote-container {
+  margin: 16px 0; /* Adjust as needed */
+  padding: 10px 20px; /* Optional padding */
+  border-left: 4px solid #ccc; /* Optional styling */
+  background-color: #f9f9f9; /* Optional background */
+}

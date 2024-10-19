@@ -91,7 +91,7 @@ const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' }, 
       loadingMessage: "Fetching response from ChatGPT", 
-      successMessage: "ChatGPT response received successfully", 
+      successMessage: "", 
       errorMessage: "Error fetching response from ChatGPT"
     }
   }

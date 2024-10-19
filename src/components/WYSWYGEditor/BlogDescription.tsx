@@ -20,8 +20,18 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
   const parseHTML = (html: string) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
-    return Array.from(tempDiv.childNodes);
+  
+    // Convert child nodes to an array while also preserving text nodes.
+    return Array.from(tempDiv.childNodes).map((node) => {
+      return {
+        nodeType: node.nodeType,
+        nodeName: node.nodeName,
+        textContent: node.textContent,
+        childNodes: Array.from(node.childNodes),
+      };
+    });
   };
+  
 
   const calculateReadingTime = (description: string) => {
     // Assuming an average reading speed of 200 words per minute

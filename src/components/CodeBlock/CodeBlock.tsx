@@ -19,7 +19,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
       <pre className="whitespace-pre-wrap break-words">{code}</pre>
       <button
         onClick={copyToClipboard}
-        className="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+        className="absolute top-2 right-2 bg-blue-500  px-2 py-1 rounded hover:bg-blue-600"
       >
         Copy
       </button>

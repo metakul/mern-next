@@ -8,16 +8,21 @@ export const renderCustomStyles = (node: any, index: number) => {
       case 'blockquote':
         const blockquoteContent = Array.from(node.childNodes)
           .map((childNode, idx) => renderCustomStyles(childNode, idx))
-          .join('');
+          .join('\n');
 
+          
         // Check for code blocks within blockquote
         const codeMatch = blockquoteContent.match(/```(.*?)```/s);
         if (codeMatch) {
           const codeBlock = codeMatch[1].trim();
-          return <CodeBlock key={index} code={codeBlock} />; // Use CodeBlock for code
+          return(
+            <div key={index} className="blockquote-container">
+            <CodeBlock code={codeBlock} /> {/* Use CodeBlock for code */}
+          </div>
+          )// Use CodeBlock for code
         }
 
-        return <blockquote key={index}>{blockquoteContent}</blockquote>;
+        return <CodeBlock code={blockquoteContent} key={index}/>;
 
 
       case 'b':
@@ -89,9 +94,7 @@ export const renderCustomStyles = (node: any, index: number) => {
           </div>
         );
 
-      default:
-        return <React.Fragment key={index}>{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</React.Fragment>;
-    }
+  }
   } else if (node.nodeType === 3) { // Node.TEXT_NODE
     const textContent = node.textContent || '';
     if (textContent.trim() === '') return null; // Ignore empty text nodes
@@ -110,8 +113,30 @@ const handleSpecialCharacters = (text: string) => {
 export const parseHTML = (html: string) => {
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = html;
-  return Array.from(tempDiv.childNodes);
+
+  const childNodes = Array.from(tempDiv.childNodes);
+  const mergedNodes: Node[] = [];
+
+  for (let i = 0; i < childNodes.length; i++) {
+    const currentNode = childNodes[i];
+
+    // Check if the current node is a blockquote
+    if (currentNode.nodeName === 'BLOCKQUOTE') {
+      // If the last node in mergedNodes is also a blockquote, merge them
+      if (mergedNodes.length > 0 && mergedNodes[mergedNodes.length - 1].nodeName === 'BLOCKQUOTE') {
+        const lastBlockquote = mergedNodes[mergedNodes.length - 1] as HTMLQuoteElement;
+        (lastBlockquote as HTMLElement).innerHTML += '<br>' +(currentNode as HTMLElement).innerHTML; // Merge innerHTML
+      } else {
+        mergedNodes.push(currentNode); // Push current blockquote if not merging
+      }
+    } else {
+      mergedNodes.push(currentNode); // Push non-blockquote nodes
+    }
+  }
+
+  return mergedNodes;
 };
+
 
 // Calculate reading time based on 120 words per minute
 export const calculateReadingTime = (description: string) => {
