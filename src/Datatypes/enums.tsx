@@ -45,6 +45,7 @@ export enum Pages {
   INSTA_BOT = "/instabot" ,
   SHOPPING = "/shopping" ,
   ADD_BLOG = "/addblog" ,
+  CHAT_GPT = "/ChatGpt" ,
 }
 
 export enum HomePageInfo{

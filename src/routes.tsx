@@ -13,6 +13,7 @@ import EarnPage from "./(routes)/earn/page";
 import CreateNft from "./(routes)/create_nft/page";
 import ShopPage from "./(routes)/shopping/page";
 import AddBlogPage from "./(routes)/addBlog/page";
+import ChatGpt from "./Projects/ChatGpt/ChatGpt";
 
 
 
@@ -64,6 +65,10 @@ const Router: React.FC = () => {
         {
           path: Pages.ADD_BLOG,
           element:  <AddBlogPage/>,
+        },
+        {
+          path: Pages.CHAT_GPT,
+          element:  <ChatGpt/>,
         },
       
       ],

@@ -80,6 +80,11 @@ export const navConfig = [
     to: "",
   },
   {
+    text: "ChatGpt",
+    icon:<SmartToyIcon/>,
+    to: "/ChatGpt",
+  },
+  {
     text: "InstaBot",
     icon:<SmartToyIcon/>,
     to: "/InstaBot",
