@@ -1,0 +1,99 @@
+/* General styling for the blog content */
+.text-md {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+  
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  
+  .font-bold {
+    font-weight: bold;
+  }
+  
+  .underline {
+    text-decoration: underline;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .text-blue-600 {
+    color: #2563eb;
+  }
+  
+  .text-blue-800 {
+    color: #1d4ed8;
+  }
+  
+  .hover\:text-blue-800:hover {
+    color: #1d4ed8;
+  }
+  
+  .italic {
+    font-style: italic;
+  }
+  
+  .list-disc {
+    list-style-type: disc;
+  }
+  
+  .list-inside {
+    list-style-position: inside;
+  }
+  
+  /* Margins for block elements */
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mt-6 {
+    margin-top: 1.5rem;
+  }
+  
+  /* Image and iframe responsive styling */
+  .max-w-full {
+    max-width: 100%;
+  }
+  
+  .h-auto {
+    height: auto;
+  }
+  
+  .iframe-container iframe {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .iframe-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  }
+  
+  .iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Blockquote styling */
+  .blockquote {
+    border-left: 4px solid #d1d5db; /* Gray border */
+    padding-left: 1rem;
+    font-style: italic;
+  }
+  

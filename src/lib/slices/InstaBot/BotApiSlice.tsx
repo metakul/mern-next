@@ -91,10 +91,11 @@ export const createBotDispatcher = (data:any) => async (dispatch: Dispatch) => {
     // dispatch(fetchBotsSuccess({ data: response as BotData[], message: apiSuccess.message }));
  // Dispatch request action to update state after the async call
     // dispatch(fetchBotsRequest());
-
+    data.setIsSaving(false)
     return apiSuccess
   } catch (error) {
     const castedError = error as ApiError;
+    data.setIsSaving(false)
 
     // Dispatch failure action with the error message
     dispatch(fetchBotsFailure(castedError?.error === "string" ? castedError?.error : 'Unknown Error'));

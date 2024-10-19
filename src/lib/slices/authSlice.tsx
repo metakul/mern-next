@@ -22,17 +22,23 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<{ user: any; token: { accessToken: any, refreshToken: any }; userType: string;isLoading:boolean }>) => {
+console.log(action.payload.isLoading, "action.payload.isLoading"); // Add console to debug
+
 
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.access = action.payload.token.accessToken.token;
-      state.refresh = action.payload.token.refreshToken;
+      state.refresh = action.payload.token.refreshToken.token;
       state.userType = action.payload.userType;
       state.isLoading=action.payload.isLoading
       Cookies.set('user', JSON.stringify(action.payload.user));
       Cookies.set('access', action.payload.token.accessToken.token);
       Cookies.set('refresh', action.payload.token.refreshToken.token);
       Cookies.set('userType', action.payload.userType);
+    },
+    setLoading: (state, action: PayloadAction<{ isLoading: boolean }>) => {
+      console.log(action.payload.isLoading, "action.payload.isLoading"); // Add console to debug
+      state.isLoading = action.payload.isLoading;
     },
     logout: (state) => {
       state.isAuthenticated = false;
@@ -53,7 +59,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout, refreshAccessToken } = authSlice.actions;
+export const { setCredentials,setLoading, logout, refreshAccessToken } = authSlice.actions;
 
 export default authSlice.reducer;
 

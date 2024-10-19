@@ -44,6 +44,8 @@ const AddBotForm: React.FC<AddBotProps> = () => {
         hashtags: "",
         caption: ''
     });
+    const [isSaving,setIsSaving]=useState<boolean>(false)
+
 
 
     const [errors, setErrors] = useState<ErrorMessages>(newErrors);
@@ -62,7 +64,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
             caption: '',
         });
 
-
+        setIsSaving(true);
         event.preventDefault();
 
         // Validate form fields
@@ -93,6 +95,7 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                 createBotDispatcher({
                     newBotData: { ...formData },
                     setDialogOpen,
+                    setIsSaving,
                 })
             );
         }
@@ -242,6 +245,9 @@ const AddBotForm: React.FC<AddBotProps> = () => {
                     </Grid>
                 </Grid>
                 <Button type="submit">Save</Button>
+                    <Button type="submit" disabled={isSaving}>
+                       Save
+                    </Button>
             </form>
         </CustomDialog>
     );

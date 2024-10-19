@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '@/lib/slices/authApiSlice';
 import { LoginData } from '@/Datatypes/interfaces/interface';
@@ -37,6 +37,10 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess,userType}) => {
   const [error, setError] = useState('');
   const isAuthLoading=useSelector(authLoading)
   
+  console.log("isAuthLoading",isAuthLoading);
+  useEffect(() => {
+ 
+  }, [isAuthLoading]);
   const handleLoginSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 

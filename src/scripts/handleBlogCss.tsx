@@ -1,54 +1,62 @@
 import React from "react";
-
+import "./blogdescription.css"
 export const renderCustomStyles = (node: any, index: number) => {
   if (node.nodeType === 1) { // Node.ELEMENT_NODE
     switch (node.nodeName.toLowerCase()) {
       case 'b':
       case 'strong':
         return (
-          <span key={index} className="font-bold underline" style={{ fontSize: '20px' }}>
+          <span key={index} className="font-bold underline text-md">
             {Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}
           </span>
         );
       case 'a':
         return (
-          <a key={index} className="underline" style={{ fontSize: '10px', color: "blue" }} href={node.getAttribute('href')} target="_blank" rel="noopener noreferrer">
+          <a key={index} className="underline text-blue-600 hover:text-blue-800 text-md" href={node.getAttribute('href')} target="_blank" rel="noopener noreferrer">
             {Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}
           </a>
         );
       case 'img':
-        return <img key={index} src={node.getAttribute('src')} alt={node.getAttribute('alt')} className="max-w-full" />;
+        return (
+          <img
+            key={index}
+            src={node.getAttribute('src')}
+            alt={node.getAttribute('alt') || 'Image'}
+            className="max-w-full h-auto my-4"
+          />
+        );
       case 'i':
       case 'em':
-        return <em key={index}>{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</em>;
+        return <em key={index} className="italic">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</em>;
       case 'ul':
-        return <ul key={index} className="list-disc list-inside mt-6 mb-6">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</ul>;
+        return <ul key={index} className="list-disc list-inside my-4">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</ul>;
       case 'li':
-        return <li key={index} className="mb-2">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</li>;
+        return <li key={index} className="ml-4 mb-2">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</li>;
       case 'p':
-        return <p key={index} className="mb-4 text-md">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</p>;
-
-      // New case for handling iframes
+        return <p key={index} className="mb-6 text-md leading-relaxed">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</p>;
+      case 'h1':
+        return <h1 key={index} className="mb-6 text-md leading-relaxed">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</h1>;
+      case 'h2':
+        return <h2 key={index} className="mb-6 text-md leading-relaxed">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</h2>;
+      
+      // Handle iframes
       case 'iframe':
         return (
-          <div key={index} className="iframe-container mb-4">
+          <div key={index} className="iframe-container mb-6">
             <iframe
               src={node.getAttribute('src')}
-              title={node.getAttribute('title') || 'iframe content'}
+              title={node.getAttribute('title') || 'Embedded Content'}
               width={node.getAttribute('width') || '100%'}
-              height={node.getAttribute('height') || '300'}
+              height={node.getAttribute('height') || '315'}
               frameBorder="0"
               allowFullScreen
-              className="w-full "
+              className="w-full"
             />
           </div>
         );
-
-      // Add any other cases for additional WYSIWYG editor nodes
       case 'blockquote':
-        return <blockquote key={index} className="border-l-4 border-gray-300 pl-4 italic">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</blockquote>;
-
-      // Default case for other elements
+        return <blockquote key={index} className="border-l-4 border-gray-400 pl-4 italic my-4">{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</blockquote>;
+      
       default:
         return <React.Fragment key={index}>{Array.from(node.childNodes).map((childNode, idx) => renderCustomStyles(childNode, idx))}</React.Fragment>;
     }
@@ -60,41 +68,46 @@ export const renderCustomStyles = (node: any, index: number) => {
   return null;
 };
 
+// Handle special characters, more extensible in case of other markup.
+const handleSpecialCharacters = (text: string) => {
+  // Currently handling underscores, you can extend this logic
+  return text.replace(/_/g, '');
+};
 
-  const handleSpecialCharacters = (text: string) => {
-    // Add logic to handle special characters like italics, etc.
-    // For example:
-    return text.replace(/_/g, ''); // Remove underscores (assuming underscores indicate italics)
-  };
+// Parse HTML string into nodes
+export const parseHTML = (html: string) => {
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+  return Array.from(tempDiv.childNodes);
+};
 
+// Calculate reading time based on 120 words per minute
+export const calculateReadingTime = (description: string) => {
+  const wordsPerMinute = 120;
+  const words = description.split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
+};
+
+// Handle share functionality
+export const handleShare = (link: string) => {
+  const fullLink = `https://yourwebsite.com${link}`;
   
-  export const parseHTML = (html: string) => {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html;
-    return Array.from(tempDiv.childNodes);
-  };
-
-
-
-  export const calculateReadingTime = (description: string) => {
-    // Assuming an average reading speed of 200 words per minute
-    const wordsPerMinute = 120;
-    const words = description.split(/\s+/).length;
-    const minutes = Math.ceil(words / wordsPerMinute);
-    return minutes;
-  };
-
-
-  export const handleShare = (link: string) => {
-    // Fallback for browsers that do not support Web Share API
-    navigator.clipboard.writeText(`https://localhost:3000${link}`)
+  if (navigator.share) {
+    navigator.share({
+      title: 'Check this out!',
+      text: 'Here’s an interesting blog you might enjoy.',
+      url: fullLink
+    })
+    .catch((error) => console.error('Error sharing', error));
+  } else {
+    navigator.clipboard.writeText(fullLink)
       .then(() => {
-        alert('Shareable link copied to clipboard');
+        alert('Link copied to clipboard');
       })
       .catch((error) => {
-        console.error(error);
-        
-        alert('Error copying shareable link to clipboard');
+        console.error('Error copying link', error);
+        alert('Failed to copy the link');
       });
-  };
-  
+  }
+};
