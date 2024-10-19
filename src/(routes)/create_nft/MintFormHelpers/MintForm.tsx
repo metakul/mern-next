@@ -8,8 +8,10 @@ import ExplicitContent from "@/components/FormDetails/ExplicitContent";
 import { useAddress, useContract } from "@thirdweb-dev/react";
 import { mintWithSignature } from "./signature";
 import { toast } from "react-toastify";
+import ContractInfo from "@/components/ContractInfo/ContractInfo";
 
 const marketpalceAddress=import.meta.env.VITE_PUBLIC_MARKETPLACE_ADDRESS as string
+const thirdwebDashboard = import.meta.env.VITE_THIRDWEB_DASHBOARD as string
 
 
 function Home() {
@@ -117,6 +119,7 @@ function Home() {
 
         <s.TextInfo>Upload Image to enable Mint Button</s.TextInfo>
       </s.ResponsiveWrapper>
+      <ContractInfo urlBase={`${thirdwebDashboard}/${marketpalceAddress}`} buttonText="NFT Minter Contract" />
     </Container>
   );
 }

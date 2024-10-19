@@ -97,3 +97,25 @@
     font-style: italic;
   }
   
+  /* In your CSS file (e.g., styles.css) */
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.code-block pre {
+  margin: 0;
+  white-space: pre-wrap; /* Preserve formatting */
+}
+
+.blockquote-custom {
+  border-left: 4px solid #cbd5e1; /* Tailwind's gray-400 */
+  padding-left: 1rem; /* Tailwind's pl-4, which is 1rem (16px) */
+  font-style: italic; /* Italic text */
+  margin-top: 1rem; /* Tailwind's my-4 (margin-top: 1rem and margin-bottom: 1rem) */
+  margin-bottom: 1rem; /* Tailwind's my-4 (margin-bottom: 1rem) */
+}

@@ -3,10 +3,12 @@ import { RequestOptions } from '@/Datatypes/interfaces/interface';
 import { toast } from 'react-toastify';
 import { ApiEndpoint } from '@/Datatypes/enums';
 import Cookies from 'js-cookie';
+const chatGptApiKey = import.meta.env.VITE_OPENAI_API_KEY; 
 
-const Request = async ({ endpointId, slug, data }: RequestOptions) => {
+const Request = async ({ endpointId, slug, data, headers }: RequestOptions) => {
   const storedAccessToken = Cookies.get('access');  // Retrieve stored access token
   const endpoint = ApiEndpoint[endpointId];
+  console.log(headers);
 
   if (!endpoint) {
     throw new Error(`Invalid API endpoint: ${endpointId}`);
@@ -17,12 +19,14 @@ const Request = async ({ endpointId, slug, data }: RequestOptions) => {
     fullUrl += `${slug}`;  // Append additional slug to URL if provided
   }
 
+  
   const axiosConfig: AxiosRequestConfig = {
     method: endpoint.method,
     url: fullUrl,
     headers: {
       ...endpoint.headers,
-      Authorization: endpoint.withAuth ? `Bearer ${storedAccessToken}` : ""
+      // Use the appropriate Authorization header based on the endpoint type
+      Authorization: endpoint.isChatGpt ? `Bearer ${chatGptApiKey}` : endpoint.withAuth ? `Bearer ${storedAccessToken}` : undefined
     }
   };
 

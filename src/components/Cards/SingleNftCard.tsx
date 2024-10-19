@@ -6,8 +6,8 @@ import {
 } from "@thirdweb-dev/react";
 import { toast } from 'react-toastify';
 
-const nftDropContractAddress = "0x710E9161e8A768c0605335AB632361839f761374"
-const stakingContractAddress = "0x7615Cc203dDe705bFD65C42CEAcA7e15eB41b11b"
+const stakingContractAddress = import.meta.env.VITE_PUBLIC_STAKING_CONTRACT_ADDRESS as string
+const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 
 const SingleNftCard = ({ tokenId }: any) => {
   const { contract } = useContract(nftDropContractAddress, "nft-drop");

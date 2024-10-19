@@ -12,9 +12,11 @@ import {
 import BreadCrumbs from "@/components/Elements/BreadCrumbs";
 import SocialProfiles from "@/components/SocialProfile";
 import HolderBenifits from "@/components/Sections/HolderSection";
+import ContractInfo from "@/components/ContractInfo/ContractInfo";
 
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
+const thirdwebDashboard = import.meta.env.VITE_THIRDWEB_DASHBOARD as string
 
 const MintPage = () => {
   const { contract: nftDrop } = useContract(nftDropContractAddress);
@@ -119,6 +121,8 @@ const MintPage = () => {
             ))}
           </Grid>
         </Grid>
+      <ContractInfo urlBase={`${thirdwebDashboard}/${nftDropContractAddress}`} buttonText="Metakul Nft Contract" />
+
       </Container>
 
     </Container>

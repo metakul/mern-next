@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BlogDetailsProps } from '@/Datatypes/interfaces/interface';
 import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
@@ -8,7 +8,6 @@ import { renderCustomStyles } from '@/scripts/handleBlogCss';
 
 const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
 
-  
   const {blogs:blogsData} = useSelector(selectedBlogs);
   const selectedBlog = blogsData.find((blog) => blog.blogId === _id);
   const [timeToRead,setTimeToRead]=useState<number>()
@@ -22,12 +21,6 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
     return Array.from(tempDiv.childNodes);
-  };
-
-  const handleSpecialCharacters = (text: string) => {
-    // Add logic to handle special characters like italics, etc.
-    // For example:
-    return text.replace(/_/g, ''); // Remove underscores (assuming underscores indicate italics)
   };
 
   const calculateReadingTime = (description: string) => {
@@ -64,7 +57,7 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
               <Button variant='contained' sx={{
               }}>
                 
-                <Typography  onClick={() => handleNavigate(`/blogdetails/${_id}`)}>
+                <Typography  onClick={() => selectedBlog && handleNavigate(`/blogdetails/${selectedBlog.title}/${_id}`)}>
                 Read All
                 </Typography> </Button>
             </div>

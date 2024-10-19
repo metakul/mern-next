@@ -17,13 +17,13 @@ import { TransferCryptoInterface } from "@/Datatypes/interfaces/interface";
 import CustomSwiper from "@/components/Swiper";
 
 const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
-
+const PassiveIncomeAddress= import.meta.env.VITE_PASSIVEINCOME_ADDRESS
 const ShopPage = () => {
   const address = useAddress();
 
   const { contract } = useContract(tokenContractAddress);
   const [balance, setBalance] = useState<string>()
-  const [to, _setAddressTo] = useState("0x9808A1AD4f7DF5992e22F7e21C12819fa98Ee54e")
+  const [to, _setAddressTo] = useState(PassiveIncomeAddress)
   const [amount, _setAmount] = useState<Number>(20)
 
   const { mutateAsync: transfer } = useContractWrite(contract, "transfer");

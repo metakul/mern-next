@@ -41,7 +41,7 @@ export enum Pages {
   CREATE_NFT = "/CREATE_NFT",
   LAUNDRY_PAGE = "/laundry",
   CREATE_ORDER = "/createOrder",
-  SINGLE_BLOG = "/blogDetails/:id" ,
+  SINGLE_BLOG = "/blogDetails/:blogTitle/:id" ,
   INSTA_BOT = "/instabot" ,
   SHOPPING = "/shopping" ,
   ADD_BLOG = "/addblog" ,
@@ -84,7 +84,16 @@ const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1
     GetBot: { apiId:11, withAuth:true, url: `${base_url_backend}/bots`, method: 'GET', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Loading My Bots",successMessage:"Bots retrievd successfully SuccessFull.", errorMessage:"Oho,Error fetching "},
     
     create_bot: { apiId:12, withAuth:true, url: `${base_url_backend}/create_bot`, method: 'POST', headers: {  }, loadingMessage:"Loading My Bots",successMessage:"Bots retrievd successfully SuccessFull.", errorMessage:"Oho,Error fetching "},
-
+    CHATGPT: { 
+      apiId: 13, 
+      isChatGpt: true,
+      url: 'https://api.openai.com/v1/chat/completions', 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' }, 
+      loadingMessage: "Fetching response from ChatGPT", 
+      successMessage: "ChatGPT response received successfully", 
+      errorMessage: "Error fetching response from ChatGPT"
+    }
   }
 
   

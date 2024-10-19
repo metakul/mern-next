@@ -3,6 +3,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import authReducer from "./slices/authSlice"
 import NftCollectionReducer from "./slices/MetakulCollection/NftSlice"
 import blogCollectionReducer from "./slices/Blogs/BlogSlice"
+import chatReducer from "./slices/Chatgpt/ChatGptSlice"
 import cryptoCollectionRedcuer from "./slices/CryptoSlices/CryptoSlice"
 import userReducer from "./slices/RegisterUsers/RegisterSlice"
 import botsSlice from "./slices/InstaBot/BotSlice"
@@ -16,7 +17,7 @@ export const makeStore = () => {
         cryptoCollection:cryptoCollectionRedcuer,
         user:userReducer,
         botsSlice:botsSlice,
-        
+        chat: chatReducer,
     }, 
     // middleware:getDefaultMiddlerware =>
     //   getDefaultMiddlerware().concat(logger),

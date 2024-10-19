@@ -50,6 +50,7 @@ export interface RequestOptions {
   endpointId:string;
   slug?:string;
   data?:object;
+  headers?:any;
 }
 
 // api response success

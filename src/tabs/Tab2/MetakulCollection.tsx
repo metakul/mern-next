@@ -14,6 +14,8 @@ import SocialProfiles from '@/components/SocialProfile';
 import { isAuthenticated } from '@/lib/slices/authSlice';
 import LogoutButton from '@/components/Elements/Buttons/LogoutButton';
 
+const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
+
 export const svgStyle = {
   fill: '#5893f9', // Set your desired fill color here
   height: '1em',
@@ -26,14 +28,14 @@ const MetakulCollection = () => {
 
   const handleLoadNft = () => {
     const collectionInfo: CollectionInfo = {
-      collectionAddress: "0x710E9161e8A768c0605335AB632361839f761374"
+      collectionAddress: nftDropContractAddress
     };
     (dispatch as AppDispatch)(LoadNftSlice(collectionInfo));
   }
 
   const buyNft = (id: string | undefined) => {
     if (id) {
-      const url = `https://opensea.io/assets/matic/0x710e9161e8a768c0605335ab632361839f761374/${id}`;
+      const url = `https://opensea.io/assets/matic/${nftDropContractAddress}/${id}`;
       window.open(url, '_blank');
       return true;
     } else {
@@ -271,6 +273,54 @@ const MetakulCollection = () => {
                       />
                     </svg>
                     <span>Web3</span>
+                  </button>
+
+                </div>
+                <div className="my-1 mr-2.5">
+                  <button
+                    className="dropdown-toggle group group flex h-9 items-center rounded-lg border border-jacarta-100  px-4 font-display text-sm font-semibold  transition-colors hover:border-transparent      "
+                    id="categoriesFilter"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      className="mr-1 h-4 w-4 fill-jacarta-300 transition-colors group-hover:fill-white "
+                    >
+                      <path fill="none" d="M0 0h24v24H0z" />
+                      <path
+                        d="M14 10v4h-4v-4h4zm2 0h5v4h-5v-4zm-2 11h-4v-5h4v5zm2 0v-5h5v4a1 1 0 0 1-1 1h-4zM14 3v5h-4V3h4zm2 0h4a1 1 0 0 1 1 1v4h-5V3zm-8 7v4H3v-4h5zm0 11H4a1 1 0 0 1-1-1v-4h5v5zM8 3v5H3V4a1 1 0 0 1 1-1h4z"
+                      />
+                    </svg>
+                    <span>ERC4337</span>
+                  </button>
+
+                </div>
+                <div className="my-1 mr-2.5">
+                  <button
+                    className="dropdown-toggle group group flex h-9 items-center rounded-lg border border-jacarta-100  px-4 font-display text-sm font-semibold  transition-colors hover:border-transparent      "
+                    id="categoriesFilter"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      className="mr-1 h-4 w-4 fill-jacarta-300 transition-colors group-hover:fill-white "
+                    >
+                      <path fill="none" d="M0 0h24v24H0z" />
+                      <path
+                        d="M14 10v4h-4v-4h4zm2 0h5v4h-5v-4zm-2 11h-4v-5h4v5zm2 0v-5h5v4a1 1 0 0 1-1 1h-4zM14 3v5h-4V3h4zm2 0h4a1 1 0 0 1 1 1v4h-5V3zm-8 7v4H3v-4h5zm0 11H4a1 1 0 0 1-1-1v-4h5v5zM8 3v5H3V4a1 1 0 0 1 1-1h4z"
+                      />
+                    </svg>
+                    <span>Metaverse</span>
                   </button>
 
                 </div>

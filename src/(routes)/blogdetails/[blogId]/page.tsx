@@ -10,7 +10,7 @@ import AddBlogForm from '@/components/Forms/AddBlogForm';
 
 import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
 import { BlogsStatusInfo, UserCategory } from '@/Datatypes/enums';
-import { handleShare, parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
+import {  parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
 
 //theme
 import { getColors } from '@/layout/Theme/themes';
@@ -20,22 +20,23 @@ import { useSelectedBlog } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
 import { fetchSingleBlogApiSlice, updateBlogStatusSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import { Helmet } from "react-helmet";
-import { useLocation, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 
 
 const SingleBlogDetails = () => {
 
-  const { id: blogId } = useParams<{ id: string }>();
+  const { blogTitle, id: blogId } = useParams<{ blogTitle: string; id: string }>();
+
   const selectedBlog = useSelector(useSelectedBlog(blogId));
   const dispatch = useDispatch()
-  const location = useLocation();
+  // const location = useLocation();
 
   const [isUpdating,setIsUpdating]=useState(false);
 
-  const currentDomain = location.pathname; // Get the current pathname
+  // const currentDomain = location.pathname; // Get the current pathname
 
 
-  const blogLink = `${currentDomain}/blogDetails/${blogId}`;
+  // const blogLink = `${currentDomain}/blogDetails/${blogId}`;
 
 
   const userType = useSelector(selectUserType);
@@ -69,8 +70,6 @@ const SingleBlogDetails = () => {
   const author = selectedBlog?.author ?? '';
   const cryptoSymbol = selectedBlog?.cryptoSymbol ?? '';
   const categories = selectedBlog?.categories ?? [];
-
-  console.log(status, "status");
 
   const approveBlog = () => {
     (dispatch as AppDispatch)(updateBlogStatusSlice({
@@ -114,7 +113,7 @@ const SingleBlogDetails = () => {
       </Helmet>
       {truncatedDescription ? (
         <>
-          <BreadCrumbs currentPath={`/blogdetails/${blogId}`} />
+          {/* <BreadCrumbs currentPath={`/`} /> */}
           <div>
 
             {userType === UserCategory.SUPER_ADMIN ? (
@@ -149,7 +148,7 @@ const SingleBlogDetails = () => {
                     Home
                   </a>
                 </Button>
-                <Button
+                {/* <Button
                   variant='contained'
                   sx={{
                     background: getColors().blueAccent[800],
@@ -158,17 +157,15 @@ const SingleBlogDetails = () => {
                   onClick={() => handleShare(blogLink)}
                 >
                   Share
-                </Button>
+                </Button> */}
 
                 <Typography variant='h3' sx={{
                   mb: 1,
                   mt: 6
                 }}>
-                  {title}
+                  {blogTitle}
                 </Typography>
-                <Typography variant='h5' >
-                  Author: {author}
-                </Typography>
+              
                 <Box sx={{
                   display: "flex",
                   justifyContent: "center",
@@ -187,15 +184,23 @@ const SingleBlogDetails = () => {
                     </h5>
                   ))}
                 </span>
+                
                 {parseHTML(truncatedDescription).map((node, index) => renderCustomStyles(node, index))}
-
+                <Typography variant='h5' >
+                  Author: {author}
+                </Typography>
               </Box>
             )}
           </div>
         </>
       ) : (
         <>
-          <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+           <Typography variant='h3' sx={{
+                  mb: 1,
+                  mt: 6
+                }}>
+                  {blogTitle}
+                </Typography>
           <Skeleton variant="rounded" sx={{
             marginLeft: "auto",
             marginRight: "auto",

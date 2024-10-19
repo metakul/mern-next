@@ -8,7 +8,7 @@ interface Props {
     tokenId: number;
 }
 
-const nftDropContractAddress = "0x710E9161e8A768c0605335AB632361839f761374"
+const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 
 const BuyCrypto: React.FC<Props> = ({ price, tokenName, tokenId }) => {
 

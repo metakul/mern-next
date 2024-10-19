@@ -42,7 +42,7 @@ const BlogColumn = (
       headerName: "Actions",
       width: 160,
       editable: false,
-      renderCell: (params: { row: { blogId: string; }; }) => (
+      renderCell: (params: { row: { blogId: string; title:string }; }) => (
         <div>
           {/* <Button
             variant="contained"
@@ -57,7 +57,7 @@ const BlogColumn = (
           <div onClick={(event) => {
             setOpenMenu(event.currentTarget);
             setSelectedRowId(params.row.blogId);
-            handleNavigate(`/blogdetails/${params.row.blogId}`)
+            handleNavigate(`/blogdetails/${params.row.title}/${params.row.blogId}`)
           }}>
             <Button variant="contained">
               <PreviewOutlined />
