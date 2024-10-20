@@ -33,15 +33,15 @@ const HomePage: React.FC<HomePageProps> = () => {
 
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Metakul- A next gen education plateform in Blockchain." />
+        <meta name="description" content="Metakul- A next gen education platform in Blockchain." />
         <meta name="keywords" content="metakul, web3, blockchain, quantum" />
         <meta property="og:title" content="Metakul" />
-        <meta property="og:description" content="Metakul- A next gen education plateform in Blockchain." />
+        <meta property="og:description" content="Metakul- A next gen education platform in Blockchain." />
         <meta property="og:image" content="/logo.svg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="description"
-          content="Metakul- A next gen education plateform in Blockchain."
+          content="Metakul- A next gen education platform in Blockchain."
           data-react-helmet="true"
         />
 
