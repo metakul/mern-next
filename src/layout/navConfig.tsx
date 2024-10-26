@@ -37,10 +37,15 @@ export const navConfig = [
     to: "/earn",
   },
   {
-    text: "Shopping",
-    icon: <ShoppingCartOutlined />,
-    to: "/shopping",
+    text: "Profile",
+    icon: <PieChartOutlined />,
+    to: "/profile",
   },
+  // {
+  //   text: "Shopping",
+  //   icon: <ShoppingCartOutlined />,
+  //   to: "/shopping",
+  // },
   {
     text: "Metaverse",
     icon: null,

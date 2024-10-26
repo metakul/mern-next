@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import  { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
+import InstallMobileIcon from '@mui/icons-material/InstallMobile';
 type BeforeInstallPromptEvent = Event & {
     prompt: () => void;
     userChoice: Promise<{
@@ -57,7 +57,7 @@ const InstallPWA = () => {
       title="Install app"
       onClick={onClick}
     >
-      Install now 
+      Install now <InstallMobileIcon/>
 
     </button>
   );

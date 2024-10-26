@@ -1,13 +1,9 @@
 import PropTypes from 'prop-types';
 import MyMetakulNft from './collection/metakulNft';
 
-export default function index({type,collectionAddress}:any) {
-
-
+export default function index({collectionAddress}:any) {
   return (
-    <div>
-    <section className="relative py-24 pt-2">
- 
+   
     <div className="container">
   
     
@@ -74,7 +70,7 @@ export default function index({type,collectionAddress}:any) {
     
       </div>
     </div>
-    </section></div>
+
   )
 }
 

@@ -5,6 +5,7 @@ import UnStaking from './UnStaking';
 import MobileTabNavigation from "@/components/MobileTabNav/StakingTab";
 
 import { Container, Typography } from '@mui/material';
+import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 const tabs = [
   { value: <Typography variant='h5' className='font-display text-base hover:text-accent'>Stake</Typography>, content: <Staking/>, label: "Stake Now" },
   { value: <Typography variant='h5' className='font-display text-base hover:text-accent'>UnStake</Typography>, content: <UnStaking/>, label: "UnStake Now" },
@@ -18,6 +19,8 @@ export default function EarnPage() {
 
   return (
     <Container >
+          <BreadCrumbs currentPath={"/"} />
+
    <MobileTabNavigation  tabs={tabs} position={"top"}/>
    <ContractInfo urlBase={`${thirdwebDashboard}/${stakingContractAddress}`} buttonText="Metakul Staking Nft Contract" />
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
 import { Button, Menu, MenuItem, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Pages } from '@/Datatypes/enums';
 
 interface Props {
   isLoading?:boolean
@@ -127,7 +128,7 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
           <Typography >
             Visit to Mint Your Own NFT
           </Typography>
-          <Typography color="primary" onClick={() => handleNavigate('/')}>
+          <Typography color="primary" onClick={() => handleNavigate(Pages.MINT)}>
           <Button >
           Claim Now
 

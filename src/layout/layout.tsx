@@ -157,7 +157,7 @@ export default function DashboardLayout() {
                   component="main"
                   sx={{
                     flexGrow: 1,
-                    mt: 12,
+                    mt: 10,
                     mr: "auto",
                   }}
                 >

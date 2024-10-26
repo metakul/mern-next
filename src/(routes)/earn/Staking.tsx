@@ -99,7 +99,7 @@ const Staking = () => {
             NFT Staking
           </Typography>
         </Grid>
-        <Grid item xs={6} className="flex justify-end">
+        <Grid item xs={6} >
           <Box>
             <ConnectWallet className="max-h-[220px]" />
           </Box>

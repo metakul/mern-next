@@ -5,7 +5,7 @@ import  { useState } from 'react'
 import UserCollection from './UserCollection/index'
 import CreatedNft from './UserCollection/index'
 import { NftTabs } from "@/Datatypes/enums";
-import { useAddress } from '@thirdweb-dev/react';
+import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
 import { Container, Typography } from '@mui/material';
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import StakingTabNavigation from '@/components/MobileTabNav/StakingTab';
@@ -88,10 +88,13 @@ export default function ProfilePage() {
           <StakingTabNavigation showOutlet={showOutlet} position={"top"} tabs={tabs} />
         </>
       ) : (
+        <>
 
         <Typography>
           Wallet Not connected
         </Typography>
+        <ConnectWallet />
+        </>
       )}
 
     </Container>

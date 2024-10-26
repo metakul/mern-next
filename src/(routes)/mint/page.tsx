@@ -1,16 +1,14 @@
 
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import {  Button, Container, Grid } from "@mui/material";
 import {
   useAddress,
   useContract,
   ThirdwebNftMedia,
   useOwnedNFTs,
-  ConnectWallet,
 } from "@thirdweb-dev/react";
 
 
 import BreadCrumbs from "@/components/Elements/BreadCrumbs";
-import SocialProfiles from "@/components/SocialProfile";
 import HolderBenifits from "@/components/Sections/HolderSection";
 import ContractInfo from "@/components/ContractInfo/ContractInfo";
 
@@ -35,44 +33,7 @@ const MintPage = () => {
     <Container >
       <Container>
         <BreadCrumbs currentPath={"/mint"} />
-        <div className="">
-          <Grid container sx={{ mt: 4 }}>
-            <Grid item xs={6} sx={{
-              mb: 4
-            }}>
-              <Typography variant="h3">
-                GASLESS NFT Mint
-              </Typography>
-            </Grid>
-            <Grid item xs={6} className="flex justify-end">
-              <Box>
-
-              <ConnectWallet className="max-h-[220px]" />
-              </Box>
-            </Grid>
-            <Grid xs={12} sx={{
-              display: "flex",
-              justifyContent: "center",
-              maxHeight:"450px"
-            }}>
-             <SocialProfiles/>
-          </Grid>
-            <Grid xs={12} sx={{
-              my: 4,
-              display: "flex",
-              justifyContent: "center",
-              maxHeight:"450px"
-            }}>
-              <video className="border-2 rounded-2xl" controls>
-                <source src="video/MetakulInfo.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </Grid>
-          </Grid>
-
-      
-         
-        </div>
+       
         {/* <Box sx={{
           display:"flex",
           justifyContent:'center',
