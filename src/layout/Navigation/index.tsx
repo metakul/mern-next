@@ -42,7 +42,8 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ setIsSidebarOpen, isNonMobile, 
                         } }                >
                     <DrawerHeader>
                     <IconButton onClick={() => setIsSidebarOpen()} >
-                            <MenuIcon />
+                    <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" />
+
                         </IconButton>
                     </DrawerHeader>
                     <Divider />
@@ -54,7 +55,8 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ setIsSidebarOpen, isNonMobile, 
                     <Divider />
                     <DrawerHeader>
                         <IconButton onClick={() => setIsSidebarOpen()} >
-                            <ChevronLeftIcon />
+                        <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" />
+
                         </IconButton>
                     </DrawerHeader>
                     <Divider />

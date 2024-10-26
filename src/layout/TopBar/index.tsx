@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
 
   return (
     <AppBar sx={{
-      backgroundColor: getColors().blueAccent[900],
+      backgroundColor: getColors().secondary[900],
       height: APP_BAR
     }} >
       <Toolbar>
@@ -100,11 +100,11 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
             color: getColors().blueAccent[100]
           }}
         >
-          <MenuIcon />
+        <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" />
         </IconButton>
         <Box
           onClick={() => navigate("/")}
-          sx={{ cursor: "pointer",mt:2 }}
+          sx={{ cursor: "pointer",mt: 2}}
         >
           <img src={`/logo.svg`} alt="logo" className="w-8 h-8 ml-4" />
         </Box>
