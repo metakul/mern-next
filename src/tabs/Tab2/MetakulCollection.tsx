@@ -53,37 +53,14 @@ const MetakulCollection = () => {
         <div className="text-center ">
           <figure className="mb-4">
 
-            <div
-              className="bottom-0 flex items-center justify-center rounded-full border-2  p-4 pl-12 border-white  "
-              data-tippy-content="Verified Collection"
-            >
-              <img
-                src="img/logo.png"
-                alt="collection avatar"
-                className="bottom-0 flex items-center justify-center rounded-full border-2  p-4  border-white  "
-
-                width="200"
-                height="200"
-              />
-              <div className='bg-green relative top-20 right-28'>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="44"
-                  height="44"
-                  className="h-[1.875rem] w-[1.875rem] fill-white border "
-                >
-                  <path fill="none" d="M0 0h24v24H0z"></path>
-                  <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
-                </svg>
-              </div>
-
-            </div>
+          
           </figure>
-          <h2 className="mb-2 font-display text-4xl font-medium ">Metakul NFT Collection</h2>
-          <div className="mb-2">
-            <span className="text-sm font-bold text-jacarta-400">Created by </span>
+          
+          <h2 className=" font-sans  mb-2 font-display text-4xl font-medium ">Metakul NFT Collection</h2>
+          <SocialProfiles/>
+          
+          <div className="mb-4 mt-4">
+            <span className="text-sm font-bold text-jacarta-400 m-2">Created by </span>
             <a href="https://www.linkedin.com/in/shubham-kunwar-90ba441ba/" target="_balnk" className="text-sm font-bold text-accent">Kunwar.eth</a>
             {isUserAuthenticated ? (
 
@@ -119,7 +96,7 @@ const MetakulCollection = () => {
             <div
               className="w-1/2 border-jacarta-100 py-4 hover:shadow-md border-b  sm:w-24 sm:border-r"
             >
-              <div className="mb-1 text-base font-bold  ">32</div>
+              <div className="mb-1 text-base font-bold  ">**</div>
               <div className="text-2xs font-medium tracking-tight ">Owners</div>
             </div>
             <div
@@ -177,11 +154,11 @@ const MetakulCollection = () => {
           </div>
 
           <p className="mx-auto max-w-xl text-lg ">
-            Unique NFT&apos;s built to unite the design multiverse. Designed and styled by Metakul.
-            Join Discord to know about the free claiming of Metakul NFT
+            Unique GasLess NFT&apos;s built to unite and design multiverse. Designed and styled by Metakul.
+            Join Discord to know about the free claiming of Metakul NFT.
           </p>
+         
 
-          <SocialProfiles/>
           <ConnectWallet style={{
             marginTop: "20px"
           }} />

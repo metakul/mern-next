@@ -29,8 +29,6 @@ export const fetchBotsDispatcher = () => async (dispatch: Dispatch) => {
     // Dispatch request action to update state before the async call
     dispatch(fetchBotsRequest());
 
-    console.log("Fetching bots");
-
     const response = await Request({
       endpointId: "GetBot",
     });

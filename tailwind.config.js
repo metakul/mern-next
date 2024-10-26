@@ -6,20 +6,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    screens: {
-      sm: "575px",
-      md: "768px",
-      lg: "1025px",
-      xl: "1202px"
-    },
-    fontFamily: {
-      display: ['"CalSans-SemiBold"', "sans-serif"],
-      body: ['"DM Sans"', "sans-serif"]
-    },
-    container: {
-      center: true,
-      padding: "1rem"
-    },
+
     colors: {
       transparent: "transparent",
       current: "currentColor",

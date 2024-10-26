@@ -19,7 +19,7 @@ export const claimNft = async ({ claimNftHandler }: { claimNftHandler: ClaimNftI
             error: 'Error Claiming NFt. Join discord to know more 🤯'
           }
         )
-        console.log("response",response);
+        // console.log("response",response);
         
         return response;
       } catch (err) {

@@ -81,7 +81,7 @@ export default function Offline({ children }:OfflineProps) {
           <OfflineContent>
           <img src="logo.svg" alt="metakul" height={100} width={100} />
             <Typography variant="h3" gutterBottom>
-              You're Offlines
+              You're Offline
             </Typography>
             <Typography variant="body1">
               Check your internet connection.
