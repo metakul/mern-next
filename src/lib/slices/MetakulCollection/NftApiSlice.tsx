@@ -6,10 +6,11 @@ import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { toast } from 'react-toastify';
 
 // $TODO : set Sdk based on user choice from wallet
+const clientId = import.meta.env.VITE_PUBLIC_THIRDWEB_CLIENT_ID;
 
 // If used on the FRONTEND pass your 'clientId'
 const sdk = new ThirdwebSDK("polygon", {
-  clientId: "07cf4631d08f1e16216c6ca7bb35d392",
+  clientId: clientId,
 });
 
 export const LoadNftSlice = createAsyncThunk(

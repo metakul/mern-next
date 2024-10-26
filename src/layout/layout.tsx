@@ -47,7 +47,7 @@ const smartWalletOptions = {
   gasless: true,
 };
 
-// const apikey = import.meta.env.VITE_PUBLIC_THIRDWEB_APIKEY;
+const clientId = import.meta.env.VITE_PUBLIC_THIRDWEB_CLIENT_ID;
 
 export default function DashboardLayout() {
   const [theme, colorMode] = useMode();
@@ -114,7 +114,7 @@ export default function DashboardLayout() {
               {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
               <ThirdwebProvider
                 activeChain="polygon"
-                clientId={"07cf4631d08f1e16216c6ca7bb35d392"}
+                clientId={clientId}
                 supportedWallets={[
                   smartWallet(metamaskWallet(), smartWalletOptions),
                   smartWallet(
