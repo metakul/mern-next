@@ -1,6 +1,6 @@
 
 
-import { Link } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import Blogs from './Blogs';
 import MarqueeCryptoNew from '@/components/MarqueCrypto';
 import InstallPWA from '@/PWA/InstallPwa';
@@ -13,11 +13,18 @@ const Tab1 = () => {
           Member of the 4337 Revolution
         </Link>
       </h1>
-        <>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'end',
+          width: '100%',
+          height: '100%',
+          padding: '0 1rem',
+          margin: '0 auto',
+        }}>
       <InstallPWA/>
+        </Box>
           <MarqueeCryptoNew />
           <Blogs />
-        </>
     </>
   );
 };

@@ -32,7 +32,7 @@ const pwaOptions: Partial<VitePWAOptions> ={
   ],
   manifest: {
     name: "METAKUL",
-    short_name: "M-kul",
+    short_name: "Metakul",
     description: "Metakul- A next gen professional education platform in Blockchain.",
     icons: [
       {

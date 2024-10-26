@@ -24,27 +24,41 @@ const InstallPWA = () => {
 
   }, []);
 
-  const onClick = (evt:any) => {
+  const onClick = async (evt: React.MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
+
     if (!promptInstall) {
       return;
     }
-    toast.success("installing");
-    
-    promptInstall.prompt();
+
+    try {
+      toast.success("Installing...");
+      await promptInstall.prompt();
+      const { outcome } = await promptInstall.userChoice;
+
+      if (outcome === 'accepted') {
+        toast.success("App installed successfully!");
+      } else {
+        toast.info("Installation was dismissed.");
+      }
+    } catch (error) {
+      toast.error("An error occurred during installation.");
+      console.error("Installation error:", error);
+    }
   };
   if (!supportsPWA) {
     return null;
   }
   return (
     <button
-      className=""
+      className="open-sans border border-rounded bg-red-800 font-bold py-2 px-2 rounded inline-flex items-center"
       id="setup_button"
       aria-label="Install app"
       title="Install app"
       onClick={onClick}
     >
-      Install This as App
+      Install now 
+
     </button>
   );
 };
