@@ -96,6 +96,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
         <IconButton
           onClick={() => setIsSidebarOpen()}
           sx={{
+            mt:2,
             color: getColors().blueAccent[100]
           }}
         >
@@ -103,13 +104,16 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
         </IconButton>
         <Box
           onClick={() => navigate("/")}
-          sx={{ cursor: "pointer" }}
+          sx={{ cursor: "pointer",mt:2 }}
         >
           <img src={`/logo.svg`} alt="logo" className="w-8 h-8 ml-4" />
         </Box>
 
         <Box sx={{ flexGrow: 1 }} />
         <Stack
+        sx={{
+          mt: 1
+        }}
           direction="row"
           alignItems="center"
           spacing={{
@@ -117,7 +121,9 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
             sm: 1,
           }}
         >
-          <ConnectWallet />
+          <ConnectWallet style={{
+            padding: "8px",
+          }} />
           <div className="switch" data-ison={isOn} onClick={toggleSwitch} style={{
             background: theme.palette.grey[900],
             border: "2px solid",

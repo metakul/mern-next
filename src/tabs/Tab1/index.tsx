@@ -11,10 +11,8 @@ const Tab1 = () => {
 
   return (
     <>
-      <h1 className="mb-4 underline underline-offset-4 text-center  font-display text-xl open-sans flex justify-center items-center" onClick={handleLinkClick} style={{ cursor: 'pointer' }}>
-        <span style={{ color: getColors().blueAccent[100], textDecoration: 'none' }}>
+      <h1 className="mb-4 pt-2 pb-2 underline underline-offset-4 text-center  font-display text-xl open-sans flex justify-center items-center" onClick={handleLinkClick} style={{ color: getColors().blueAccent[100], cursor:"pointer" }}>
           METAKUL - Member of the 4337 Revolution <LaunchIcon/>
-        </span>
       </h1>
 
 
@@ -25,6 +23,7 @@ const Tab1 = () => {
         height: '100%',
         padding: '0 1rem',
         margin: '0 auto',
+        mb:2
       }}>
         <InstallPWA />
       </Box>

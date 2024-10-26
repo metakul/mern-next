@@ -8,6 +8,7 @@ import { accountStatus, UserCategory } from '@/Datatypes/enums';
 import { Container, TextField, Button, Grid, Typography, MenuItem } from '@mui/material';
 import CustomDialog from '@/components/Dailog/Dailog';
 import LoginForm from '@/components/Forms/LoginForm';
+import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 
 const RegisterPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,7 +38,8 @@ const RegisterPage = () => {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" gutterBottom>
+      <BreadCrumbs currentPath={"/InstaBot"} />
+      <Typography variant="h3" mt={4} gutterBottom>
         Register User
       </Typography>
       <form noValidate autoComplete="off">
@@ -118,17 +120,20 @@ const RegisterPage = () => {
               required
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}>
             <Button variant="contained" color="primary" onClick={handleRegister}>
               Register
             </Button>
             <CustomDialog
-                className="ml-2"
+                className="mt-2"
                 open={isDialogOpen}
                 onClose={() => setDialogOpen(!isDialogOpen)}
-                triggerButtonText={"Admin Login"}
+                triggerButtonText={"Login"}
                 title={"Login Now"}
-                description={"Only admin are availabale to login for now"}
+                description={"Login Now To play with your instagram bot"}
                 >
                 <LoginForm
                   loginTitle="User Login"
