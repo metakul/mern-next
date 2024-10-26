@@ -33,15 +33,15 @@ const HomePage: React.FC<HomePageProps> = () => {
 
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Metakul- A next gen education platform in Blockchain." />
+        <meta name="description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
         <meta name="keywords" content="metakul, web3, blockchain, quantum" />
         <meta property="og:title" content="Metakul" />
-        <meta property="og:description" content="Metakul- A next gen education platform in Blockchain." />
+        <meta property="og:description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
         <meta property="og:image" content="/logo.svg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="description"
-          content="Metakul- A next gen education platform in Blockchain."
+          content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership."
           data-react-helmet="true"
         />
 
@@ -63,20 +63,20 @@ const HomePage: React.FC<HomePageProps> = () => {
 
 
             <title>Metakul</title>
-            <meta name="description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+            <meta name="description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
             <meta name="robots" content="index, follow" />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />
             <meta property="og:title" content="metakul" />
-            <meta property="og:description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+            <meta property="og:description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
 
             <meta property="og:url" content="https://metakul.live/" />
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="metakul" />
-            <meta name="twitter:description" content="Discover a gasless blockchain platform with NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+            <meta name="twitter:description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
           </Helmet>
 
           <Tab1 />
