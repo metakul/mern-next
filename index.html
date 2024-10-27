@@ -31,6 +31,11 @@
   <body>
     <div id="root"></div>
     <canvas className="webgl"></canvas>
+    <script>
+      if (global === undefined) {
+        var global = window;
+      }
+    </script>
     <script type="module" src="/src/main.tsx" defer></script>
   </body>
 </html>
