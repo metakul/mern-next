@@ -29,6 +29,8 @@ export const mintWithSignature = async ({ authorAddress, nftCollection, name, de
 
     return nft;
   } catch (e) {
+    console.log(e);
+    
     toast.error("An error occurred trying to mint the NFT:");
     throw e
   }

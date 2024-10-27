@@ -46,6 +46,8 @@ export default async function server({authorAddress,description, name:nftName, i
         const newsignedPayload = JSON.parse(JSON.stringify(signedPayload));
         return newsignedPayload;
     } catch (e) {
+        console.log(e);
+        
         throw e;
     }
 }
