@@ -53,7 +53,7 @@ const pwaOptions: Partial<VitePWAOptions> ={
       },
       {
         src: "offline.png",
-        sizes: "100x100",
+        sizes: "512x512",
         type: "image/png",
         purpose: 'any'
       },
@@ -73,13 +73,13 @@ const pwaOptions: Partial<VitePWAOptions> ={
         form_factor: "wide"
       },
       {
-        src: "screenshot1.png",
+        src: "screenshot2.png",
         sizes: "1920x1080",
         type: "image/png",
         form_factor: "wide"
       },
       {
-        src: "screenshot2.png",
+        src: "screenshot1.png",
         sizes: "1080x1920",
         type: "image/png",
         form_factor: "narrow",
