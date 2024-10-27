@@ -173,6 +173,9 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, __dirname);
 
   return {
+    define: {
+      _global: {},
+    },
     plugins: [
       react(),
       VitePWA(pwaOptions),
