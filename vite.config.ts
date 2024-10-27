@@ -67,25 +67,49 @@ const pwaOptions: Partial<VitePWAOptions> ={
     ],
     screenshots : [
       {
-        src: "screenshot1.png",
+        src: "screenshots/ss1pc.png",
         sizes: "1920x1080",
         type: "image/png",
         form_factor: "wide"
       },
       {
-        src: "screenshot2.png",
+        src: "screenshots/ss2pc.png",
         sizes: "1920x1080",
         type: "image/png",
         form_factor: "wide"
       },
       {
-        src: "screenshot1.png",
+        src: "screenshots/ss3pc.png",
+        sizes: "1920x1080",
+        type: "image/png",
+        form_factor: "wide"
+      },
+      {
+        src: "screenshots/ss4pc.png",
+        sizes: "1920x1080",
+        type: "image/png",
+        form_factor: "wide"
+      },
+      {
+        src: "screenshots/ss1phone.png",
         sizes: "1080x1920",
         type: "image/png",
         form_factor: "narrow",
       },
       {
-        src: "screenshot2.png",
+        src: "screenshots/ss2phone.png",
+        sizes: "1080x1920",
+        type: "image/png",
+        form_factor: "narrow",
+      },
+      {
+        src: "screenshots/ss3phone.png",
+        sizes: "1080x1920",
+        type: "image/png",
+        form_factor: "narrow",
+      },
+      {
+        src: "screenshots/ss4phone.png",
         sizes: "1080x1920",
         type: "image/png",
         form_factor: "narrow",
