@@ -357,7 +357,7 @@ const MetakulCollection = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-[1.875rem] md:grid-cols-2 lg:grid-cols-4">
-              <NftCard balance={balance} loadingMessage='Loading Nfts From Metakul Colelction' handleNftButtonText={"Buy Now"} onHandleButtonClick={buyNft} />
+              <NftCard balance={balance} loadingMessage='Loading Nfts From Metakul Colelction' handleNftButtonText={"Buy Now"} onHandleButtonClick={buyNft} address={nftDropContractAddress}/>
 
               <div className="block ml-2 rounded-2.5xl border border-jacarta-100 p-[1\5rem] transition-shadow hover:shadow-lg max-w-80">
                 <figure className="relative">

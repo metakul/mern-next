@@ -1,23 +1,48 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 // import BannerInfo from './bannerInfo'
 import UserCollection from './UserCollection/index'
 import CreatedNft from './UserCollection/index'
 import { NftTabs } from "@/Datatypes/enums";
-import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
-import { Container, Typography } from '@mui/material';
+import { ConnectWallet, useAddress, useContract } from '@thirdweb-dev/react';
+import { Box, Container, Typography } from '@mui/material';
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import StakingTabNavigation from '@/components/MobileTabNav/StakingTab';
+import SocialProfiles from '@/components/SocialProfile';
+import ContractInfo from '@/components/ContractInfo/ContractInfo';
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 const ownerCreatedNftCollection = import.meta.env.VITE_PUBLIC_MARKETPLACE_ADDRESS as string
+const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
+const thirdwebDashboard = import.meta.env.VITE_THIRDWEB_DASHBOARD as string
 
 
 export default function ProfilePage() {
   const [showOutlet/*, setShowOutlet*/] = useState<boolean>(false);
   const address = useAddress()
+  const { contract } = useContract(tokenContractAddress);
+  const [balance, setBalance] = useState<string>("Loading...")
 
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        if (address && contract) {
+
+          const userBalance = await contract?.erc20.balance();
+
+          setBalance(userBalance?.displayValue);
+        }
+      } catch (error) {
+        console.error("Error fetching balance:", error);
+      }
+    };
+
+    if (address !== null && contract) {
+      fetchBalance();
+    }
+
+  }, [address, contract]);
   const tabs = [
  
     {
@@ -79,11 +104,37 @@ export default function ProfilePage() {
 
 
   return (
-    <Container>
+    <Container sx={{
+      mt:16
+    }}>
       {address ? (
         <>
           {/* <BannerInfo /> */}
           <BreadCrumbs currentPath={"/"} />
+          <Box sx={{
+            width: '100%',
+            height: '100%',
+            padding: '0 1rem',
+            margin: '0 auto',
+            mt:4,
+            mb:8,
+          }}>
+            
+            <Typography variant="h1" className="text-center mt-4 mb-4">
+            {balance} $KULL
+            </Typography>
+            <Typography variant="h4" sx={{mt:4}} className="text-center mt-8 mb-4">
+              Know More and Earn :
+            </Typography>
+            <SocialProfiles/>
+      <ContractInfo urlBase={`${thirdwebDashboard}/${tokenContractAddress}`} buttonText="ERC20 Contract" />
+
+          </Box>
+          <Box>
+            <Typography variant="h3" className=" mt-4 mb-4">
+              My NFTs 
+            </Typography>
+          </Box>
 
           <StakingTabNavigation showOutlet={showOutlet} position={"top"} tabs={tabs} />
         </>

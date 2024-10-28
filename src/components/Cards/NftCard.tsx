@@ -10,9 +10,10 @@ interface Props {
   loadingMessage: string;
   handleNftButtonText: string;
   onHandleButtonClick?: (id: string) => void;
+  address?: string;
 }
 
-const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick }) => {
+const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick,address }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate(); 
 
@@ -26,7 +27,17 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  async function opensea(id: string | undefined) {
+    window.open(
+      `https://opensea.io/assets/matic/${address}/${id}`
+    );
+  }
+  const openDiscord = () => {
+    window.open(
+      `https://discord.gg/wMcv6HW6VJ`
+    );
+  }
+ 
   return (
     <>
     {isLoading ? (
@@ -96,10 +107,11 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                       'aria-labelledby': `itemActions${index}`,
                     }}
                   >
-                    <MenuItem onClick={handleClose}>New bid</MenuItem>
-                    <MenuItem onClick={handleClose}>Refresh Metadata</MenuItem>
-                    <MenuItem onClick={handleClose}>Share</MenuItem>
-                    <MenuItem onClick={handleClose}>Report</MenuItem>
+                    {/* <MenuItem onClick={handleClose}>New bid</MenuItem> */}
+                    {/* <MenuItem onClick={handleClose}>Refresh Metadata</MenuItem> */}
+                    
+                    <MenuItem onClick={() => opensea(item.metadata?.id)}>Share</MenuItem>
+                    <MenuItem onClick={()=>openDiscord()}>Report</MenuItem>
                   </Menu>
                 </div>
               </div>

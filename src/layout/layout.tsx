@@ -41,6 +41,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import ProfilePage from "@/(routes)/profile/page";
 
 const smartWalletOptions = {
   factoryAddress: "0x2ace847964fe70d38ea6dad726e3a230dca244bd",
@@ -100,7 +101,7 @@ export default function DashboardLayout() {
           }}
         />
       ),
-      content: <Tab4 />,
+      content: <ProfilePage />,
       label: Tabs.tabTitle4,
     },
   ];

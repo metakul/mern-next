@@ -20,21 +20,10 @@ const InstaBot = () => {
 
     return (
         <>
-            {!address ? (
-                <ConnectWallet />
-            ) : (
-                <>
-
-                    {!isUserAuthenticated ? (
-                        <RegisterPage />
-                    ) : (
-                        <>
+  
                                 <ChatGpt />
 
-                        </>
-                    )}
-                </>
-            )}
+           
         </>
     );
 };

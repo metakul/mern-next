@@ -22,8 +22,8 @@ const NavItem: React.FC<NavItemProps> = ({ item, isSidebarOpen,setShowOutlet }) 
     return (
         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
             <Box
-                onClick={() => navigate(to)} // Add this onClick handler
-                sx={{ cursor: "pointer" }}     // Add cursor styling to indicate clickable element
+                onClick={icon ? () => navigate(to) : undefined} 
+                sx={{ cursor: "pointer" }}
             >
             <ListItemButton
                 onClick={handleClick}
