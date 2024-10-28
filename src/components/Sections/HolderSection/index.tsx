@@ -102,35 +102,30 @@ export default function HolderBenifits() {
                 <li className="flex gap-x-3">
                   <KeyboardDoubleArrowUpIcon aria-hidden="true" className="mt-1 h-5 w-5 flex-none text-indigo-600" />
                   <span>
-                    <strong className="font-semibold text-gray-900">Push to deploy.</strong> Lorem ipsum, dolor sit amet
-                    consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate
-                    blanditiis ratione.
-                  </span>
+                    <strong className="font-semibold text-gray-900">ERC4337</strong> Utilize Power Of Blockchain In METAVERSE
+                      with ease of Metakul Gasless Platform
+                    </span>
                 </li>
                 <li className="flex gap-x-3">
                   <LockPersonIcon aria-hidden="true" className="mt-1 h-5 w-5 flex-none text-indigo-600" />
                   <span>
-                    <strong className="font-semibold text-gray-900">SSL certificates.</strong> Anim aute id magna aliqua
-                    ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                    <strong className="font-semibold text-gray-900">Unmatched Security</strong>
+                    We prioritize your safety with robust SSL protection, ensuring your data and interactions remain secure. Our platform makes every step intuitive, safe, and user-friendly
                   </span>
                 </li>
                 <li className="flex gap-x-3">
                   <StorageIcon aria-hidden="true" className="mt-1 h-5 w-5 flex-none text-indigo-600" />
                   <span>
-                    <strong className="font-semibold text-gray-900">Database backups.</strong> Ac tincidunt sapien
-                    vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.
+                    <strong className="font-semibold text-gray-900">Freedom to Connect and Create</strong> Engage with others, build, and collaborate without worrying about transaction costs. Our gasless infrastructure empowers you to focus on what truly matters: building your presence, making connections, and enjoying an experience that’s as free as it is powerful.
                   </span>
                 </li>
               </ul>
-              <p className="mt-8">
-                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie auctor
-                fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices hac
-                adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.
-              </p>
+           
               <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">Not able to claim with your web3 wallet? No problem.</h2>
               <p className="mt-6">
                 You can easily get eligibile (whitelist) to claim free nft via our discord giveways or completing simple task.
               </p>
+              <SocialProfiles/>
             </div>
           </div>
         </div>
