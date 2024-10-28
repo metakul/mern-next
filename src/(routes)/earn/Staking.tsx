@@ -28,13 +28,13 @@ const Staking = () => {
     tokenContractAddress,
     "token"
   );
-  
+
   const { data: tokenBalance } = useTokenBalance(tokenContract, address);
   const { contract: nftDropContract } = useContract(
     nftDropContractAddress,
     "nft-drop"
   );
-  
+
   const { contract, } = useContract(stakingContractAddress);
   let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
 
@@ -62,7 +62,7 @@ const Staking = () => {
 
   async function stakeNft(id: unknown) {
     if (!address) return;
-  
+
     const isApproved = await nftDropContract?.isApproved(address, stakingContractAddress);
     if (!isApproved) {
       await nftDropContract?.setApprovalForAll(stakingContractAddress, true);
@@ -72,12 +72,12 @@ const Staking = () => {
       if (response) {
         await toast.promise(
           response, {
-            pending: "Staking Now",
-            success: "Successfully Staked Nft",
-            error: "Error while staking",
-          }
+          pending: "Staking Now",
+          success: "Successfully Staked Nft",
+          error: "Error while staking",
+        }
         );
-  
+
         ownedNfts = await nftDropContract.erc721.getOwned(address);
       } else {
         toast.error("Failed to initiate staking");
@@ -86,7 +86,7 @@ const Staking = () => {
       toast.error("Contract is not available");
     }
   }
-  
+
   return (
     <Container className=''>
       <BreadCrumbs currentPath={"/"} />
@@ -99,42 +99,39 @@ const Staking = () => {
             NFT Staking
           </Typography>
         </Grid>
-        <Grid item xs={6} >
-          <Box>
-            <ConnectWallet className="max-h-[220px]" />
-          </Box>
+        <Grid item xs={6} sx={{
+          display: "flex",
+          justifyContent: "flex-end"
+        }} >
+          {address && claimableRewards &&
+            <>
+              <Typography className="mt-4" >
+                Claimable Balance: <b>
+                  {/* {claimableRewards} */}
+                  {ethers.utils.formatUnits(claimableRewards, 18)}
+                </b>{" "}
+                {tokenBalance?.symbol}
+              </Typography>
+            </>
+          }
+          <Web3Button
+            action={(contract: { call: (arg0: string) => unknown; }) => contract.call("claimRewards")}
+            contractAddress={stakingContractAddress}
+          >
+            Claim Rewards
+          </Web3Button>
         </Grid>
       </Grid>
-
-      {address && claimableRewards &&
-      <>
-        <Typography className="mt-4" >
-          Claimable Balance: <b>
-            {/* {claimableRewards} */}
-            {ethers.utils.formatUnits(claimableRewards, 18)}
-          </b>{" "}
-          {tokenBalance?.symbol}
-        </Typography>
-          <Web3Button
-          action={(contract: { call: (arg0: string) => unknown; }) => contract.call("claimRewards")}
-          contractAddress={stakingContractAddress}
-        >
-          Claim Rewards
-        </Web3Button>
-      </>
-        
-        }
-
       {address ? (
         <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4 mt-4">
 
-          <NftCard balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"} onHandleButtonClick={stakeNft} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "No Nfts to Stake"} address={nftDropContractAddress}/>
+          <NftCard balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"} onHandleButtonClick={stakeNft} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "No Nfts to Stake"} address={nftDropContractAddress} />
         </div>
       ) : (
         <Box sx={{
-          display:"flex",
-          justifyContent:"center",
-          mt:12
+          display: "flex",
+          justifyContent: "center",
+          mt: 12
         }}>
           <Typography variant='h3' sx={{
             mt: 2

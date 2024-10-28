@@ -43,10 +43,10 @@ export default function EarnPage() {
         mt: 4,
         mb: 4,
         p: 3,
-        borderRadius: 2,
+        borderRadius: 8,
         boxShadow: 3,
         backgroundColor: 'background.paper',
-        textAlign: 'center'
+        textAlign: 'center',
       }}>
         <Typography variant='h3' className='font-display text-3xl font-bold'>
           Remaining Rewards To Claim:

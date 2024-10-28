@@ -62,37 +62,39 @@ const Mywallet = () => {
             NFT Unstaking
           </Typography>
         </Grid>
-        <Grid item xs={6} >
-          <Box>
-            <ConnectWallet className="max-h-[220px]" />
-          </Box>
+        <Grid item xs={6} sx={{
+          display: "flex",
+          justifyContent: "flex-end"
+        }}>
+          {address && claimableRewards &&
+            <>
+              <Typography className="mt-4" >
+                Claimable Balance: <b>
+                  {/* {claimableRewards} */}
+                  {ethers.utils.formatUnits(claimableRewards, 18)}
+                </b>{" "}
+                {tokenBalance?.symbol}
+              </Typography>
+
+            </>
+
+          }
+          <Web3Button
+            action={(contract: { call: (arg0: string) => unknown; }) => contract.call("claimRewards")}
+            contractAddress={stakingContractAddress}
+          >
+            Claim Rewards
+          </Web3Button>
         </Grid>
       </Grid>
 
-      {address && claimableRewards &&
-      <>
-        <Typography className="mt-4" >
-          Claimable Balance: <b>
-            {/* {claimableRewards} */}
-            {ethers.utils.formatUnits(claimableRewards, 18)}
-          </b>{" "}
-          {tokenBalance?.symbol}
-        </Typography>
-          <Web3Button
-          action={(contract: { call: (arg0: string) => unknown; }) => contract.call("claimRewards")}
-          contractAddress={stakingContractAddress}
-        >
-          Claim Rewards
-        </Web3Button>
-      </>
-        
-        }
+
 
       <section className="relative py-2">
 
         <Box className="grid grid-cols-1 gap-[1.875rem] md:grid-cols-2 lg:grid-cols-4">
-        {stakedTokens && stakedTokens[0].length > 0 ? (
-          stakedTokens[0]?.map((stakedToken: { toNumber: () => any; toString: () => any; }) => (
+          {stakedTokens && stakedTokens[0].length > 0 ? (
+            stakedTokens[0]?.map((stakedToken: { toNumber: () => any; toString: () => any; }) => (
               <SingleNftCard
                 tokenId={stakedToken.toNumber()}
                 key={stakedToken.toString()}
@@ -100,17 +102,17 @@ const Mywallet = () => {
             ))
           ) : (
             <Box sx={{
-              display:"flex",
-              justifyContent:"center",
-              mt:12
+              display: "flex",
+              justifyContent: "center",
+              mt: 12
             }}>
-          <Typography variant="h3" sx={{
-            mt: 2
-          }}>
-            No NFT&apos;s To UnStake
-          </Typography>
-          </Box>
-        )}
+              <Typography variant="h3" sx={{
+                mt: 2
+              }}>
+                No NFT&apos;s To UnStake
+              </Typography>
+            </Box>
+          )}
         </Box>
       </section>
     </Container >
