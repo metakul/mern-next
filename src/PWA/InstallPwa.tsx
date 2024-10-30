@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import InstallMobileIcon from '@mui/icons-material/InstallMobile';
+import Request from "@/Backend/axiosCall/apiCall";
+
 type BeforeInstallPromptEvent = Event & {
     prompt: () => void;
     userChoice: Promise<{
@@ -38,6 +40,23 @@ const InstallPWA = () => {
 
       if (outcome === 'accepted') {
         toast.success("App installed successfully!");
+
+        // API call to increase download count
+        try {
+        
+           await Request({
+            endpointId: "increaseTotalDownloadCount",
+            data:{
+            password: import.meta.env.VITE_PUBLIC_PASSWORD
+
+            }
+          })
+          
+        } catch (apiError) {
+          toast.error("Failed to record installation count.");
+          console.error("API error:", apiError);
+        }
+
       } else {
         toast.info("Installation was dismissed.");
       }
