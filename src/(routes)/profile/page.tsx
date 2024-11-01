@@ -107,7 +107,6 @@ export default function ProfilePage() {
     <Container sx={{
       mt:16
     }}>
-      {address ? (
         <>
           {/* <BannerInfo /> */}
           <BreadCrumbs currentPath={"/"} />
@@ -130,23 +129,23 @@ export default function ProfilePage() {
       <ContractInfo urlBase={`${thirdwebDashboard}/${tokenContractAddress}`} buttonText="ERC20 Contract" />
 
           </Box>
-          <Box>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            height: '100%',
+            padding: '0 1rem',
+            margin: '0 auto',
+          }}>
             <Typography variant="h3" className=" mt-4 mb-4">
               My NFTs 
             </Typography>
+          <ConnectWallet />
           </Box>
 
           <StakingTabNavigation showOutlet={showOutlet} position={"top"} tabs={tabs} />
         </>
-      ) : (
-        <>
-
-        <Typography>
-          Wallet Not connected
-        </Typography>
-        <ConnectWallet />
-        </>
-      )}
+  
 
     </Container>
   )

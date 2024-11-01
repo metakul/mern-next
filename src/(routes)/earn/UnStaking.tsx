@@ -55,7 +55,6 @@ const Mywallet = () => {
 
   return (
     <Container className=''>
-      <BreadCrumbs currentPath={"/earn"} />
       <Grid container sx={{ mt: 4 }}>
         <Grid item xs={6} sx={{ mb: 4 }}>
           <Typography variant="h3">

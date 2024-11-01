@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import InstallMobileIcon from '@mui/icons-material/InstallMobile';
 import Request from "@/Backend/axiosCall/apiCall";
+import { getColors } from "@/layout/Theme/themes";
 
 type BeforeInstallPromptEvent = Event & {
     prompt: () => void;
@@ -69,16 +70,30 @@ const InstallPWA = () => {
     return null;
   }
   return (
-    <button
-      className="open-sans border border-rounded bg-red-800 font-bold py-2 px-2 rounded inline-flex items-center"
-      id="setup_button"
-      aria-label="Install app"
-      title="Install app"
-      onClick={onClick}
-    >
-      Install now <InstallMobileIcon/>
+    <>
 
-    </button>
+
+
+<div className="w-full p-4 text-center  border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <h5 className="mb-2 text-3xl font-bold ">  Secure Access, Anytime, Anywhere </h5>
+    <p className="mb-5 text-base sm:text-lg">
+    Install our app to get fast, one-tap access to all features, even offline!
+    </p>
+    <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+ 
+        <button onClick={onClick} className={`w-full sm:w-auto  ring-1 focus:outline-none focus:ring-gray-300  rounded-lg inline-flex items-center justify-center px-4 py-2.5 `} style={{
+          background:getColors().grey[800]
+        }}>
+        <InstallMobileIcon className="me-3 w-7 h-7"/>
+            <div className="text-left rtl:text-right">
+                <div className="-mt-1 font-sans text-sm font-semibold">      Install now 
+                </div>
+            </div>
+        </button>
+    </div>
+</div>
+
+      </>
   );
 };
 

@@ -40,10 +40,9 @@ const StakingTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positi
         aria-label="mobile tabs example"
         variant="fullWidth"
         sx={{
-          backgroundColor: getColors().blueAccent[900],
-          color: getColors().redAccent[500],
+          backgroundColor: getColors().blueAccent[700],
         }}
-        className={` ${position === "top" ? " mt-2" : "fixed bottom-0 left-0"} w-full flex flex-row  z-20`}
+        className={` ${position === "top" ? " mt-2" : "fixed bottom-0 left-0"} w-full flex flex-row  z-20 rounded rounded-xl`}
       >
         {tabs.map(({ value }, index) => (
           <Tab 
@@ -53,7 +52,7 @@ const StakingTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positi
             sx={{
               height:"60px",
               '&.Mui-selected': {
-                backgroundColor: getColors().greenAccent[800],
+                backgroundColor: getColors().grey[800],
                 color: getColors().blueAccent[100],
                 borderTopLeftRadius: "10px", 
                 borderTopRightRadius: "10px", 

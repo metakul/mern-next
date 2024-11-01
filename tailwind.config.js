@@ -116,5 +116,6 @@ export default {
     }
   },
   plugins: [],
+  darkMode: ['selector', '[data-mode="dark"]'],
 }
 

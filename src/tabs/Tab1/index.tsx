@@ -16,6 +16,8 @@ const Tab1 = () => {
       </h1>
 
 
+      
+      <MarqueeCryptoNew />
       <Box sx={{
         display: 'flex',
         justifyContent: 'end',
@@ -27,8 +29,6 @@ const Tab1 = () => {
       }}>
         <InstallPWA />
       </Box>
-      
-      <MarqueeCryptoNew />
       <Blogs />
     </>
   );
