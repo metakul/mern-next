@@ -2,7 +2,7 @@ import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
 
 const privateKey=import.meta.env.VITE_PUBLIC_PRIVATE_KEY_SIGNATURE as string
-const marketpalceAddress=import.meta.env.VITE_PUBLIC_MARKETPLACE_ADDRESS as string
+const nftMinterAddress=import.meta.env.VITE_PUBLIC_NFT_MINTER_CONTRACT as string
 const secretKey=import.meta.env.VITE_PUBLIC_SECRET_KEY as string
 const clientId = import.meta.env.VITE_PUBLIC_THIRDWEB_CLIENT_ID as string;
 
@@ -19,7 +19,7 @@ export default async function server({authorAddress,description, name:nftName, i
         // Load the NFT Collection via it's contract address using the SDK
         const nftCollection = await sdk.getContract(
             // Use your NFT_COLLECTION_ADDRESS constant
-            marketpalceAddress,
+            nftMinterAddress,
             'nft-collection'
         );
 

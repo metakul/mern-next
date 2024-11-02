@@ -8,7 +8,7 @@ interface Props {
   isLoading?:boolean
   balance: BalanceItem[];
   loadingMessage: string;
-  handleNftButtonText: string;
+  handleNftButtonText?: string;
   onHandleButtonClick?: (id: string) => void;
   address?: string;
 }

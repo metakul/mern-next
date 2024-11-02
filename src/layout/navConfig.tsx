@@ -1,3 +1,4 @@
+import { Pages } from "@/Datatypes/enums";
 import {
   HomeOutlined,
   ShoppingCartOutlined,
@@ -24,7 +25,7 @@ export const navConfig = [
   {
     text: "Claim NFT",
     icon: <TodayOutlined />,
-    to: "/mint",
+    to: Pages.MINT
   },
   // {
   //   text: "Explore",
@@ -34,12 +35,12 @@ export const navConfig = [
   {
     text: "Earn With Nft",
     icon: <PieChartOutlined />,
-    to: "/earn",
+    to: Pages.EARN,
   },
   {
     text: "Profile",
     icon: <PieChartOutlined />,
-    to: "/profile",
+    to: Pages.PROFILE
   },
   // {
   //   text: "Shopping",
@@ -71,7 +72,17 @@ export const navConfig = [
   {
     text: "Create Own NFT",
     icon: <PublicOutlined />,
-    to: "/create_nft",
+    to: Pages.CREATE_NFT
+  },
+  {
+    text: "Buy Nft Own NFT",
+    icon: <PublicOutlined />,
+    to: Pages.MARKETPLACE
+  },
+  {
+    text: "Sell Your NFT",
+    icon: <PublicOutlined />,
+    to: Pages.SELL,
   },
   // {
   //   text: "Career",
@@ -87,12 +98,12 @@ export const navConfig = [
   {
     text: "ChatGpt",
     icon:<SmartToyIcon/>,
-    to: "/ChatGpt",
+    to: Pages.CHAT_GPT
   },
   {
     text: "InstaBot",
     icon:<SmartToyIcon/>,
-    to: "/InstaBot",
+    to: Pages.INSTA_BOT
   },
   // {
   //   text: "LAUNDRY",

@@ -14,6 +14,9 @@ import CreateNft from "./(routes)/create_nft/page";
 import ShopPage from "./(routes)/shopping/page";
 import AddBlogPage from "./(routes)/addBlog/page";
 import ChatGpt from "./Projects/ChatGpt/ChatGpt";
+import MarketPlace from "./(routes)/Marketplace/page";
+import SaleInfo from "./components/SaleInfo";
+import Sell from "./(routes)/Marketplace/SellPage";
 
 
 
@@ -69,6 +72,14 @@ const Router: React.FC = () => {
         {
           path: Pages.CHAT_GPT,
           element:  <ChatGpt/>,
+        },
+        {
+          path: Pages.MARKETPLACE,
+          element:  <MarketPlace/>,
+        },
+        {
+          path: Pages.SELL,
+          element:  <Sell/>,
         },
       
       ],

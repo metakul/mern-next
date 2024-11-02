@@ -23,7 +23,7 @@ const MyMetakulNft = ({ collectionAddress }: any) => {
       {address ? (
         <div className="flex justify-center mt-4">
           <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4">
-            <NftCard isLoading={isLoading} balance={ownedNfts as BalanceItem[]} handleNftButtonText={"Stake Now"} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "Loading Nfts"} address={collectionAddress}/>
+            <NftCard isLoading={isLoading} balance={ownedNfts as BalanceItem[]} loadingMessage={!address ? 'Loading Owner NFT. Keep Your wallet Conencted.' : "Loading Nfts"} address={collectionAddress}/>
           </div>
         </div>
 

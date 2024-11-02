@@ -3,6 +3,7 @@ import { RequestOptions } from '@/Datatypes/interfaces/interface';
 import { toast } from 'react-toastify';
 import { ApiEndpoint } from '@/Datatypes/enums';
 import Cookies from 'js-cookie';
+import toastStyle from '@/util/toastConfig';
 const chatGptApiKey = import.meta.env.VITE_OPENAI_API_KEY; 
 
 const Request = async ({ endpointId, slug, data, headers }: RequestOptions) => {
@@ -48,14 +49,14 @@ const Request = async ({ endpointId, slug, data, headers }: RequestOptions) => {
 
     // Show success message if the response is successful
     if (endpoint?.successMessage) {
-      toast.success(endpoint.successMessage);
+          toast.success(endpoint.successMessage,{style: toastStyle,position: "bottom-center"});
     }
 
     return response.data;  // Return the response data for further processing
   } catch (error) {
 
     if ( endpoint?.errorMessage) {
-      toast.error(endpoint?.errorMessage);
+      toast.error(endpoint?.errorMessage,{style: toastStyle,position: "bottom-center"});
     }
 
     console.error("Request error:", error);

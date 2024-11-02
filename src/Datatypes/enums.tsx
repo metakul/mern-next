@@ -46,6 +46,8 @@ export enum Pages {
   SHOPPING = "/shopping" ,
   ADD_BLOG = "/addblog" ,
   CHAT_GPT = "/ChatGpt" ,
+  MARKETPLACE = "/Marketplace" ,
+  SELL = "/SELL" ,
 }
 
 export enum HomePageInfo{

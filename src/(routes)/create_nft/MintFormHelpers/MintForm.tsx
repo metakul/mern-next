@@ -10,7 +10,7 @@ import { mintWithSignature } from "./signature";
 import { toast } from "react-toastify";
 import ContractInfo from "@/components/ContractInfo/ContractInfo";
 
-const marketpalceAddress=import.meta.env.VITE_PUBLIC_MARKETPLACE_ADDRESS as string
+const nftMinterAddress=import.meta.env.VITE_PUBLIC_NFT_MINTER_CONTRACT as string
 const thirdwebDashboard = import.meta.env.VITE_THIRDWEB_DASHBOARD as string
 
 
@@ -22,7 +22,7 @@ function Home() {
   const address=useAddress()
 
   const { contract: nftCollection } = useContract(
-    marketpalceAddress,
+    nftMinterAddress,
     "nft-collection"
 );
 
@@ -119,7 +119,7 @@ function Home() {
 
         <s.TextInfo>Upload Image to enable Mint Button</s.TextInfo>
       </s.ResponsiveWrapper>
-      <ContractInfo urlBase={`${thirdwebDashboard}/${marketpalceAddress}`} buttonText="NFT Minter Contract" />
+      <ContractInfo urlBase={`${thirdwebDashboard}/${nftMinterAddress}`} buttonText="NFT Minter Contract" />
     </Container>
   );
 }

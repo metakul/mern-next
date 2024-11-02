@@ -13,7 +13,7 @@ import SocialProfiles from '@/components/SocialProfile';
 import ContractInfo from '@/components/ContractInfo/ContractInfo';
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
-const ownerCreatedNftCollection = import.meta.env.VITE_PUBLIC_MARKETPLACE_ADDRESS as string
+const nftMinterAddress = import.meta.env.VITE_PUBLIC_NFT_MINTER_CONTRACT as string
 const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
 const thirdwebDashboard = import.meta.env.VITE_THIRDWEB_DASHBOARD as string
 
@@ -96,7 +96,7 @@ export default function ProfilePage() {
         </svg>
         <span className="font-display text-base font-medium">Created</span>
       </button>,
-      content: <CreatedNft collectionAddress={ownerCreatedNftCollection} type={"ownerCreatedNft"} />,
+      content: <CreatedNft collectionAddress={nftMinterAddress} type={"ownerCreatedNft"} />,
       label: NftTabs.tabTitle2
     },
  
