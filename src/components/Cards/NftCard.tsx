@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
-import { Button, Menu, MenuItem, Typography } from '@mui/material';
+import { Button, CircularProgress, Menu, MenuItem, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Pages } from '@/Datatypes/enums';
+import { getColors } from '@/layout/Theme/themes';
 
 interface Props {
   isLoading?:boolean
@@ -15,6 +16,12 @@ interface Props {
 
 const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick,address }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [staking, setStaking] = useState<boolean>(false);
+  
+  // Memoize the initial button text based on handleNftButtonText
+  const initialButtonText = useMemo(() => handleNftButtonText || 'Stake NFT', [handleNftButtonText]);
+  const [buttonText, setButtonText] = useState<string>(initialButtonText);
+
   const navigate = useNavigate(); 
 
   const handleNavigate = (href: string) => {
@@ -51,7 +58,7 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                   <img
                     src={item?.metadata?.image}
                     alt={`item ${index + 1}`}
-                    className=" rounded-t-2.5xl border sm:max-w-[180px]"
+                    className=" rounded-t-2.5xl border max-w-[160px] md:max-w-[200px] object-cover"
                     loading="lazy"
                   />
                 <div className="absolute top-3 right-3 flex items-center space-x-1 rounded-md  p-2">
@@ -110,23 +117,58 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                     {/* <MenuItem onClick={handleClose}>New bid</MenuItem> */}
                     {/* <MenuItem onClick={handleClose}>Refresh Metadata</MenuItem> */}
                     
-                    <MenuItem onClick={() => opensea(item.metadata?.id)}>Share</MenuItem>
-                    <MenuItem onClick={()=>openDiscord()}>Report</MenuItem>
+          
+          <MenuItem onClick={() => opensea(item.metadata?.id)}>View on <img src="/Images/opensea-logo.svg" alt="opensea" className="h-6 w-6 ml-2" /> </MenuItem>
+                    <MenuItem onClick={()=>openDiscord()}>Report </MenuItem>
                   </Menu>
                 </div>
               </div>
               {onHandleButtonClick &&
               <div className="mt-4 flex items-center justify-between ml-4">
                 {item && item?.metadata?.id ? (
-                  <Button sx={{
-                    backgroundColor:"white",
-                    mb:2
-                  }} onClick={() => item && item.metadata && onHandleButtonClick(item.metadata.id)}>
-                   <Typography variant='h5'>
-
-                    {handleNftButtonText}
+                 <Button
+                 sx={{
+                   backgroundColor: getColors().grey[800],
+                   mb: 2,
+                   "&.Mui-disabled": {
+                     color: getColors().grey[300],
+                   },
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   width: '120px',
+                   height: '44px',
+                 }}
+                 disabled={staking}
+                 onClick={async () => {
+                   try {
+                     setStaking(true);
+                     setButtonText("Staking Now");
+                     if (item && item.metadata) {
+                       await onHandleButtonClick(item.metadata.id);
+                     }
+                     setStaking(false);
+                     setButtonText(initialButtonText);
+                   } catch (error) {
+                     console.error(error);
+                     setStaking(false);
+                     setButtonText(initialButtonText);
+                   }
+                 }}
+               >
+                 {staking ? (
+                   <CircularProgress size={24} sx={{ color: getColors().grey[100] }} />
+                 ) : (
+                   <Typography
+                     variant="h5"
+                     sx={{
+                       color: getColors().blueAccent[100],
+                     }}
+                   >
+                     {buttonText}
                    </Typography>
-                    </Button>
+                 )}
+               </Button>
                 ) : (
                   <h3>Not Minted Yet</h3>
                 )}

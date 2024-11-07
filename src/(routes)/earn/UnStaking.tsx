@@ -105,7 +105,7 @@ const Mywallet = () => {
               justifyContent: "center",
               mt: 12
             }}>
-              <Typography variant="h3" sx={{
+              <Typography variant="h4" sx={{
                 mt: 2
               }}>
                 No NFT&apos;s To UnStake

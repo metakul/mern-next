@@ -132,7 +132,7 @@ const Staking = () => {
           justifyContent: "center",
           mt: 12
         }}>
-          <Typography variant='h3' sx={{
+          <Typography variant='h4' sx={{
             mt: 2
           }}>
             Connect Your Wallet To View your Staked NFT&apos;s

@@ -123,7 +123,7 @@ export default function DashboardLayout() {
                     smartWalletOptions
                   ),
                   smartWallet(walletConnect(), smartWalletOptions),
-                  smartWallet(localWallet(), smartWalletOptions),
+                  // smartWallet(localWallet(), smartWalletOptions),
                   smartWallet(
                     embeddedWallet({
                       auth: {

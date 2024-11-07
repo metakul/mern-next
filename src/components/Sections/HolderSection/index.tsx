@@ -46,7 +46,7 @@ export default function HolderBenifits() {
   }
 
   return (
-    <div className="relative isolate overflow-hidden  px-6 py-12 sm:py-16 lg:overflow-visible lg:px-0">
+    <div className="relative mt-6 isolate overflow-hidden lg:overflow-visible lg:px-0">
       <div className='mb-16'>
       <video className="border-2 rounded-2xl mb-6" controls>
                 <source src="video/MetakulInfo.mp4" type="video/mp4" />
@@ -64,7 +64,7 @@ export default function HolderBenifits() {
               <p className="mt-6 text-lg leading-8 text-gray-700">
                 Students moving to web3 are our number-one priority, so we like to take care of them!
               </p>
-              <p className='mt-4'>
+              <p className='mt-4 text-md'>
                 Discover. Collect. Buy Now. Without hassle of Gas Fees
               </p>
             </div>
@@ -95,28 +95,28 @@ export default function HolderBenifits() {
             Total Claimed NFT : {isLoading ? "Loading" : parseInt(totalSupply._hex, 16).toString()}/777
            </Typography>
         </div>
-        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-2">
           <div className="lg:pr-4">
             <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
-              <ul role="list" className="mt-8 space-y-8 text-gray-600">
+              <ul role="list" className="mt-2 space-y-8 text-gray-600">
                 <li className="flex gap-x-3">
                   <KeyboardDoubleArrowUpIcon aria-hidden="true" className="mt-1 h-5 w-5 flex-none text-indigo-600" />
                   <span>
-                    <strong className="font-semibold text-gray-900">ERC4337</strong> Utilize Power Of Blockchain In METAVERSE
+                    <strong className="font-semibold text-gray-900 text-md">ERC4337 AKA Account Abstraction:</strong> Utilize Power Of Blockchain In METAVERSE
                       with ease of Metakul Gasless Platform
                     </span>
                 </li>
                 <li className="flex gap-x-3">
                   <LockPersonIcon aria-hidden="true" className="mt-1 h-5 w-5 flex-none text-indigo-600" />
                   <span>
-                    <strong className="font-semibold text-gray-900">Unmatched Security</strong>
+                    <strong className="font-semibold text-gray-900 text-md">Unmatched Security: </strong>
                     We prioritize your safety with robust SSL protection, ensuring your data and interactions remain secure. Our platform makes every step intuitive, safe, and user-friendly
                   </span>
                 </li>
                 <li className="flex gap-x-3">
                   <StorageIcon aria-hidden="true" className="mt-1 h-5 w-5 flex-none text-indigo-600" />
                   <span>
-                    <strong className="font-semibold text-gray-900">Freedom to Connect and Create</strong> Engage with others, build, and collaborate without worrying about transaction costs. Our gasless infrastructure empowers you to focus on what truly matters: building your presence, making connections, and enjoying an experience that’s as free as it is powerful.
+                    <strong className="font-semibold text-gray-900 text-md">Freedom to Connect and Create: </strong> Engage with others, build, and collaborate without worrying about transaction costs. Our gasless infrastructure empowers you to focus on what truly matters: building your presence, making connections, and enjoying an experience that’s as free as it is powerful.
                   </span>
                 </li>
               </ul>

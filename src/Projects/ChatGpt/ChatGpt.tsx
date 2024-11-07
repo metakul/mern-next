@@ -8,6 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import { parseMessageContent } from '@/scripts/handleBlogCss';
 import { useScrollToBottom } from '@/components/custom/use-scroll-to-bootm';
 import { getColors } from '@/layout/Theme/themes'; // Import your color utility
+import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 
 const ChatGPTClone = () => {
   const [input, setInput] = useState('');
@@ -33,13 +34,15 @@ const ChatGPTClone = () => {
 
   return (
     <div style={{ margin: 'auto', padding: '20px' }}>
+      <BreadCrumbs currentPath={"/ChatGpt"} />
+
       <Paper
         ref={containerRef}
         elevation={3}
         style={{
-          height: "65vh",
           overflowY: 'auto',
           padding: '20px',
+          marginTop: '40px',
           borderRadius: '8px',
           backgroundColor: colors.secondary[900], // Background based on theme
           color: colors.primary[100], // Primary color for text

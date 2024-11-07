@@ -33,6 +33,9 @@ export default function ProfilePage() {
 
           setBalance(userBalance?.displayValue);
         }
+        else{
+          setBalance("Connect Wallet to view balance")
+        }
       } catch (error) {
         console.error("Error fetching balance:", error);
       }
@@ -109,7 +112,7 @@ export default function ProfilePage() {
     }}>
         <>
           {/* <BannerInfo /> */}
-          <BreadCrumbs currentPath={"/"} />
+          <BreadCrumbs currentPath={"/profile"} />
           <Box sx={{
             width: '100%',
             height: '100%',
@@ -119,10 +122,10 @@ export default function ProfilePage() {
             mb:8,
           }}>
             
-            <Typography variant="h1" className="text-center mt-4 mb-4">
+            <Typography variant="h4" className="text-center mt-4 mb-4">
             {balance} $KULL
             </Typography>
-            <Typography variant="h4" sx={{mt:4}} className="text-center mt-8 mb-4">
+            <Typography variant="h5" sx={{mt:4}} className="text-center mt-8 mb-4">
               Know More and Earn :
             </Typography>
             <SocialProfiles/>
@@ -136,6 +139,7 @@ export default function ProfilePage() {
             height: '100%',
             padding: '0 1rem',
             margin: '0 auto',
+            mt:16
           }}>
             <Typography variant="h3" className=" mt-4 mb-4">
               My NFTs 

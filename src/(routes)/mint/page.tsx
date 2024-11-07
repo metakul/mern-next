@@ -20,19 +20,15 @@ const MintPage = () => {
   const { contract: nftDrop } = useContract(nftDropContractAddress);
   const address=useAddress()
   // const [errmsg, setErrmsg]=useState("")
-  const { data: ownedNfts } = useOwnedNFTs(nftDrop, address);
+  // const { data: ownedNfts } = useOwnedNFTs(nftDrop, address);
 
-  async function opensea(id: string) {
-    const nft = id;
-    window.open(
-      `https://opensea.io/assets/matic/${nftDropContractAddress}/${nft}`
-    );
-  }
+
 
   return (
-    <Container >
-      <Container>
-        <BreadCrumbs currentPath={"/mint"} />
+      <Container sx={{
+        mt:12
+      }}>
+        <BreadCrumbs currentPath={"/mint"}/>
        
         {/* <Box sx={{
           display:"flex",
@@ -49,44 +45,17 @@ const MintPage = () => {
           <Grid>
             {address &&
               <div>
-                <h3>Your Owned NFT</h3>
-                <p style={{ marginTop: "0px", fontWeight: "bold" }}>
-                  ( Will Load After Mint )
-                </p>
+                <h2>Your Owned NFT</h2>
+                View it On Profile
               </div>
             }
           </Grid>
-          <Grid>
-            {ownedNfts?.map((nft,index) => (
-              <Container key={index}>
-                <div
-                  key={nft.metadata.id.toString()}
-                  className=""
-                >
-                  <ThirdwebNftMedia
-                    metadata={nft.metadata}
-                    className="nftMedia"
-                  />
-                  <h3
-                  >
-                    {nft.metadata.name}
-                  </h3>
-                  <Button
-                    onClick={() => opensea(nft.metadata.id)}
-                    className="mainButton"
-                  >
-                    View on Opensea
-                  </Button>
-                </div>
-              </Container>
-            ))}
-          </Grid>
+         
         </Grid>
       <ContractInfo urlBase={`${thirdwebDashboard}/${nftDropContractAddress}`} buttonText="Metakul Nft Contract" />
 
       </Container>
 
-    </Container>
 
   );
 };

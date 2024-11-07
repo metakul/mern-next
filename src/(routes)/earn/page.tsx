@@ -38,7 +38,7 @@ export default function EarnPage() {
   }, [contract]);
 
   return (
-    <Container sx={{mt:18}}>
+    <Container sx={{mt:8}}>
       <BreadCrumbs currentPath={"/earn"} />
       <Box sx={{
         mt: 4,
@@ -52,28 +52,28 @@ export default function EarnPage() {
         <Box sx={{
         }}>
           
-          <div className="p-4  rounded-lg md:p-4 " id="stats" role="tabpanel" aria-labelledby="stats-tab">
-            <dl className="grid max-w-screen-xl grid-cols-2 gap-8 p-2 mx-auto  sm:grid-cols-2 xl:grid-cols-6 sm:p-4">
+          <div className="p-1  rounded-lg md:p-4 " id="stats" role="tabpanel" aria-labelledby="stats-tab">
+            <dl className="grid  grid-cols-2 gap-2 p-2 mx-auto  sm:grid-cols-2 xl:grid-cols-6 sm:p-">
               <div className="flex flex-col items-center justify-center">
-                <dt className="mb-2 text-3xl font-extrabold">1M+</dt>
+                <dt className="mb-2 text-md md:text-2xl font-extrabold">1M+</dt>
                 <dd className="">Total Rewards</dd>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <dt className="mb-2 text-3xl font-extrabold">
+                <dt className="mb-2 text-md md:text-2xl font-extrabold">
 
                   {rewardBalance !== null ? `${rewardBalance}` : "Loading..."}
                 </dt>
-                <dd className="">Claimable Rewards</dd>
+                <dd className="text-sm">Claimable Rewards</dd>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <dt className="mb-2 text-3xl font-extrabold">
+                <dt className="mb-2 text-md md:text-2xl font-extrabold">
                   {rewardBalance !== null ? `${100100 - Number(rewardBalance)}` : "Loading..."}
                 </dt>
                 <dd className="">Claimed Rewards</dd>
               </div>
             
               <div className="flex flex-col items-center justify-center">
-                <dt className="mb-2 text-3xl font-extrabold">
+                <dt className="mb-2 text-md md:text-2xl font-extrabold">
                     $KULL
                 </dt>
                 <dd className="">Crypto To Claim</dd>

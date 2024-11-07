@@ -19,13 +19,6 @@ const Tab1 = () => {
       
       <MarqueeCryptoNew />
       <Box sx={{
-        display: 'flex',
-        justifyContent: 'end',
-        width: '100%',
-        height: '100%',
-        padding: '0 1rem',
-        margin: '0 auto',
-        mb:2
       }}>
         <InstallPWA />
       </Box>
