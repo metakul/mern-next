@@ -15,7 +15,7 @@ export const MARKETPLACE = getContract({
 });
 
 // 3. The address of your NFT collection smart contract.
-const NFT_COLLECTION_ADDRESS = import.meta.env.VITE_PUBLIC_NFT_MINTER_CONTRACT;
+const NFT_COLLECTION_ADDRESS = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS;
 export const NFT_COLLECTION = getContract({
 	address: NFT_COLLECTION_ADDRESS,
 	client,

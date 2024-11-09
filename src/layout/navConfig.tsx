@@ -74,16 +74,16 @@ export const navConfig = [
     icon: <PublicOutlined />,
     to: Pages.CREATE_NFT
   },
-  // {
-  //   text: "Buy Nft Own NFT",
-  //   icon: <PublicOutlined />,
-  //   to: Pages.MARKETPLACE
-  // },
-  // {
-  //   text: "Sell Your NFT",
-  //   icon: <PublicOutlined />,
-  //   to: Pages.SELL,
-  // },
+  {
+    text: "Buy Nft Own NFT",
+    icon: <PublicOutlined />,
+    to: Pages.MARKETPLACE
+  },
+  {
+    text: "Sell Your NFT",
+    icon: <PublicOutlined />,
+    to: Pages.SELL,
+  },
   // {
   //   text: "Career",
   //   icon: <CalendarMonthOutlined />,
