@@ -73,14 +73,14 @@ const Router: React.FC = () => {
           path: Pages.CHAT_GPT,
           element:  <ChatGpt/>,
         },
-        {
-          path: Pages.MARKETPLACE,
-          element:  <MarketPlace/>,
-        },
-        {
-          path: Pages.SELL,
-          element:  <Sell/>,
-        },
+        // {
+        //   path: Pages.MARKETPLACE,
+        //   element:  <MarketPlace/>,
+        // },
+        // {
+        //   path: Pages.SELL,
+        //   element:  <Sell/>,
+        // },
       
       ],
     },
