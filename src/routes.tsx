@@ -17,6 +17,7 @@ import ChatGpt from "./Projects/ChatGpt/ChatGpt";
 import MarketPlace from "./(routes)/Marketplace/page";
 import SaleInfo from "./components/SaleInfo";
 import Sell from "./(routes)/Marketplace/SellPage";
+import Gurukul from "./(routes)/Learning/Gurukul";
 
 
 
@@ -72,6 +73,10 @@ const Router: React.FC = () => {
         {
           path: Pages.CHAT_GPT,
           element:  <ChatGpt/>,
+        },
+        {
+          path: Pages.GURUKUL,
+          element:  <Gurukul/>,
         },
         // {
         //   path: Pages.MARKETPLACE,

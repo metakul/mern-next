@@ -9,7 +9,7 @@ import {
   // Checkroom
 } from "@mui/icons-material";
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-
+import SchoolIcon from '@mui/icons-material/School';
 export const navConfig = [
   {
     text: "Dashboard",
@@ -110,6 +110,16 @@ export const navConfig = [
   //   icon:<Checkroom/>,
   //   to: "/laundry",
   // },
+  {
+    text: "Learn",
+    icon:null,
+    to: "",
+  },
+  {
+    text: "Gurukul",
+    icon:<SchoolIcon/>,
+    to: Pages.GURUKUL
+  },
 ];
 
 export default navConfig;
