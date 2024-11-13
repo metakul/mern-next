@@ -42,6 +42,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import ProfilePage from "@/(routes)/profile/page";
+import { MenuBookRounded, MenuRounded } from "@mui/icons-material";
 
 const smartWalletOptions = {
   factoryAddress: "0x2ace847964fe70d38ea6dad726e3a230dca244bd",
@@ -95,13 +96,13 @@ export default function DashboardLayout() {
     },
     {
       value: (
-        <ContactEmergencyOutlinedIcon
+        <MenuRounded
           sx={{
             color: "white",
           }}
         />
       ),
-      content: <ProfilePage />,
+      content: null,
       label: Tabs.tabTitle4,
     },
   ];
@@ -162,7 +163,11 @@ export default function DashboardLayout() {
                     mr: "auto",
                   }}
                 >
-                  <MobileTabNavigation showOutlet={showOutlet} tabs={tabs} />
+                    <MobileTabNavigation
+                      showOutlet={showOutlet}
+                      tabs={tabs}
+                      setIsSidebarOpen={handleSideBarState}
+                    />
                 </Container>
                 <Analytics />
                 <SpeedInsights />
