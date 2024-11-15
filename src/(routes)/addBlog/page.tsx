@@ -1,12 +1,22 @@
 import { useSelector } from 'react-redux';
-import { selectUserType } from '@/lib/slices/authSlice';
+import { isAuthenticated, selectUserType } from '@/lib/slices/authSlice';
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import AddDropShipItemForm from '@/components/Forms/AddDropShipItemForm';
-import { Pages } from '@/Datatypes/enums';
+import { Pages, UserCategory } from '@/Datatypes/enums';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 function AddDropShipItemPage() {
 
   const userType = useSelector(selectUserType);
+  const isUserAuthenticated = useSelector(isAuthenticated);
+  const selectedUserType = useSelector(selectUserType);
+  const navigation = useNavigate(); 
 
+  useEffect(() => {
+    if (!isUserAuthenticated && selectedUserType!==UserCategory.SUPER_ADMIN) {
+      navigation("/"); 
+    }
+  }, [isUserAuthenticated, history]);
   return (
     <div>
           <BreadCrumbs currentPath={Pages.ADD_DROPSHIP_ITEM} />
