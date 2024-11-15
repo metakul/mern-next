@@ -1,22 +1,23 @@
-import AddBlogForm from '@/components/Forms/AddBlogForm'
 import { useSelector } from 'react-redux';
 import { selectUserType } from '@/lib/slices/authSlice';
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
-function AddBlogPage() {
+import AddDropShipItemForm from '@/components/Forms/AddDropShipItemForm';
+import { Pages } from '@/Datatypes/enums';
+function AddDropShipItemPage() {
 
   const userType = useSelector(selectUserType);
 
   return (
     <div>
-          <BreadCrumbs currentPath={`/addBlog`} />
+          <BreadCrumbs currentPath={Pages.ADD_DROPSHIP_ITEM} />
           <div>
 
 
-            <AddBlogForm  userType={userType} formEvent={"ADD BLOG"} />
+            <AddDropShipItemForm  userType={userType} formEvent={"ADD DropShipItem"} />
           </div>
               
     </div>
   )
 }
 
-export default AddBlogPage
+export default AddDropShipItemPage

@@ -2,7 +2,7 @@ import { Button, Container } from '@mui/material';
 import { useState } from 'react';
 import ThreeScene from '@/components/Three.js/index';
 
-const Userpage: React.FC = () => {
+const VRPAGE: React.FC = () => {
   const [xrEnabled, setXrEnabled] = useState(false);
 
   const enableXr = () => {
@@ -20,4 +20,4 @@ const Userpage: React.FC = () => {
   );
 };
 
-export default Userpage;
+export default VRPAGE;

@@ -1,17 +1,18 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { BlogDetailsProps } from '@/Datatypes/interfaces/interface';
-import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
+import { DropShipItemDetailsProps } from '@/Datatypes/interfaces/interface';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { renderCustomStyles } from '@/scripts/handleBlogCss';
+import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
+import { Pages } from '@/Datatypes/enums';
 
-const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
+const DropShipItemDescription = ({ _id, userType }: DropShipItemDetailsProps) => {
 
-  const {blogs:blogsData} = useSelector(selectedBlogs);
-  const selectedBlog = blogsData.find((blog) => blog.blogId === _id);
-  const [timeToRead,setTimeToRead]=useState<number>()
-  const navigate = useNavigate(); 
+  const { dropShipItems: dropShipItemsData } = useSelector(selectedDropShipItems);
+  const selectedDropShipItem = dropShipItemsData.find((dropShipItem) => dropShipItem.id === _id);
+  const [timeToRead, setTimeToRead] = useState<number>()
+  const navigate = useNavigate();
 
   const handleNavigate = (href: string) => {
     navigate(href);
@@ -20,7 +21,7 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
   const parseHTML = (html: string) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
-  
+
     // Convert child nodes to an array while also preserving text nodes.
     return Array.from(tempDiv.childNodes).map((node) => {
       return {
@@ -31,7 +32,7 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
       };
     });
   };
-  
+
 
   const calculateReadingTime = (description: string) => {
     // Assuming an average reading speed of 200 words per minute
@@ -42,45 +43,46 @@ const BlogDescription = ({ _id,userType }: BlogDetailsProps) => {
   };
 
   useEffect(() => {
-    if (selectedBlog && selectedBlog.description) {
-      setTimeToRead(calculateReadingTime(selectedBlog.description));
+    if (selectedDropShipItem && selectedDropShipItem.description) {
+      setTimeToRead(calculateReadingTime(selectedDropShipItem.description));
     }
-  }, [selectedBlog])
-  
+  }, [selectedDropShipItem])
+
   let truncatedDescription
-  if(userType===""){
-    truncatedDescription= selectedBlog?.description ? selectedBlog.description.split(' ').slice(0, 80).join(' ') + ' .....' : '';
+  if (userType === "") {
+    truncatedDescription = selectedDropShipItem?.description ? selectedDropShipItem.description.split(' ').slice(0, 80).join(' ') + ' .....' : '';
   }
-  else{
-    truncatedDescription=selectedBlog?.description
+  else {
+    truncatedDescription = selectedDropShipItem?.description
   }
-  
+
 
   return (
     <div className='px-8 mt-4'>
-      {truncatedDescription &&  (
+      {truncatedDescription && (
         <>
           <div>
             <div className="flex flex-wrap justify-between items-center space-x-2 text-md mb-2 text-jacarta-400">
-              {}
+              { }
               <span>•  {timeToRead} min read</span>
               <Button variant='contained' sx={{
               }}>
-                
-                <Typography  onClick={() => selectedBlog && handleNavigate(`/blogdetails/${selectedBlog.title}/${_id}`)}>
-                Read All
-                </Typography> </Button>
+
+                <Typography onClick={() => selectedDropShipItem && handleNavigate(`${Pages.SINGLE_BLOG.replace(':dropShipItemTitle', selectedDropShipItem.title).replace(':id', _id)}`)}>
+                  Read All
+                </Typography>
+              </Button>
             </div>
 
-            {parseHTML(truncatedDescription).map((node, index) => renderCustomStyles(node, index))} 
+            {parseHTML(truncatedDescription).map((node, index) => renderCustomStyles(node, index))}
 
-            
+
           </div>
         </>
       )}
-                 
+
     </div>
   );
 };
 
-export default BlogDescription;
+export default DropShipItemDescription;

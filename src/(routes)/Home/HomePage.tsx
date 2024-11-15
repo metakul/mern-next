@@ -21,7 +21,7 @@ const HomePage: React.FC<HomePageProps> = () => {
 
 
   useEffect(() => {
-    if (isUserAuthenticated && userType == UserCategory.SUPER_ADMIN) {
+    if (isUserAuthenticated && userType == UserCategory.SUPER_ADMIN) { // todo use SUPER_ADMIN_DROP_SHIP
       navigation(Pages.DASHBOARD)
     } else {
       console.error("User is not authenticated");

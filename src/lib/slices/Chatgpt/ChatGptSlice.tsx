@@ -12,7 +12,7 @@ interface ChatState {
 }
 
 const initialState: ChatState = {
-  messages: [{ role: 'assistant', content: `Ask me anything and get instant responses! Im here to help you explore information and find answers.`}],
+  messages: [{ role: 'assistant', content: `Ask me anything related to your convenience and get instant responses! Im here to help you explore information and find answers.`}],
   loading: false,
 };
 

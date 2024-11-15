@@ -28,10 +28,6 @@ const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positio
     let activeItem = menu.querySelector(".active") as HTMLElement;
 
     function clickItem(item: HTMLElement | null, index: number) {
-      if (index === 3 && setIsSidebarOpen) {
-        setIsSidebarOpen();
-        return;
-      }
 
       if (activeItem === item) return;
 

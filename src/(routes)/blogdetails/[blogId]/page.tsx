@@ -4,30 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Box, Button, Skeleton, Typography } from '@mui/material';
 
-import BreadCrumbs from '@/components/Elements/BreadCrumbs';
-
-import AddBlogForm from '@/components/Forms/AddBlogForm';
-
-import { IFetchBlogData } from '@/Datatypes/interfaces/interface';
-import { BlogsStatusInfo, Pages, UserCategory } from '@/Datatypes/enums';
-import {  parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
+import { DropShipStatusInfo, Pages, UserCategory } from '@/Datatypes/enums';
 
 //theme
 import { getColors } from '@/layout/Theme/themes';
 //redux
 import { AppDispatch } from '@/lib/store';
-import { useSelectedBlog } from '@/lib/slices/Blogs/BlogSlice';
 import { selectUserType } from '@/lib/slices/authSlice';
-import { fetchSingleBlogApiSlice, updateBlogStatusSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import { Helmet } from "react-helmet";
 import {  useNavigate, useParams } from 'react-router-dom';
+import AddDropShipItemForm from '@/components/Forms/AddDropShipItemForm';
+import { useSelectedDropShipItem } from '@/lib/slices/DropShip/DropShipSlice';
+import { fetchSingleDropShipItemApi, updateDropShipItemStatus } from '@/lib/slices/DropShip/DropShipAPI';
+import { parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
 
 
-const SingleBlogDetails = () => {
+const SingleDropShipItemDetails = () => {
 
-  const { blogTitle, id: blogId } = useParams<{ blogTitle: string; id: string }>();
+  const { dropShipItemTitle, id: dropShipItemId } = useParams<{ dropShipItemTitle: string; id: string }>();
 
-  const selectedBlog = useSelector(useSelectedBlog(blogId));
+  const selectedDropShipItem = useSelector(useSelectedDropShipItem(dropShipItemId));
   const dispatch = useDispatch()
   const navigate=useNavigate();
   // const location = useLocation();
@@ -37,22 +33,17 @@ const SingleBlogDetails = () => {
   // const currentDomain = location.pathname; // Get the current pathname
 
 
-  // const blogLink = `${currentDomain}/blogDetails/${blogId}`;
+  // const dropShipItemLink = `${currentDomain}/dropShipItemDetails/${dropShipItemId}`;
 
 
   const userType = useSelector(selectUserType);
 
-  const handleLoadBlogs = () => {
+  const handleLoadDropShipItems = () => {
 
-    const loadForUser: IFetchBlogData = {
-      userType: userType,
-    };
-    if (blogId) {
-      (dispatch as AppDispatch)(fetchSingleBlogApiSlice({
-        fetchBlogData: {
-          fetchBlogData: loadForUser,
-          blogId
-        }
+    if (dropShipItemId) {
+      (dispatch as AppDispatch)(fetchSingleDropShipItemApi({
+        itemId: 
+          dropShipItemId
       }));
     }
   }
@@ -62,33 +53,30 @@ const SingleBlogDetails = () => {
   }
 
   useEffect(() => {
-    // Load blogs when the component mounts
-    handleLoadBlogs();
-  }, [userType, blogId]);
+    // Load dropShipItems when the component mounts
+    handleLoadDropShipItems();
+  }, [userType, dropShipItemId]);
 
 
   // Perform null checks before accessing properties
-  const truncatedDescription = selectedBlog?.description ?? '';
-  const image = selectedBlog?.image ?? '';
-  const title = selectedBlog?.title ?? '';
-  const author = selectedBlog?.author ?? '';
-  const cryptoSymbol = selectedBlog?.cryptoSymbol ?? '';
-  const categories = selectedBlog?.categories ?? [];
+  const truncatedDescription = selectedDropShipItem?.description ?? '';
+  const image = selectedDropShipItem?.image ?? '';
+  const title = selectedDropShipItem?.title ?? '';
+  const author = selectedDropShipItem?.author ?? '';
+  const categories = selectedDropShipItem?.categories ?? [];
 
-  const approveBlog = () => {
-    (dispatch as AppDispatch)(updateBlogStatusSlice({
+  const approveDropShipItem = () => {
+    (dispatch as AppDispatch)(updateDropShipItemStatus({
+      itemId: dropShipItemId,
       setIsUpdating,
-      userType,
-      blogId: blogId,
-      status: BlogsStatusInfo.APPROVED
+      status: DropShipStatusInfo.APPROVED
     }));
   }
-  const pauseBlog = () => {
-    (dispatch as AppDispatch)(updateBlogStatusSlice({
+  const pauseDropShipItem = () => {
+    (dispatch as AppDispatch)(updateDropShipItemStatus({
       setIsUpdating,
-      userType,
-      blogId: blogId,
-      status: BlogsStatusInfo.PENDING
+      itemId: dropShipItemId,
+      status: DropShipStatusInfo.PENDING
     }));
   }
 
@@ -127,20 +115,19 @@ const SingleBlogDetails = () => {
                   <Button variant='contained' disabled={isUpdating} sx={{
                     background: getColors().blueAccent[800],
                     color: getColors().blueAccent[100]
-                  }} onClick={selectedBlog?.status == BlogsStatusInfo.PENDING ? approveBlog : pauseBlog}>
+                  }} onClick={selectedDropShipItem?.status == DropShipStatusInfo.PENDING ? approveDropShipItem : pauseDropShipItem}>
 
-                    {selectedBlog?.status == BlogsStatusInfo.PENDING ? 'Approve' : 'Pause'}
+                    {selectedDropShipItem?.status == DropShipStatusInfo.PENDING ? 'Approve' : 'Pause'}
                   </Button>
                 }
-                <AddBlogForm formEvent={"EDIT"} blogInfo={{
-                  blogId: blogId,
+                <AddDropShipItemForm formEvent={"EDIT"} itemInfo={{
+                  dropShipItemsId: dropShipItemId,
                   title,
                   description: truncatedDescription,
                   image: image,
                   author: author,
                   categories: categories,
-                  cryptoSymbol: cryptoSymbol,
-                }} userType={userType} blogType="edit" />
+                }} userType={userType} />
               </div>
             ) : (
               <Box >
@@ -159,7 +146,7 @@ const SingleBlogDetails = () => {
                     background: getColors().blueAccent[800],
                     color: getColors().blueAccent[100]
                   }}
-                  onClick={() => handleShare(blogLink)}
+                  onClick={() => handleShare(dropShipItemLink)}
                 >
                   Share
                 </Button> */}
@@ -168,7 +155,7 @@ const SingleBlogDetails = () => {
                   mb: 1,
                   mt: 6
                 }}>
-                  {blogTitle}
+                  {dropShipItemTitle}
                 </Typography>
               
                 <Box sx={{
@@ -204,7 +191,7 @@ const SingleBlogDetails = () => {
                   mb: 1,
                   mt: 6
                 }}>
-                  {blogTitle}
+                  {dropShipItemTitle}
                 </Typography>
           <Skeleton variant="rounded" sx={{
             marginLeft: "auto",
@@ -221,4 +208,4 @@ const SingleBlogDetails = () => {
   );
 };
 
-export default SingleBlogDetails;
+export default SingleDropShipItemDetails;

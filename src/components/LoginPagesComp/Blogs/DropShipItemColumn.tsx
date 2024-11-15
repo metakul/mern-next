@@ -5,12 +5,12 @@ import {
   PreviewOutlined,
 } from "@mui/icons-material";
 
-const BlogColumn = (
+const DropShipItemColumn = (
   setOpenMenu: (value: React.SetStateAction<HTMLElement | null>) => void,
   setSelectedRowId: (value: React.SetStateAction<string | null>) => void,
   handleNavigate: { (href: string): void; (arg0: string): void; }
 ) => [
-    { field: "blogId", headerName: "Id", width: 120, editable: false },
+    { field: "dropShipItemsId", headerName: "Id", width: 120, editable: false },
     { field: "author", headerName: "Author Name", width: 120, editable: false },
     {
       field: "title",
@@ -42,13 +42,13 @@ const BlogColumn = (
       headerName: "Actions",
       width: 160,
       editable: false,
-      renderCell: (params: { row: { blogId: string; title:string }; }) => (
+      renderCell: (params: { row: { dropShipItemsId: string; title:string }; }) => (
         <div>
           {/* <Button
             variant="contained"
             onClick={(event) => {
               setOpenMenu(event.currentTarget);
-              setSelectedRowId(params.row.blogId);
+              setSelectedRowId(params.row.dropShipItemsId);
             }}
           >
             <MoreIcon />
@@ -56,8 +56,8 @@ const BlogColumn = (
 
           <div onClick={(event) => {
             setOpenMenu(event.currentTarget);
-            setSelectedRowId(params.row.blogId);
-            handleNavigate(`/blogdetails/${params.row.title}/${params.row.blogId}`)
+            setSelectedRowId(params.row.dropShipItemsId);
+            handleNavigate(`/DropShipItemdetails/${params.row.title}/${params.row.dropShipItemsId}`)
           }}>
             <Button variant="contained">
               <PreviewOutlined />
@@ -68,4 +68,4 @@ const BlogColumn = (
     },
   ];
 
-export default BlogColumn;
+export default DropShipItemColumn;

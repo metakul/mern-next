@@ -1,19 +1,13 @@
 
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { SocialProfileProps } from '@/Datatypes/interfaces/interface';
-import { selectedBlogs } from '@/lib/slices/Blogs/BlogSlice';
-const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 
 export const svgStyle = {
   fill: '#5893f9',
   height: '1em',
 };
 const SocialProfiles: React.FC<SocialProfileProps> = ({ cryptoSymbol }) => {
-  const blogsData = useSelector(selectedBlogs).blogs
-
   
-  const selectedBlog = blogsData.find(blog => blog.cryptoSymbol === cryptoSymbol);
   
   return (
     <div className="mt-2 flex items-center justify-center space-x-2.5">

@@ -7,30 +7,32 @@ import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
 import BlogInfoTab from './BlogInfoComp';
 import CryptoInfoPage from '../CryptoInfo';
 import BlogDescription from '../WYSWYGEditor/BlogDescription';
-import SocialProfiles from './../SocialProfile/index';
+import SocialProfiles from '../SocialProfile/index';
 import { useSelector } from 'react-redux';
 import { selectUserType } from '@/lib/slices/authSlice';
+import AddToCart from '../AddToCart';
 
 export interface SingleBlogInfoProps{
     // $todo change interface to have all details of blogs and send the deatils from blogpage
-    cryptoSymbol?:string
-    _blogId:string
-    isBlogInfoOpen: boolean
+    price?:number
+    _dropShipItemId:string
+    isDropShipItemInfoOpen: boolean
   }
 
   
-  const BlogDetails: React.FC<SingleBlogInfoProps> = ({_blogId,cryptoSymbol, isBlogInfoOpen}) => {
+  const DropShipItemDetails: React.FC<SingleBlogInfoProps> = ({_dropShipItemId,price, isDropShipItemInfoOpen}) => {
   const userType = useSelector(selectUserType);
 
   const tabs = [
-    { value: <OtherHousesOutlinedIcon />, content: <BlogDescription userType={userType} _id={_blogId}/>, label: "Read More" },
+    { value: <OtherHousesOutlinedIcon />, content: <BlogDescription userType={userType} _id={_dropShipItemId}/>, label: "Read More" },
+    { value: <OtherHousesOutlinedIcon />, content: <AddToCart price={price} _id={_dropShipItemId}/>, label: "Price" },
     // { value: <StoreOutlinedIcon />, content: <CryptoInfoPage _id={_blogId} cryptoSymbol={cryptoSymbol}/>, label: "Information" },
-    { value: <CategoryOutlinedIcon />, content:<SocialProfiles cryptoSymbol={cryptoSymbol}/>, label: "Socials" },
+    { value: <CategoryOutlinedIcon />, content:<SocialProfiles/>, label: "Socials" },
   ];
 
   return (
-      <BlogInfoTab openedTab={isBlogInfoOpen} tabs={tabs} />
+      <BlogInfoTab openedTab={isDropShipItemInfoOpen} tabs={tabs} />
   );
 };
 
-export default BlogDetails;
+export default DropShipItemDetails;

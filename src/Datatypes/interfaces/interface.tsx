@@ -128,6 +128,20 @@ export interface Iblog  {
   status?:string
 }
 
+export interface IDropShipItem  {
+  _id?:string,
+  id?:string,
+  dropShipItemsId?: string;
+  title: string;
+  description?: string;
+  image:string;
+  author:string;
+  categories: string[];
+  date?: string;
+  status?:string;
+  price?:number;
+}
+
   export interface IBot {
     botFile: File | string; 
     _alias: string;
@@ -155,6 +169,10 @@ export interface CryptoInfoProps{
 }
 
 export interface BlogDetailsProps{
+  _id:string
+  userType:string
+}
+export interface DropShipItemDetailsProps{
   _id:string
   userType:string
 }

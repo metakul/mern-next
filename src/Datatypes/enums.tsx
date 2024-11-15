@@ -48,6 +48,7 @@ export enum Pages {
   CHAT_GPT = "/ChatGpt" ,
   MARKETPLACE = "/Marketplace" ,
   SELL = "/SELL" ,
+  ADD_DROPSHIP_ITEM = "/ADD_DROPSHIP_ITEM" ,
 }
 
 export enum HomePageInfo{
@@ -100,10 +101,23 @@ const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1
     //random
     increaseTotalDownloadCount: { apiId:14, withAuth:true, url: `${base_url_backend}/increaseTotalDownloadCount`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"",successMessage:"",errorMessage:""},
 
+
+    // DROPSHIP API
+    GET_DROPSHIP_ITEMS: { apiId:15, withAuth:false, url: `${base_url_backend}/blogs/blogType`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:"Error geting Items"},
+    GET_SINGLE_DROPSHIP_ITEM: { apiId:16, withAuth:false, url: `${base_url_backend}/blogs`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Loading Current Item",successMessage:"Item Loaded SuccessFully",errorMessage:"Error Loading Items"},
+    ADD_DROPSHIP_ITEM: { apiId:17, withAuth:true, url: `${base_url_backend}/blogs`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Adding New Item",successMessage:"Item Added Successfully",errorMessage:"Error Loading Items"},
+    UPDATE_DROPSHIP_ITEM_STATUS: { apiId:18, withAuth:true, url: `${base_url_backend}/blogs/updateStatus`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Item",successMessage:"Item Status Updates SuccessFully",errorMessage:"Error Updating Item Status"},
+    EDIT_DROPSHIP_ITEM: { apiId:19, withAuth:true, url: `${base_url_backend}/blogs`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Item",successMessage:"Item Updated successfully",errorMessage:"Error Updating Item"},
+   
   }
 
   
 export enum BlogsStatusInfo {
+  APPROVED="approved",
+  PENDING="pending"
+}
+
+export enum DropShipStatusInfo {
   APPROVED="approved",
   PENDING="pending"
 }

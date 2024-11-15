@@ -1,23 +1,19 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 // import logger from 'redux-logger'
 import authReducer from "./slices/authSlice"
-import NftCollectionReducer from "./slices/MetakulCollection/NftSlice"
-import blogCollectionReducer from "./slices/Blogs/BlogSlice"
 import chatReducer from "./slices/Chatgpt/ChatGptSlice"
-import cryptoCollectionRedcuer from "./slices/CryptoSlices/CryptoSlice"
 import userReducer from "./slices/RegisterUsers/RegisterSlice"
-import botsSlice from "./slices/InstaBot/BotSlice"
+import dropShipSlice from "./slices/DropShip/DropShipSlice"
+import cryptoCollectionRedcuer from "./slices/CryptoSlices/CryptoSlice"
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
         auth:authReducer,
-        nftCollection:NftCollectionReducer,
-        blogsCollection:blogCollectionReducer,
-        cryptoCollection:cryptoCollectionRedcuer,
         user:userReducer,
-        botsSlice:botsSlice,
         chat: chatReducer,
+        cryptoCollection:cryptoCollectionRedcuer,
+        dropShipCollection:dropShipSlice
     }, 
     // middleware:getDefaultMiddlerware =>
     //   getDefaultMiddlerware().concat(logger),
