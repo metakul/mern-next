@@ -14,7 +14,7 @@ const DropShipItems = () => {
   const dispatch = useDispatch();
   const { dropShipItems, loading } = useSelector(selectedDropShipItems);
   const [page, setItemPage] = useState(1);
-  const [pageSize] = useState(3);
+  const [pageSize] = useState(4);
   const [openedItemId, setOpenedItemId] = useState<string | null>(null);
 
   const handleLoadItems = async () => {
@@ -65,7 +65,7 @@ const DropShipItems = () => {
                     <img
                       src={`data:image/png;base64,${item.image}`}
                       alt="Item image"
-                      className="w-[80%] lg:w-[70%] sm:h-[20em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
+                      className="w-[16em] h-[16em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
                       onClick={() => handleOpenItem(item.id || '')}
                     />
                   </Box>
@@ -80,7 +80,7 @@ const DropShipItems = () => {
                     <Grid item xs={4} md={4} lg={4} className="mx-auto flex flex-end justify-end pr-8 pb-4">
                       <ShareButton link={`${itemLink}`} />
                     </Grid>
-                    <h2 className="mb-4 font-display text-md" onClick={() => handleOpenItem(item.id || '')}>
+                    <h2 className="mb-4 font-display text-md truncate" style={{ height: '2.5rem', overflow: 'hidden' }} onClick={() => handleOpenItem(item.id || '')}>
                       {item.title
                         .split(' ')
                         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -101,17 +101,19 @@ const DropShipItems = () => {
       </Grid>
 
       {loading && (
-        <>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Stack key={index} spacing={1} className="relative py-4 mt-4">
-              <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
-                <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-                  <Skeleton variant="rounded" width="100%" height="400px" />
+        <Grid container spacing={2} sx={{ mb: 4 }}>
+          {Array.from({ length: pageSize }).map((_, index) => (
+            <Grid key={index} item xs={6}>
+              <Stack spacing={1} className="relative py-4 mt-4">
+                <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+                  <div className="rounded-[1.25rem] p-4 flex-row justify-center">
+                    <Skeleton variant="rounded" width="100%" height="400px" />
+                  </div>
                 </div>
-              </div>
-            </Stack>
+              </Stack>
+            </Grid>
           ))}
-        </>
+        </Grid>
       )}
       <div className="mx-auto flex flex-row justify-center">
         <Button variant="contained" sx={{ backgroundColor: getColors().blueAccent[800] }} onClick={handleLoadItems}>

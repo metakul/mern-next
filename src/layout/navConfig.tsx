@@ -23,75 +23,17 @@ export const navConfig = [
 
   },
   {
-    text: "Claim NFT",
-    icon: <TodayOutlined />,
-    to: Pages.MINT
-  },
-  // {
-  //   text: "Explore",
-  //   icon: <ShoppingCartOutlined />,
-  //   to: "metakul",
-  // },
-  {
-    text: "Earn With Nft",
-    icon: <PieChartOutlined />,
-    to: Pages.EARN,
-  },
-  {
     text: "Profile",
     icon: <PieChartOutlined />,
     to: Pages.PROFILE
   },
-  // {
-  //   text: "Shopping",
-  //   icon: <ShoppingCartOutlined />,
-  //   to: "/shopping",
-  // },
   {
     text: "Metaverse",
     icon: null,
     to: "",
   },
-  // {
-  //   text: "Learn Web3",
-  //   icon: <ReceiptLongOutlined />,
-  //   to: "blogs",
-  // },
-
-
-  // {
-  //   text: "Extras",
-  //   icon:null,
-  //   to: "",
-  // },
-  // {
-  //   text: "Profile",
-  //   icon: <AdminPanelSettingsOutlined />,
-  //   to: "/Profile",
-  // },
   {
-    text: "Create Own NFT",
-    icon: <PublicOutlined />,
-    to: Pages.CREATE_NFT
-  },
-  // {
-  //   text: "Buy Nft Own NFT",
-  //   icon: <PublicOutlined />,
-  //   to: Pages.MARKETPLACE
-  // },
-  // {
-  //   text: "Sell Your NFT",
-  //   icon: <PublicOutlined />,
-  //   to: Pages.SELL,
-  // },
-  // {
-  //   text: "Career",
-  //   icon: <CalendarMonthOutlined />,
-  //   to: "/Career",
-  // },
-    
-  {
-    text: "Metakul utilities",
+    text: "AI",
     icon:null,
     to: "",
   },
@@ -100,16 +42,6 @@ export const navConfig = [
     icon:<SmartToyIcon/>,
     to: Pages.CHAT_GPT
   },
-  {
-    text: "InstaBot",
-    icon:<SmartToyIcon/>,
-    to: Pages.INSTA_BOT
-  },
-  // {
-  //   text: "LAUNDRY",
-  //   icon:<Checkroom/>,
-  //   to: "/laundry",
-  // },
 ];
 
 export default navConfig;
