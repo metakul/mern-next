@@ -54,7 +54,7 @@ const AddDropShipItemComp: React.FC<DropShipItemInfo>=({status}) => {
 
     const filteredRows = dropShipItems.filter((row) =>
         row?.status === status && 
-        row?.dropShipItemsId?.toLowerCase().includes(searchQuery.toLowerCase())
+        row?.id?.toLowerCase().includes(searchQuery.toLowerCase())
     );
     
         
@@ -76,7 +76,7 @@ const AddDropShipItemComp: React.FC<DropShipItemInfo>=({status}) => {
                 <RefreshOutlined sx={{mb:2}} onClick={handleRefresh} />
                 </Container>
                 
-                <CustomDataGrid loading={ loading} getRowId={(row: { dropShipItemsId?: string }) => row.dropShipItemsId || ''} columns={columns} rows={filteredRows} />
+                <CustomDataGrid loading={ loading} getRowId={(row: { id?: string }) => row.id || ''} columns={columns} rows={filteredRows} />
                 {/* <UserOptionsMenu
                     openMenu={openMenu}
                     setOpenMenu={setOpenMenu}

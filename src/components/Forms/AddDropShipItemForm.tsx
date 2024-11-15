@@ -25,11 +25,11 @@ const newErrors: ErrorMessages = {
   author: '',
   categories: '',
   price: '',
+  totalItemRemaining: '',
 };
 
-const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEvent, userType }) => {
+const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo }) => {
   const dispatch = useDispatch();
-  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<IDropShipItem>(
     itemInfo
       ? itemInfo
@@ -39,13 +39,12 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEve
           author: '',
           categories: [],
           price: undefined,
+          totalItemRemaining: undefined,
         }
   );
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [description, setDescription] = useState(itemInfo ? itemInfo.description : '');
   const [errors, setErrors] = useState<ErrorMessages>(newErrors);
-
-  const closeDialog = () => setDialogOpen(false);
 
   const clearForm = () => {
     setFormData({
@@ -54,6 +53,7 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEve
       author: '',
       categories: [],
       price: undefined,
+      totalItemRemaining: undefined,
     });
     setDescription('');
     setErrors(newErrors);
@@ -86,6 +86,11 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEve
           ...prevErrors,
           price: 'Price is required',
         }));
+      } else if (key === 'totalItemRemaining' && formValue === undefined) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          totalItemRemaining: 'Total Item Remaining is required',
+        }));
       }
     });
 
@@ -99,7 +104,6 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEve
             id: itemInfo?.id,
             status: 'pending',
           },
-          closeDialog,
           clearForm,
           setIsSaving,
         })
@@ -111,7 +115,7 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEve
     if (field === 'categories') {
       const categoriesArray = e.currentTarget.value.split(',').map((category) => category.trim());
       setFormData({ ...formData, [field]: categoriesArray });
-    } else if (field === 'price') {
+    } else if (field === 'price' || field === 'totalItemRemaining') {
       setFormData({ ...formData, [field]: parseFloat(e.currentTarget.value) || undefined });
     } else {
       setFormData({ ...formData, [field]: e.currentTarget.value });
@@ -123,7 +127,7 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEve
   const register: (e: string) => void = (e) => setFormData({ ...formData, image: e });
 
   const areAllFieldsFilled = () => {
-    return formData.title.trim() && formData.image && formData.author.trim() && formData.categories.length && formData.price !== undefined;
+    return formData.title.trim() && formData.image && formData.author.trim() && formData.categories.length && formData.price !== undefined && formData.totalItemRemaining !== undefined;
   };
 
   return (
@@ -187,6 +191,19 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEve
             placeholder="Enter price"
             error={errors.price}
             isError={!!errors.price}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h3">Total Item Remaining</Typography>
+          <CustomTextField
+            id="totalItemRemaining"
+            type="number"
+            label="Total Item Remaining"
+            value={formData.totalItemRemaining || ''}
+            onChange={(e) => handleChange(e, 'totalItemRemaining')}
+            placeholder="Enter total item remaining"
+            error={errors.totalItemRemaining}
+            isError={!!errors.totalItemRemaining}
           />
         </Grid>
       </Grid>

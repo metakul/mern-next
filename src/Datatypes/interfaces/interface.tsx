@@ -140,6 +140,7 @@ export interface IDropShipItem  {
   date?: string;
   status?:string;
   price?:number;
+  totalItemRemaining?:number;
 }
 
   export interface IBot {

@@ -57,8 +57,6 @@ const DropShipItems = () => {
             key={index}
             item
             xs={6} // 2 items per row on small screens (xs)
-            md={3} // 4 items per row on medium screens (md)
-            lg={2} // 6 items per row on large screens (lg)
           >
             <section className="relative py-4">
               <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">

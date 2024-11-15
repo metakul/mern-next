@@ -75,7 +75,7 @@ export const fetchSingleDropShipItemApi = createAsyncThunk(
 
 export const addDropShipItemApi = createAsyncThunk(
   'dropShipCollection/addItem',
-  async ({ newDropShipItemData, closeDialog, clearForm, setIsSaving }: { newDropShipItemData: IDropShipItem, closeDialog: any, clearForm: any, setIsSaving: any }, { rejectWithValue, dispatch }) => {
+  async ({ newDropShipItemData,  clearForm, setIsSaving }: { newDropShipItemData: IDropShipItem, clearForm: any, setIsSaving: any }, { rejectWithValue, dispatch }) => {
     try {
       let response;
 
@@ -103,7 +103,6 @@ export const addDropShipItemApi = createAsyncThunk(
         data: response,
       };
 
-      closeDialog();
       setIsSaving(false);
       return apiSuccess;
 
