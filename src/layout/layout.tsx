@@ -30,8 +30,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { MenuRounded } from "@mui/icons-material";
-import VRPAGE from "@/tabs/Tab4/temp";
 import Metaship from "@/tabs/Tab2";
+import CartPage from "@/tabs/Tab4";
 
 
 
@@ -86,7 +86,7 @@ export default function DashboardLayout() {
           }}
         />
       ),
-      content: <VRPAGE />,
+      content: <CartPage />,
       label: Tabs.tabTitle4,
     },
   ];
@@ -122,7 +122,6 @@ export default function DashboardLayout() {
             <MobileTabNavigation
               showOutlet={showOutlet}
               tabs={tabs}
-              setIsSidebarOpen={handleSideBarState}
             />
           </Container>
           <Analytics />

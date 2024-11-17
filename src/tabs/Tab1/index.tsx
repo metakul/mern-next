@@ -16,6 +16,9 @@ const Tab1 = () => {
       <Box sx={{
       }}>
         <InstallPWA />
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+          Featured Items
+        </Typography>
         <DropShipItems />
       </Box>
     </>

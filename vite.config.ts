@@ -31,9 +31,9 @@ const pwaOptions: Partial<VitePWAOptions> ={
     "logo.svg",
   ],
   manifest: {
-    name: "METAKUL",
-    short_name: "Metakul",
-    description: "Metakul- A next gen professional education platform in Blockchain.",
+    name: "Meta-Ship",
+    short_name: "Meta-Ship",
+    description: "MetaShip- A next gen professional shooping platform in Blockchain.",
     icons: [
       {
         src: "pwa-192x192.png",

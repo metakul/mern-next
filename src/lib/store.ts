@@ -1,9 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-// import logger from 'redux-logger'
+import logger from 'redux-logger'
 import authReducer from "./slices/authSlice"
 import chatReducer from "./slices/Chatgpt/ChatGptSlice"
 import userReducer from "./slices/RegisterUsers/RegisterSlice"
 import dropShipSlice from "./slices/DropShip/DropShipSlice"
+import AddToCartSlice from "./slices/DropShip/AddToCartSlice"
 import cryptoCollectionRedcuer from "./slices/CryptoSlices/CryptoSlice"
 
 export const makeStore = () => {
@@ -13,7 +14,8 @@ export const makeStore = () => {
         user:userReducer,
         chat: chatReducer,
         cryptoCollection:cryptoCollectionRedcuer,
-        dropShipCollection:dropShipSlice
+        dropShipCollection:dropShipSlice,
+        cart:AddToCartSlice,
     }, 
     // middleware:getDefaultMiddlerware =>
     //   getDefaultMiddlerware().concat(logger),

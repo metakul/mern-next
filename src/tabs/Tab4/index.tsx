@@ -1,103 +1,96 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useMemo } from 'react';
-import * as THREE from 'three';
-import CustomDialog from '@/components/Dailog/Dailog';
-import LoginForm from '@/components/Forms/LoginForm';
-import { Box } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  Box,
+  Button,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  Divider,
+  Stack,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {
+  clearCart,
+  selectCartItems,
+} from '@/lib/slices/DropShip/AddToCartSlice';
+import { fetchCartApi, removeItemQuantityApi } from '@/lib/slices/DropShip/DropShipAPI';
+import { AppDispatch } from '@/lib/store';
+import { isAuthenticated } from '@/lib/slices/authSlice';
 
-interface UserpageProps {}
-const Userpage: React.FC<UserpageProps> = () => {
-  const scene = new THREE.Scene();
+const CartPage = () => {
+  const cartItems = useSelector(selectCartItems); // Get cart items from Redux
+  const dispatch = useDispatch<AppDispatch>();
 
-  // Sizes
-  const sizes = {
-    width: 800,
-    height: 600,
-  };
-
-  // Camera
-  const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-  camera.position.z = 5;
-  scene.add(camera);
-  // camera.position.set( 0, 0, 100 );
-
-  // Renderer
-  const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(sizes.width, sizes.height);
-
-  // Ref for the mount point of the Three.js scene
-  const mount = useRef<HTMLDivElement | null>(null);
-
-  // Use useMemo for creating the mesh to prevent unnecessary recreations
-  const mesh = useMemo(() => {
-    // Object
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    const newMesh = new THREE.Mesh(geometry, material);
-    scene.add(newMesh);
-    return newMesh;
-  }, [scene]);
-
-  // State for dialog open/close
-  const [bg, setBg] = React.useState(false);
-
-  // Mouse movement variables
-  const mouseX = useRef(0);
-  const mouseY = useRef(0);
+  const isAuthenticatedUser = useSelector(isAuthenticated);
 
   useEffect(() => {
-    // Append the renderer to the mount point
-    if (mount.current) {
-      mount.current.appendChild(renderer.domElement);
-    }
+    // Dispatch the fetchCartApi thunk to load cart items when the component mounts
+    dispatch(fetchCartApi({ isAuthenticated: isAuthenticatedUser }));
+  }, [dispatch]);
 
-    // Handle mouse movement
-    const handleMouseMove = (event: MouseEvent) => {
-      mouseX.current = (event.clientX / sizes.width) * 2 - 1;
-      mouseY.current = -(event.clientY / sizes.height) * 2 + 1;
-    };
+  const handleRemoveItem = (id: string) => {
+    dispatch(removeItemQuantityApi({ itemId: id, isAuthenticated: isAuthenticatedUser })); // Dispatch action to remove an item
+  };
 
-    document.addEventListener('mousemove', handleMouseMove);
-
-    // Animation logic
-    const animate = () => {
-      requestAnimationFrame(animate);
-
-      // Move the cube with the mouse
-      mesh.rotation.x = mouseY.current * 2;
-      mesh.rotation.y = mouseX.current * 2;
-
-      // Render the scene
-      renderer.render(scene, camera);
-    };
-
-    // Start the animation loop
-    animate();
-
-    // Clean up on component unmount 
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      mount.current?.removeChild(renderer.domElement);
-    };
-  }, [renderer, scene, camera, mesh, sizes.width, sizes.height]);
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
 
   return (
-    <div>
-      <Box onClick={() => setBg(!bg)}>
-        <div ref={mount}></div>
-      </Box>
-  
-      <CustomDialog
-        triggerButtonText={""}
-        title={"Login Now"}
-        description={"This is description for Login"}
-        open={bg}
-        onClose={() => setBg(!bg)}
-      >
-        <LoginForm loginTitle='Login' userType='ADMIN' />
-      </CustomDialog>
-    </div>
+    <Box sx={{ maxWidth: '800px', mx: 'auto', p: 3 }}>
+      <Typography variant="h4" component="h1" align="center" gutterBottom>
+        <ShoppingCartIcon fontSize="large" sx={{ mr: 1 }} />
+        Your Cart
+      </Typography>
+      {cartItems.length > 0 ? (
+        <>
+          <List>
+            {cartItems.map((item) => (
+              <React.Fragment key={item.id}>
+                <ListItem alignItems="flex-start">
+                  <ListItemText
+                    primary={item.id}
+                    secondary={`Id: ${item.id} | Price: $${item?.price?.toFixed(2)} | Quantity: ${item.quantity}`}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      edge="end"
+                      aria-label="remove"
+                      onClick={() => handleRemoveItem(item.id)}
+                    >
+                      <DeleteIcon color="error" />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <Divider />
+              </React.Fragment>
+            ))}
+          </List>
+          <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 3 }}>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleClearCart}
+            >
+              Clear Cart
+            </Button>
+            <Button variant="contained" color="primary">
+              Proceed to Checkout
+            </Button>
+          </Stack>
+        </>
+      ) : (
+        <Typography variant="h6" align="center" color="textSecondary">
+          Your cart is empty. Start adding items to your cart!
+        </Typography>
+      )}
+    </Box>
   );
 };
 
-export default Userpage;
+export default CartPage;

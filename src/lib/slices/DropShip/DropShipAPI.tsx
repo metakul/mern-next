@@ -3,6 +3,7 @@ import { setLoadedItems, addItem, updateItem } from './DropShipSlice';
 import { ApiError, ApiSuccess } from '../../../Datatypes/interfaces/interface';
 import Request from '@/Backend/axiosCall/apiCall';
 import { IDropShipItem } from '../../../Datatypes/interfaces/interface';
+import { addItemToCart, CartItem, loadCartFromCookies, removeItemFromCart } from './AddToCartSlice';
 
 export const fetchDropShipItemsApi = createAsyncThunk(
   'dropShipCollection/setLoadedItems',
@@ -139,6 +140,126 @@ export const updateDropShipItemStatus = createAsyncThunk(
       setIsUpdating(false);
       const castedError = error as ApiError;
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
+    }
+  }
+);
+
+// Async Thunks
+
+export const addToCartApi = createAsyncThunk(
+  'cart/addToCartApi',
+  async (
+    { item, isAuthenticated }: { item: CartItem; isAuthenticated: boolean },
+    { rejectWithValue, dispatch }
+  ) => {
+    if (isAuthenticated) {
+      try {
+        const response = await Request({
+          endpointId: 'ADD_TO_CART',
+          data: item,
+        });
+        dispatch(addItemToCart(response));
+        return response;
+      } catch (error) {
+        return rejectWithValue('An error occurred while adding to cart.');
+      }
+    } else {
+      try {
+        const existingCart = sessionStorage.getItem('cart');
+        let cartItems = existingCart ? JSON.parse(existingCart) : [];
+
+        const existingItemIndex = cartItems.findIndex((cartItem: CartItem) => cartItem.id === item.id);
+        if (existingItemIndex !== -1) {
+          cartItems[existingItemIndex].quantity += item.quantity;
+        } else {
+          cartItems.push(item);
+        }
+
+        sessionStorage.setItem('cart', JSON.stringify(cartItems));
+        dispatch(addItemToCart(item));
+        return { message: 'Item saved to cart in sessionStorage', item };
+      } catch (error) {
+        return rejectWithValue('Failed to save item to cart in sessionStorage');
+      }
+    }
+  }
+);
+
+export const fetchCartApi = createAsyncThunk(
+  'cart/fetchCartApi',
+  async ({ isAuthenticated }: { isAuthenticated: boolean }, { rejectWithValue, dispatch }) => {
+    if (isAuthenticated) {
+      try {
+        const response = await Request({
+          endpointId: 'GET_CART',
+        });
+
+        response.cartItems.forEach((item: CartItem) => {
+          dispatch(addItemToCart(item));
+        });
+        return response.cartItems;
+      } catch (error) {
+        return rejectWithValue('Failed to fetch cart from backend');
+      }
+    } else {
+      try {
+        const savedCart = sessionStorage.getItem('cart');
+        const cartItems = savedCart ? JSON.parse(savedCart) : [];
+        dispatch(loadCartFromCookies(cartItems)); 
+        return cartItems;
+      } catch (error) {
+        return rejectWithValue('Failed to fetch cart from sessionStorage');
+      }
+    }
+  }
+);
+
+export const removeItemQuantityApi = createAsyncThunk(
+  'cart/removeItemQuantityApi',
+  async (
+    { itemId, isAuthenticated }: { itemId: string; isAuthenticated: boolean },
+    { rejectWithValue, dispatch }
+  ) => {
+    if (isAuthenticated) {
+      try {
+        const response = await Request({
+          endpointId: 'REMOVE_ITEM_FROM_CART',
+          data: { id: itemId },
+        });
+        dispatch(removeItemFromCart(itemId));
+        return response;
+      } catch (error) {
+        return rejectWithValue('An error occurred while removing item.');
+      }
+    } else {
+      try {
+        const existingCart = sessionStorage.getItem('cart');
+        let cartItems = existingCart ? JSON.parse(existingCart) : [];
+
+        const existingItemIndex = cartItems.findIndex((cartItem: CartItem) => cartItem.id === itemId);
+        console.log(existingItemIndex);
+        
+        if (existingItemIndex !== -1) {
+          const item = cartItems[existingItemIndex];
+          
+          // Only reduce quantity if it's greater than 1
+          if (item.quantity > 1) {
+            item.quantity -= 1;
+          } else {
+            // If quantity is 1 or less, remove the item entirely
+            cartItems = cartItems.filter((cartItem: CartItem) => cartItem.id !== itemId);
+          }
+        
+          // Ensure sessionStorage is updated with the new cart state
+          sessionStorage.setItem('cart', JSON.stringify(cartItems));
+        }
+        
+
+        dispatch(removeItemFromCart(itemId));
+        return { message: 'Item quantity updated in sessionStorage', itemId };
+      } catch (error) {
+        return rejectWithValue('Failed to update item in sessionStorage');
+      }
     }
   }
 );

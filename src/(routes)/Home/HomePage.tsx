@@ -33,21 +33,21 @@ const HomePage: React.FC<HomePageProps> = () => {
 
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+        <meta name="description" content="Discover the best online shopping experience with meta-shippers." />
         <meta name="keywords" content="metakul, web3, blockchain, quantum" />
-        <meta property="og:title" content="Metakul" />
-        <meta property="og:description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+        <meta property="og:title" content="Meta-Ship" />
+        <meta property="og:description" content="Discover the best online shopping experience with meta-shippers." />
         <meta property="og:image" content="/logo.svg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="description"
-          content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership."
+          content="Discover the best online shopping experience with meta-shippers."
           data-react-helmet="true"
         />
 
         <meta
           property="og:url"
-          content="https://metakul.live/"
+          content="https://metashippers.com/"
           data-react-helmet="true"
         />
           <meta
@@ -62,21 +62,21 @@ const HomePage: React.FC<HomePageProps> = () => {
           />
 
 
-            <title>Metakul</title>
-            <meta name="description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+            <title>Meta-Ship</title>
+            <meta name="description" content="Discover the best online shopping experience with meta-shippers." />
             <meta name="robots" content="index, follow" />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />
-            <meta property="og:title" content="metakul" />
-            <meta property="og:description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+            <meta property="og:title" content="metashippers" />
+            <meta property="og:description" content="Discover the best online shopping experience with meta-shippers." />
 
-            <meta property="og:url" content="https://metakul.live/" />
+            <meta property="og:url" content="https://metashippers.com/" />
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="metakul" />
-            <meta name="twitter:description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
+            <meta name="twitter:title" content="metashippers" />
+            <meta name="twitter:description" content="Discover the best online shopping experience with meta-shippers." />
           </Helmet>
 
           <Tab1 />

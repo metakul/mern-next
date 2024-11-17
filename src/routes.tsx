@@ -30,7 +30,7 @@ const Router: React.FC = () => {
           element:  <ProtectedPage pageTitle="Admin Dashboard" pageDescription="" />,
         },
         {
-          path: Pages.SINGLE_BLOG,
+          path: Pages.SINGLE_DROPSHIP_ITEM,
           element:  <SingleBlogDetails/>,
         },
         {
@@ -43,7 +43,7 @@ const Router: React.FC = () => {
         },
       ],
     },
-    { path: "*", element: <Navigate to={Pages.HOME} /> },
+    // { path: "*", element: <Navigate to={Pages.HOME} /> },
   ]);
 
   return routes;

@@ -4,13 +4,14 @@ import {
   // MoreVert as MoreIcon,
   PreviewOutlined,
 } from "@mui/icons-material";
+import { Pages } from '@/Datatypes/enums';
 
 const DropShipItemColumn = (
   setOpenMenu: (value: React.SetStateAction<HTMLElement | null>) => void,
   setSelectedRowId: (value: React.SetStateAction<string | null>) => void,
   handleNavigate: { (href: string): void; (arg0: string): void; }
 ) => [
-    { field: "dropShipItemsId", headerName: "Id", width: 120, editable: false },
+    { field: "id", headerName: "Id", width: 120, editable: false },
     { field: "author", headerName: "Author Name", width: 120, editable: false },
     {
       field: "title",
@@ -42,7 +43,7 @@ const DropShipItemColumn = (
       headerName: "Actions",
       width: 160,
       editable: false,
-      renderCell: (params: { row: { dropShipItemsId: string; title:string }; }) => (
+      renderCell: (params: { row: { id: string; title: string }; }) => (
         <div>
           {/* <Button
             variant="contained"
@@ -53,18 +54,19 @@ const DropShipItemColumn = (
           >
             <MoreIcon />
           </Button> */}
-
+      
           <div onClick={(event) => {
             setOpenMenu(event.currentTarget);
-            setSelectedRowId(params.row.dropShipItemsId);
-            handleNavigate(`/DropShipItemdetails/${params.row.title}/${params.row.dropShipItemsId}`)
+            setSelectedRowId(params.row.id);
+            const { id, title } = params.row;
+            handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', title).replace(':id', id)}`);
           }}>
             <Button variant="contained">
               <PreviewOutlined />
             </Button>
           </div>
         </div>
-      ),
+      )
     },
   ];
 

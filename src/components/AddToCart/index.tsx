@@ -1,5 +1,9 @@
 import React from 'react';
 import { Button, Typography, Box } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { isAuthenticated } from '@/lib/slices/authSlice';
+import { addToCartApi } from '@/lib/slices/DropShip/DropShipAPI';
+import { AppDispatch } from '@/lib/store';
 
 interface AddToCartProps {
   price?: number;
@@ -7,9 +11,12 @@ interface AddToCartProps {
 }
 
 const AddToCart: React.FC<AddToCartProps> = ({ price, _id }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const isAuthenticatedUser = useSelector(isAuthenticated);
+
   const handleAddToCart = () => {
-    // Implement add to cart functionality here
-    console.log(`Item with ID: ${_id} added to cart`);
+    const item = {quantity:1, id:_id };
+      dispatch(addToCartApi({item,isAuthenticated:isAuthenticatedUser}));
   };
 
   return (
