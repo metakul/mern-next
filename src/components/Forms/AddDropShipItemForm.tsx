@@ -34,6 +34,7 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo }) => {
     itemInfo
       ? itemInfo
       : {
+          name: '',
           title: '',
           image: '',
           author: '',
@@ -54,6 +55,7 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo }) => {
       categories: [],
       price: undefined,
       totalItemRemaining: undefined,
+      name: ''
     });
     setDescription('');
     setErrors(newErrors);

@@ -4,6 +4,7 @@ export interface CartItem {
   id: string;
   quantity: number;
   price?:any
+  name?:string
 }
 
 interface CartState {

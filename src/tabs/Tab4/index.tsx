@@ -21,6 +21,7 @@ import {
 import { fetchCartApi, removeItemQuantityApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { AppDispatch } from '@/lib/store';
 import { isAuthenticated } from '@/lib/slices/authSlice';
+import Subscribe from '@/components/Inputs/Subscribe';
 
 const CartPage = () => {
   const cartItems = useSelector(selectCartItems); // Get cart items from Redux
@@ -55,7 +56,7 @@ const CartPage = () => {
                 <ListItem alignItems="flex-start">
                   <ListItemText
                     primary={item.id}
-                    secondary={`Id: ${item.id} | Price: $${item?.price?.toFixed(2)} | Quantity: ${item.quantity}`}
+                    secondary={`Id: ${item.id} |Name: ${item.name} | Price: $${item?.price?.toFixed(2)} | Quantity: ${item.quantity}`}
                   />
                   <ListItemSecondaryAction>
                     <IconButton
@@ -72,16 +73,8 @@ const CartPage = () => {
             ))}
           </List>
           <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 3 }}>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={handleClearCart}
-            >
-              Clear Cart
-            </Button>
-            <Button variant="contained" color="primary">
-              Proceed to Checkout
-            </Button>
+          
+              <Subscribe />
           </Stack>
         </>
       ) : (

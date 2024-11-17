@@ -59,7 +59,7 @@ const DropShipItems = () => {
             item
             xs={6} // 2 items per row on small screens (xs)
           >
-            <section className="relative py-4 max-w-[400px]">
+            <section className="relative py-4 ">
               <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
                 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
                   <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
@@ -71,31 +71,31 @@ const DropShipItems = () => {
                     />
                   </Box>
                   <Grid container className="mt-8">
-                    <Grid item xs={8} md={8} lg={8}>
-                      <span className="inline-flex flex-wrap items-center space-x-1 text-accent">
+                    <Grid item xs={8} md={8} lg={8} className=''>
+                      <span className="inline-flex flex-wrap items-center space-x-1 text-accent mb-4">
                         {item?.categories?.map((category, index) => (
                           <h5 key={index}>{category}</h5>
                         ))}
                       </span>
                     </Grid>
-                    <Grid item xs={4} md={4} lg={4} className="mx-auto flex flex-end justify-end pr-8 pb-4">
+                    <Grid item xs={4} md={4} lg={4} className="mx-auto flex  justify-center  pb-4">
                       <ShareButton link={`${itemLink}`} />
                     </Grid>
                     <Grid item xs={8} md={8} lg={8} className="mx-auto">
-                    <h2 className="mb-4 font-display text-md truncate" style={{ height: '2.5rem', overflow: 'hidden' }} onClick={() => handleOpenItem(item.id || '')}>
-                      {item.title
-                        .split(' ')
-                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(' ')}
+                    <h2 className="mb-4 font-display " style={{ overflow: 'hidden' }} onClick={() => handleOpenItem(item.id || '')}>
+                      {item.title} <br />
+                      Price:{item.price}
                     </h2>
                     </Grid>
                     <Grid item xs={4} md={4} lg={4} className="mx-auto">
-                      <AddToCart _id={item._id || ''} price={item.price}/>
+                      {item.id && item.title && <AddToCart _id={item.id} price={item.price} name={item.title} image={item.image}/>}
                     </Grid>
                     <DropShipItemDetails
                       isDropShipItemInfoOpen={openedItemId === item.id}
                       price={item.price}
                       _dropShipItemId={item.id || ''}
+                      name={item.title}
+                      image={item.image}
                     />
                     {/* Add any additional item details here */}
                   </Grid>

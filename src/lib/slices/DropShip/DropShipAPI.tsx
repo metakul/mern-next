@@ -146,12 +146,16 @@ export const updateDropShipItemStatus = createAsyncThunk(
 
 // Async Thunks
 
+import { toast } from 'react-toastify';
+
 export const addToCartApi = createAsyncThunk(
   'cart/addToCartApi',
   async (
     { item, isAuthenticated }: { item: CartItem; isAuthenticated: boolean },
     { rejectWithValue, dispatch }
   ) => {
+    console.log(item);
+    
     if (isAuthenticated) {
       try {
         const response = await Request({
@@ -177,6 +181,10 @@ export const addToCartApi = createAsyncThunk(
 
         sessionStorage.setItem('cart', JSON.stringify(cartItems));
         dispatch(addItemToCart(item));
+
+        // Show toast notification when item is added to cart in session storage
+        toast.success(`${item.name} has been added to your cart!`);
+
         return { message: 'Item saved to cart in sessionStorage', item };
       } catch (error) {
         return rejectWithValue('Failed to save item to cart in sessionStorage');
@@ -184,6 +192,7 @@ export const addToCartApi = createAsyncThunk(
     }
   }
 );
+
 
 export const fetchCartApi = createAsyncThunk(
   'cart/fetchCartApi',

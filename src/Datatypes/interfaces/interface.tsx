@@ -129,6 +129,7 @@ export interface Iblog  {
 }
 
 export interface IDropShipItem  {
+  name: string;
   _id?:string,
   id?:string,
   dropShipItemsId?: string;

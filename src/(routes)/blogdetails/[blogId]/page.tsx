@@ -103,6 +103,7 @@ const SingleDropShipItemDetails = () => {
                 <AddDropShipItemForm formEvent={"EDIT"} itemInfo={{
                   dropShipItemsId: dropShipItemId,
                   title,
+                  name:title,
                   description: truncatedDescription,
                   image: image,
                   author: author,

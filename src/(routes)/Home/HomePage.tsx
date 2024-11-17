@@ -25,7 +25,10 @@ const HomePage: React.FC<HomePageProps> = () => {
   }, [isUserAuthenticated]);
 
   return (
-    <Container className="container">
+    <Container sx={{
+      padding: { xs: 0 },
+      margin: { xs: 0 }
+    }}>
 
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

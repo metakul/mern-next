@@ -17,15 +17,15 @@ export interface SingleBlogInfoProps{
     price?:number
     _dropShipItemId:string
     isDropShipItemInfoOpen: boolean
+    name:string
+    image:string
   }
-
-  
-  const DropShipItemDetails: React.FC<SingleBlogInfoProps> = ({_dropShipItemId,price, isDropShipItemInfoOpen}) => {
+  const DropShipItemDetails: React.FC<SingleBlogInfoProps> = ({_dropShipItemId,image,price,name, isDropShipItemInfoOpen}) => {
   const userType = useSelector(selectUserType);
 
   const tabs = [
     { value: <OtherHousesOutlinedIcon />, content: <BlogDescription userType={userType} _id={_dropShipItemId}/>, label: "Read More" },
-    { value: <OtherHousesOutlinedIcon />, content: <AddToCart price={price} _id={_dropShipItemId}/>, label: "Price" },
+    { value: <OtherHousesOutlinedIcon />, content: <AddToCart name={name} price={price} _id={_dropShipItemId} image={image}/>, label: "Price" },
     // { value: <StoreOutlinedIcon />, content: <CryptoInfoPage _id={_blogId} cryptoSymbol={cryptoSymbol}/>, label: "Information" },
     { value: <CategoryOutlinedIcon />, content:<SocialProfiles/>, label: "Socials" },
   ];
