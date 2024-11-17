@@ -88,10 +88,10 @@ const SingleDropShipItemDetails = () => {
           {/* <BreadCrumbs currentPath={`/`} /> */}
           <div>
 
-            {userType === UserCategory.SUPER_ADMIN ? (
+            {userType === UserCategory.ROADIES_SUPER_ADMIN ? (
               <div className="flex mt-6 flex-wrap justify-between items-center space-x-2 text-md mb-2 text-jacarta-400">
 
-                {userType === UserCategory.SUPER_ADMIN && 
+                {userType === UserCategory.ROADIES_SUPER_ADMIN && 
                   <Button variant='contained' disabled={isUpdating} sx={{
                     background: getColors().blueAccent[800],
                     color: getColors().blueAccent[100]
@@ -107,6 +107,8 @@ const SingleDropShipItemDetails = () => {
                   image: image,
                   author: author,
                   categories: categories,
+                  price: selectedDropShipItem?.price ?? 0,
+                  totalItemRemaining: selectedDropShipItem?.totalItemRemaining ?? 0,
                 }} userType={userType} />
               </div>
             ) : (

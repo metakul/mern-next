@@ -22,7 +22,7 @@ const ProtectedPage: React.FC<ProtectedPageProps> = () =>
     const navigation = useNavigate(); 
 
     useEffect(() => {
-      if (!isUserAuthenticated && selectedUserType!==UserCategory.SUPER_ADMIN) {
+      if (!isUserAuthenticated && selectedUserType!==UserCategory.ROADIES_SUPER_ADMIN) {
         navigation("/"); 
       }
     }, [isUserAuthenticated, history]);

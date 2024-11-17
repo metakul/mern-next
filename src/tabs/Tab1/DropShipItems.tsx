@@ -9,6 +9,7 @@ import { fetchDropShipItemsApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
 import { DropShipStatusInfo } from '@/Datatypes/enums';
 import DropShipItemDetails from '@/components/DropShipItemDetails';
+import AddToCart from '@/components/AddToCart';
 
 const DropShipItems = () => {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const DropShipItems = () => {
             item
             xs={6} // 2 items per row on small screens (xs)
           >
-            <section className="relative py-4">
+            <section className="relative py-4 max-w-[400px]">
               <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
                 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
                   <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
@@ -72,7 +73,7 @@ const DropShipItems = () => {
                   <Grid container className="mt-8">
                     <Grid item xs={8} md={8} lg={8}>
                       <span className="inline-flex flex-wrap items-center space-x-1 text-accent">
-                        {item.categories.map((category, index) => (
+                        {item?.categories?.map((category, index) => (
                           <h5 key={index}>{category}</h5>
                         ))}
                       </span>
@@ -80,12 +81,17 @@ const DropShipItems = () => {
                     <Grid item xs={4} md={4} lg={4} className="mx-auto flex flex-end justify-end pr-8 pb-4">
                       <ShareButton link={`${itemLink}`} />
                     </Grid>
+                    <Grid item xs={8} md={8} lg={8} className="mx-auto">
                     <h2 className="mb-4 font-display text-md truncate" style={{ height: '2.5rem', overflow: 'hidden' }} onClick={() => handleOpenItem(item.id || '')}>
                       {item.title
                         .split(' ')
                         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
                         .join(' ')}
                     </h2>
+                    </Grid>
+                    <Grid item xs={4} md={4} lg={4} className="mx-auto">
+                      <AddToCart _id={item._id || ''} price={item.price}/>
+                    </Grid>
                     <DropShipItemDetails
                       isDropShipItemInfoOpen={openedItemId === item.id}
                       price={item.price}

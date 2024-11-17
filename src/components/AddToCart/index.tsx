@@ -20,7 +20,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ price, _id }) => {
   };
 
   return (
-    <Box sx={{ textAlign: 'center', p: 2 }}>
+    <Box sx={{ textAlign: 'center' }}>
       <Typography variant="h6" gutterBottom>
         Price: ${price}
       </Typography>

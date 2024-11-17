@@ -76,7 +76,7 @@ export const fetchSingleDropShipItemApi = createAsyncThunk(
 
 export const addDropShipItemApi = createAsyncThunk(
   'dropShipCollection/addItem',
-  async ({ newDropShipItemData,  clearForm, setIsSaving }: { newDropShipItemData: IDropShipItem, clearForm: any, setIsSaving: any }, { rejectWithValue, dispatch }) => {
+  async ({ newDropShipItemData, clearForm, setIsSaving }: { newDropShipItemData: IDropShipItem, clearForm: any, setIsSaving: any }, { rejectWithValue, dispatch }) => {
     try {
       let response;
 
@@ -197,6 +197,7 @@ export const fetchCartApi = createAsyncThunk(
         response.cartItems.forEach((item: CartItem) => {
           dispatch(addItemToCart(item));
         });
+
         return response.cartItems;
       } catch (error) {
         return rejectWithValue('Failed to fetch cart from backend');
@@ -204,15 +205,43 @@ export const fetchCartApi = createAsyncThunk(
     } else {
       try {
         const savedCart = sessionStorage.getItem('cart');
-        const cartItems = savedCart ? JSON.parse(savedCart) : [];
-        dispatch(loadCartFromCookies(cartItems)); 
-        return cartItems;
+        const cartItems: CartItem[] = savedCart ? JSON.parse(savedCart) : [];
+
+        // Fetch prices for each item
+        // Fetch or assign random prices for each item
+        const cartItemsWithPrices = await Promise.all(
+          cartItems.map(async (item) => {
+            try {
+              const priceResponse = await Request({
+                endpointId: 'GET_ITEM_PRICE',
+                data: { id: item.id },
+              });
+
+              return {
+                ...item,
+                price: priceResponse.price, // Add price to the cart item
+              };
+            } catch (error) {
+              console.error(`Failed to fetch price for item with id ${item.id}`, error);
+              // Assign a random price in case of an error
+              return {
+                ...item,
+                price: Math.floor(Math.random() * 100) + 1, // Random price between 1 and 100
+              };
+            }
+          })
+        );
+
+        // Update the Redux state
+        dispatch(loadCartFromCookies(cartItemsWithPrices));
+        return cartItemsWithPrices;
       } catch (error) {
         return rejectWithValue('Failed to fetch cart from sessionStorage');
       }
     }
   }
 );
+
 
 export const removeItemQuantityApi = createAsyncThunk(
   'cart/removeItemQuantityApi',
@@ -238,10 +267,10 @@ export const removeItemQuantityApi = createAsyncThunk(
 
         const existingItemIndex = cartItems.findIndex((cartItem: CartItem) => cartItem.id === itemId);
         console.log(existingItemIndex);
-        
+
         if (existingItemIndex !== -1) {
           const item = cartItems[existingItemIndex];
-          
+
           // Only reduce quantity if it's greater than 1
           if (item.quantity > 1) {
             item.quantity -= 1;
@@ -249,11 +278,11 @@ export const removeItemQuantityApi = createAsyncThunk(
             // If quantity is 1 or less, remove the item entirely
             cartItems = cartItems.filter((cartItem: CartItem) => cartItem.id !== itemId);
           }
-        
+
           // Ensure sessionStorage is updated with the new cart state
           sessionStorage.setItem('cart', JSON.stringify(cartItems));
         }
-        
+
 
         dispatch(removeItemFromCart(itemId));
         return { message: 'Item quantity updated in sessionStorage', itemId };

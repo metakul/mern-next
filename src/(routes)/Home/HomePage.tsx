@@ -10,18 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { Pages, UserCategory } from '@/Datatypes/enums';
 import { Helmet } from 'react-helmet';
 
-
-
-
 const HomePage: React.FC<HomePageProps> = () => {
 
   const isUserAuthenticated = useSelector(isAuthenticated);
   const userType = useSelector(selectUserType);
   const navigation = useNavigate()
 
-
   useEffect(() => {
-    if (isUserAuthenticated && userType == UserCategory.SUPER_ADMIN) { // todo use SUPER_ADMIN_DROP_SHIP
+    if (isUserAuthenticated && userType == UserCategory.ROADIES_SUPER_ADMIN) { // todo use SUPER_ADMIN_DROP_SHIP
       navigation(Pages.DASHBOARD)
     } else {
       console.error("User is not authenticated");

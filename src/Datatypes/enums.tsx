@@ -13,7 +13,7 @@ export enum UserCategory {
   Verifier = 'verifier',
   Holder = 'holder',
   User = 'user',
-  SUPER_ADMIN = 'SUPER_ADMIN',
+  ROADIES_SUPER_ADMIN = 'ROADIES_SUPER_ADMIN',
 }
 
 

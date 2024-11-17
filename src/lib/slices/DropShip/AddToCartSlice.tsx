@@ -3,6 +3,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 export interface CartItem {
   id: string;
   quantity: number;
+  price?:any
 }
 
 interface CartState {
@@ -14,8 +15,6 @@ const initialState: CartState = {
   cartItems: [],
   isAuthenticated: false,
 };
-
-
 
 // Slice
 const cartSlice = createSlice({
