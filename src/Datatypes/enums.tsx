@@ -61,7 +61,7 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-const base_url_backend="http://localhost:5002/v1"
+const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
 
 // define endpoints here
   export const ApiEndpoint: Record<string, any> = {
@@ -104,8 +104,8 @@ const base_url_backend="http://localhost:5002/v1"
 
 
     // DROPSHIP API
-    GET_DROPSHIP_ITEMS: { apiId:15, withAuth:false, url: `${base_url_backend}/DropShip/dropShipType`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:"Error geting Items"},
-    GET_SINGLE_DROPSHIP_ITEM: { apiId:16, withAuth:false, url: `${base_url_backend}/DropShip`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Loading Current Item",successMessage:"Item Loaded SuccessFully",errorMessage:"Error Loading Items"},
+    GET_DROPSHIP_ITEMS: { apiId:15, withAuth:false, url: `${base_url_backend}/DropShip/dropShipType`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
+    GET_SINGLE_DROPSHIP_ITEM: { apiId:16, withAuth:false, url: `${base_url_backend}/DropShip`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"",successMessage:"",errorMessage:"Error Loading Items"},
     ADD_DROPSHIP_ITEM: { apiId:17, withAuth:true, url: `${base_url_backend}/DropShip`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Adding New Item",successMessage:"Item Added Successfully",errorMessage:"Error Loading Items"},
     UPDATE_DROPSHIP_ITEM_STATUS: { apiId:18, withAuth:true, url: `${base_url_backend}/DropShip/updateStatus`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Item",successMessage:"Item Status Updates SuccessFully",errorMessage:"Error Updating Item Status"},
     EDIT_DROPSHIP_ITEM: { apiId:19, withAuth:true, url: `${base_url_backend}/DropShip`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Item",successMessage:"Item Updated successfully",errorMessage:"Error Updating Item"},

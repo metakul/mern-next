@@ -46,17 +46,18 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({ images, autoplayDelay = 250
       >
 
         {images && images.map((src, index) => (
-          <SwiperSlide key={index}>
-            <img src={src} alt={`Slide ${index + 1}`}  className="w-full rounded-t-2.5xl border "  width={400}
+          <SwiperSlide key={index} 
+          >
+            <img src={src} alt={`Slide ${index + 1}`} className=" object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125" 
           height={400}/>
           </SwiperSlide>
         ))}
-        <div className="autoplay-progress" slot="container-end">
+        {/* <div className="autoplay-progress" slot="container-end">
           <svg viewBox="0 0 48 48" ref={progressCircle}>
             <circle cx="24" cy="24" r="20"></circle>
           </svg>
           <span ref={progressContent}></span>
-        </div>
+        </div> */}
       </Swiper>
     </>
   );

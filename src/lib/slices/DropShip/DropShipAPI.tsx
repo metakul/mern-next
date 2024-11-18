@@ -193,7 +193,6 @@ export const addToCartApi = createAsyncThunk(
   }
 );
 
-
 export const fetchCartApi = createAsyncThunk(
   'cart/fetchCartApi',
   async ({ isAuthenticated }: { isAuthenticated: boolean }, { rejectWithValue, dispatch }) => {
@@ -203,6 +202,7 @@ export const fetchCartApi = createAsyncThunk(
           endpointId: 'GET_CART',
         });
 
+        // Update Redux with fetched cart items
         response.cartItems.forEach((item: CartItem) => {
           dispatch(addItemToCart(item));
         });
@@ -216,41 +216,45 @@ export const fetchCartApi = createAsyncThunk(
         const savedCart = sessionStorage.getItem('cart');
         const cartItems: CartItem[] = savedCart ? JSON.parse(savedCart) : [];
 
-        // Fetch prices for each item
-        // Fetch or assign random prices for each item
-        const cartItemsWithPrices = await Promise.all(
+        // Fetch detailed information for each item in the cart
+        const detailedCartItems = await Promise.all(
           cartItems.map(async (item) => {
             try {
-              const priceResponse = await Request({
-                endpointId: 'GET_ITEM_PRICE',
-                data: { id: item.id },
+              // Fetch detailed item info using Request
+              const response = await Request({
+                endpointId: "GET_SINGLE_DROPSHIP_ITEM",
+                slug: `/${item.id}`,
               });
+
+              // Assuming the response contains an array with a single item
+              const detailedItem = response[0];
 
               return {
                 ...item,
-                price: priceResponse.price, // Add price to the cart item
+                name: detailedItem.name,
+                price: detailedItem.price, 
               };
             } catch (error) {
-              console.error(`Failed to fetch price for item with id ${item.id}`, error);
-              // Assign a random price in case of an error
+              console.error(`Failed to fetch details for item ID: ${item.id}`, error);
+
+              // Fallback to random price if fetching fails
               return {
                 ...item,
-                price: Math.floor(Math.random() * 100) + 1, // Random price between 1 and 100
+                price:undefined, // Random price between 1 and 100
               };
             }
           })
         );
 
-        // Update the Redux state
-        dispatch(loadCartFromCookies(cartItemsWithPrices));
-        return cartItemsWithPrices;
+        // Update Redux state with detailed cart items
+        dispatch(loadCartFromCookies(detailedCartItems));
+        return detailedCartItems;
       } catch (error) {
         return rejectWithValue('Failed to fetch cart from sessionStorage');
       }
     }
   }
 );
-
 
 export const removeItemQuantityApi = createAsyncThunk(
   'cart/removeItemQuantityApi',

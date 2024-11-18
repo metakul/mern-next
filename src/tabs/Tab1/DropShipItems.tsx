@@ -10,6 +10,7 @@ import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
 import { DropShipStatusInfo } from '@/Datatypes/enums';
 import DropShipItemDetails from '@/components/DropShipItemDetails';
 import AddToCart from '@/components/AddToCart';
+import CustomSwiper from '@/components/Swiper';
 
 interface DropShipItemsProps {
   categoryType?: string; // Optional categoryType prop
@@ -74,21 +75,19 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
             <section className="relative py-4">
               <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
                 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
-                    <img
-                      src={`data:image/png;base64,${item.image}`}
-                      alt="Item image"
-                      className="w-[16em] h-[16em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
-                      onClick={() => handleOpenItem(item.id || '')}
-                    />
+                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }} onClick={() => handleOpenItem(item.id || '')}
+                      >
+                    <CustomSwiper images={[`data:image/png;base64,${item.image}`,`data:image/png;base64,${item.image}`]}/>
                   </Box>
                   <Grid container className="mt-8">
                     <Grid item xs={8}>
-                      {/* <span className="inline-flex flex-wrap items-center space-x-1 text-accent mb-4">
-                        {item?.categories?.map((category, index) => (
-                          <h5 key={index}>{category}</h5>
-                        ))}
-                      </span> */}
+                    <h2
+                        className="mb-4 font-display"
+                        style={{ overflow: 'hidden' }}
+                        onClick={() => handleOpenItem(item.id || '')}
+                      >
+                        {item.title} <br />
+                      </h2>
                     </Grid>
                     <Grid item xs={4} className="mx-auto flex justify-center pb-4">
                       <ShareButton link={`${itemLink}`} />
@@ -99,11 +98,10 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
                         style={{ overflow: 'hidden' }}
                         onClick={() => handleOpenItem(item.id || '')}
                       >
-                        {item.title} <br />
                         Price: ₹{item.price}
                       </h2>
                     </Grid>
-                    <Grid item xs={4} className="mx-auto">
+                    <Grid item xs={4} className="mx-auto flex justify-center">
                       {item.id && item.title && (
                         <AddToCart
                           _id={item.id}
