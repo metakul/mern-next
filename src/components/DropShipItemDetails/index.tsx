@@ -3,9 +3,7 @@ import React from 'react';
 // icons
 import OtherHousesOutlinedIcon from '@mui/icons-material/OtherHousesOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
-import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
 import BlogInfoTab from './BlogInfoComp';
-import CryptoInfoPage from '../CryptoInfo';
 import BlogDescription from '../WYSWYGEditor/BlogDescription';
 import SocialProfiles from '../SocialProfile/index';
 import { useSelector } from 'react-redux';

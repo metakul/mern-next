@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from 'react';
 import { Button, Stack, Skeleton, Box, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/lib/store';
 import { IDropShipItem } from '@/Datatypes/interfaces/interface';
 import ShareButton from '@/components/Elements/Buttons/ShareButton';
-import { useEffect, useState } from 'react';
 import { getColors } from '@/layout/Theme/themes';
 import { fetchDropShipItemsApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
@@ -11,27 +11,32 @@ import { DropShipStatusInfo } from '@/Datatypes/enums';
 import DropShipItemDetails from '@/components/DropShipItemDetails';
 import AddToCart from '@/components/AddToCart';
 
-const DropShipItems = () => {
+interface DropShipItemsProps {
+  categoryType?: string; // Optional categoryType prop
+}
+
+const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
   const dispatch = useDispatch();
   const { dropShipItems, loading } = useSelector(selectedDropShipItems);
   const [page, setItemPage] = useState(1);
   const [pageSize] = useState(4);
   const [openedItemId, setOpenedItemId] = useState<string | null>(null);
+  const [currentDomain, setCurrentDomain] = useState<string | null>(null);
 
   const handleLoadItems = async () => {
     try {
-      (dispatch as AppDispatch)(fetchDropShipItemsApi({
-        pageSize,
-        page,
-        setItemPage,
-        status: DropShipStatusInfo.APPROVED
-      }));
+      (dispatch as AppDispatch)(
+        fetchDropShipItemsApi({
+          pageSize,
+          page,
+          setItemPage,
+          status: DropShipStatusInfo.APPROVED,
+        })
+      );
     } catch (error) {
       console.error("Failed to fetch DropShip items:", error);
     }
   };
-
-  const [currentDomain, setCurrentDomain] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -50,16 +55,23 @@ const DropShipItems = () => {
     setOpenedItemId(id === openedItemId ? null : id);
   };
 
+  // Filter items by categoryType if provided
+  const filteredItems = categoryType
+    ? dropShipItems.filter((item: IDropShipItem) =>
+        item.categories?.includes(categoryType)
+      )
+    : dropShipItems;
+
   return (
     <div className="sm:w-full overflow-hidden mx-auto">
       <Grid container spacing={2} sx={{ mb: 4 }}>
-        {dropShipItems.map((item: IDropShipItem, index: number) => (
+        {filteredItems.map((item: IDropShipItem, index: number) => (
           <Grid
             key={index}
             item
             xs={6} // 2 items per row on small screens (xs)
           >
-            <section className="relative py-4 ">
+            <section className="relative py-4">
               <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
                 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
                   <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
@@ -71,24 +83,35 @@ const DropShipItems = () => {
                     />
                   </Box>
                   <Grid container className="mt-8">
-                    <Grid item xs={8} md={8} lg={8} className=''>
-                      <span className="inline-flex flex-wrap items-center space-x-1 text-accent mb-4">
+                    <Grid item xs={8}>
+                      {/* <span className="inline-flex flex-wrap items-center space-x-1 text-accent mb-4">
                         {item?.categories?.map((category, index) => (
                           <h5 key={index}>{category}</h5>
                         ))}
-                      </span>
+                      </span> */}
                     </Grid>
-                    <Grid item xs={4} md={4} lg={4} className="mx-auto flex  justify-center  pb-4">
+                    <Grid item xs={4} className="mx-auto flex justify-center pb-4">
                       <ShareButton link={`${itemLink}`} />
                     </Grid>
-                    <Grid item xs={8} md={8} lg={8} className="mx-auto">
-                    <h2 className="mb-4 font-display " style={{ overflow: 'hidden' }} onClick={() => handleOpenItem(item.id || '')}>
-                      {item.title} <br />
-                      Price:{item.price}
-                    </h2>
+                    <Grid item xs={8} className="mx-auto">
+                      <h2
+                        className="mb-4 font-display"
+                        style={{ overflow: 'hidden' }}
+                        onClick={() => handleOpenItem(item.id || '')}
+                      >
+                        {item.title} <br />
+                        Price: ₹{item.price}
+                      </h2>
                     </Grid>
-                    <Grid item xs={4} md={4} lg={4} className="mx-auto">
-                      {item.id && item.title && <AddToCart _id={item.id} price={item.price} name={item.title} image={item.image}/>}
+                    <Grid item xs={4} className="mx-auto">
+                      {item.id && item.title && (
+                        <AddToCart
+                          _id={item.id}
+                          price={item.price}
+                          name={item.title}
+                          image={item.image}
+                        />
+                      )}
                     </Grid>
                     <DropShipItemDetails
                       isDropShipItemInfoOpen={openedItemId === item.id}
@@ -97,7 +120,6 @@ const DropShipItems = () => {
                       name={item.title}
                       image={item.image}
                     />
-                    {/* Add any additional item details here */}
                   </Grid>
                 </div>
               </div>
@@ -122,7 +144,11 @@ const DropShipItems = () => {
         </Grid>
       )}
       <div className="mx-auto flex flex-row justify-center">
-        <Button variant="contained" sx={{ backgroundColor: getColors().blueAccent[800] }} onClick={handleLoadItems}>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: getColors().blueAccent[800] }}
+          onClick={handleLoadItems}
+        >
           Load More
         </Button>
       </div>

@@ -71,10 +71,10 @@ const InstallPWA = () => {
   }
   return (
     <>
-      <div className=" p-4 text-center  border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-        <h5 className="mb-2 text-md md:text-xl font-bold ">  Secure Access, Anytime, Anywhere </h5>
-        <p className="mb-5 text-sm sm:text-lg">
-          Install our app to get fast, one-tap access to all features, even offline!
+      <div className="mt-4 p-2 text-center  border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <h5 className="mb-2 text-md font-bold ">  "Shop Smarter, Anywhere! 🌟 </h5>
+        <p className="mb-3 text-sm ">
+        One tap, all features. Install now for the ultimate shopping experience!
         </p>
         <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
 

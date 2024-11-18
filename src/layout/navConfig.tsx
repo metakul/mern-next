@@ -27,11 +27,11 @@ export const navConfig = [
     icon: <PieChartOutlined />,
     to: Pages.PROFILE
   },
-  {
-    text: "Metaverse",
-    icon: null,
-    to: "",
-  },
+  // {
+  //   text: "Metaverse",
+  //   icon: null,
+  //   to: "",
+  // },
   {
     text: "AI",
     icon:null,

@@ -128,9 +128,9 @@ const indianCities = [
 
 const AutocompleteList: React.FC<AutocompleteListProps> = ({ setAddress, handleClose }) => {
   const {
-    ready,
+    // ready,
     value,
-    suggestions: { status, data },
+    // suggestions: {  data },
     setValue,
     clearSuggestions,
   } = usePlacesAutocomplete({ debounce: 300 });
@@ -146,16 +146,16 @@ const AutocompleteList: React.FC<AutocompleteListProps> = ({ setAddress, handleC
     setValue(e.target.value);
   };
 
-  const handleSelect = ({ description }: any) => () => {
-    setValue(description, false);
-    clearSuggestions();
-    setAddress(description);
-    handleClose();
-    getGeocode({ address: description }).then((results) => {
-      const { lat, lng } = getLatLng(results[0]);
-      console.log('📍 Coordinates:', { lat, lng });
-    });
-  };
+  // const handleSelect = ({ description }: any) => () => {
+  //   setValue(description, false);
+  //   clearSuggestions();
+  //   setAddress(description);
+  //   handleClose();
+  //   getGeocode({ address: description }).then((results) => {
+  //     const { lat, lng } = getLatLng(results[0]);
+  //     console.log('📍 Coordinates:', { lat, lng });
+  //   });
+  // };
 
   const handleCitySelect = (city: string) => {
     setSelectedCity(city);
@@ -163,28 +163,28 @@ const AutocompleteList: React.FC<AutocompleteListProps> = ({ setAddress, handleC
     handleClose();
   };
 
-  const renderSuggestions = () =>
-    data.map((suggestion) => {
-      const {
-        place_id,
-        structured_formatting: { main_text, secondary_text },
-      } = suggestion;
+  // const renderSuggestions = () =>
+  //   data.map((suggestion) => {
+  //     const {
+  //       place_id,
+  //       structured_formatting: { main_text, secondary_text },
+  //     } = suggestion;
 
-      return (
-        <ListItem
-          key={place_id}
-          onClick={handleSelect(suggestion)}
-          className="cursor-pointer hover:bg-gray-100"
-        >
-          <Typography variant="body1" component="strong">
-            {main_text}
-          </Typography>
-          <Typography variant="body2" className="text-gray-500">
-            {secondary_text}
-          </Typography>
-        </ListItem>
-      );
-    });
+  //     return (
+  //       <ListItem
+  //         key={place_id}
+  //         onClick={handleSelect(suggestion)}
+  //         className="cursor-pointer hover:bg-gray-100"
+  //       >
+  //         <Typography variant="body1" component="strong">
+  //           {main_text}
+  //         </Typography>
+  //         <Typography variant="body2" className="text-gray-500">
+  //           {secondary_text}
+  //         </Typography>
+  //       </ListItem>
+  //     );
+  //   });
 
   return (
     <div ref={ref} className="p-4 rounded shadow-lg w-96" style={{

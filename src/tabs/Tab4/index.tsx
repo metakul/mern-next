@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Box,
-  Button,
+  // Button,
   Typography,
   List,
   ListItem,
@@ -15,8 +15,9 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
-  clearCart,
+  // clearCart,
   selectCartItems,
+  selectTotalQuantityAndPrice,
 } from '@/lib/slices/DropShip/AddToCartSlice';
 import { fetchCartApi, removeItemQuantityApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { AppDispatch } from '@/lib/store';
@@ -24,8 +25,9 @@ import { isAuthenticated } from '@/lib/slices/authSlice';
 import Subscribe from '@/components/Inputs/Subscribe';
 
 const CartPage = () => {
-  const cartItems = useSelector(selectCartItems); // Get cart items from Redux
+  const cartItems = useSelector(selectCartItems); 
   const dispatch = useDispatch<AppDispatch>();
+  const { totalQuantity, totalPrice } = useSelector(selectTotalQuantityAndPrice);
 
   const isAuthenticatedUser = useSelector(isAuthenticated);
 
@@ -38,9 +40,9 @@ const CartPage = () => {
     dispatch(removeItemQuantityApi({ itemId: id, isAuthenticated: isAuthenticatedUser })); // Dispatch action to remove an item
   };
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
+  // const handleClearCart = () => {
+  //   dispatch(clearCart());
+  // };
 
   return (
     <Box sx={{ maxWidth: '800px', mx: 'auto', p: 3 }}>
@@ -55,8 +57,8 @@ const CartPage = () => {
               <React.Fragment key={item.id}>
                 <ListItem alignItems="flex-start">
                   <ListItemText
-                    primary={item.id}
-                    secondary={`Id: ${item.id} |Name: ${item.name} | Price: $${item?.price?.toFixed(2)} | Quantity: ${item.quantity}`}
+                    primary={item.name}
+                    secondary={`Id: ${item.id} | Price: ₹ ${item?.price?.toFixed(2)} | Quantity: ${item.quantity}`}
                   />
                   <ListItemSecondaryAction>
                     <IconButton
@@ -72,10 +74,17 @@ const CartPage = () => {
               </React.Fragment>
             ))}
           </List>
+          <List>
+      <ListItem>Total Items: {totalQuantity}</ListItem>
+      <ListItem sx={{
+        m:0
+      }}>Total Price: ₹ {totalPrice.toFixed(2)}</ListItem>
+    </List>
           <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 3 }}>
           
               <Subscribe />
           </Stack>
+          
         </>
       ) : (
         <Typography variant="h6" align="center" color="textSecondary">

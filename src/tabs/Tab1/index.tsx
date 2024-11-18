@@ -15,12 +15,20 @@ const Tab1 = () => {
       <MarqueeCryptoNew />
       <Box sx={{
       }}>
-        <InstallPWA />
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Featured Items
         </Typography>
         <DropShipItems />
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+          Most Liked Shirt
+        </Typography>
+        <DropShipItems categoryType="shirt" />
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+          Hot Deals
+        </Typography>
+        <DropShipItems categoryType="hotdeals" />
       </Box>
+        <InstallPWA />
     </>
   );
 };

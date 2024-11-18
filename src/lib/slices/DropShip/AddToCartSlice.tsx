@@ -71,3 +71,13 @@ export default cartSlice.reducer;
 // Selectors
 export const selectCartItems = (state: { cart: { cartItems: CartItem[] } }) => state.cart.cartItems;
 export const selectAuthentication = (state: { cart: { isAuthenticated: boolean } }) => state.cart.isAuthenticated;
+export const selectTotalQuantityAndPrice = (state: { cart: { cartItems: CartItem[] } }) => {
+  return state.cart.cartItems.reduce(
+    (totals, item) => {
+      totals.totalQuantity += item.quantity;
+      totals.totalPrice += item.price ? item.price * item.quantity : 0;
+      return totals;
+    },
+    { totalQuantity: 0, totalPrice: 0 }
+  );
+};
