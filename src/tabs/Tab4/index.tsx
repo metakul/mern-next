@@ -54,8 +54,15 @@ const CartPage = () => {
         <>
           <List>
             {cartItems.map((item) => (
+              
               <React.Fragment key={item.id}>
                 <ListItem alignItems="flex-start">
+                 <img
+                      src={`data:image/png;base64,${item.image}`}
+                      alt="Item image"
+                      className="w-[10em] h-[10em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125 p-2"
+                      // onClick={() => handleOpenItem(item.id || '')}
+                    />
                   <ListItemText
                     primary={item.name}
                     secondary={`Id: ${item.id} | Price: ₹ ${item?.price?.toFixed(2)} | Quantity: ${item.quantity}`}

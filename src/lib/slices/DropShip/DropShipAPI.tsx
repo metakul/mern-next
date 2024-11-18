@@ -228,10 +228,11 @@ export const fetchCartApi = createAsyncThunk(
 
               // Assuming the response contains an array with a single item
               const detailedItem = response[0];
-
+              console.log(detailedItem);
+              
               return {
                 ...item,
-                name: detailedItem.name,
+                name: detailedItem.title,
                 price: detailedItem.price, 
               };
             } catch (error) {

@@ -17,9 +17,9 @@ export const makeStore = () => {
         dropShipCollection:dropShipSlice,
         cart:AddToCartSlice,
     }, 
-    middleware:getDefaultMiddlerware =>
-      getDefaultMiddlerware().concat(logger),
-      devTools:true
+    // middleware:getDefaultMiddlerware =>
+    //   getDefaultMiddlerware().concat(logger),
+    //   devTools:true
   })
 }
 
