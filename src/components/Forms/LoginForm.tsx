@@ -69,7 +69,7 @@ const LoginForm: React.FC<LoginProps> = ({OnFormSuccess,userType}) => {
   return (
     <div>
        <form noValidate>
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={12}>
             <Stack spacing={1}>
               <InputLabel htmlFor="email-login">Email Address</InputLabel>

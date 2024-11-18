@@ -31,7 +31,7 @@ export interface CartPageProps {
   setShowOutlet: (showOutlet: boolean) => void;
 }
 
-const CartPage:React.FC<CartPageProps> = ({setShowOutlet}) => {
+const CartPage: React.FC<CartPageProps> = ({ setShowOutlet }) => {
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
 
@@ -86,14 +86,14 @@ const CartPage:React.FC<CartPageProps> = ({setShowOutlet}) => {
                     width: '100%',
                   }}>
 
-                  <ListItemText
-                    primary={item.name}
-                    secondary={` Price: ₹ ${item?.price?.toFixed(2)}`}
+                    <ListItemText
+                      primary={item.name}
+                      secondary={` Price: ₹ ${item?.price?.toFixed(2)}`}
                     />
-                  <ListItemText
-                    secondary={` Quantity: ${item.quantity}`}
+                    <ListItemText
+                      secondary={` Quantity: ${item.quantity}`}
                     />
-                    </Box>
+                  </Box>
                   <ListItemSecondaryAction>
                     <IconButton
                       edge="end"
@@ -114,11 +114,12 @@ const CartPage:React.FC<CartPageProps> = ({setShowOutlet}) => {
               m: 0
             }}>Total Price: ₹ {totalPrice.toFixed(2)}</ListItem>
           </List>
-          <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 3 }}>
-
-            <Subscribe />
+          <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 1 }}>
+            {
+              totalPrice &&
+              <Subscribe cartItems={cartItems} price={totalPrice} setShowOutlet={setShowOutlet} />
+            }
           </Stack>
-
         </>
       ) : (
         <Typography variant="h6" align="center" color="textSecondary">

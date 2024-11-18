@@ -216,3 +216,49 @@ export interface IUser extends IloginUser {
     subcategory?: string;
     permissions?: string[];
 }
+
+
+
+//payment
+
+// Extended PaymentInfo Interface
+export interface AcquirerData {
+  rrn: string;
+  upi_transaction_id: string;
+}
+
+export interface UPIInfo {
+  vpa: string;
+}
+
+export interface PaymentInfo {
+  id: string;
+  amount: number;
+  currency: string;
+  status: string;
+  acquirer_data?: AcquirerData;
+  amount_refunded?: number;
+  bank?: string | null;
+  captured?: boolean;
+  card_id?: string | null;
+  contact?: string;
+  created_at?: number;
+  description?: string;
+  email?: string;
+  entity?: string;
+  error_code?: string | null;
+  error_description?: string | null;
+  error_reason?: string | null;
+  error_source?: string | null;
+  error_step?: string | null;
+  fee?: number | null;
+  international?: boolean;
+  invoice_id?: string | null;
+  method?: string;
+  notes?: string[];
+  order_id?: string | null;
+  refund_status?: string | null;
+  tax?: number | null;
+  upi?: UPIInfo;
+  wallet?: string | null;
+}

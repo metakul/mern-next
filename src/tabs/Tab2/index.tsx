@@ -36,20 +36,22 @@ const Metaship = () => {
                 <LogoutButton/>
              
               ):(
+                <>
                 <CustomDialog
                 className="ml-2"
                 open={isDialogOpen}
                 onClose={() => setDialogOpen(!isDialogOpen)}
-                triggerButtonText={"Admin Login"}
+                triggerButtonText={"Login"}
                 title={"Login Now"}
-                description={"Only admin are availabale to login for now"}
+                description={"Login Now To See what your friends are wearing"}
                 >
                 <LoginForm
-                  loginTitle="Admin Login"
+                  loginTitle=" Login"
                   userType='ADMIN'
                   OnFormSuccess={() => setDialogOpen(!isDialogOpen)}
                   />
               </CustomDialog>
+                  </>
               )}
           </div>
         </div>

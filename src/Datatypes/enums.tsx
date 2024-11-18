@@ -112,7 +112,7 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
     EDIT_DROPSHIP_ITEM: { apiId:19, withAuth:true, url: `${base_url_backend}/DropShip`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Item",successMessage:"Item Updated successfully",errorMessage:"Error Updating Item"},
     
     //  rajorPayW
-    GET_PAYMENT_INFO: { apiId:15, withAuth:false, url: `${base_url_rajorpay}/payments`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
+    GET_PAYMENT_INFO: { apiId:15, withAuth:false, url: `${base_url_backend}/payment`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
   }
 
   

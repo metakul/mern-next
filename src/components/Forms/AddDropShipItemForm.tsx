@@ -28,7 +28,7 @@ const newErrors: ErrorMessages = {
   totalItemRemaining: '',
 };
 
-const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo }) => {
+const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo,formEvent }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<IDropShipItem>(
     itemInfo
@@ -106,6 +106,7 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo }) => {
             id: itemInfo?.id,
             status: 'pending',
           },
+          formEvent,
           clearForm,
           setIsSaving,
         })

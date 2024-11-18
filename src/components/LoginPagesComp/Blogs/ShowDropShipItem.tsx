@@ -20,8 +20,6 @@ interface DropShipItemInfo {
 
 const AddDropShipItemComp: React.FC<DropShipItemInfo>=({status}) => {
 
-
-
     const [searchQuery, setSearchQuery] = useState("");
     const [/*openMenu*/, setOpenMenu] = useState<HTMLElement | null>(null);
     const [/*selectedRowId*/, setSelectedRowId] = useState<string | null>(null);

@@ -76,11 +76,11 @@ export const fetchSingleDropShipItemApi = createAsyncThunk(
 
 export const addDropShipItemApi = createAsyncThunk(
   'dropShipCollection/addItem',
-  async ({ newDropShipItemData, clearForm, setIsSaving }: { newDropShipItemData: IDropShipItem, clearForm: any, setIsSaving: any }, { rejectWithValue, dispatch }) => {
+  async ({ newDropShipItemData, formEvent,clearForm, setIsSaving }: { newDropShipItemData: IDropShipItem,formEvent:any, clearForm: any, setIsSaving: any }, { rejectWithValue, dispatch }) => {
     try {
       let response;
 
-      if (newDropShipItemData.id) {
+      if (formEvent==="EDIT") {
         // Update item logic
         response = await Request({
           endpointId: "EDIT_DROPSHIP_ITEM",

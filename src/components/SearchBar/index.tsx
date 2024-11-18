@@ -8,7 +8,6 @@ interface SearchBarProps {
 
 const SearchBar: FC<SearchBarProps> = ({ searchQuery, setSearchQuery }) => {
   return (
-    <Box >
       <TextField
         label=" Search by Name, title, tags, id"
         variant="outlined"
@@ -25,7 +24,6 @@ const SearchBar: FC<SearchBarProps> = ({ searchQuery, setSearchQuery }) => {
         }}
       />
     
-    </Box>
   );
 };
 

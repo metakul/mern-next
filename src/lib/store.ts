@@ -19,9 +19,9 @@ export const makeStore = () => {
         cart:AddToCartSlice,
         razorpay:razorpaySlice
     }, 
-    // middleware:getDefaultMiddlerware =>
-    //   getDefaultMiddlerware().concat(logger),
-    //   devTools:true
+    middleware:getDefaultMiddlerware =>
+      getDefaultMiddlerware().concat(logger),
+      devTools:true
   })
 }
 
