@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Container, useMediaQuery } from "@mui/material";
+import { Badge, Container, useMediaQuery } from "@mui/material";
 
 import Header from "./TopBar";
 
@@ -32,6 +32,8 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Metaship from "@/tabs/Tab2";
 import CartPage from "@/tabs/Tab4";
+import { useSelector } from "react-redux";
+import { selectTotalQuantityAndPrice } from "@/lib/slices/DropShip/AddToCartSlice";
 
 
 
@@ -41,6 +43,8 @@ export default function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showOutlet, setShowOutlet] = useState<boolean>(false);
   const APP_BAR = "64px";
+  const { totalQuantity } = useSelector(selectTotalQuantityAndPrice);
+
   const handleSideBarState = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -80,11 +84,23 @@ export default function DashboardLayout() {
     },
     {
       value: (
+        <Badge
+        badgeContent={totalQuantity > 0 ? totalQuantity : 0}
+        color="error"
+        invisible={totalQuantity === 0}
+        sx={{
+          "& .MuiBadge-badge": {
+            top: "8px",
+            right: "-8px",
+          },
+        }}
+      >
         <ShoppingCartIcon
           sx={{
             color: "white",
           }}
         />
+      </Badge>
       ),
       content: <CartPage />,
       label: Tabs.tabTitle4,
