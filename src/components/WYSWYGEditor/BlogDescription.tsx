@@ -68,7 +68,7 @@ const DropShipItemDescription = ({ _id, userType }: DropShipItemDetailsProps) =>
               <Button variant='contained' sx={{
               }}>
 
-                <Typography onClick={() => selectedDropShipItem && handleNavigate(`${Pages.SINGLE_BLOG.replace(':dropShipItemTitle', selectedDropShipItem.title).replace(':id', _id)}`)}>
+                <Typography onClick={() => selectedDropShipItem && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', selectedDropShipItem.title).replace(':id', _id)}`)}>
                   Read All
                 </Typography>
               </Button>

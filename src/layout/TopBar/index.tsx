@@ -52,9 +52,9 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
         
         <Box
           onClick={() => navigate("/")}
-          sx={{ cursor: "pointer",mt: 2}}
+          sx={{ cursor: "pointer"}}
         >
-          <img src={`/logo.svg`} alt="logo" className="w-8 h-8 ml-4" />
+          <img src={`/logo.png`} alt="logo" className="w-8 h-8 ml-4" />
         </Box>
 
         <Box sx={{ flexGrow: 1 }} />

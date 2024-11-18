@@ -19,7 +19,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
   const dispatch = useDispatch();
   const { dropShipItems, loading } = useSelector(selectedDropShipItems);
   const [page, setItemPage] = useState(1);
-  const [pageSize] = useState(4);
+  const [showItemPerPage] = useState(40);
   const [openedItemId, setOpenedItemId] = useState<string | null>(null);
   const [currentDomain, setCurrentDomain] = useState<string | null>(null);
 
@@ -27,7 +27,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
     try {
       (dispatch as AppDispatch)(
         fetchDropShipItemsApi({
-          pageSize,
+          pageSize:40,
           page,
           setItemPage,
           status: DropShipStatusInfo.APPROVED,
@@ -130,7 +130,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
 
       {loading && (
         <Grid container spacing={2} sx={{ mb: 4 }}>
-          {Array.from({ length: pageSize }).map((_, index) => (
+          {Array.from({ length: 2 }).map((_, index) => (
             <Grid key={index} item xs={6}>
               <Stack spacing={1} className="relative py-4 mt-4">
                 <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
