@@ -62,6 +62,7 @@ export enum ProtectedPageInfo{
   pageDescription="This is Protected page",
 }
 const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
+const base_url_rajorpay="https://api.razorpay.com/v1"
 
 // define endpoints here
   export const ApiEndpoint: Record<string, any> = {
@@ -109,7 +110,9 @@ const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1
     ADD_DROPSHIP_ITEM: { apiId:17, withAuth:true, url: `${base_url_backend}/DropShip`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Adding New Item",successMessage:"Item Added Successfully",errorMessage:"Error Loading Items"},
     UPDATE_DROPSHIP_ITEM_STATUS: { apiId:18, withAuth:true, url: `${base_url_backend}/DropShip/updateStatus`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Item",successMessage:"Item Status Updates SuccessFully",errorMessage:"Error Updating Item Status"},
     EDIT_DROPSHIP_ITEM: { apiId:19, withAuth:true, url: `${base_url_backend}/DropShip`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Item",successMessage:"Item Updated successfully",errorMessage:"Error Updating Item"},
-   
+    
+    //  rajorPayW
+    GET_PAYMENT_INFO: { apiId:15, withAuth:false, url: `${base_url_rajorpay}/payments`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
   }
 
   

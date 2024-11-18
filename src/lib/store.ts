@@ -4,6 +4,7 @@ import authReducer from "./slices/authSlice"
 import chatReducer from "./slices/Chatgpt/ChatGptSlice"
 import userReducer from "./slices/RegisterUsers/RegisterSlice"
 import dropShipSlice from "./slices/DropShip/DropShipSlice"
+import razorpaySlice from "./slices/DropShip/Payment/paymentSlice"
 import AddToCartSlice from "./slices/DropShip/AddToCartSlice"
 import cryptoCollectionRedcuer from "./slices/CryptoSlices/CryptoSlice"
 
@@ -16,6 +17,7 @@ export const makeStore = () => {
         cryptoCollection:cryptoCollectionRedcuer,
         dropShipCollection:dropShipSlice,
         cart:AddToCartSlice,
+        razorpay:razorpaySlice
     }, 
     // middleware:getDefaultMiddlerware =>
     //   getDefaultMiddlerware().concat(logger),

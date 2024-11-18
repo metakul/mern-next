@@ -11,12 +11,12 @@ import { getColors } from '@/layout/Theme/themes';
 //redux
 import { AppDispatch } from '@/lib/store';
 import { selectUserType } from '@/lib/slices/authSlice';
-import { Helmet } from "react-helmet";
 import {  useNavigate, useParams } from 'react-router-dom';
 import AddDropShipItemForm from '@/components/Forms/AddDropShipItemForm';
 import { useSelectedDropShipItem } from '@/lib/slices/DropShip/DropShipSlice';
 import { fetchSingleDropShipItemApi, updateDropShipItemStatus } from '@/lib/slices/DropShip/DropShipAPI';
 import { parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
+import AddToCart from '@/components/AddToCart';
 
 
 const SingleDropShipItemDetails = () => {
@@ -149,9 +149,23 @@ const SingleDropShipItemDetails = () => {
                   <img
                     src={`data:image/png;base64,${image}`}
                     alt={"Post image"}
-                    className=" w-[80%] lg:w-[70%] sm:h-3/4 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
+                    className=" w-[24rem] h-[24rem] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
                   />
                 </Box>
+                <Box sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  mb: 4
+                }}>
+
+                {dropShipItemId && title && (
+                  <AddToCart
+                  _id={dropShipItemId}
+                  name={title}
+                  image={image}
+                  />
+                )}
                 <span className="inline-flex flex-wrap items-center space-x-1 text-accent">
                   {categories.map((category, index) => (
                     <h5 key={index} >
@@ -159,10 +173,11 @@ const SingleDropShipItemDetails = () => {
                     </h5>
                   ))}
                 </span>
+                  </Box>
                 
                 {parseHTML(truncatedDescription).map((node, index) => renderCustomStyles(node, index))}
                 <Typography variant='h5' >
-                  Author: {author}
+                  Seller: {author}
                 </Typography>
               </Box>
             )}

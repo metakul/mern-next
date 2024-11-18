@@ -1,12 +1,12 @@
 
 .swiper {
-  width: 20em;
-  height: 400px;
+  width: 16em;
+  height: 360px;
 }
 
 @media (max-width: 786px) {
   .swiper {
-    height: 200px;
+    height: 280px;
   }
 }
   .mySwiper{

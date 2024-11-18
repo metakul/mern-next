@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import './style.css';
 // import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
+import { Box } from '@mui/material';
 
 interface CustomSwiperProps {
   images: string[];
@@ -45,11 +46,15 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({ images, autoplayDelay = 250
       >
 
         {images && images.map((src, index) => (
+          <Box sx={{
+            border:"40px solid grey"
+          }}>
+
           <SwiperSlide key={index} 
           >
-            <img src={src} alt={`Slide ${index + 1}`} className=" object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125" 
-          height={400}/>
+            <img src={src} alt={`Slide ${index + 1}`} className="bprder border-xl object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"/>
           </SwiperSlide>
+            </Box>
         ))}
         {/* <div className="autoplay-progress" slot="container-end">
           <svg viewBox="0 0 48 48" ref={progressCircle}>

@@ -21,16 +21,16 @@ const Tab1 = () => {
 
   return (
     <>
-      <h1 className="mb-4 pt-2 pb-2 underline underline-offset-4 text-center  font-display text-xl open-sans flex justify-center items-center"  style={{ color: getColors().blueAccent[100], cursor:"pointer" }}>
-          Meta-Ship   <LocalShippingIcon sx={{
-            ml:1
-          }}/>
+      <h1 className="mb-4 pt-2 pb-2 underline underline-offset-4 text-center  font-display text-xl open-sans flex justify-center items-center" style={{ color: getColors().blueAccent[100], cursor: "pointer" }}>
+        Meta-Ship   <LocalShippingIcon sx={{
+          ml: 1
+        }} />
       </h1>
       <MarqueeCryptoNew />
       <Box sx={{
       }}>
-    <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
-          WInter Sales
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+          Winter Sales
         </Typography>
         <DropShipItems categoryType="winterwear" />
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
@@ -46,7 +46,7 @@ const Tab1 = () => {
         </Typography>
         <DropShipItems />
       </Box>
-        <InstallPWA />
+      <InstallPWA />
     </>
   );
 };

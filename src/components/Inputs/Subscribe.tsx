@@ -1,7 +1,11 @@
 import { Box, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChooseLocation from '../Location/ChooseLocation';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { Pages } from '@/Datatypes/enums';
+
+const VITE_PUBLICRAZORPAY_KEY_ID = import.meta.env.VITE_PUBLICRAZORPAY_KEY_ID as string
 
 interface FormData {
   email: string;
@@ -12,6 +16,21 @@ function Subscribe() {
   const [formData, setFormData] = useState<FormData>({ email: "", address: "" });
   const [openMap, setOpenMap] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
+  const navigate = useNavigate();
+  // Dynamically load Razorpay script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    script.onload = () => setIsRazorpayLoaded(true);
+    script.onerror = () => toast.error("Failed to load Razorpay script.");
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -19,7 +38,7 @@ function Subscribe() {
       ...prevData,
       [name]: value,
     }));
-    setError(null); // Clear error on input change
+    setError(null);
   };
 
   const handleAddressChange = (address: string | { latitude: number; longitude: number } | null) => {
@@ -42,8 +61,40 @@ function Subscribe() {
       toast.error("Both email and address are required.");
       return;
     }
-    console.log("Email:", formData.email);
-    console.log("Address:", formData.address);
+
+    if (!isRazorpayLoaded) {
+      toast.error("Razorpay script not loaded. Please try again later.");
+      return;
+    }
+
+    const options = {
+      key: VITE_PUBLICRAZORPAY_KEY_ID, 
+      amount: 5000, 
+      currency: "INR",
+      name: "Your Business Name",
+      description: "Subscription Payment",
+      image: "https://example.com/logo.png",
+      handler: (response: any) => {
+        toast.success(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+        console.log("Payment successful:", response);
+        navigate(Pages.PROFILE)
+      },
+      prefill: {
+        email: formData.email,
+        contact: "9000090000", // Optional: Pre-fill customer's phone number
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const razorpay = new (window as any).Razorpay(options);
+    razorpay.on("payment.failed", (response: any) => {
+      toast.error("Payment Failed. Please try again.");
+      console.error("Payment failed:", response.error);
+    });
+
+    razorpay.open();
   };
 
   return (

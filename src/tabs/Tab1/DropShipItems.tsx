@@ -7,10 +7,11 @@ import ShareButton from '@/components/Elements/Buttons/ShareButton';
 import { getColors } from '@/layout/Theme/themes';
 import { fetchDropShipItemsApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
-import { DropShipStatusInfo } from '@/Datatypes/enums';
+import { DropShipStatusInfo, Pages } from '@/Datatypes/enums';
 import DropShipItemDetails from '@/components/DropShipItemDetails';
 import AddToCart from '@/components/AddToCart';
 import CustomSwiper from '@/components/Swiper';
+import { useNavigate } from 'react-router-dom';
 
 interface DropShipItemsProps {
   categoryType?: string; // Optional categoryType prop
@@ -28,7 +29,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
     try {
       (dispatch as AppDispatch)(
         fetchDropShipItemsApi({
-          pageSize:40,
+          pageSize: 40,
           page,
           setItemPage,
           status: DropShipStatusInfo.APPROVED,
@@ -44,7 +45,11 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
       setCurrentDomain(window.location.origin);
     }
   }, []);
+  const navigate = useNavigate();
 
+  const handleNavigate = (href: string) => {
+    navigate(href);
+  };
   const itemLink = currentDomain ? `${currentDomain}` : '';
 
   useEffect(() => {
@@ -59,32 +64,37 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
   // Filter items by categoryType if provided
   const filteredItems = categoryType
     ? dropShipItems.filter((item: IDropShipItem) =>
-        item.categories?.includes(categoryType)
-      )
+      item.categories?.includes(categoryType)
+    )
     : dropShipItems;
 
   return (
-    <div className="sm:w-full overflow-hidden mx-auto">
+    <div className="overflow-hidden mx-auto">
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {filteredItems.map((item: IDropShipItem, index: number) => (
           <Grid
             key={index}
             item
-            xs={6} // 2 items per row on small screens (xs)
+            xs={6}
+            md={4}
+            sx={{
+              height:"600px"
+            }}
           >
-            <section className="relative py-4">
-              <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+            <section className="relative py-4 ">
+              <div className="flex flex-col rounded-2.5xltransition-shadow shadow-lg justify-center">
                 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }} onClick={() => handleOpenItem(item.id || '')}
-                      >
-                    <CustomSwiper images={[`data:image/png;base64,${item.image}`,`data:image/png;base64,${item.image}`]}/>
+                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}
+                    onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
+                  >
+                    <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
                   </Box>
                   <Grid container className="mt-8">
                     <Grid item xs={8}>
-                    <h2
+                      <h2
                         className="mb-4 font-display"
                         style={{ overflow: 'hidden' }}
-                        onClick={() => handleOpenItem(item.id || '')}
+                        onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
                       >
                         {item.title} <br />
                       </h2>
@@ -105,7 +115,6 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
                       {item.id && item.title && (
                         <AddToCart
                           _id={item.id}
-                          price={item.price}
                           name={item.title}
                           image={item.image}
                         />

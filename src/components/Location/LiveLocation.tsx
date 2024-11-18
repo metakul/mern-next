@@ -1,6 +1,7 @@
 import { Dialog, DialogContent } from '@mui/material';
 import { useState, useEffect } from 'react';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import { getColors } from '@/layout/Theme/themes';
 function MyLocation({ setAddress, open, handleClose }: { setAddress: any, open: boolean, handleClose: any }) {
 
     const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
@@ -59,16 +60,13 @@ function MyLocation({ setAddress, open, handleClose }: { setAddress: any, open: 
                 aria-describedby="alert-dialog-description"
                 PaperProps={{
                     style: {
-                        backgroundColor: 'transparent',
+                        backgroundColor: getColors().primary[900],
                         boxShadow: 'none',
                     },
                 }}
             >
                 <DialogContent>
-                    <img src="/loading.gif"
-                        width={200}
-                        height={200}
-                        alt='loading' />
+                    <CircularProgress/>
                 </DialogContent>
 
             </Dialog>

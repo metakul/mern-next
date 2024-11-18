@@ -102,7 +102,7 @@ export default function DashboardLayout() {
         />
       </Badge>
       ),
-      content: <CartPage />,
+      content: <CartPage setShowOutlet={setShowOutlet} />,
       label: Tabs.tabTitle4,
     },
   ];
@@ -137,6 +137,7 @@ export default function DashboardLayout() {
           >
             <MobileTabNavigation
               showOutlet={showOutlet}
+              setShowOutlet={setShowOutlet}
               tabs={tabs}
             />
           </Container>

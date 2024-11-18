@@ -23,9 +23,22 @@ import { fetchCartApi, removeItemQuantityApi } from '@/lib/slices/DropShip/DropS
 import { AppDispatch } from '@/lib/store';
 import { isAuthenticated } from '@/lib/slices/authSlice';
 import Subscribe from '@/components/Inputs/Subscribe';
+import { Pages } from '@/Datatypes/enums';
+import { useNavigate } from 'react-router-dom';
 
-const CartPage = () => {
-  const cartItems = useSelector(selectCartItems); 
+
+export interface CartPageProps {
+  setShowOutlet: (showOutlet: boolean) => void;
+}
+
+const CartPage:React.FC<CartPageProps> = ({setShowOutlet}) => {
+  const cartItems = useSelector(selectCartItems);
+  const navigate = useNavigate();
+
+  const handleNavigate = (href: string) => {
+    setShowOutlet(true)
+    navigate(href);
+  };
   const dispatch = useDispatch<AppDispatch>();
   const { totalQuantity, totalPrice } = useSelector(selectTotalQuantityAndPrice);
 
@@ -54,19 +67,33 @@ const CartPage = () => {
         <>
           <List>
             {cartItems.map((item) => (
-              
+
               <React.Fragment key={item.id}>
-                <ListItem alignItems="flex-start">
-                 <img
-                      src={`data:image/png;base64,${item.image}`}
-                      alt="Item image"
-                      className="w-[10em] h-[10em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125 p-2"
-                      // onClick={() => handleOpenItem(item.id || '')}
-                    />
+                <ListItem alignItems="flex-start"
+                  onClick={() => item && item.id && item.name && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.name).replace(':id', item.id)}`)}
+
+                >
+                  <img
+                    src={`data:image/png;base64,${item.image}`}
+                    alt="Item image"
+                    className="w-[12em] h-[10em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125 p-2"
+                  // onClick={() => handleOpenItem(item.id || '')}
+                  />
+                  <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}>
+
                   <ListItemText
                     primary={item.name}
-                    secondary={`Id: ${item.id} | Price: ₹ ${item?.price?.toFixed(2)} | Quantity: ${item.quantity}`}
-                  />
+                    secondary={` Price: ₹ ${item?.price?.toFixed(2)}`}
+                    />
+                  <ListItemText
+                    secondary={` Quantity: ${item.quantity}`}
+                    />
+                    </Box>
                   <ListItemSecondaryAction>
                     <IconButton
                       edge="end"
@@ -82,16 +109,16 @@ const CartPage = () => {
             ))}
           </List>
           <List>
-      <ListItem>Total Items: {totalQuantity}</ListItem>
-      <ListItem sx={{
-        m:0
-      }}>Total Price: ₹ {totalPrice.toFixed(2)}</ListItem>
-    </List>
+            <ListItem>Total Items: {totalQuantity}</ListItem>
+            <ListItem sx={{
+              m: 0
+            }}>Total Price: ₹ {totalPrice.toFixed(2)}</ListItem>
+          </List>
           <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 3 }}>
-          
-              <Subscribe />
+
+            <Subscribe />
           </Stack>
-          
+
         </>
       ) : (
         <Typography variant="h6" align="center" color="textSecondary">

@@ -8,15 +8,18 @@ interface MobileTabNavigationProps {
   tabs: { value: ReactNode; content: ReactNode; label: string }[];
   position?: string;
   showOutlet?: boolean;
+  setShowOutlet: (showOutlet: boolean) => void;
+
 }
 
-const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, position, showOutlet }) => {
+const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, position, showOutlet ,setShowOutlet}) => {
 
   const [value, setValue] = useState(0)
   
   useEffect(() => {
     if (showOutlet) {
       setValue(0);
+      setShowOutlet(false)
     }
   }, [showOutlet, tabs]);
 
