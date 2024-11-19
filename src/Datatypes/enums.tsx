@@ -61,7 +61,7 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
+const base_url_backend="http://localhost:5002/v1"
 const base_url_rajorpay="https://api.razorpay.com/v1"
 
 // define endpoints here
@@ -103,7 +103,6 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
     //random
     increaseTotalDownloadCount: { apiId:14, withAuth:true, url: `${base_url_backend}/increaseTotalDownloadCount`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"",successMessage:"",errorMessage:""},
 
-
     // DROPSHIP API
     GET_DROPSHIP_ITEMS: { apiId:15, withAuth:false, url: `${base_url_backend}/DropShip/dropShipType`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
     GET_SINGLE_DROPSHIP_ITEM: { apiId:16, withAuth:false, url: `${base_url_backend}/DropShip`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"",successMessage:"",errorMessage:"Error Loading Items"},
@@ -113,6 +112,10 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
     
     //  rajorPayW
     GET_PAYMENT_INFO: { apiId:15, withAuth:false, url: `${base_url_backend}/payment`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
+    
+    // passwordless Login
+    SEND_OTP: { apiId:16, withAuth:false, url: `${base_url_backend}/passwordless/login`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
+    VERIFY_OTP: { apiId:17, withAuth:false, url: `${base_url_backend}/passwordless/verifyOtp`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
   }
 
   

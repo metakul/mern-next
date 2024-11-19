@@ -1,7 +1,7 @@
 // authActions.tsx
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCredentials, setLoading } from './authSlice';
-import { ApiError, LoginData } from '../../Datatypes/interfaces/interface';
+import { ApiError, LoginData, OtpData, SignUpData } from '../../Datatypes/interfaces/interface';
 import Request from '@/Backend/axiosCall/apiCall';
 // import { ApiSuccess } from '../../Datatypes/interfaces/interface';
 
@@ -45,6 +45,52 @@ export const loginUser = createAsyncThunk(
 
       const castedError =error as ApiError
       return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
+    }
+  }
+);
+
+// Handle sending OTP for login or signup
+export const sendOtp = createAsyncThunk(
+  'auth/sendOtp',
+  async (data: SignUpData | { phoneNumber: string }, { rejectWithValue, dispatch }) => {
+    try {
+      dispatch(setLoading({ isLoading: true }));
+      
+      const response = await Request({
+        endpointId: "SEND_OTP",
+        data,
+      });
+
+      dispatch(setLoading({ isLoading: false }));
+      return response.data;
+       // Assuming response contains `trxId` or any metadata required
+    } catch (error) {
+      dispatch(setLoading({ isLoading: false }));
+      const castedError = error as ApiError;
+      return rejectWithValue(castedError.error || 'Failed to send OTP');
+    }
+  }
+);
+
+export const verifyOtp = createAsyncThunk(
+  'auth/verifyOtp',
+  async ({ otp, trxId, deviceId, phoneNumber }: OtpData, { rejectWithValue, dispatch }) => {
+    try {
+      dispatch(setLoading({ isLoading: true }));
+
+      const response = await Request({
+        endpointId: "VERIFY_OTP",
+        data: { otp, trxId, deviceId, phoneNumber },
+      });
+
+         const {  accessToken,refreshToken } = response.data.token;
+         dispatch(setCredentials({ user:response?.data?.email, token:{accessToken,refreshToken}, userType:response?.data?.category,isLoading:false }));
+        
+      return response.data;
+    } catch (error) {
+      dispatch(setLoading({ isLoading: false }));
+      const castedError = error as ApiError;
+      return rejectWithValue(castedError.error || 'Failed to verify OTP');
     }
   }
 );

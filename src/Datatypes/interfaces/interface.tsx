@@ -38,6 +38,7 @@ export interface AuthState {
   refresh: string | null;
   userType: string | null;
   isLoading:boolean
+  trxId?: string;
 }
 
 // api request
@@ -261,4 +262,22 @@ export interface PaymentInfo {
   tax?: number | null;
   upi?: UPIInfo;
   wallet?: string | null;
+}
+
+
+export interface SignUpData {
+  name?: string;
+  email?: string;
+  password?: string;
+  phoneNumber: string;
+  address?: string;
+  accountStatus?: string;
+  category?: string;
+}
+
+export interface OtpData {
+  otp: string;
+  trxId: string;
+  deviceId: string;
+  phoneNumber: string;
 }

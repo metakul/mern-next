@@ -14,21 +14,20 @@ const initialState: AuthState = {
   access: storedAccessToken ? storedAccessToken : null,
   refresh: storedRefreshToken ? storedRefreshToken : null,
   userType: storedUserType ? storedUserType : null,
-  isLoading:false
+  isLoading:false,
+  trxId: ""
 };
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<{ user: any; token: { accessToken: any, refreshToken: any }; userType: string;isLoading:boolean }>) => {
-
+    setCredentials: (state, action: PayloadAction<{ user: any; token: { accessToken: any, refreshToken: any }; userType: string; isLoading: boolean }>) => {
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.access = action.payload.token.accessToken.token;
       state.refresh = action.payload.token.refreshToken.token;
       state.userType = action.payload.userType;
-      state.isLoading=action.payload.isLoading
+      state.isLoading = action.payload.isLoading;
       Cookies.set('user', JSON.stringify(action.payload.user));
       Cookies.set('access', action.payload.token.accessToken.token);
       Cookies.set('refresh', action.payload.token.refreshToken.token);
@@ -37,18 +36,21 @@ const authSlice = createSlice({
     setLoading: (state, action: PayloadAction<{ isLoading: boolean }>) => {
       state.isLoading = action.payload.isLoading;
     },
+    setTrxId: (state, action: PayloadAction<string>) => {
+      state.trxId = action.payload; // Save the transaction ID
+    },
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       state.access = null;
       state.refresh = null;
       state.userType = null;
+      state.trxId = ""; 
       Cookies.remove('user');
       Cookies.remove('access');
       Cookies.remove('refresh');
       Cookies.remove('userType');
     },
-    // Define a new action to refresh the access token
     refreshAccessToken: (state, action: PayloadAction<string>) => {
       state.access = action.payload;
       Cookies.set('access', action.payload);
@@ -56,7 +58,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials,setLoading, logout, refreshAccessToken } = authSlice.actions;
+export const { setCredentials, setLoading, logout, refreshAccessToken, setTrxId } = authSlice.actions;
 
 export default authSlice.reducer;
 
@@ -66,4 +68,4 @@ export const selectToken = (state: { auth: { access: string } }) => state.auth.a
 export const isAuthenticated = (state: { auth: { isAuthenticated: boolean } }) => state.auth.isAuthenticated;
 export const selectUserType = (state: { auth: { userType: string } }) => state.auth.userType;
 export const authLoading = (state: { auth: { isLoading: boolean } }) => state.auth.isLoading;
-
+export const selectTrxId = (state: { auth: AuthState }) => state.auth.trxId;
