@@ -139,9 +139,9 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
       url: `${base_url_backend}/cart`,
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
-      loadingMessage: 'Fetching cart items...',
-      successMessage: 'Cart fetched successfully!',
-      errorMessage: 'Failed to fetch cart items.',
+      loadingMessage: '',
+      successMessage: '',
+      errorMessage: '',
     },
   }
 

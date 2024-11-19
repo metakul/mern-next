@@ -76,11 +76,11 @@ export const fetchSingleDropShipItemApi = createAsyncThunk(
 
 export const addDropShipItemApi = createAsyncThunk(
   'dropShipCollection/addItem',
-  async ({ newDropShipItemData, formEvent,clearForm, setIsSaving }: { newDropShipItemData: IDropShipItem,formEvent:any, clearForm: any, setIsSaving: any }, { rejectWithValue, dispatch }) => {
+  async ({ newDropShipItemData, formEvent, clearForm, setIsSaving }: { newDropShipItemData: IDropShipItem, formEvent: any, clearForm: any, setIsSaving: any }, { rejectWithValue, dispatch }) => {
     try {
       let response;
 
-      if (formEvent==="EDIT") {
+      if (formEvent === "EDIT") {
         // Update item logic
         response = await Request({
           endpointId: "EDIT_DROPSHIP_ITEM",
@@ -155,7 +155,7 @@ export const addToCartApi = createAsyncThunk(
     { rejectWithValue, dispatch }
   ) => {
     console.log(item);
-    
+
     if (isAuthenticated) {
       try {
         const response = await Request({
@@ -187,8 +187,8 @@ export const addToCartApi = createAsyncThunk(
 
         return { message: 'Item saved to cart in sessionStorage', item };
       } catch (error) {
-        console.log("forbidden",error);
-        
+        console.log("forbidden", error);
+
         return rejectWithValue('Failed to save item to cart in sessionStorage');
       }
     }
@@ -204,18 +204,24 @@ export const fetchCartApi = createAsyncThunk(
           endpointId: 'GET_CART',
         });
 
-        
         // Ensure `response.push.cartItems` exists and is an array
-       // Ensure response structure and validate if `cartItems` is an array
-if (response.data.push && Array.isArray(response.data.push.cartItems)) {
-  // Dispatch each item to the Redux store
-  response.data.push.cartItems.forEach((item: CartItem) => {
-    console.log(item);
-    dispatch(addItemToCart(item));
-  });
-} else {
-  console.error('Invalid response structure or cartItems is not an array');
-}
+        // Ensure response structure and validate if `cartItems` is an array
+        if (response.data && Array.isArray(response.data)) {
+          // Dispatch each item to the Redux store
+          response.data.forEach(async(item: CartItem) => {
+            const response = await Request({
+              endpointId: "GET_SINGLE_DROPSHIP_ITEM",
+              slug: `/${item.id}`,
+            });
+            console.log("response",response);
+            
+
+            dispatch(addItemToCart({ ...item, name: response[0].title, price: response[0].price }));
+
+          });
+        } else {
+          console.error('Invalid response structure or cartItems is not an array');
+        }
 
         return response.cartItems;
       } catch (error) {
@@ -239,11 +245,11 @@ if (response.data.push && Array.isArray(response.data.push.cartItems)) {
               // Assuming the response contains an array with a single item
               const detailedItem = response[0];
               console.log(detailedItem);
-              
+
               return {
                 ...item,
                 name: detailedItem.title,
-                price: detailedItem.price, 
+                price: detailedItem.price,
               };
             } catch (error) {
               console.error(`Failed to fetch details for item ID: ${item.id}`, error);
@@ -251,7 +257,7 @@ if (response.data.push && Array.isArray(response.data.push.cartItems)) {
               // Fallback to random price if fetching fails
               return {
                 ...item,
-                price:undefined, // Random price between 1 and 100
+                price: undefined, // Random price between 1 and 100
               };
             }
           })
