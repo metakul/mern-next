@@ -21,7 +21,7 @@ export default function ProfilePage() {
   useEffect(() => {
     // const paymentId = "pay_PMugIkknwkpxCA";
     dispatch(fetchPaymentIds());
-  }, [dispatch]);
+  }, [dispatch,fetchPaymentIds]);
 
   // Filter payment info based on the search query
   const filteredPayments = paymentInfo?.filter((payment) =>

@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { Pages } from '@/Datatypes/enums';
 import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
 import PasswordlessLoginForm from '../Forms/PasswordLoginForm';
-import { addPaymentInfo } from '@/lib/slices/DropShip/Payment/paymentSlice';
 import { useDispatch } from 'react-redux';
+import { addPaymentId } from '@/lib/slices/DropShip/Payment/paymentSliceApi';
+import { AppDispatch } from '@/lib/store';
 
 const VITE_PUBLICRAZORPAY_KEY_ID = import.meta.env.VITE_PUBLICRAZORPAY_KEY_ID as string;
 
@@ -30,7 +31,7 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
   const [contactVerified, setContactVerified] = useState(false);
   const [verifiedContact, setVerifiedContact] = useState<string | null>(null); // Store verified contact
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   React.useEffect(() => {
     const script = document.createElement('script');
@@ -95,12 +96,12 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
       prefill: {
         name: 'Gaurav Kumar',
         contact: verifiedContact,
-        email, // Include email in prefill
+        email:`${email}, ${address}`, // Include email in prefill
       },
       description: 'Instant DropShipper Subscription',
       image: 'http://localhost:5173/logo.png',
       handler: (response: any) => {
-        dispatch(addPaymentInfo(response.razorpay_payment_id));
+        dispatch(addPaymentId(response.razorpay_payment_id));
   
         toast.success(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
         navigate(Pages.PROFILE);

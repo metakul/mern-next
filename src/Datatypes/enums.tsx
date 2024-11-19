@@ -61,7 +61,7 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-const base_url_backend="http://localhost:5002/v1"
+const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
 const base_url_rajorpay="https://api.razorpay.com/v1"
 
 // define endpoints here
@@ -118,8 +118,8 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
     VERIFY_OTP: { apiId:17, withAuth:false, url: `${base_url_backend}/passwordless/verifyOtp`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
     
     // user order
-    ADD_PAYMENT_ID: { apiId:18, withAuth:false, url: `${base_url_backend}/payments/add`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
-    FETCH_PAYMENT_IDS: { apiId:19, withAuth:false, url: `${base_url_backend}/payments/get`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
+    ADD_PAYMENT_ID: { apiId:18, withAuth:true, url: `${base_url_backend}/payments/add`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
+    FETCH_PAYMENT_IDS: { apiId:19, withAuth:true, url: `${base_url_backend}/payments/get`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
 
   }
 

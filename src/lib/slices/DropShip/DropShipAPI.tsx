@@ -156,7 +156,7 @@ export const addToCartApi = createAsyncThunk(
   ) => {
     console.log(item);
     
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       try {
         const response = await Request({
           endpointId: 'ADD_TO_CART',
@@ -187,6 +187,8 @@ export const addToCartApi = createAsyncThunk(
 
         return { message: 'Item saved to cart in sessionStorage', item };
       } catch (error) {
+        console.log("forbidden",error);
+        
         return rejectWithValue('Failed to save item to cart in sessionStorage');
       }
     }
@@ -196,7 +198,7 @@ export const addToCartApi = createAsyncThunk(
 export const fetchCartApi = createAsyncThunk(
   'cart/fetchCartApi',
   async ({ isAuthenticated }: { isAuthenticated: boolean }, { rejectWithValue, dispatch }) => {
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       try {
         const response = await Request({
           endpointId: 'GET_CART',

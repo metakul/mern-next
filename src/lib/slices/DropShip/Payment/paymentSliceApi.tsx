@@ -10,9 +10,11 @@ export const fetchPaymentIds = createAsyncThunk(
     try {
       dispatch(startLoading());
 
-        const paymentIds: string[] = await Request({
+        const resposne = await Request({
           endpointId: 'FETCH_PAYMENT_IDS',
         });
+        
+        const paymentIds: string[] =resposne.data.razorpayPayments
   
         const paymentDetails: PaymentInfo[] = await Promise.all(
           paymentIds.map(async (paymentId) => {
@@ -20,6 +22,9 @@ export const fetchPaymentIds = createAsyncThunk(
               endpointId: 'GET_PAYMENT_INFO', 
               slug: `/${paymentId}`,
             });
+
+            console.log(paymentInfo,"paymentInfo");
+            
             return paymentInfo;
           })
         );
@@ -63,8 +68,12 @@ export const addPaymentId = createAsyncThunk(
         data: response,
       };
 
-      // Append the new payment ID to the store
-      // dispatch(setPaymentInfo((prevState: PaymentInfo[]) => [...prevState, response]));
+      const paymentInfo: PaymentInfo = await Request({
+        endpointId: 'GET_PAYMENT_INFO', 
+        slug: `/${paymentId}`,
+      });
+      dispatch(setPaymentInfo([paymentInfo]));
+  
 
       return apiSuccess.data;
     } catch (error) {
