@@ -121,6 +121,28 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
     ADD_PAYMENT_ID: { apiId:18, withAuth:true, url: `${base_url_backend}/payments/add`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
     FETCH_PAYMENT_IDS: { apiId:19, withAuth:true, url: `${base_url_backend}/payments/get`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
 
+
+    // cart
+    ADD_TO_CART: {
+      apiId: 2,
+      withAuth: true,
+      url: `${base_url_backend}/cart/add`,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      loadingMessage: 'Adding item to cart...',
+      successMessage: 'Item added to cart successfully!',
+      errorMessage: 'Failed to add item to cart.',
+    },
+    GET_CART: {
+      apiId: 3,
+      withAuth: true,
+      url: `${base_url_backend}/cart`,
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      loadingMessage: 'Fetching cart items...',
+      successMessage: 'Cart fetched successfully!',
+      errorMessage: 'Failed to fetch cart items.',
+    },
   }
 
   

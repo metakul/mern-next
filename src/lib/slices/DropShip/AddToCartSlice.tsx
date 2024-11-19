@@ -44,7 +44,7 @@ const cartSlice = createSlice({
       }
     },
 
-    loadCartFromCookies: (state, action: PayloadAction<CartItem[]>) => {
+    loadCart: (state, action: PayloadAction<CartItem[]>) => {
       state.cartItems = action.payload;
     },
 
@@ -64,7 +64,7 @@ export const {
   removeItemFromCart, 
   clearCart, 
   setAuthentication, 
-  loadCartFromCookies
+  loadCart
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -3,7 +3,7 @@ import { setLoadedItems, addItem, updateItem } from './DropShipSlice';
 import { ApiError, ApiSuccess } from '../../../Datatypes/interfaces/interface';
 import Request from '@/Backend/axiosCall/apiCall';
 import { IDropShipItem } from '../../../Datatypes/interfaces/interface';
-import { addItemToCart, CartItem, loadCartFromCookies, removeItemFromCart } from './AddToCartSlice';
+import { addItemToCart, CartItem, loadCart, removeItemFromCart } from './AddToCartSlice';
 
 export const fetchDropShipItemsApi = createAsyncThunk(
   'dropShipCollection/setLoadedItems',
@@ -156,7 +156,7 @@ export const addToCartApi = createAsyncThunk(
   ) => {
     console.log(item);
     
-    if (!isAuthenticated) {
+    if (isAuthenticated) {
       try {
         const response = await Request({
           endpointId: 'ADD_TO_CART',
@@ -198,16 +198,24 @@ export const addToCartApi = createAsyncThunk(
 export const fetchCartApi = createAsyncThunk(
   'cart/fetchCartApi',
   async ({ isAuthenticated }: { isAuthenticated: boolean }, { rejectWithValue, dispatch }) => {
-    if (!isAuthenticated) {
+    if (isAuthenticated) {
       try {
         const response = await Request({
           endpointId: 'GET_CART',
         });
 
-        // Update Redux with fetched cart items
-        response.cartItems.forEach((item: CartItem) => {
-          dispatch(addItemToCart(item));
-        });
+        
+        // Ensure `response.push.cartItems` exists and is an array
+       // Ensure response structure and validate if `cartItems` is an array
+if (response.data.push && Array.isArray(response.data.push.cartItems)) {
+  // Dispatch each item to the Redux store
+  response.data.push.cartItems.forEach((item: CartItem) => {
+    console.log(item);
+    dispatch(addItemToCart(item));
+  });
+} else {
+  console.error('Invalid response structure or cartItems is not an array');
+}
 
         return response.cartItems;
       } catch (error) {
@@ -250,7 +258,7 @@ export const fetchCartApi = createAsyncThunk(
         );
 
         // Update Redux state with detailed cart items
-        dispatch(loadCartFromCookies(detailedCartItems));
+        dispatch(loadCart(detailedCartItems));
         return detailedCartItems;
       } catch (error) {
         return rejectWithValue('Failed to fetch cart from sessionStorage');
