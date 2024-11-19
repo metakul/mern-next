@@ -29,14 +29,22 @@ const razorpaySlice = createSlice({
       state.loading = false;
       state.paymentInfo = action.payload;
     },
-    // Add a single PaymentInfo to the existing array
+    // Add a single PaymentInfo to the existing array if not already present
     addPaymentInfo: (state, action: PayloadAction<PaymentInfo>) => {
       state.loading = false;
-      state.paymentInfo = [...state.paymentInfo, action.payload];
+      const exists = state.paymentInfo.some(
+        (info) => info.id === action.payload.id // Assuming each PaymentInfo has a unique `id`
+      );
+      if (!exists) {
+        state.paymentInfo.push(action.payload);
+      }
     },
     setError: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    resetError: (state) => {
+      state.error = null;
     },
     clearPaymentInfo: (state) => {
       state.paymentInfo = [];
@@ -52,6 +60,7 @@ export const {
   setPaymentInfo,
   addPaymentInfo,
   setError,
+  resetError,
   clearPaymentInfo,
 } = razorpaySlice.actions;
 export default razorpaySlice.reducer;
@@ -61,6 +70,9 @@ export const selectRazorpayState = (state: { razorpay: RazorpayState }) => state
 
 export const selectPaymentInfo = (state: { razorpay: RazorpayState }) =>
   state.razorpay;
+
+export const selectPaymentInfoById = (id: string) => (state: { razorpay: RazorpayState }) =>
+  state.razorpay.paymentInfo.find((info) => info.id === id);
 
 export const selectLoading = (state: { razorpay: RazorpayState }) => state.razorpay.loading;
 

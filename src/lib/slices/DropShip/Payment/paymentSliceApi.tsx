@@ -1,28 +1,35 @@
 import Request from '@/Backend/axiosCall/apiCall';
 import { ApiError, ApiSuccess, PaymentInfo } from '../../../../Datatypes/interfaces/interface';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {  setError, setPaymentInfo, startLoading } from './paymentSlice';
+import { setError, setPaymentInfo, startLoading } from './paymentSlice';
 
-// Updated Async Thunk for Fetching Payment Info
-export const fetchPaymentInfo = createAsyncThunk(
-  'razorpay/fetchPaymentInfo',
-  async (paymentId: string, { rejectWithValue, dispatch }) => {
+// Fetch Razorpay Payment IDs
+export const fetchPaymentIds = createAsyncThunk(
+  'razorpay/fetchPaymentIds',
+  async (_, { rejectWithValue, dispatch }) => {
     try {
-      // Start loading
       dispatch(startLoading());
 
-      const response: PaymentInfo= await Request({
-        endpointId: 'GET_PAYMENT_INFO',
-        slug: `/${paymentId}`,
-      });
-
-      const apiSuccess: ApiSuccess = {
-        message: 'Payment info fetched successfully',
-        data: response,
-      };
-
-      // Set the payment info in the store
-      dispatch(setPaymentInfo([response]));
+        const paymentIds: string[] = await Request({
+          endpointId: 'FETCH_PAYMENT_IDS',
+        });
+  
+        const paymentDetails: PaymentInfo[] = await Promise.all(
+          paymentIds.map(async (paymentId) => {
+            const paymentInfo: PaymentInfo = await Request({
+              endpointId: 'GET_PAYMENT_INFO', 
+              slug: `/${paymentId}`,
+            });
+            return paymentInfo;
+          })
+        );
+        const apiSuccess: ApiSuccess = {
+          message: 'Payment IDs and details fetched successfully',
+          data: paymentDetails,
+        };
+  
+        dispatch(setPaymentInfo(paymentDetails));
+  
 
       return apiSuccess.data;
     } catch (error) {
@@ -38,30 +45,26 @@ export const fetchPaymentInfo = createAsyncThunk(
   }
 );
 
-// Updated Async Thunk for Creating Payment Order
-export const createPaymentOrder = createAsyncThunk(
-  'razorpay/createPaymentOrder',
-  async (
-    { amount, currency }: { amount: number; currency: string },
-    { rejectWithValue, dispatch }
-  ) => {
+// Add a Razorpay Payment ID
+export const addPaymentId = createAsyncThunk(
+  'razorpay/addPaymentId',
+  async (paymentId: string, { rejectWithValue, dispatch }) => {
     try {
       // Start loading
       dispatch(startLoading());
 
-      const response:PaymentInfo = await Request({
-        endpointId: 'CREATE_PAYMENT_ORDER',
-        data: { amount, currency },
+      const response: PaymentInfo = await Request({
+        endpointId: 'ADD_PAYMENT_ID', 
+        data: { paymentId },
       });
 
       const apiSuccess: ApiSuccess = {
-        // statusCode: response.status,
-        message: 'Payment order created successfully',
+        message: 'Payment ID added successfully',
         data: response,
       };
 
-      // Set the payment info in the store
-      dispatch(setPaymentInfo([response]));
+      // Append the new payment ID to the store
+      // dispatch(setPaymentInfo((prevState: PaymentInfo[]) => [...prevState, response]));
 
       return apiSuccess.data;
     } catch (error) {

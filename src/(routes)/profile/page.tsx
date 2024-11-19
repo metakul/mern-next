@@ -4,7 +4,7 @@ import { Box, Container, Typography, CircularProgress, Card, CardContent, CardAc
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import { AppDispatch } from '@/lib/store';
 import { selectPaymentInfo } from '@/lib/slices/DropShip/Payment/paymentSlice';
-import { fetchPaymentInfo } from '@/lib/slices/DropShip/Payment/paymentSliceApi';
+import { fetchPaymentIds } from '@/lib/slices/DropShip/Payment/paymentSliceApi';
 import SearchBar from '@/components/SearchBar';
 import LoginForm from '@/components/Forms/LoginForm';
 import { isAuthenticated } from '@/lib/slices/authSlice';
@@ -19,8 +19,8 @@ export default function ProfilePage() {
   const isUserAuthenticated = useSelector(isAuthenticated)
 
   useEffect(() => {
-    const paymentId = "pay_PMugIkknwkpxCA";
-    dispatch(fetchPaymentInfo(paymentId));
+    // const paymentId = "pay_PMugIkknwkpxCA";
+    dispatch(fetchPaymentIds());
   }, [dispatch]);
 
   // Filter payment info based on the search query
