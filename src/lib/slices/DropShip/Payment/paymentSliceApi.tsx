@@ -44,6 +44,7 @@ export const fetchPaymentIds = createAsyncThunk(
       const errorMessage =
         castedError?.error === 'string' ? castedError?.error : 'Unknown Error';
       dispatch(setError(errorMessage));
+      dispatch(setPaymentInfo([]));
 
       return rejectWithValue(errorMessage);
     }

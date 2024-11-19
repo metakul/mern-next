@@ -10,6 +10,7 @@ import LoginForm from '@/components/Forms/LoginForm';
 import { isAuthenticated } from '@/lib/slices/authSlice';
 import LogoutButton from '@/components/Elements/Buttons/LogoutButton';
 import CustomDialog from '@/components/Dailog/Dailog';
+import PasswordlessLoginForm from '@/components/Forms/PasswordLoginForm';
 
 export default function ProfilePage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,7 +22,7 @@ export default function ProfilePage() {
   useEffect(() => {
     // const paymentId = "pay_PMugIkknwkpxCA";
     dispatch(fetchPaymentIds());
-  }, [dispatch,fetchPaymentIds]);
+  }, [dispatch, fetchPaymentIds, isUserAuthenticated]);
 
   // Filter payment info based on the search query
   const filteredPayments = paymentInfo?.filter((payment) =>
@@ -40,12 +41,28 @@ export default function ProfilePage() {
           }}
         >
           {isUserAuthenticated ? (
+            <Box sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexDirection: "row",
+              flexWrap: "wrap",
+            }}>
+              <Box>
 
-            <LogoutButton />
+
+                <Typography variant="h5" sx={{ mt: 4, mb: 2 }}>
+                  Search Payment By Phone Number:
+                </Typography>
+              <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+              </Box>
+
+              <LogoutButton />
+            </Box>
 
           ) : (
             <Box>
-              
+
               <span className="text-sm font-bold text-jacarta-400 m-2">Login Now To See what your friends are wearing</span>
               <CustomDialog
                 className="ml-2"
@@ -55,23 +72,16 @@ export default function ProfilePage() {
                 title={"Login Now"}
                 description={"Login Now To See what your friends are wearing"}
               >
-                <LoginForm
-                  loginTitle=" Login"
-                  userType='ADMIN'
-                  OnFormSuccess={() => setDialogOpen(!isDialogOpen)}
-                />
+                <PasswordlessLoginForm />
               </CustomDialog>
             </Box>
           )}
-          <Typography variant="h5" sx={{ mt: 4, mb: 2 }}>
-            Search Payment By Phone Number:
-          </Typography>
-          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
           {loading && <CircularProgress />}
           {error && <Typography color="error">{error}</Typography>}
 
           {!loading && filteredPayments && (
             <Grid container spacing={3} sx={{ mt: 0 }}>
+
               {filteredPayments.map((payment) => {
                 // Parse notes if it's a JSON string (assumes the notes are an array of strings)
                 let parsedNotes: { id?: string, name?: string; quantity?: number; price?: any, image: any }[] = [];
@@ -90,7 +100,7 @@ export default function ProfilePage() {
                 }
 
                 return (
-                  <Grid item xs={12} sm={12} md={12} lg={6} key={payment.id}>
+                  <Grid item xs={12} sm={6} md={4} lg={4} key={payment.id}>
                     <Card sx={{ boxShadow: 3 }}>
                       <CardContent>
                         <Typography variant="h6" component="div">

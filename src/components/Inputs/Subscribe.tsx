@@ -96,9 +96,9 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
       prefill: {
         name: 'Gaurav Kumar',
         contact: verifiedContact,
-        email:`${email}, ${address}`, // Include email in prefill
+        email, // Include email in prefill
       },
-      description: 'Instant DropShipper Subscription',
+      description:address,
       image: 'http://localhost:5173/logo.png',
       handler: (response: any) => {
         dispatch(addPaymentId(response.razorpay_payment_id));
