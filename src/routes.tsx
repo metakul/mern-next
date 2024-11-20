@@ -1,5 +1,5 @@
 import React from "react";
-import { useRoutes, Navigate } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import ProfilePage from "./(routes)/profile/page";
 import { Pages } from "./Datatypes/enums";
 // import ShopPage from "./(routes)/shopping/page";
