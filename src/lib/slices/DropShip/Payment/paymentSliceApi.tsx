@@ -34,10 +34,15 @@ export const fetchPaymentIds = createAsyncThunk(
             slug: `/${paymentId.trackingId}`,
           });
 
-          console.log(trackingInfo.trackingInfo.data,"trackingInfo");
+        // Combine trackingInfo.data with trackingId
+          const trackingDataWithId = {
+            ...trackingInfo.trackingInfo.data,
+            trackingId: paymentId.trackingId,
+          };
+
+          // Dispatch combined tracking info and trackingId
+          dispatch(addTrackingInfo(trackingDataWithId));
           
-          // Dispatch tracking info immediately after fetching
-          dispatch(addTrackingInfo(trackingInfo.trackingInfo.data));
         } catch (innerError) {
           console.error(
             `Failed to fetch details for Payment ID ${paymentId.paymentId}:`,

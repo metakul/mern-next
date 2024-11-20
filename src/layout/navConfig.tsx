@@ -1,15 +1,12 @@
 import { Pages } from "@/Datatypes/enums";
 import {
   HomeOutlined,
-  ShoppingCartOutlined,
-  PublicOutlined,
-  TodayOutlined,
-  // AdminPanelSettingsOutlined,
+
   PieChartOutlined,
   // Checkroom
 } from "@mui/icons-material";
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-
+import GavelIcon from '@mui/icons-material/Gavel';
 export const navConfig = [
   {
     text: "Dashboard",
@@ -32,15 +29,20 @@ export const navConfig = [
   //   icon: null,
   //   to: "",
   // },
+  // {
+  //   text: "AI",
+  //   icon:null,
+  //   to: "",
+  // },
   {
     text: "AI",
-    icon:null,
-    to: "",
-  },
-  {
-    text: "ChatGpt",
     icon:<SmartToyIcon/>,
     to: Pages.CHAT_GPT
+  },
+  {
+    text: "Terms and Consitions",
+    icon:<GavelIcon/>,
+    to: Pages.TERMS_AND_CONDITIONS
   },
 ];
 

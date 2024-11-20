@@ -79,7 +79,7 @@ export default function Offline({ children }:OfflineProps) {
       <Slide direction={online ? 'up' : 'down'} in={!online} mountOnEnter unmountOnExit>
         <OfflineContainer style={previousOnline === online && online ? { display: 'none' } : undefined}>
           <OfflineContent>
-          <img src="logo.svg" alt="meta-ship" height={100} width={100} />
+          <img src="logo.svg" alt="whatiwear" height={100} width={100} />
             <Typography variant="h3" gutterBottom>
               You're Offline
             </Typography>

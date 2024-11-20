@@ -3,6 +3,7 @@ import { PaymentInfo } from '@/Datatypes/interfaces/interface';
 
 export interface TrackingInfo {
   id: string;
+  trackingId:string
   active: boolean;
   courier_tracking_link: string | null;
   destination_city: string;

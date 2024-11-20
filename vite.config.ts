@@ -31,9 +31,9 @@ const pwaOptions: Partial<VitePWAOptions> ={
     "logo.svg",
   ],
   manifest: {
-    name: "Meta-Ship",
-    short_name: "Meta-Ship",
-    description: "MetaShip- A next gen professional shooping platform in Blockchain.",
+    name: "whatiwear",
+    short_name: "whatiwear",
+    description: "whatiwear- A next gen professional shooping platform in Blockchain.",
     icons: [
       {
         src: "pwa-192x192.png",

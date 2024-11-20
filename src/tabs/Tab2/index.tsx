@@ -11,7 +11,7 @@ export const svgStyle = {
   fill: '#5893f9', // Set your desired fill color here
   height: '1em',
 };
-const Metaship = () => {
+const whatiwear = () => {
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
   const isUserAuthenticated=useSelector(isAuthenticated)
 
@@ -25,7 +25,7 @@ const Metaship = () => {
         <div className="text-center ">
           <figure className="mb-4">
           </figure>
-          <h2 className=" font-sans  mb-2 font-display text-4xl font-medium ">Meta-Ship - The Best Dropshipping </h2>
+          <h2 className=" font-sans  mb-2 font-display text-4xl font-medium ">whatiwear - The Best Dropshipping </h2>
           <SocialProfiles/>
           
           <div className="mb-4 mt-4">
@@ -70,4 +70,4 @@ const Metaship = () => {
   );
 };
 
-export default Metaship;
+export default whatiwear;

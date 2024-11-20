@@ -9,6 +9,7 @@ import ProtectedPage from "./(routes)/admin/home/page";
 import SingleBlogDetails from "./(routes)/blogdetails/[blogId]/page";
 import AddBlogPage from "./(routes)/addBlog/page";
 import ChatGpt from "./Projects/ChatGpt/ChatGpt";
+import TermsAndConditions from "./(routes)/termAndCondition/page";
 
 const Router: React.FC = () => {
 
@@ -40,6 +41,10 @@ const Router: React.FC = () => {
         {
           path: Pages.CHAT_GPT,
           element:  <ChatGpt/>,
+        },
+        {
+          path: Pages.TERMS_AND_CONDITIONS,
+          element:  <TermsAndConditions/>,
         },
       ],
     },

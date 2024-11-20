@@ -22,7 +22,7 @@ const Tab1 = () => {
   return (
     <>
       <h1 className="mb-4 pt-2 pb-2 underline underline-offset-4 text-center  font-display text-xl open-sans flex justify-center items-center" style={{ color: getColors().blueAccent[100], cursor: "pointer" }}>
-        Meta-Ship   <LocalShippingIcon sx={{
+        whatiwear   <LocalShippingIcon sx={{
           ml: 1
         }} />
       </h1>

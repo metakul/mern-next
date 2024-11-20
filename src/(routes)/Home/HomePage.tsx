@@ -32,21 +32,21 @@ const HomePage: React.FC<HomePageProps> = () => {
 
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Discover the best online shopping experience with meta-shippers." />
+        <meta name="description" content="Discover the best online shopping experience with whatiwearpers." />
         <meta name="keywords" content="metakul, web3, blockchain, quantum" />
-        <meta property="og:title" content="Meta-Ship" />
-        <meta property="og:description" content="Discover the best online shopping experience with meta-shippers." />
+        <meta property="og:title" content="whatiwear" />
+        <meta property="og:description" content="Discover the best online shopping experience with whatiwearpers." />
         <meta property="og:image" content="/logo.svg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="description"
-          content="Discover the best online shopping experience with meta-shippers."
+          content="Discover the best online shopping experience with whatiwearpers."
           data-react-helmet="true"
         />
 
         <meta
           property="og:url"
-          content="https://metashippers.com/"
+          content="https://whatiwearpers.com/"
           data-react-helmet="true"
         />
           <meta
@@ -61,21 +61,21 @@ const HomePage: React.FC<HomePageProps> = () => {
           />
 
 
-            <title>Meta-Ship</title>
-            <meta name="description" content="Discover the best online shopping experience with meta-shippers." />
+            <title>whatiwear</title>
+            <meta name="description" content="Discover the best online shopping experience with whatiwearpers." />
             <meta name="robots" content="index, follow" />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />
-            <meta property="og:title" content="metashippers" />
-            <meta property="og:description" content="Discover the best online shopping experience with meta-shippers." />
+            <meta property="og:title" content="whatiwearpers" />
+            <meta property="og:description" content="Discover the best online shopping experience with whatiwearpers." />
 
-            <meta property="og:url" content="https://metashippers.com/" />
+            <meta property="og:url" content="https://whatiwearpers.com/" />
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="metashippers" />
-            <meta name="twitter:description" content="Discover the best online shopping experience with meta-shippers." />
+            <meta name="twitter:title" content="whatiwearpers" />
+            <meta name="twitter:description" content="Discover the best online shopping experience with whatiwearpers." />
           </Helmet>
 
           <Tab1 />

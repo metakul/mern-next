@@ -141,8 +141,12 @@ export default function ProfilePage() {
                                 Tracking Information
                               </Typography>
                               <Typography variant="body2" className="text-gray-600">
+                                TrackingId: {paymentTrackingInfo.trackingId}
+                              </Typography>
+                              <Typography variant="body2" className="text-gray-600">
                                 Status: {paymentTrackingInfo.active ? "Active" : "Inactive"}
                               </Typography>
+                             
                               <Typography variant="body2" className="text-gray-600">
                                 Tracking Number Tag: {paymentTrackingInfo.tracking_number}
                               </Typography>
