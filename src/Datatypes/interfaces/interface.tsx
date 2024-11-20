@@ -281,3 +281,17 @@ export interface OtpData {
   deviceId: string;
   phoneNumber: string;
 }
+
+export interface Consignee {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  pin: string;
+  country: string;
+  phone: string;
+}
+
+export interface DeliveryLocation {
+  consignee: Consignee;
+}

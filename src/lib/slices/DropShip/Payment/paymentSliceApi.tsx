@@ -1,7 +1,8 @@
 import Request from '@/Backend/axiosCall/apiCall';
-import { ApiError, ApiSuccess, PaymentInfo } from '../../../../Datatypes/interfaces/interface';
+import { ApiError, ApiSuccess, DeliveryLocation, PaymentInfo } from '../../../../Datatypes/interfaces/interface';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setError, setPaymentInfo, startLoading } from './paymentSlice';
+import { addPaymentInfo, addTrackingInfo, setError, setPaymentInfo, startLoading } from './paymentSlice';
+import { fetchCartApi } from '../DropShipAPI';
 
 // Fetch Razorpay Payment IDs
 export const fetchPaymentIds = createAsyncThunk(
@@ -10,58 +11,70 @@ export const fetchPaymentIds = createAsyncThunk(
     try {
       dispatch(startLoading());
 
-        const resposne = await Request({
-          endpointId: 'FETCH_PAYMENT_IDS',
-        });
-        
-        const paymentIds: string[] =resposne.data.razorpayPayments
-  
-        const paymentDetails: PaymentInfo[] = await Promise.all(
-          paymentIds.map(async (paymentId) => {
-            const paymentInfo: PaymentInfo = await Request({
-              endpointId: 'GET_PAYMENT_INFO', 
-              slug: `/${paymentId}`,
-            });
+      const response = await Request({
+        endpointId: 'FETCH_PAYMENT_IDS',
+      });
 
-            console.log(paymentInfo,"paymentInfo");
-            
-            return paymentInfo;
-          })
-        );
-        const apiSuccess: ApiSuccess = {
-          message: 'Payment IDs and details fetched successfully',
-          data: paymentDetails,
-        };
-  
-        dispatch(setPaymentInfo(paymentDetails));
-  
+      const deliveryInfo: any[] = response.data;
 
-      return apiSuccess.data;
+      for (const paymentId of deliveryInfo) {
+        try {
+          // Fetch payment information
+          const paymentInfo: PaymentInfo = await Request({
+            endpointId: 'GET_PAYMENT_INFO',
+            slug: `/${paymentId.paymentId}`,
+          });
+
+          // Dispatch payment info immediately after fetching
+          dispatch(addPaymentInfo(paymentInfo));
+
+          // Fetch tracking information
+          const trackingInfo = await Request({
+            endpointId: 'FETCH_PAYMENT_IDS',
+            slug: `/${paymentId.trackingId}`,
+          });
+
+          console.log(trackingInfo.trackingInfo.data,"trackingInfo");
+          
+          // Dispatch tracking info immediately after fetching
+          dispatch(addTrackingInfo(trackingInfo.trackingInfo.data));
+        } catch (innerError) {
+          console.error(
+            `Failed to fetch details for Payment ID ${paymentId.paymentId}:`,
+            innerError
+          );
+        }
+      }
+
+      return { message: 'Payment IDs and details fetched successfully' };
     } catch (error) {
-      const castedError = error as ApiError;
+      console.error('Error fetching payment IDs:', error);
 
-      // Set error in the store
+      const castedError = error as ApiError;
       const errorMessage =
         castedError?.error === 'string' ? castedError?.error : 'Unknown Error';
-      dispatch(setError(errorMessage));
-      dispatch(setPaymentInfo([]));
 
+      dispatch(setError('Error Fetching Payment Info'));
       return rejectWithValue(errorMessage);
     }
   }
 );
 
-// Add a Razorpay Payment ID
+
 export const addPaymentId = createAsyncThunk(
   'razorpay/addPaymentId',
-  async (paymentId: string, { rejectWithValue, dispatch }) => {
+  async (
+    { paymentId, orderDetails }: { paymentId: string; orderDetails: DeliveryLocation },
+    { rejectWithValue, dispatch }
+  ) => {
     try {
       // Start loading
       dispatch(startLoading());
 
+      // Send the payment ID along with order details
       const response: PaymentInfo = await Request({
-        endpointId: 'ADD_PAYMENT_ID', 
-        data: { paymentId },
+        endpointId: 'ADD_PAYMENT_ID',
+        data: { paymentId, orderDetails },
       });
 
       const apiSuccess: ApiSuccess = {
@@ -69,12 +82,15 @@ export const addPaymentId = createAsyncThunk(
         data: response,
       };
 
+      // Fetch payment information after adding the payment ID
       const paymentInfo: PaymentInfo = await Request({
-        endpointId: 'GET_PAYMENT_INFO', 
+        endpointId: 'GET_PAYMENT_INFO',
         slug: `/${paymentId}`,
       });
+
+      // Update the store with the fetched payment information
+      dispatch(fetchCartApi({ isAuthenticated: true }));
       dispatch(setPaymentInfo([paymentInfo]));
-  
 
       return apiSuccess.data;
     } catch (error) {
@@ -82,10 +98,11 @@ export const addPaymentId = createAsyncThunk(
 
       // Set error in the store
       const errorMessage =
-        castedError?.error === 'string' ? castedError?.error : 'Unknown Error';
+        typeof castedError?.error === 'string' ? castedError?.error : 'Unknown Error';
       dispatch(setError(errorMessage));
 
       return rejectWithValue(errorMessage);
     }
   }
 );
+

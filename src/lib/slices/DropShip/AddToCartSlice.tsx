@@ -47,7 +47,6 @@ const cartSlice = createSlice({
     loadCart: (state, action: PayloadAction<CartItem[]>) => {
       state.cartItems = action.payload;
     },
-
     setAuthentication: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
@@ -63,8 +62,8 @@ export const {
   addItemToCart, 
   removeItemFromCart, 
   clearCart, 
+  loadCart,
   setAuthentication, 
-  loadCart
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

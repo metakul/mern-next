@@ -204,26 +204,38 @@ export const fetchCartApi = createAsyncThunk(
           endpointId: 'GET_CART',
         });
 
-        // Ensure `response.push.cartItems` exists and is an array
-        // Ensure response structure and validate if `cartItems` is an array
+        // Ensure `response.data` exists and is an array of cart items
         if (response.data && Array.isArray(response.data)) {
-          // Dispatch each item to the Redux store
-          response.data.forEach(async(item: CartItem) => {
-            const response = await Request({
-              endpointId: "GET_SINGLE_DROPSHIP_ITEM",
-              slug: `/${item.id}`,
-            });
-            console.log("response",response);
-            
+          // Remove duplicates based on the item id
+          const uniqueCartItems = response.data.filter((value: { id: any; }, index: any, self: any[]) =>
+            index === self.findIndex((t) => t.id === value.id)
+          );
 
-            dispatch(addItemToCart({ ...item, name: response[0].title, price: response[0].price }));
+          // Dispatch the entire cart once fetched
+          const detailedCartItems = await Promise.all(
+            uniqueCartItems.map(async (item: CartItem) => {
+              const itemDetails = await Request({
+                endpointId: 'GET_SINGLE_DROPSHIP_ITEM',
+                slug: `/${item.id}`,
+              });
 
-          });
+              return {
+                ...item,
+                name: itemDetails[0].title,
+                price: itemDetails[0].price,
+                image: itemDetails[0].image,
+              };
+            })
+          );
+
+          console.log(detailedCartItems);
+
+          // Dispatch the loaded cart
+          dispatch(loadCart(detailedCartItems));
+          return detailedCartItems;
         } else {
           console.error('Invalid response structure or cartItems is not an array');
         }
-
-        return response.cartItems;
       } catch (error) {
         return rejectWithValue('Failed to fetch cart from backend');
       }
@@ -232,32 +244,33 @@ export const fetchCartApi = createAsyncThunk(
         const savedCart = sessionStorage.getItem('cart');
         const cartItems: CartItem[] = savedCart ? JSON.parse(savedCart) : [];
 
-        // Fetch detailed information for each item in the cart
+        // Remove duplicates from savedCart items
+        const uniqueCartItems = cartItems.filter((value, index, self) =>
+          index === self.findIndex((t) => t.id === value.id)
+        );
+
+        // Fetch detailed information for each unique item in the cart
         const detailedCartItems = await Promise.all(
-          cartItems.map(async (item) => {
+          uniqueCartItems.map(async (item) => {
             try {
-              // Fetch detailed item info using Request
               const response = await Request({
                 endpointId: "GET_SINGLE_DROPSHIP_ITEM",
                 slug: `/${item.id}`,
               });
 
-              // Assuming the response contains an array with a single item
               const detailedItem = response[0];
-              console.log(detailedItem);
-
               return {
                 ...item,
                 name: detailedItem.title,
                 price: detailedItem.price,
+                image: detailedItem.image,
               };
             } catch (error) {
               console.error(`Failed to fetch details for item ID: ${item.id}`, error);
 
-              // Fallback to random price if fetching fails
               return {
                 ...item,
-                price: undefined, // Random price between 1 and 100
+                price: undefined, // Random price if fetching fails
               };
             }
           })
@@ -272,6 +285,7 @@ export const fetchCartApi = createAsyncThunk(
     }
   }
 );
+
 
 export const removeItemQuantityApi = createAsyncThunk(
   'cart/removeItemQuantityApi',

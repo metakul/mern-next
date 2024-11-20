@@ -61,7 +61,8 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
+// const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
+const base_url_backend="http://localhost:5003/v1"
 const base_url_rajorpay="https://api.razorpay.com/v1"
 
 // define endpoints here
@@ -75,7 +76,6 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
     EDIT_BLOG: { apiId:7, withAuth:true, url: `${base_url_backend}/blogs`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Blog",successMessage:"Blog Updated successfully",errorMessage:"Error Updating Blog"},
     FetchCryptoInfo: { apiId:8, withAuth:false, url: "https://rest.coinapi.io/v1/exchangerate", method: 'GET', headers: { "X-CoinAPI-Key":"7bcdeaf0-f41c-4538-ad46-e7a15d4da51c"}, loadingMessage:"",successMessage:"",errorMessage:"",showmsg:false},
     
-    
     // main backend 
     // register user
     
@@ -83,7 +83,6 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
     
     // LOGIN USER
     MAIN_LOGIN: {apiId:10,  withAuth:false,url: `${base_url_backend}/login`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Logging In",successMessage:"Logged In",errorMessage:"Error While Login"},
-    
     
     // bots
     GetBot: { apiId:11, withAuth:true, url: `${base_url_backend}/bots`, method: 'GET', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Loading My Bots",successMessage:"Bots retrievd successfully SuccessFull.", errorMessage:"Oho,Error fetching "},
@@ -119,8 +118,7 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
     
     // user order
     ADD_PAYMENT_ID: { apiId:18, withAuth:true, url: `${base_url_backend}/payments/add`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
-    FETCH_PAYMENT_IDS: { apiId:19, withAuth:true, url: `${base_url_backend}/payments/get`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
-
+    FETCH_PAYMENT_IDS: { apiId:19, withAuth:true, url: `${base_url_backend}/dhelivery/get`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
 
     // cart
     ADD_TO_CART: {
@@ -132,6 +130,16 @@ const base_url_rajorpay="https://api.razorpay.com/v1"
       loadingMessage: 'Adding item to cart...',
       successMessage: 'Item added to cart successfully!',
       errorMessage: 'Failed to add item to cart.',
+    },
+    REMOVE_ITEM_FROM_CART: {
+      apiId: 2,
+      withAuth: true,
+      url: `${base_url_backend}/cart/remove`,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      loadingMessage: 'Removing item to cart...',
+      successMessage: 'Item Removed from cart successfully!',
+      errorMessage: 'Failed to remove item from cart.',
     },
     GET_CART: {
       apiId: 3,

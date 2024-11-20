@@ -9,6 +9,7 @@ import PasswordlessLoginForm from '../Forms/PasswordLoginForm';
 import { useDispatch } from 'react-redux';
 import { addPaymentId } from '@/lib/slices/DropShip/Payment/paymentSliceApi';
 import { AppDispatch } from '@/lib/store';
+import { DeliveryLocation } from '@/Datatypes/interfaces/interface';
 
 const VITE_PUBLICRAZORPAY_KEY_ID = import.meta.env.VITE_PUBLICRAZORPAY_KEY_ID as string;
 
@@ -101,8 +102,25 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
       description:address,
       image: 'http://localhost:5173/logo.png',
       handler: (response: any) => {
-        dispatch(addPaymentId(response.razorpay_payment_id));
-  
+        const orderDetails: DeliveryLocation = {
+          consignee: {
+            name: 'name to be taken ', // Replace with dynamic consignee details if available
+            address: address as string,
+            city: 'Mumbai',
+            state: 'Maharashtra',
+            pin: '400001',
+            country: 'India',
+            phone: verifiedContact,
+          },
+        };
+    
+        dispatch(
+          addPaymentId({
+            paymentId: response.razorpay_payment_id,
+            orderDetails,
+          })
+        );
+    
         toast.success(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
         navigate(Pages.PROFILE);
         setShowOutlet(true);
