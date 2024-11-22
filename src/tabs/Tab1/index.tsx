@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isAuthenticated } from '@/lib/slices/authSlice';
 import { fetchCartApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { AppDispatch } from '@/lib/store';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 const Tab1 = () => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -25,8 +26,8 @@ const Tab1 = () => {
       {/* <MarqueeCryptoNew /> */}
       <Box sx={{
       }}>
-        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
-          Winter Sales
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4 underline">
+        WHAT I WEAR<RocketLaunchIcon sx={{ml:2}}/>
         </Typography>
         <DropShipItems categoryType="winterwear" />
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">

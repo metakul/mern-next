@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Badge, Container, useMediaQuery } from "@mui/material";
+import { Badge, Box, Container, useMediaQuery } from "@mui/material";
 
 import Header from "./TopBar";
 
@@ -115,6 +115,10 @@ export default function DashboardLayout() {
           <CssBaseline />
           {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
           <ToastContainer />
+          <Box
+          component="main"
+          >
+
           <Header
             APP_BAR={APP_BAR}
             setIsSidebarOpen={handleSideBarState}
@@ -130,7 +134,6 @@ export default function DashboardLayout() {
             navConfig={navConfig}
           /> */}
           <Container
-            component="main"
             sx={{
               flexGrow: 1,
               mt: 10,
@@ -144,6 +147,8 @@ export default function DashboardLayout() {
             />
           <Footer/>
           </Container>
+          </Box>
+
           <Analytics />
           <SpeedInsights />
           {/* </Box> */}

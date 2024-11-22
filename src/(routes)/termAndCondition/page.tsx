@@ -2,9 +2,9 @@ import { Container, Typography, Box } from "@mui/material";
 
 const TermsAndConditions = () => {
   return (
-    <Container className="py-8 ">
-      <Box className=" shadow-lg rounded-lg p-6">
-        <Typography variant="h4" className="font-bold mb-4">
+    <Container className="py-2">
+      <Box className=" shadow-lg rounded-lg ">
+        <Typography variant="h2" className="font-bold mb-4">
           Terms and Conditions
         </Typography>
         <Typography sx={{
@@ -136,9 +136,9 @@ const TermsAndConditions = () => {
                   If you have any questions about these Terms, please contact us
                   at:
                   <ul className="list-disc ml-6 mt-2">
-                    <li>Email: [Insert Email]</li>
-                    <li>Phone: [Insert Phone Number]</li>
-                    <li>Address: [Insert Address]</li>
+                    <li>Email: [founders@whatiwear.com]</li>
+                    <li>Phone: [73100747066]</li>
+                    <li>Address: [Shubham Kunwar, Metakul, IIT Kanpur]</li>
                   </ul>
                 </>
               ),

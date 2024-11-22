@@ -63,12 +63,6 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet, APP_BAR,showOutlet }) =>
           }}
         >
           <img src={`/logo.png`} alt="logo" className="w-8 h-8 ml-4" />
-          <Typography sx={{
-            color: theme.palette.grey[900],
-          }}>
-
-          WHAT I WEAR 
-          </Typography>
         </Box>
 
         <Box sx={{ flexGrow: 1 }} />

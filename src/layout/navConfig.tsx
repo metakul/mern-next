@@ -40,7 +40,7 @@ export const navConfig = [
     to: Pages.CHAT_GPT
   },
   {
-    text: "Terms and Consitions",
+    text: "Terms and Conditions",
     icon:<GavelIcon/>,
     to: Pages.TERMS_AND_CONDITIONS
   },

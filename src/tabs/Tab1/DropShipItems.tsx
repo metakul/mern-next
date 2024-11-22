@@ -29,7 +29,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
     try {
       (dispatch as AppDispatch)(
         fetchDropShipItemsApi({
-          pageSize: 40,
+          pageSize: 10,
           page,
           setItemPage,
           status: DropShipStatusInfo.APPROVED,
