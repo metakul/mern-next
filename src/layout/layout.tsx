@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Badge, Box, Container, useMediaQuery } from "@mui/material";
+import { Badge, Box, } from "@mui/material";
 
 import Header from "./TopBar";
 
@@ -11,7 +11,6 @@ import MobileTabNavigation from "@/components/MobileTabNav/mobileVIew";
 
 import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
 import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
-import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
 
 import "./global.css";
 // import MiniDrawer from "./Navigation";
@@ -21,7 +20,7 @@ import "./global.css";
 import Tab3 from "@/tabs/Tab3/temp";
 import { Outlet } from "react-router-dom";
 
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CssBaseline, ThemeProvider } from "@mui/material";
 //theme
 import { ColorModeContext, useMode } from "./Theme/themes";
@@ -57,12 +56,12 @@ export default function DashboardLayout() {
           }}
         />
       ),
-      content: <Container><Outlet /></Container>,
+      content: <Outlet />,
       label: Tabs.tabTitle1,
     },
     {
       value: (
-        <StoreOutlinedIcon
+        <AccountCircleIcon
           sx={{
             color: "white",
           }}
@@ -133,11 +132,9 @@ export default function DashboardLayout() {
             setIsSidebarOpen={handleSideBarState}
             navConfig={navConfig}
           /> */}
-          <Container
+          <Box
             sx={{
-              flexGrow: 1,
-              mt: 10,
-              mr: "auto",
+              mt: APP_BAR,
             }}
           >
             <MobileTabNavigation
@@ -146,7 +143,7 @@ export default function DashboardLayout() {
               tabs={tabs}
             />
           <Footer/>
-          </Container>
+          </Box>
           </Box>
 
           <Analytics />

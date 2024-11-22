@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isAuthenticated } from '@/lib/slices/authSlice';
 import { fetchCartApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { AppDispatch } from '@/lib/store';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 const Tab1 = () => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -22,13 +21,25 @@ const Tab1 = () => {
 
   return (
     <>
-    
+
       {/* <MarqueeCryptoNew /> */}
+
       <Box sx={{
       }}>
-        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4 underline">
-        WHAT I WEAR<RocketLaunchIcon sx={{ml:2}}/>
-        </Typography>
+        <div className="relative bottom-16 w-screen  overflow-hidden">
+          {/* Video Background */}
+          <video
+            className=" w-[100vw] h-[95vh] object-cover pointer-events-none"
+            src="https://video-previews.elements.envatousercontent.com/h264-video-previews/34b4f82d-339a-4c07-ba47-e8a87ded3de1/2733283.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          ></video>
+  
+          {/* Hover Effect */}
+          <div className="absolute inset-0 z-20 hover:cursor-pointer"></div>
+        </div>
         <DropShipItems categoryType="winterwear" />
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Most Liked Shirt

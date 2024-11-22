@@ -49,8 +49,8 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet, APP_BAR,showOutlet }) =>
 
   return (
     <AppBar sx={{
-      backgroundColor: getColors().secondary[900],
-      height: APP_BAR
+      backgroundColor:"transparent",
+      height: APP_BAR,
     }} >
       <Toolbar>
         

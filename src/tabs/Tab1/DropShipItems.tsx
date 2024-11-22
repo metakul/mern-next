@@ -87,6 +87,9 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
                     <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
                   </Box>
                   <Grid container className="mt-8">
+                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 0 }}>
+                    
+                  </Box>
                     <Grid item xs={8}>
                       <h2
                         className="mb-4 font-display"

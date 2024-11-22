@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { HomePageProps } from '@/Datatypes/interfaces/interface';
 
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Tab1 from '@/tabs/Tab1';
 import { useSelector } from 'react-redux';
 import { isAuthenticated, selectUserType, } from '@/lib/slices/authSlice';
@@ -25,7 +25,7 @@ const HomePage: React.FC<HomePageProps> = () => {
   }, [isUserAuthenticated]);
 
   return (
-    <Container sx={{
+    <Box sx={{
       padding: { xs: 0 },
       margin: { xs: 0 }
     }}>
@@ -79,7 +79,7 @@ const HomePage: React.FC<HomePageProps> = () => {
           </Helmet>
 
           <Tab1 />
-        </Container>
+        </Box>
         );
 };
 
