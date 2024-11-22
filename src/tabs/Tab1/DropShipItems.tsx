@@ -70,21 +70,18 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
 
   return (
     <div className="overflow-hidden mx-auto">
-      <Grid container spacing={2} sx={{ mb: 4 }}>
+      <Grid container  sx={{ mb: 0 }}>
         {filteredItems.map((item: IDropShipItem, index: number) => (
           <Grid
             key={index}
             item
             xs={6}
             md={4}
-            sx={{
-              height:"600px"
-            }}
           >
             <section className="relative py-4 ">
               <div className="flex flex-col rounded-2.5xltransition-shadow shadow-lg justify-center">
                 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}
+                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 0 }}
                     onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
                   >
                     <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
@@ -99,12 +96,12 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
                         {item.title} <br />
                       </h2>
                     </Grid>
-                    <Grid item xs={4} className="mx-auto flex justify-center pb-4">
-                      <ShareButton link={`${itemLink}`} />
+                    <Grid item xs={4} className="mx-auto flex justify-center pb-0">
+                    <ShareButton link={`${itemLink}/SINGLE_DROPSHIP_ITEM/${item.title}/${item.id}`} />
                     </Grid>
                     <Grid item xs={8} className="mx-auto">
                       <h2
-                        className="mb-4 font-display"
+                        className="mb-2 font-display"
                         style={{ overflow: 'hidden' }}
                         onClick={() => handleOpenItem(item.id || '')}
                       >

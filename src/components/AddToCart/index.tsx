@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { isAuthenticated } from '@/lib/slices/authSlice';
 import { addToCartApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { AppDispatch } from '@/lib/store';
 import { getColors } from '@/layout/Theme/themes';
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 interface AddToCartProps {
   _id: string;
   name: string,
@@ -23,13 +23,11 @@ const AddToCart: React.FC<AddToCartProps> = ({ _id, name, image }) => {
 
   return (
 
-    <Button variant="outlined" sx={{
+    <Box sx={{
       color: getColors().blueAccent[100],
-    }} className='w-auto  ring-1 focus:outline-none focus:ring-gray-300  rounded-lg inline-flex items-center justify-center ' onClick={handleAddToCart}>
-      <div className=" font-sans text-xs  p-1">
-        Buy Now
-      </div>
-    </Button>
+    }} onClick={handleAddToCart}>
+      <AddShoppingCartIcon/>
+    </Box>
   );
 };
 
