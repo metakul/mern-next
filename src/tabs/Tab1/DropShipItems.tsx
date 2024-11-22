@@ -137,8 +137,8 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
 
       {loading && (
         <Grid container spacing={2} sx={{ mb: 4 }}>
-          {Array.from({ length: 2 }).map((_, index) => (
-            <Grid key={index} item xs={6}>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Grid key={index} item xs={6} md={4}>
               <Stack spacing={1} className="relative py-4 mt-4">
                 <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
                   <div className="rounded-[1.25rem] p-4 flex-row justify-center">
