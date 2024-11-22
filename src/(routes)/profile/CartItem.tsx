@@ -65,9 +65,7 @@ const isUserAuthenticated = useSelector(isAuthenticated);
             <Typography variant="body2">
               Quantity: {details.quantity || "N/A"}
             </Typography>
-            <Typography variant="body2">
-              Price: ₹{details.price ? details.price.toFixed(2) : "Loading..."}
-            </Typography>
+         
             {details.image && (
               <Box className="mt-2">
                 <img

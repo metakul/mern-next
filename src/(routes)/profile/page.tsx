@@ -95,9 +95,9 @@ export default function ProfilePage() {
                         <Typography variant="h6" component="div" className="font-bold">
                           Payment ID: {payment.id}
                         </Typography>
-                        <Typography variant="body2" className="text-gray-600">
+                        {/* <Typography variant="body2" className="text-gray-600">
                           Amount: ₹{(payment.amount / 100).toFixed(2)} {payment.currency}
-                        </Typography>
+                        </Typography> */}
                         <Typography variant="body2" className="text-gray-600">
                           Status: {payment.status}
                         </Typography>
