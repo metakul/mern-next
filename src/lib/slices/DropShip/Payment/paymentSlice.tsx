@@ -45,6 +45,10 @@ const razorpaySlice = createSlice({
       state.loading = true;
       state.error = null;
     },
+    stopLoading: (state) => {
+      state.loading = false;
+      state.error = null;
+    },
     // Replace existing paymentInfo with a new array
     setPaymentInfo: (state, action: PayloadAction<PaymentInfo[]>) => {
       state.loading = false;
@@ -89,6 +93,7 @@ const razorpaySlice = createSlice({
 
 export const {
   startLoading,
+  stopLoading,
   setPaymentInfo,
   setTrackingInfo,
   addPaymentInfo,

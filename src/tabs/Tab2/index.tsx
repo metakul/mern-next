@@ -50,6 +50,7 @@ const whatiwear = () => {
                   userType='ADMIN'
                   OnFormSuccess={() => setDialogOpen(!isDialogOpen)}
                   />
+                  
               </CustomDialog>
                   </>
               )}

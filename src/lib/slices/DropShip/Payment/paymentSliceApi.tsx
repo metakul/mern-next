@@ -1,7 +1,7 @@
 import Request from '@/Backend/axiosCall/apiCall';
 import { ApiError, ApiSuccess, DeliveryLocation, PaymentInfo } from '../../../../Datatypes/interfaces/interface';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addPaymentInfo, addTrackingInfo, setError, setPaymentInfo, startLoading } from './paymentSlice';
+import { addPaymentInfo, addTrackingInfo, setError, setPaymentInfo, startLoading, stopLoading } from './paymentSlice';
 import { fetchCartApi } from '../DropShipAPI';
 
 // Fetch Razorpay Payment IDs
@@ -40,20 +40,24 @@ export const fetchPaymentIds = createAsyncThunk(
             trackingId: paymentId.trackingId,
           };
 
-          // Dispatch combined tracking info and trackingId
+
           dispatch(addTrackingInfo(trackingDataWithId));
           
         } catch (innerError) {
+
           console.error(
             `Failed to fetch details for Payment ID ${paymentId.paymentId}:`,
             innerError
           );
         }
       }
+      dispatch(stopLoading());
+
 
       return { message: 'Payment IDs and details fetched successfully' };
     } catch (error) {
       console.error('Error fetching payment IDs:', error);
+      dispatch(stopLoading());
 
       const castedError = error as ApiError;
       const errorMessage =

@@ -17,6 +17,7 @@ import { useSelectedDropShipItem } from '@/lib/slices/DropShip/DropShipSlice';
 import { fetchSingleDropShipItemApi, updateDropShipItemStatus } from '@/lib/slices/DropShip/DropShipAPI';
 import { parseHTML, renderCustomStyles } from '@/scripts/handleBlogCss';
 import AddToCart from '@/components/AddToCart';
+import CustomSwiper from '@/components/Swiper';
 
 
 const SingleDropShipItemDetails = () => {
@@ -141,17 +142,10 @@ const SingleDropShipItemDetails = () => {
                   {dropShipItemTitle}
                 </Typography>
               
-                <Box sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  mb: 4
-                }}>
-                  <img
-                    src={`data:image/png;base64,${image}`}
-                    alt={"Post image"}
-                    className=" w-[24rem] h-[24rem] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
-                  />
-                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}
+                  >
+                    <CustomSwiper images={[`data:image/png;base64,${image}`, `data:image/png;base64,${image}`,`data:image/png;base64,${image}`]} />
+                  </Box>
                 <Box sx={{
                   display: "flex",
                   justifyContent: "space-between",

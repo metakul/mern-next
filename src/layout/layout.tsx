@@ -14,8 +14,8 @@ import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
 
 import "./global.css";
-import MiniDrawer from "./Navigation";
-import navConfig from "./navConfig";
+// import MiniDrawer from "./Navigation";
+// import navConfig from "./navConfig";
 
 // home page tabs
 import Tab3 from "@/tabs/Tab3/temp";
@@ -30,17 +30,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Metaship from "@/tabs/Tab2";
+// import Metaship from "@/tabs/Tab2";
 import CartPage from "@/tabs/Tab4";
 import { useSelector } from "react-redux";
 import { selectTotalQuantityAndPrice } from "@/lib/slices/DropShip/AddToCartSlice";
 import Footer from "./Footer/Footer";
-
-
+import ProfilePage from "@/(routes)/profile/page";
 
 export default function DashboardLayout() {
   const [theme, colorMode] = useMode();
-  const isNonMobile = useMediaQuery("(min-width: 766px)");
+  // const isNonMobile = useMediaQuery("(min-width: 766px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showOutlet, setShowOutlet] = useState<boolean>(false);
   const APP_BAR = "64px";
@@ -69,7 +68,7 @@ export default function DashboardLayout() {
           }}
         />
       ),
-      content: <Metaship />,
+      content: <ProfilePage />,
       label: Tabs.tabTitle2,
     },
     {
@@ -119,15 +118,17 @@ export default function DashboardLayout() {
           <Header
             APP_BAR={APP_BAR}
             setIsSidebarOpen={handleSideBarState}
+            setShowOutlet={setShowOutlet}
+            showOutlet={showOutlet}
           />
-          <MiniDrawer
+          {/* <MiniDrawer
             APP_BAR={APP_BAR}
             setShowOutlet={setShowOutlet}
             isNonMobile={isNonMobile}
             isSidebarOpen={isSidebarOpen}
             setIsSidebarOpen={handleSideBarState}
             navConfig={navConfig}
-          />
+          /> */}
           <Container
             component="main"
             sx={{

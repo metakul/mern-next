@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // @mui
 import {
@@ -8,6 +8,7 @@ import {
   Toolbar,
   IconButton,
   useTheme,
+  Typography,
 } from "@mui/material";
 
 // import app
@@ -27,9 +28,12 @@ import { MenuRounded } from "@mui/icons-material";
 interface HeaderProps {
   setIsSidebarOpen: () => void;
   APP_BAR: string
+  setShowOutlet: (showOutlet: boolean) => void;
+  showOutlet:boolean
+
 }
 
-const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
+const Header: React.FC<HeaderProps> = ({ setShowOutlet, APP_BAR,showOutlet }) => {
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme()
   const [isOn, setIsOn] = useState(false);
@@ -51,10 +55,20 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
       <Toolbar>
         
         <Box
-          onClick={() => navigate("/")}
-          sx={{ cursor: "pointer"}}
+          onClick={() => {navigate("/");  setShowOutlet(true)}}
+          sx={{ cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <img src={`/logo.png`} alt="logo" className="w-8 h-8 ml-4" />
+          <Typography sx={{
+            color: theme.palette.grey[900],
+          }}>
+
+          WHAT I WEAR 
+          </Typography>
         </Box>
 
         <Box sx={{ flexGrow: 1 }} />
@@ -79,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
               background: theme.palette.grey[100],
             }} />
           </div>
-          <IconButton
+          {/* <IconButton
           onClick={() => setIsSidebarOpen()}
           sx={{
             mt:2,
@@ -87,7 +101,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
           }}
         >
           <MenuRounded/>
-        </IconButton>
+        </IconButton> */}
          
         </Stack>
       </Toolbar>

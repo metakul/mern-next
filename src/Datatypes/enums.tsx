@@ -34,7 +34,7 @@ export enum NftTabs {
 export enum Pages {
   HOME = '/',
   PROFILE = '/profile',
-  DASHBOARD = '/dashboard/app',
+  DASHBOARD = '/dashboard',
   MINT = '/mint',
   CAREER = '/Career',
   TERMS_AND_CONDITIONS = '/t_&_C',

@@ -25,7 +25,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ _id, name, image }) => {
 
     <Button variant="outlined" sx={{
       color: getColors().blueAccent[100],
-    }} className='w-full sm:w-auto  ring-1 focus:outline-none focus:ring-gray-300  rounded-lg inline-flex items-center justify-center ' onClick={handleAddToCart}>
+    }} className='w-auto  ring-1 focus:outline-none focus:ring-gray-300  rounded-lg inline-flex items-center justify-center ' onClick={handleAddToCart}>
       <div className=" font-sans text-xs  p-1">
         Buy Now
       </div>

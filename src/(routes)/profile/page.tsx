@@ -18,16 +18,16 @@ import { fetchPaymentIds } from '@/lib/slices/DropShip/Payment/paymentSliceApi';
 import SearchBar from '@/components/SearchBar';
 import { isAuthenticated } from '@/lib/slices/authSlice';
 import LogoutButton from '@/components/Elements/Buttons/LogoutButton';
-import CustomDialog from '@/components/Dailog/Dailog';
 import PasswordlessLoginForm from '@/components/Forms/PasswordLoginForm';
 import { selectTrackingInfo } from '@/lib/slices/DropShip/Payment/paymentSlice';
+import CartItems from './CartItem';
+import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
 
 export default function ProfilePage() {
   const dispatch = useDispatch<AppDispatch>();
   const { paymentInfo, loading, error } = useSelector(selectPaymentInfo);
   const trackingInfo = useSelector(selectTrackingInfo);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
   const isUserAuthenticated = useSelector(isAuthenticated);
 
   useEffect(() => {
@@ -54,22 +54,21 @@ export default function ProfilePage() {
                 <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
               </Box>
               <LogoutButton />
+
+              {!loading && isUserAuthenticated && !error && filteredPayments.length === 0 && (
+            <Typography className="text-center text-gray-500 mt-4">
+              Your Orders are empty. Start adding items to your cart!
+            </Typography>
+          )}
             </Box>
           ) : (
             <Box className="text-center">
+
               <span className="text-sm font-bold text-gray-600 m-2">
                 Login Now To See what your friends are wearing
               </span>
-              <CustomDialog
-                className="ml-2"
-                open={isDialogOpen}
-                onClose={() => setDialogOpen(!isDialogOpen)}
-                triggerButtonText="Login"
-                title="Login Now"
-                description="Login Now To See what your friends are wearing"
-              >
+              
                 <PasswordlessLoginForm />
-              </CustomDialog>
             </Box>
           )}
 
@@ -118,19 +117,11 @@ export default function ProfilePage() {
 
                         {parsedNotes.length > 0 && (
                           <Box className="mt-4">
-                            <Typography variant="h6" className="text-gray-800">
-                              Cart Items:
-                            </Typography>
-                            {parsedNotes.map((item, index) => (
-                              <Box key={index} className="bg-gray-100 rounded-md p-2 mt-2">
-                                <Typography variant="body2">Id: {item.id || "N/A"}</Typography>
-                                <Typography variant="body2">Name: {item.name || "N/A"}</Typography>
-                                <Typography variant="body2">Quantity: {item.quantity || "N/A"}</Typography>
-                                <Typography variant="body2">
-                                  Price: ₹{item.price ? item.price.toFixed(2) : "N/A"}
-                                </Typography>
+                            {parsedNotes.length > 0 && (
+                              <Box className="mt-4">
+                                <CartItems parsedNotes={parsedNotes as CartItem[]} />
                               </Box>
-                            ))}
+                            )}
                           </Box>
                         )}
                         {paymentTrackingInfo && (
@@ -145,7 +136,7 @@ export default function ProfilePage() {
                               <Typography variant="body2" className="text-gray-600">
                                 Status: {paymentTrackingInfo.active ? "Active" : "Inactive"}
                               </Typography>
-                             
+
                               <Typography variant="body2" className="text-gray-600">
                                 Tracking Number Tag: {paymentTrackingInfo.tracking_number}
                               </Typography>
@@ -198,11 +189,7 @@ export default function ProfilePage() {
             </Grid>
           )}
 
-          {!loading && isUserAuthenticated && !error && filteredPayments.length === 0 && (
-            <Typography className="text-center text-gray-500 mt-4">
-              Your Orders are empty. Start adding items to your cart!
-            </Typography>
-          )}
+       
         </Box>
       </>
     </Container>
