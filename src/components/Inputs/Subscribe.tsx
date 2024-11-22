@@ -3,19 +3,29 @@ import { Box, Button, Typography, TextField } from '@mui/material';
 import ChooseLocation from '../Location/ChooseLocation';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { Pages } from '@/Datatypes/enums';
+import { accountStatus, Pages, UserCategory } from '@/Datatypes/enums';
 import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
 import PasswordlessLoginForm from '../Forms/PasswordLoginForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addPaymentId } from '@/lib/slices/DropShip/Payment/paymentSliceApi';
 import { AppDispatch } from '@/lib/store';
 import { DeliveryLocation } from '@/Datatypes/interfaces/interface';
+import { authLoading, isAuthenticated, SelectConactVerified, SelectContact, selectToken } from '@/lib/slices/authSlice';
+import {jwtDecode} from "jwt-decode";
+import { registerUserDispatcher } from '@/lib/slices/authApiSlice';
+
+interface CustomJwtPayload {
+  phoneNumber: string;
+  email: string;
+  name:string
+}
 
 const VITE_PUBLICRAZORPAY_KEY_ID = import.meta.env.VITE_PUBLICRAZORPAY_KEY_ID as string;
 
 interface FormData {
   address: string | { latitude: number; longitude: number };
-  email: string; // Add email field
+  email: string;
+  name: string;
 }
 
 interface SubscribeProps {
@@ -25,16 +35,36 @@ interface SubscribeProps {
 }
 
 const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }) => {
-  const [formData, setFormData] = useState<FormData>({ address: '', email: '' });
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const [formData, setFormData] = useState<FormData>({ address: '', email: '',name:'' });
   const [openMap, setOpenMap] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
-  const [contactVerified, setContactVerified] = useState(false);
-  const [verifiedContact, setVerifiedContact] = useState<string | null>(null); // Store verified contact
-  const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const isContactVerified= useSelector(SelectConactVerified);
+  const isUserAuthenticated= useSelector(isAuthenticated);
+  const [contactVerified, setContactVerified] = useState(isContactVerified);
+  
+  const verifiedContactState= useSelector(SelectContact);
+  const [verifiedContact, setVerifiedContact] = useState<string | null>(verifiedContactState); // Store verified contact
+  const myToken=useSelector(selectToken)
 
+  const isUserVerifying=useSelector(authLoading)
   React.useEffect(() => {
+
+    if(isUserAuthenticated){
+    const decodedToken = jwtDecode<CustomJwtPayload>(myToken);
+    console.log("Decoded Token:", decodedToken)
+    setVerifiedContact(decodedToken?.phoneNumber)
+    setFormData((prevData) => ({
+      ...prevData,
+      email: decodedToken?.email,
+      name: decodedToken?.name,
+    }));
+    setContactVerified(true)
+
+    }
+
     const script = document.createElement('script');
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
     script.async = true;
@@ -45,7 +75,7 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  }, [isUserAuthenticated]);
 
   const handleAddressChange = (address: string | { latitude: number; longitude: number } | null) => {
     if (address) {
@@ -53,7 +83,7 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
         ...prevData,
         address,
       }));
-      setError(null); // Clear error on address change
+      setError(null);
     }
   };
 
@@ -61,7 +91,7 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value, // Update form data dynamically
+      [name]: value,
     }));
   };
 
@@ -76,9 +106,9 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
   };
 
   const proceedToPayment = () => {
-    const { address, email } = formData;
+    const { address, email,name } = formData;
 
-    if (!contactVerified || !verifiedContact || !address || !email) {
+    if (!contactVerified || !verifiedContact || !address || !email || verifiedContact==null) {
       setError('All fields (contact, address, and email) are required.');
       toast.error('All fields (contact, address, and email) are required.');
       return;
@@ -89,6 +119,16 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
       return;
     }
 
+    if(!isUserAuthenticated){
+      dispatch(registerUserDispatcher({email,name,phoneNumber:verifiedContact,address,accountStatus:accountStatus.Pending,category:UserCategory.Verifier}))
+    }
+   
+
+    if (isUserVerifying) {
+      toast.info('Please wait, user verification in progress...');
+      return;
+    }
+    
     const options = {
       key: VITE_PUBLICRAZORPAY_KEY_ID,
       amount: price * 100,
@@ -97,30 +137,30 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
       prefill: {
         name: 'Gaurav Kumar',
         contact: verifiedContact,
-        email, // Include email in prefill
+        email,
       },
-      description:address,
+      description: address,
       image: 'http://localhost:5173/logo.png',
       handler: (response: any) => {
         const orderDetails: DeliveryLocation = {
           consignee: {
-            name: 'name to be taken ', // Replace with dynamic consignee details if available
+            name: name as string,
             address: address as string,
-            city: 'Mumbai',
-            state: 'Maharashtra',
+            city: '',
+            state: '',
             pin: '400001',
             country: 'India',
             phone: verifiedContact,
           },
         };
-    
+
         dispatch(
           addPaymentId({
             paymentId: response.razorpay_payment_id,
             orderDetails,
           })
         );
-    
+
         toast.success(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
         navigate(Pages.PROFILE);
         setShowOutlet(true);
@@ -145,12 +185,30 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
 
   return (
     <Box className="relative flex flex-col gap-4 w-full p-4">
-      <Typography variant="h6">Verify Contact Number</Typography>
-      <PasswordlessLoginForm onVerified={handleContactVerified} />
-
+      {!contactVerified &&
+        <>
+          <Typography variant="h6">Verify Contact Number</Typography>
+          <PasswordlessLoginForm onVerified={handleContactVerified} />
+        </>
+      }
       {contactVerified && (
         <>
+          <Typography variant="h6">Your Address For Delivery</Typography>
+
           <Box className="relative flex flex-col gap-2">
+           
+          {!isUserAuthenticated &&
+          <>
+            <TextField
+              label="Name"
+              variant="outlined"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              fullWidth
+              error={!!error && !formData.name}
+              helperText={!!error && !formData.name ? 'Name is required.' : ''}
+              />
             <TextField
               label="Email"
               variant="outlined"
@@ -160,14 +218,16 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
               fullWidth
               error={!!error && !formData.email}
               helperText={!!error && !formData.email ? 'Email is required.' : ''}
-            />
+              />
+            </>
+          }
             <Box
               className="relative flex items-center w-full h-12 rounded-lg border border-black focus-within:shadow-lg overflow-hidden"
               onClick={toggleMapInfo}
             >
               {formData.address && typeof formData.address === 'string' ? (
                 <Typography variant="body2" className="flex overflow-hidden">
-                  {formData.address.substring(0, 18)}...
+                  {formData.address}
                 </Typography>
               ) : (
                 <Box className="grid place-items-center h-full w-16">

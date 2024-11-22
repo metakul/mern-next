@@ -38,7 +38,9 @@ export interface AuthState {
   refresh: string | null;
   userType: string | null;
   isLoading:boolean
+  isContactVerified:boolean
   trxId?: string;
+  phoneNumber: string | null;
 }
 
 // api request
@@ -212,7 +214,7 @@ export interface IUser extends IloginUser {
     id?: any;
     name: string;
     phoneNumber: string;
-    address: string;
+    address: string | { latitude: number; longitude: number; }
     category: CategoryType;
     subcategory?: string;
     permissions?: string[];

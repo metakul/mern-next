@@ -34,6 +34,7 @@ import Metaship from "@/tabs/Tab2";
 import CartPage from "@/tabs/Tab4";
 import { useSelector } from "react-redux";
 import { selectTotalQuantityAndPrice } from "@/lib/slices/DropShip/AddToCartSlice";
+import Footer from "./Footer/Footer";
 
 
 
@@ -140,6 +141,7 @@ export default function DashboardLayout() {
               setShowOutlet={setShowOutlet}
               tabs={tabs}
             />
+          <Footer/>
           </Container>
           <Analytics />
           <SpeedInsights />

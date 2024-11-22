@@ -1,9 +1,10 @@
 // authActions.tsx
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCredentials, setLoading } from './authSlice';
+import { setContactVerified, setCredentials, setLoading, setPhoneNumber } from './authSlice';
 import { ApiError, LoginData, OtpData, SignUpData } from '../../Datatypes/interfaces/interface';
 import Request from '@/Backend/axiosCall/apiCall';
 // import { ApiSuccess } from '../../Datatypes/interfaces/interface';
+import {  ApiSuccess, IUser } from '../../Datatypes/interfaces/interface';
 
 // interface JwtPayload {
 //   sub: string;
@@ -36,7 +37,7 @@ export const loginUser = createAsyncThunk(
       // };
       
       
-      dispatch(setCredentials({ user:response?.data?.email, token:{accessToken,refreshToken}, userType:response?.data?.category,isLoading:false }));
+      dispatch(setCredentials({ user:response?.data?.email,phoneNumber:response?.data?.email, token:{accessToken,refreshToken}, userType:response?.data?.category,isLoading:false })); // todo use phoneNumber instead of email in PhoneNumber
       OnFormSuccess()
       return response.data;
 
@@ -83,14 +84,78 @@ export const verifyOtp = createAsyncThunk(
         data: { otp, trxId, deviceId, phoneNumber },
       });
 
-         const {  accessToken,refreshToken } = response.data.token;
-         dispatch(setCredentials({ user:response?.data?.email, token:{accessToken,refreshToken}, userType:response?.data?.category,isLoading:false }));
-        
+      if(response?.data?.token){
+        const {  accessToken,refreshToken } = response.data.token;
+        dispatch(setCredentials({ user:response?.data?.email,phoneNumber:phoneNumber, token:{accessToken,refreshToken}, userType:response?.data?.category,isLoading:false }));
+        dispatch(setContactVerified({ isContactVerified: true }));
+        dispatch(setPhoneNumber({ phoneNumber: phoneNumber }));
+      }
+      dispatch(setLoading({ isLoading: false }));
+      dispatch(setPhoneNumber({ phoneNumber: phoneNumber }));
+      dispatch(setContactVerified({ isContactVerified: true }));
+
       return response.data;
     } catch (error) {
       dispatch(setLoading({ isLoading: false }));
       const castedError = error as ApiError;
       return rejectWithValue(castedError.error || 'Failed to verify OTP');
+    }
+  }
+);
+
+
+
+
+
+export const registerUserDispatcher = createAsyncThunk(
+  'RegisterUserPasswordLess',
+  async (userData: IUser, { rejectWithValue, dispatch }) => {
+    try {
+      // Dispatch loading state
+      dispatch(setLoading({ isLoading: true }));
+
+      // Perform the API call to register the user
+      const response = await Request({
+        endpointId: "REGISTER_USER_PASSWORDLESS",
+        data: userData,
+      });
+
+      // Check if the response contains tokens
+      if (response?.data?.token) {
+        const { accessToken, refreshToken } = response.data.token;
+
+        // Dispatch the setCredentials action with token and user data
+        dispatch(
+          setCredentials({
+            user: response?.data?.email,
+            phoneNumber: userData.phoneNumber,
+            token: { accessToken, refreshToken },
+            userType: response?.data?.category,
+            isLoading: false,
+          })
+        );
+
+        dispatch(setContactVerified({ isContactVerified: true }));
+        dispatch(setPhoneNumber({ phoneNumber: userData.phoneNumber }));
+      }
+
+      dispatch(setLoading({ isLoading: false }));
+
+      // Return the API response as a success object
+      const apiSuccess: ApiSuccess = {
+        statusCode: response.status,
+        message: 'User Registered Successfully',
+        data: response,
+      };
+      return apiSuccess;
+    } catch (error) {
+      // Handle errors during registration
+      dispatch(setLoading({ isLoading: false }));
+      const castedError = error as ApiError;
+      const errorMessage =
+        typeof castedError?.error === 'string' ? castedError?.error : 'Unknown Error';
+
+      return rejectWithValue(errorMessage);
     }
   }
 );

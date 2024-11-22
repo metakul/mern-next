@@ -62,8 +62,8 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
-// const base_url_backend="http://localhost:5003/v1"
+// const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
+const base_url_backend="http://localhost:5003/v1"
 // const base_url_rajorpay="https://api.razorpay.com/v1"
 
 // define endpoints here
@@ -116,6 +116,7 @@ const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1
     // passwordless Login
     SEND_OTP: { apiId:16, withAuth:false, url: `${base_url_backend}/passwordless/login`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
     VERIFY_OTP: { apiId:17, withAuth:false, url: `${base_url_backend}/passwordless/verifyOtp`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
+    REGISTER_USER_PASSWORDLESS: { apiId:17, withAuth:false, url: `${base_url_backend}/passwordless/registerUser`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
     
     // user order
     ADD_PAYMENT_ID: { apiId:18, withAuth:true, url: `${base_url_backend}/payments/add`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},

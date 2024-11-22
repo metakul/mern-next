@@ -15,18 +15,22 @@ const initialState: AuthState = {
   refresh: storedRefreshToken ? storedRefreshToken : null,
   userType: storedUserType ? storedUserType : null,
   isLoading:false,
-  trxId: ""
+  isContactVerified: false,
+  trxId: "",
+  phoneNumber: null,
 };
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<{ user: any; token: { accessToken: any, refreshToken: any }; userType: string; isLoading: boolean }>) => {
+    setCredentials: (state, action: PayloadAction<{ user: any; phoneNumber:string, token: { accessToken: any, refreshToken: any }; userType: string; isLoading: boolean }>) => {
       state.isAuthenticated = true;
+      state.isContactVerified = true;
       state.user = action.payload.user;
       state.access = action.payload.token.accessToken.token;
       state.refresh = action.payload.token.refreshToken.token;
       state.userType = action.payload.userType;
+      state.phoneNumber = action.payload.phoneNumber;
       state.isLoading = action.payload.isLoading;
       Cookies.set('user', JSON.stringify(action.payload.user));
       Cookies.set('access', action.payload.token.accessToken.token);
@@ -36,16 +40,24 @@ const authSlice = createSlice({
     setLoading: (state, action: PayloadAction<{ isLoading: boolean }>) => {
       state.isLoading = action.payload.isLoading;
     },
+    setContactVerified: (state, action: PayloadAction<{ isContactVerified: boolean }>) => {
+      state.isContactVerified = action.payload.isContactVerified;
+    },
+    setPhoneNumber: (state, action: PayloadAction<{ phoneNumber: string }>) => {
+      state.phoneNumber = action.payload.phoneNumber;
+    },
     setTrxId: (state, action: PayloadAction<string>) => {
-      state.trxId = action.payload; // Save the transaction ID
+      state.trxId = action.payload;
     },
     logout: (state) => {
       state.isAuthenticated = false;
+      state.isContactVerified = false;
       state.user = null;
       state.access = null;
       state.refresh = null;
       state.userType = null;
       state.trxId = ""; 
+      state.phoneNumber = null; 
       Cookies.remove('user');
       Cookies.remove('access');
       Cookies.remove('refresh');
@@ -58,7 +70,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, setLoading, logout, refreshAccessToken, setTrxId } = authSlice.actions;
+export const { setCredentials, setLoading, logout, refreshAccessToken, setTrxId, setContactVerified, setPhoneNumber } = authSlice.actions;
 
 export default authSlice.reducer;
 
@@ -69,3 +81,5 @@ export const isAuthenticated = (state: { auth: { isAuthenticated: boolean } }) =
 export const selectUserType = (state: { auth: { userType: string } }) => state.auth.userType;
 export const authLoading = (state: { auth: { isLoading: boolean } }) => state.auth.isLoading;
 export const selectTrxId = (state: { auth: AuthState }) => state.auth.trxId;
+export const SelectConactVerified = (state: { auth: { isContactVerified: boolean }}) => state.auth.isContactVerified;
+export const SelectContact = (state: { auth: { SelectContact: string }}) => state.auth.SelectContact;
