@@ -14,12 +14,13 @@ import CustomSwiper from '@/components/Swiper';
 import { useNavigate } from 'react-router-dom';
 
 interface DropShipItemsProps {
-  categoryType?: string; // Optional categoryType prop
+  categoryType?: string;
+  dropShipItems: IDropShipItem[]
+  loading:boolean
 }
 
-const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
+const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType,dropShipItems,loading }) => {
   const dispatch = useDispatch();
-  const { dropShipItems, loading } = useSelector(selectedDropShipItems);
   const [page, setItemPage] = useState(1);
   const [showItemPerPage] = useState(40);
   const [openedItemId, setOpenedItemId] = useState<string | null>(null);

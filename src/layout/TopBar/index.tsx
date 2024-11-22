@@ -23,6 +23,7 @@ import {
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { MenuRounded } from "@mui/icons-material";
+import InstallPWA from "@/PWA/InstallPwa";
 
 
 interface HeaderProps {
@@ -77,6 +78,7 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet, APP_BAR,showOutlet }) =>
             sm: 1,
           }}
         >
+      <InstallPWA />
          
           <div className="switch" data-ison={isOn} onClick={toggleSwitch} style={{
             background: theme.palette.grey[900],

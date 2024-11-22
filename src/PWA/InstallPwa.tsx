@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import InstallMobileIcon from '@mui/icons-material/InstallMobile';
 import Request from "@/Backend/axiosCall/apiCall";
 import { getColors } from "@/layout/Theme/themes";
+import { Box } from "@mui/material";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => void;
@@ -27,7 +28,7 @@ const InstallPWA = () => {
 
   }, []);
 
-  const onClick = async (evt: React.MouseEvent<HTMLButtonElement>) => {
+  const onClick = async (evt: React.MouseEvent<HTMLDivElement>) => {
     evt.preventDefault();
 
     if (!promptInstall) {
@@ -71,24 +72,14 @@ const InstallPWA = () => {
   }
   return (
     <>
-      <div className="mt-4 p-2 text-center  border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-        <h5 className="mb-2 text-md font-bold ">  "Shop Smarter, Anywhere! 🌟 </h5>
-        <p className="mb-3 text-sm ">
-        One tap, all features. Install now for the ultimate shopping experience!
-        </p>
-        <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+       
 
-          <button onClick={onClick} className={`w-full sm:w-auto  ring-1 focus:outline-none focus:ring-gray-300  rounded-lg inline-flex items-center justify-center px-4 py-2.5 `} style={{
+          <Box component="div" onClick={onClick} className={`w-full sm:w-auto  rounded-lg inline-flex items-center justify-center px-2 py-2.5 `} sx={{
             background: getColors().grey[800]
           }}>
-            <InstallMobileIcon className="me-3 w-7 h-7" />
-            <div className="text-left rtl:text-right">
-              <div className="-mt-1 font-sans text-sm font-semibold">      Install now
-              </div>
-            </div>
-          </button>
-        </div>
-      </div>
+            <InstallMobileIcon className=" w-7 h-7" />
+          
+          </Box>
     </>
   );
 };
