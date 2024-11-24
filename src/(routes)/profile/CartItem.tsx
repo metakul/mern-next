@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, IconButton, ListItem, ListItemSecondaryAction, ListItemText, Typography } from "@mui/material";
 import { fetchSingleDropShipItemApi } from "@/lib/slices/DropShip/DropShipAPI"; // Update the import path
 import { AppDispatch } from "@/lib/store";
 import { isAuthenticated } from "@/lib/slices/authSlice";
+import { GridDeleteForeverIcon, GridDeleteIcon } from "@mui/x-data-grid";
+import { Pages } from "@/Datatypes/enums";
+import { useNavigate } from "react-router-dom";
 
 interface CartItem {
   id: string;
@@ -15,13 +18,17 @@ interface CartItem {
 
 interface CartItemsProps {
   parsedNotes: CartItem[];
+  setShowOutlet: (showOutlet: boolean) => void;
+
 }
 
-const CartItems: React.FC<CartItemsProps> = ({ parsedNotes }) => {
+const CartItems: React.FC<CartItemsProps> = ({ parsedNotes, setShowOutlet }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [itemDetails, setItemDetails] = useState<Record<string, CartItem>>({});
   const [visibleCount, setVisibleCount] = useState(2); // Number of items to display initially
-const isUserAuthenticated = useSelector(isAuthenticated);
+  const isUserAuthenticated = useSelector(isAuthenticated);
+  const navigate = useNavigate()
+
   useEffect(() => {
     parsedNotes.forEach((item) => {
       if (item.id && !itemDetails[item.id]) {
@@ -45,7 +52,12 @@ const isUserAuthenticated = useSelector(isAuthenticated);
           });
       }
     });
-  }, [parsedNotes, dispatch, itemDetails,isUserAuthenticated]);
+  }, [parsedNotes, dispatch, itemDetails, isUserAuthenticated]);
+
+  const handleNavigate = (href: string) => {
+    setShowOutlet(true)
+    navigate(href);
+  };
 
   const loadMore = () => {
     setVisibleCount((prevCount) => prevCount + 2); // Increase the visible count by 2
@@ -60,21 +72,33 @@ const isUserAuthenticated = useSelector(isAuthenticated);
         const details = itemDetails[item.id] || item; // Fallback to original item if details aren't loaded
         return (
           <Box key={index} className="bg-gray-100 rounded-md p-2 mt-2">
-            <Typography variant="body2">Id: {details.id || "N/A"}</Typography>
-            <Typography variant="body2">Name: {details.name || "Loading..."}</Typography>
-            <Typography variant="body2">
-              Quantity: {details.quantity || "N/A"}
-            </Typography>
-         
-            {details.image && (
-              <Box className="mt-2">
-                <img
-                  src={`data:image/png;base64,${details.image}`}
-                  alt={`Slide ${index + 1}`}
-                  className="border border-xl h-40 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
+
+            <ListItem alignItems="flex-start"
+              onClick={() => details && details.id && details.name && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', details.name).replace(':id', details.id)}`)}
+
+            >
+              <img
+                src={`data:image/png;base64,${details.image}`}
+                alt="Item image"
+                className="w-[12em] h-[10em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125 p-2"
+              // onClick={() => handleOpenItem(item.id || '')}
+              />
+              <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                width: '100%',
+              }}>
+
+                <ListItemText
+                  primary={details.name}
+                  secondary={` Price: ₹ ${details?.price?.toFixed(2)}`}
+                />
+                <ListItemText
+                  secondary={` Quantity: ${details.quantity}`}
                 />
               </Box>
-            )}
+            </ListItem>
           </Box>
         );
       })}

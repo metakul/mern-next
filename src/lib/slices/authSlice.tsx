@@ -82,4 +82,4 @@ export const selectUserType = (state: { auth: { userType: string } }) => state.a
 export const authLoading = (state: { auth: { isLoading: boolean } }) => state.auth.isLoading;
 export const selectTrxId = (state: { auth: AuthState }) => state.auth.trxId;
 export const SelectConactVerified = (state: { auth: { isContactVerified: boolean }}) => state.auth.isContactVerified;
-export const SelectContact = (state: { auth: { SelectContact: string }}) => state.auth.SelectContact;
+export const SelectContact = (state: { auth: { phoneNumber: string }}) => state.auth.phoneNumber;

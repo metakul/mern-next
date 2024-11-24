@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 // import MarqueeCryptoNew from '@/components/MarqueCrypto';
 // import InstallPWA from '@/PWA/InstallPwa';
 // import { getColors } from '@/layout/Theme/themes';
@@ -11,6 +11,7 @@ import { fetchCartApi, fetchDropShipItemsApi } from '@/lib/slices/DropShip/DropS
 import { AppDispatch } from '@/lib/store';
 import { DropShipStatusInfo } from '@/Datatypes/enums';
 import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
+import Scroll from '@/components/Motion/scroll';
 
 const Tab1 = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -62,15 +63,28 @@ const Tab1 = () => {
           {/* Hover Effect */}
           <div className="absolute inset-0 z-20 hover:cursor-pointer"></div>
         </div>
-        <DropShipItems categoryType="winterwear" dropShipItems={dropShipItems} loading={loading}/>
-        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
-          Most Liked Shirt
-        </Typography>
-        <DropShipItems categoryType="shirt" dropShipItems={dropShipItems} loading={loading}/>
+
+        <Grid container>
+      <Grid sm={6} sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        }}>
+        <DropShipItems showScroll={true} categoryType="winterwear" dropShipItems={dropShipItems} loading={loading}/>
+
+      </Grid>
+      <Grid sm={6}>
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Hot Deals
         </Typography>
-        <DropShipItems categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading}/>
+        <DropShipItems  categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading}/>
+
+      </Grid>
+        </Grid>
+
+        {/* <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+          Most Liked Shirt
+        </Typography> */}
+        {/* <DropShipItems categoryType="shirt" dropShipItems={dropShipItems} loading={loading}/> */}
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Featured Items
         </Typography>

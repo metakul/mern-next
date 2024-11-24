@@ -15,6 +15,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
+  CartItem,
   // clearCart,
   selectCartItems,
   selectTotalQuantityAndPrice,
@@ -25,6 +26,7 @@ import { isAuthenticated } from '@/lib/slices/authSlice';
 import Subscribe from '@/components/Inputs/Subscribe';
 import { Pages } from '@/Datatypes/enums';
 import { useNavigate } from 'react-router-dom';
+import CartItems from '@/(routes)/profile/CartItem';
 
 
 export interface CartPageProps {
@@ -66,47 +68,18 @@ const CartPage: React.FC<CartPageProps> = ({ setShowOutlet }) => {
       {cartItems.length > 0 ? (
         <>
           <List>
-            {cartItems.map((item) => (
 
-              <React.Fragment key={item.id}>
-                <ListItem alignItems="flex-start"
-                  onClick={() => item && item.id && item.name && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.name).replace(':id', item.id)}`)}
-
-                >
-                  <img
-                    src={`data:image/png;base64,${item.image}`}
-                    alt="Item image"
-                    className="w-[12em] h-[10em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125 p-2"
-                  // onClick={() => handleOpenItem(item.id || '')}
-                  />
-                  <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                  }}>
-
-                    <ListItemText
-                      primary={item.name}
-                      secondary={` Price: ₹ ${item?.price?.toFixed(2)}`}
-                    />
-                    <ListItemText
-                      secondary={` Quantity: ${item.quantity}`}
-                    />
-                  </Box>
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="remove"
-                      onClick={() => handleRemoveItem(item.id)}
-                    >
-                      <DeleteIcon color="error" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
+                    {cartItems.length > 0 && (
+                          <Box className="mt-4">
+                            {cartItems.length > 0 && (
+                              <Box className="mt-4">
+                                <CartItems setShowOutlet={setShowOutlet} parsedNotes={cartItems as CartItem[]} />
+                              </Box>
+                              
+                            )}
+                          </Box>
+                        )}
                 <Divider />
-              </React.Fragment>
-            ))}
           </List>
           <List>
             <ListItem>Total Items: {totalQuantity}</ListItem>

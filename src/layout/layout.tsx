@@ -35,12 +35,14 @@ import { useSelector } from "react-redux";
 import { selectTotalQuantityAndPrice } from "@/lib/slices/DropShip/AddToCartSlice";
 import Footer from "./Footer/Footer";
 import ProfilePage from "@/(routes)/profile/page";
+import { useShowOutlet } from "@/context/showOutletContext";
 
 export default function DashboardLayout() {
   const [theme, colorMode] = useMode();
   // const isNonMobile = useMediaQuery("(min-width: 766px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [showOutlet, setShowOutlet] = useState<boolean>(false);
+  const { showOutlet, setShowOutlet } = useShowOutlet();
+
   const APP_BAR = "64px";
   const { totalQuantity } = useSelector(selectTotalQuantityAndPrice);
 

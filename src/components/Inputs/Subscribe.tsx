@@ -102,7 +102,6 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
   const handleContactVerified = (contact: string) => {
     setContactVerified(true);
     setVerifiedContact(contact);
-    toast.success(`Contact ${contact} verified successfully!`);
   };
 
   const proceedToPayment = () => {
@@ -119,10 +118,6 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
       return;
     }
 
-    if(!isUserAuthenticated){
-      dispatch(registerUserDispatcher({email,name,phoneNumber:verifiedContact,address,accountStatus:accountStatus.Pending,category:UserCategory.Verifier}))
-    }
-   
 
     if (isUserVerifying) {
       toast.info('Please wait, user verification in progress...');
@@ -185,42 +180,18 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
 
   return (
     <Box className="relative flex flex-col gap-4 w-full p-4">
-      {!contactVerified &&
+      {!isUserAuthenticated &&
         <>
           <Typography variant="h6">Verify Contact Number</Typography>
           <PasswordlessLoginForm onVerified={handleContactVerified} />
         </>
       }
-      {contactVerified && (
+      {contactVerified && isUserAuthenticated && (
         <>
           <Typography variant="h6">Your Address For Delivery</Typography>
 
           <Box className="relative flex flex-col gap-2">
            
-          {!isUserAuthenticated &&
-          <>
-            <TextField
-              label="Name"
-              variant="outlined"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              fullWidth
-              error={!!error && !formData.name}
-              helperText={!!error && !formData.name ? 'Name is required.' : ''}
-              />
-            <TextField
-              label="Email"
-              variant="outlined"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              fullWidth
-              error={!!error && !formData.email}
-              helperText={!!error && !formData.email ? 'Email is required.' : ''}
-              />
-            </>
-          }
             <Box
               className="relative flex items-center w-full h-12 rounded-lg border border-black focus-within:shadow-lg overflow-hidden"
               onClick={toggleMapInfo}

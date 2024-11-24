@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Stack, Skeleton, Box, Grid } from '@mui/material';
+import { Button, Stack, Skeleton, Box, Grid, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/lib/store';
 import { IDropShipItem } from '@/Datatypes/interfaces/interface';
@@ -12,14 +12,18 @@ import DropShipItemDetails from '@/components/DropShipItemDetails';
 import AddToCart from '@/components/AddToCart';
 import CustomSwiper from '@/components/Swiper';
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
+import Scroll from '@/components/Motion/scroll';
+import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
 
 interface DropShipItemsProps {
   categoryType?: string;
   dropShipItems: IDropShipItem[]
-  loading:boolean
+  loading: boolean
+  showScroll?:boolean
 }
 
-const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType,dropShipItems,loading }) => {
+const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipItems, loading,showScroll }) => {
   const dispatch = useDispatch();
   const [page, setItemPage] = useState(1);
   const [showItemPerPage] = useState(40);
@@ -70,71 +74,75 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType,dropShipItem
     : dropShipItems;
 
   return (
-    <div className="overflow-hidden mx-auto">
-      <Grid container  sx={{ mb: 0 }}>
-        {filteredItems.map((item: IDropShipItem, index: number) => (
-          <Grid
+    <Container className="overflow-hidden mx-auto">
+        {showScroll ? (
+          
+          <Scroll parsedNotes={filteredItems as unknown as CartItem[]} />
+        ):(
+          <>
+          <Grid container gap={0} sx={{ mb: 0 }}>
+
+          {filteredItems.map((item: IDropShipItem, index: number) => (
+            <Grid
             key={index}
-            item
-            xs={6}
-            md={4}
+            xs={12}
+            md={6}
+            lg={4}
+            className='p-4'
           >
-            <section className="relative py-4 ">
-              <div className="flex flex-col rounded-2.5xltransition-shadow shadow-lg justify-center">
-                <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 0 }}
-                    onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
-                  >
-                    <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
-                  </Box>
-                  <Grid container className="mt-8">
-                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 0 }}>
-                    
-                  </Box>
-                    <Grid item xs={8}>
-                      <h2
-                        className="mb-4 font-display"
-                        style={{ overflow: 'hidden' }}
-                        onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
-                      >
-                        {item.title} <br />
-                      </h2>
-                    </Grid>
-                    <Grid item xs={4} className="mx-auto flex justify-center pb-0">
-                    <ShareButton link={`${itemLink}/SINGLE_DROPSHIP_ITEM/${item.title}/${item.id}`} />
-                    </Grid>
-                    <Grid item xs={8} className="mx-auto">
-                      <h2
-                        className="mb-2 font-display"
-                        style={{ overflow: 'hidden' }}
-                        onClick={() => handleOpenItem(item.id || '')}
-                      >
-                        Price: ₹{item.price}
-                      </h2>
-                    </Grid>
-                    <Grid item xs={4} className="mx-auto flex justify-center">
-                      {item.id && item.title && (
-                        <AddToCart
-                          _id={item.id}
-                          name={item.title}
-                          image={item.image}
-                        />
-                      )}
-                    </Grid>
-                    <DropShipItemDetails
-                      isDropShipItemInfoOpen={openedItemId === item.id}
-                      price={item.price}
-                      _dropShipItemId={item.id || ''}
-                      name={item.title}
-                      image={item.image}
-                    />
-                  </Grid>
-                </div>
-              </div>
-            </section>
+            <Grid item xs={12}
+              className="flex"
+              onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
+            >
+              <motion.div animate={{ x: [null, 100, 0] }} >
+
+              <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
+              </motion.div>
+            </Grid>
+            <Grid container className="mt-2 px-2 sm:px-14 md:px-4 lg:px-6">
+
+              <Grid item xs={8}>
+                <h2
+                  className="mb-2 font-display"
+                  style={{ overflow: 'hidden' }}
+                  onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
+                >
+                  {item.title} <br />
+                </h2>
+                <h2
+                  className=" font-display"
+                  style={{ overflow: 'hidden' }}
+                  onClick={() => handleOpenItem(item.id || '')}
+                >
+                  Price: ₹{item.price}
+                </h2>
+              </Grid>
+             
+              <Grid item xs={4} className="mx-auto flex justify-center mb-2">
+
+                {item.id && item.title && (
+                  <AddToCart
+                    _id={item.id}
+                    name={item.title}
+                    image={item.image}
+                  />
+                )}
+              </Grid>
+              <DropShipItemDetails
+                isDropShipItemInfoOpen={openedItemId === item.id}
+                price={item.price}
+                _dropShipItemId={item.id || ''}
+                name={item.title}
+                image={item.image}
+              />
+            </Grid>
           </Grid>
         ))}
       </Grid>
+            </>
+
+      )}
+
 
       {loading && (
         <Grid container spacing={2} sx={{ mb: 4 }}>
@@ -154,13 +162,15 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType,dropShipItem
       <div className="mx-auto flex flex-row justify-center">
         <Button
           variant="contained"
-          sx={{ backgroundColor: getColors().blueAccent[800] }}
+          sx={{ backgroundColor: getColors().blueAccent[900],
+            color:getColors().blueAccent[100],
+           }}
           onClick={handleLoadItems}
         >
           Load More
         </Button>
       </div>
-    </div>
+    </Container>
   );
 };
 

@@ -49,10 +49,7 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet, APP_BAR,showOutlet }) =>
   }
 
   return (
-    <AppBar sx={{
-      backgroundColor:"transparent",
-      height: APP_BAR,
-    }} >
+    <AppBar  elevation={0} color="transparent" >
       <Toolbar>
         
         <Box

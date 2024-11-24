@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Box, Button, Skeleton, Typography } from '@mui/material';
+import { Box, Button, Container, Skeleton, Typography } from '@mui/material';
 
 import { DropShipStatusInfo, Pages, UserCategory } from '@/Datatypes/enums';
 
@@ -82,7 +82,7 @@ const SingleDropShipItemDetails = () => {
   }
 
   return (
-    <div className='px-4 mt-4 ml-2 mr-2'>
+    <Container className='px-4 mt-4 ml-2 mr-2'>
 
       {truncatedDescription ? (
         <>
@@ -196,7 +196,7 @@ const SingleDropShipItemDetails = () => {
         </>
       )}
 
-    </div>
+    </Container>
   );
 };
 

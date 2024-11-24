@@ -42,17 +42,15 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({ images, autoplayDelay = 250
         navigation={false}
         modules={[Autoplay, Pagination]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className="mySwiper"
+        className="mySwiper border border-jacarta-900  rounded-xl"
       >
 
         {images && images.map((src, index) => (
-          <Box sx={{
-            border:"40px solid grey"
-          }}>
+          <Box>
 
           <SwiperSlide key={index} 
           >
-            <img src={src} alt={`Slide ${index + 1}`} className="border rounded-xl border-xl object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"/>
+            <img src={src} alt={`Slide ${index + 1}`} className=" object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"/>
           </SwiperSlide>
             </Box>
         ))}

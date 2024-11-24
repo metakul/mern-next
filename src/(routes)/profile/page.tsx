@@ -22,8 +22,12 @@ import PasswordlessLoginForm from '@/components/Forms/PasswordLoginForm';
 import { selectTrackingInfo } from '@/lib/slices/DropShip/Payment/paymentSlice';
 import CartItems from './CartItem';
 import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
+import { useShowOutlet } from '@/context/showOutletContext';
 
 export default function ProfilePage() {
+
+  const {setShowOutlet } = useShowOutlet();
+
   const dispatch = useDispatch<AppDispatch>();
   const { paymentInfo, loading, error } = useSelector(selectPaymentInfo);
   const trackingInfo = useSelector(selectTrackingInfo);
@@ -119,7 +123,7 @@ export default function ProfilePage() {
                           <Box className="mt-4">
                             {parsedNotes.length > 0 && (
                               <Box className="mt-4">
-                                <CartItems parsedNotes={parsedNotes as CartItem[]} />
+                                <CartItems setShowOutlet={setShowOutlet} parsedNotes={parsedNotes as CartItem[]} />
                               </Box>
                             )}
                           </Box>

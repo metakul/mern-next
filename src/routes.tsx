@@ -6,7 +6,7 @@ import { Pages } from "./Datatypes/enums";
 import DashboardLayout from "./layout/layout";
 import HomePage from "./(routes)/Home/HomePage";
 import ProtectedPage from "./(routes)/admin/home/page";
-import SingleBlogDetails from "./(routes)/blogdetails/[blogId]/page";
+import SingleBlogDetails from "./(routes)/itemDetails/[itemId]/page";
 import AddBlogPage from "./(routes)/addBlog/page";
 import ChatGpt from "./Projects/ChatGpt/ChatGpt";
 import TermsAndConditions from "./(routes)/termAndCondition/page";

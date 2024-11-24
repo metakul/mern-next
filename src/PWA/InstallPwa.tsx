@@ -72,12 +72,13 @@ const InstallPWA = () => {
   }
   return (
     <>
-       
-
-          <Box component="div" onClick={onClick} className={`w-full sm:w-auto  rounded-lg inline-flex items-center justify-center px-2 py-2.5 `} sx={{
-            background: getColors().grey[800]
+          <Box component="div" onClick={onClick} className={`w-16 sm:w-auto  rounded-lg inline-flex items-center justify-center px-2 py-2.5 `} sx={{
+            background: getColors().grey[900]
           }}>
-            <InstallMobileIcon className=" w-7 h-7" />
+            <InstallMobileIcon className=" w-7 h-7"  sx={{
+              color: getColors().grey[100]
+            }}
+            />
           
           </Box>
     </>
