@@ -34,6 +34,9 @@ export const fetchPaymentIds = createAsyncThunk(
             slug: `/${paymentId.trackingId}`,
           });
 
+          console.log(trackingInfo);
+          
+
         // Combine trackingInfo.data with trackingId
           const trackingDataWithId = {
             ...trackingInfo.trackingInfo.data,

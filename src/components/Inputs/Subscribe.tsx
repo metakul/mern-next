@@ -3,16 +3,19 @@ import { Box, Button, Typography, TextField } from '@mui/material';
 import ChooseLocation from '../Location/ChooseLocation';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { accountStatus, Pages, UserCategory } from '@/Datatypes/enums';
-import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
-import PasswordlessLoginForm from '../Forms/PasswordLoginForm';
+import { Pages} from '@/Datatypes/enums';
+import {  selectCartItems, selectTotalQuantityAndPrice } from '@/lib/slices/DropShip/AddToCartSlice';
+// import PasswordlessLoginForm from '../Forms/PasswordLoginForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPaymentId } from '@/lib/slices/DropShip/Payment/paymentSliceApi';
 import { AppDispatch } from '@/lib/store';
 import { DeliveryLocation } from '@/Datatypes/interfaces/interface';
 import { authLoading, isAuthenticated, SelectConactVerified, SelectContact, selectToken } from '@/lib/slices/authSlice';
 import {jwtDecode} from "jwt-decode";
-import { registerUserDispatcher } from '@/lib/slices/authApiSlice';
+// import { registerUserDispatcher } from '@/lib/slices/authApiSlice';
+import { useShowOutlet } from '@/context/showOutletContext';
+import VerifyOtpForm from '../Forms/Stepper/VerifyOtpForm';
+import PasswordlessLoginForm from '../Forms/PasswordLoginForm';
 
 interface CustomJwtPayload {
   phoneNumber: string;
@@ -29,14 +32,14 @@ interface FormData {
 }
 
 interface SubscribeProps {
-  price: number;
-  setShowOutlet: (showOutlet: boolean) => void;
-  cartItems: CartItem[];
 }
 
-const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }) => {
+const Subscribe: React.FC<SubscribeProps> = () => { // todo dont take totalPrice From here
   const navigate = useNavigate();
+  const {setShowOutlet} =useShowOutlet()
+  const cartItems=useSelector(selectCartItems)
   const dispatch = useDispatch<AppDispatch>();
+  const {totalPrice:price}=useSelector(selectTotalQuantityAndPrice)
   const [formData, setFormData] = useState<FormData>({ address: '', email: '',name:'' });
   const [openMap, setOpenMap] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -87,22 +90,22 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   const toggleMapInfo = () => {
     setOpenMap(!openMap);
   };
 
-  const handleContactVerified = (contact: string) => {
-    setContactVerified(true);
-    setVerifiedContact(contact);
-  };
+  // const handleContactVerified = (contact: string) => {
+  //   setContactVerified(true);
+  //   setVerifiedContact(contact);
+  // };
 
   const proceedToPayment = () => {
     const { address, email,name } = formData;
@@ -178,12 +181,16 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
     razorpay.open();
   };
 
+  const handleContactVerified = (contact: string) => {
+    toast.success('Contact verified successfully!');
+  }
   return (
     <Box className="relative flex flex-col gap-4 w-full p-4">
       {!isUserAuthenticated &&
         <>
           <Typography variant="h6">Verify Contact Number</Typography>
           <PasswordlessLoginForm onVerified={handleContactVerified} />
+          {/* <VerifyOtpForm/> */}
         </>
       }
       {contactVerified && isUserAuthenticated && (
@@ -220,6 +227,7 @@ const Subscribe: React.FC<SubscribeProps> = ({ price, setShowOutlet, cartItems }
           >
             Proceed to Payment
           </Button>
+          
         </>
       )}
     </Box>

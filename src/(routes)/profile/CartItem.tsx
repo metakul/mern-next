@@ -7,6 +7,7 @@ import { isAuthenticated } from "@/lib/slices/authSlice";
 import { GridDeleteForeverIcon, GridDeleteIcon } from "@mui/x-data-grid";
 import { Pages } from "@/Datatypes/enums";
 import { useNavigate } from "react-router-dom";
+import { useShowOutlet } from "@/context/showOutletContext";
 
 interface CartItem {
   id: string;
@@ -18,11 +19,10 @@ interface CartItem {
 
 interface CartItemsProps {
   parsedNotes: CartItem[];
-  setShowOutlet: (showOutlet: boolean) => void;
-
 }
 
-const CartItems: React.FC<CartItemsProps> = ({ parsedNotes, setShowOutlet }) => {
+const CartItems: React.FC<CartItemsProps> = ({ parsedNotes }) => {
+  const {setShowOutlet} =useShowOutlet()
   const dispatch = useDispatch<AppDispatch>();
   const [itemDetails, setItemDetails] = useState<Record<string, CartItem>>({});
   const [visibleCount, setVisibleCount] = useState(2); // Number of items to display initially
@@ -71,7 +71,7 @@ const CartItems: React.FC<CartItemsProps> = ({ parsedNotes, setShowOutlet }) => 
       {parsedNotes.slice(0, visibleCount).map((item, index) => {
         const details = itemDetails[item.id] || item; // Fallback to original item if details aren't loaded
         return (
-          <Box key={index} className="bg-gray-100 rounded-md p-2 mt-2">
+          <Box key={index} className="bg-gray-100 rounded-md mt-2">
 
             <ListItem alignItems="flex-start"
               onClick={() => details && details.id && details.name && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', details.name).replace(':id', details.id)}`)}
@@ -80,7 +80,7 @@ const CartItems: React.FC<CartItemsProps> = ({ parsedNotes, setShowOutlet }) => 
               <img
                 src={`data:image/png;base64,${details.image}`}
                 alt="Item image"
-                className="w-[12em] h-[10em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125 p-2"
+                className="w-[12em] h-[10em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125 p-4"
               // onClick={() => handleOpenItem(item.id || '')}
               />
               <Box sx={{

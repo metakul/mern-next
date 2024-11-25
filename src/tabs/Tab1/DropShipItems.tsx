@@ -21,9 +21,10 @@ interface DropShipItemsProps {
   dropShipItems: IDropShipItem[]
   loading: boolean
   showScroll?:boolean
+  grid?:number
 }
 
-const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipItems, loading,showScroll }) => {
+const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipItems, loading,showScroll,grid }) => {
   const dispatch = useDispatch();
   const [page, setItemPage] = useState(1);
   const [showItemPerPage] = useState(40);
@@ -85,9 +86,9 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
           {filteredItems.map((item: IDropShipItem, index: number) => (
             <Grid
             key={index}
-            xs={12}
-            md={6}
-            lg={4}
+            xs={grid==2 ? 12 : 6}
+            md={grid==2 ? 12 : 6}
+            lg={grid==2 ? 6 : 4}
             className='p-4'
           >
             <Grid item xs={12}
@@ -99,7 +100,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
               <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
               </motion.div>
             </Grid>
-            <Grid container className="mt-2 px-2 sm:px-14 md:px-4 lg:px-6">
+            <Grid container className="mt-2 px-2 sm:px-4 md:px-4 lg:px-6">
 
               <Grid item xs={8}>
                 <h2

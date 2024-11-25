@@ -76,7 +76,7 @@ const Tab1 = () => {
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Hot Deals
         </Typography>
-        <DropShipItems  categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading}/>
+        <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading}/>
 
       </Grid>
         </Grid>

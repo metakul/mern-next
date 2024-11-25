@@ -18,15 +18,16 @@ import { fetchPaymentIds } from '@/lib/slices/DropShip/Payment/paymentSliceApi';
 import SearchBar from '@/components/SearchBar';
 import { isAuthenticated } from '@/lib/slices/authSlice';
 import LogoutButton from '@/components/Elements/Buttons/LogoutButton';
-import PasswordlessLoginForm from '@/components/Forms/PasswordLoginForm';
+// import PasswordlessLoginForm from '@/components/Forms/PasswordLoginForm';
 import { selectTrackingInfo } from '@/lib/slices/DropShip/Payment/paymentSlice';
 import CartItems from './CartItem';
 import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
-import { useShowOutlet } from '@/context/showOutletContext';
+// import { useShowOutlet } from '@/context/showOutletContext';
+// import UserAuthStepper from '@/components/Forms/Stepper';
+// import VerifyOtpForm from '@/components/Forms/Stepper/VerifyOtpForm';
+import PasswordlessLoginForm from '@/components/Forms/PasswordLoginForm';
 
 export default function ProfilePage() {
-
-  const {setShowOutlet } = useShowOutlet();
 
   const dispatch = useDispatch<AppDispatch>();
   const { paymentInfo, loading, error } = useSelector(selectPaymentInfo);
@@ -72,13 +73,15 @@ export default function ProfilePage() {
                 Login Now To See what your friends are wearing
               </span>
               
-                <PasswordlessLoginForm />
+                {/* <PasswordlessLoginForm /> */}
+
+                <PasswordlessLoginForm/>
             </Box>
           )}
 
           {loading && <CircularProgress className="mx-auto mt-4" />}
 
-          {!loading && filteredPayments && (
+          {!loading && filteredPayments && isUserAuthenticated &&(
             <Grid container spacing={4} className="mt-0">
               {filteredPayments.map((payment) => {
                 let parsedNotes: { id?: string; name?: string; quantity?: number; price?: any; image: any }[] = [];
@@ -123,7 +126,7 @@ export default function ProfilePage() {
                           <Box className="mt-4">
                             {parsedNotes.length > 0 && (
                               <Box className="mt-4">
-                                <CartItems setShowOutlet={setShowOutlet} parsedNotes={parsedNotes as CartItem[]} />
+                                <CartItems  parsedNotes={parsedNotes as CartItem[]} />
                               </Box>
                             )}
                           </Box>
@@ -151,7 +154,7 @@ export default function ProfilePage() {
                                 Delivery Tag: {paymentTrackingInfo.tag}
                               </Typography>
                               <Typography variant="body2" className="text-gray-600">
-                                Destination: {paymentTrackingInfo.destination_raw_location}
+                                Destination: {paymentTrackingInfo.destination_city}, {paymentTrackingInfo.destination_state},{paymentTrackingInfo.destination_country_iso3},{paymentTrackingInfo.destination_postal_code}
                               </Typography>
                               <Typography variant="body2" className="text-gray-600">
                                 Delivery Type: {paymentTrackingInfo.delivery_type}

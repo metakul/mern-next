@@ -6,6 +6,8 @@ export interface TrackingInfo {
   trackingId:string
   active: boolean;
   courier_tracking_link: string | null;
+  destination_postal_code:string,
+  destination_state:string,
   destination_city: string;
   destination_country_iso3: string;
   origin_city: string;
