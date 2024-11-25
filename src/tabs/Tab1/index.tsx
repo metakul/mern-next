@@ -72,13 +72,16 @@ const Tab1 = () => {
         <DropShipItems showScroll={true} categoryType="winterwear" dropShipItems={dropShipItems} loading={loading}/>
 
       </Grid>
-      <Grid sm={6}>
-        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
-          Hot Deals
-        </Typography>
-        <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading}/>
+      <Grid 
+  sm={6} 
+  sx={{ display: { xs: 'none', sm: 'block' } }}
+>
+  <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+    Hot Deals
+  </Typography>
+  <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading}/>
+</Grid>
 
-      </Grid>
         </Grid>
 
         {/* <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
