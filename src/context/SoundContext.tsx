@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useRef, useEffect } from "r
 interface SoundContextProps {
   isPlaying: boolean;
   togglePlay: () => void;
+  stop: () => void;
 }
 
 const SoundContext = createContext<SoundContextProps | undefined>(undefined);
@@ -25,31 +26,30 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setIsPlaying(!isPlaying);
   };
 
+  const stop = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+  };
+
   useEffect(() => {
-    // Automatically play sound on load
     if (!audioRef.current) {
       audioRef.current = new Audio("/music/homeMusic.mp3");
     }
-    const playAudio = async () => {
-      try {
-        await audioRef.current?.play();
-        setIsPlaying(true);
-      } catch (err) {
-        console.error("Audio playback failed:", err);
-      }
-    };
-
-    playAudio();
+    audioRef.current.play().catch((err) => {
+      console.error("Failed to play audio:", err);
+    });
 
     return () => {
-      // Cleanup audio on unmount
       audioRef.current?.pause();
       audioRef.current = null;
     };
   }, []);
 
   return (
-    <SoundContext.Provider value={{ isPlaying, togglePlay }}>
+    <SoundContext.Provider value={{ isPlaying, togglePlay, stop }}>
       {children}
     </SoundContext.Provider>
   );
