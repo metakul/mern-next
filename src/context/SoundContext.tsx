@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useRef, useEffect } from "react";
+import React, { createContext, useContext, useState, useRef } from "react";
 
 interface SoundContextProps {
   isPlaying: boolean;
@@ -24,29 +24,6 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     setIsPlaying(!isPlaying);
   };
-
-  useEffect(() => {
-    // Automatically play sound on load
-    if (!audioRef.current) {
-      audioRef.current = new Audio("/music/homeMusic.mp3");
-    }
-    const playAudio = async () => {
-      try {
-        await audioRef.current?.play();
-        setIsPlaying(true);
-      } catch (err) {
-        console.error("Audio playback failed:", err);
-      }
-    };
-
-    playAudio();
-
-    return () => {
-      // Cleanup audio on unmount
-      audioRef.current?.pause();
-      audioRef.current = null;
-    };
-  }, []);
 
   return (
     <SoundContext.Provider value={{ isPlaying, togglePlay }}>
