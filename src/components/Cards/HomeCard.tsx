@@ -26,11 +26,11 @@ function HomeCard({ dropShipItems }: HomeCardProps) {
   return (
     <Box sx={{ flexGrow: 1, m: 0, p: 0 }}>
       <div className="flex flex-wrap">
-        <div className="w-full md:w-[50vw] w-[50vw] h-[100vh]">
+        <div className="w-full md:w-[50vw] w-[50vw] h-[75vh] md:h-[100vh]">
           <CustomSwiper
             pagination={false}
             direction="vertical"
-            height={"h-[100vh]"}
+            height={"h-[80vh] md:h-[100vh]"}
             onClick={(index) => handleImageClick(index, index === 0 ? 0 : 2)}
             images={[
               `data:image/png;base64,${dropShipItems[0].image}`,
@@ -38,17 +38,19 @@ function HomeCard({ dropShipItems }: HomeCardProps) {
             ]}
           />
         </div>
-        <div className="w-1/2 h-[100vh]">
+        <div className=" h-[50vh] md:h-[100vh]">
           <CustomSwiper
             pagination={false}
             direction="horizontal"
-            height={"h-[50vh] w-[50vw]"}
+            height={"h-[50vh] w-[100vw] md:w-[50vw]"}
             onClick={(index) => handleImageClick(index, index === 0 ? 4 : 8)}
             images={[
               `data:image/png;base64,${dropShipItems[4].image}`,
               `data:image/png;base64,${dropShipItems[8].image}`,
             ]}
           />
+          <div className='hidden md:block'>
+
           <CustomSwiper
             pagination={false}
             direction="vertical"
@@ -59,6 +61,8 @@ function HomeCard({ dropShipItems }: HomeCardProps) {
               `data:image/png;base64,${dropShipItems[1].image}`,
             ]}
           />
+          </div>
+
         </div>
       </div>
     </Box>

@@ -1,13 +1,14 @@
 .myCard {
-  margin: 100px auto;
-  max-width: 350px;
+  margin: 10px auto;
   padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* For larger screens (desktop) */
 @media screen and (max-width: 768px) {
   .myCard {
-      max-width: 450px;
   }
 }
   
@@ -25,14 +26,7 @@
   }
   
   .card-container {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding-top: 20px;
-    margin-bottom: -120px;
-  max-width: 350px;
+
 
   }
   
