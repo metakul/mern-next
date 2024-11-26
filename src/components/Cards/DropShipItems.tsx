@@ -56,6 +56,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
   const handleNavigate = (href: string) => {
     navigate(href);
   };
+  
   const itemLink = currentDomain ? `${currentDomain}` : '';
 
   useEffect(() => {
@@ -86,10 +87,10 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
             {filteredItems.map((item: IDropShipItem, index: number) => (
               <Grid
                 key={index}
-                xs={grid =6}
+                xs={grid = 6}
                 sm={grid = 6}
-                md={grid =4}
-                lg={grid =4}
+                md={grid = 4}
+                lg={grid = 4}
                 className='p-4 overflow-hidden'
               >
                 <Grid item xs={12}
@@ -97,7 +98,11 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
                   onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
                 >
 
-                    <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
+                  <img
+                    src={`data:image/png;base64,${item.image}`}
+                    alt={`Slide ${index + 1}`}
+                    className="object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
+                  />
                 </Grid>
                 <Grid container className="mt-2 px-2 sm:px-4 md:px-4 lg:px-6">
 
@@ -162,19 +167,19 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
           ))}
         </Grid>
       )}
-      {!loading && 
-      <div className="mx-auto flex flex-row justify-center">
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: getColors().blueAccent[900],
-            color: getColors().blueAccent[100],
-          }}
-          onClick={handleLoadItems}
-        >
-          Load More
-        </Button>
-      </div>
+      {!loading &&
+        <div className="mx-auto flex flex-row justify-center">
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: getColors().blueAccent[900],
+              color: getColors().blueAccent[100],
+            }}
+            onClick={handleLoadItems}
+          >
+            Load More
+          </Button>
+        </div>
       }
     </Container>
   );

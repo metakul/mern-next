@@ -18,9 +18,10 @@ interface CustomSwiperProps {
   maxDelay?: number; // Maximum delay in ms
   pagination?:boolean,
   height?:string,
+  onClick?: (index: number) => void;
 }
 
-const CustomSwiper: React.FC<CustomSwiperProps> = ({direction, images, minDelay = 3000, maxDelay = 5000,pagination=true,height="h-[360px]" }) => {
+const CustomSwiper: React.FC<CustomSwiperProps> = ({direction, images, minDelay = 3000, maxDelay = 5000,pagination=true,height="h-[360px]", onClick }) => {
   const progressCircle = useRef<SVGSVGElement | null>(null);
   const progressContent = useRef<HTMLSpanElement | null>(null);
 
@@ -53,9 +54,10 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({direction, images, minDelay 
       >
         {images &&
           images.map((src, index) => (
-            <Box key={index}>
+            <Box key={index} >
               <SwiperSlide>
                 <img
+                onClick={() => onClick && onClick(index)}
                   src={src}
                   alt={`Slide ${index + 1}`}
                   className="object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"

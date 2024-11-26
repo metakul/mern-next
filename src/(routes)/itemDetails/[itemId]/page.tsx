@@ -82,7 +82,7 @@ const SingleDropShipItemDetails = () => {
   }
 
   return (
-    <Container className='px-4 mt-4 ml-2 mr-2'>
+    <Container className='px-4 mt-24 ml-2 mr-2'>
 
       {truncatedDescription ? (
         <>
@@ -144,7 +144,7 @@ const SingleDropShipItemDetails = () => {
               
                 <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}
                   >
-                    <CustomSwiper images={[`data:image/png;base64,${image}`, `data:image/png;base64,${image}`,`data:image/png;base64,${image}`]} />
+                    <CustomSwiper height='h-[800px] w-[400px]' images={[`data:image/png;base64,${image}`, `data:image/png;base64,${image}`,`data:image/png;base64,${image}`]} />
                   </Box>
                 <Box sx={{
                   display: "flex",

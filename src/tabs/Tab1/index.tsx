@@ -69,13 +69,7 @@ const Tab1 = () => {
         {dropShipItems.length>0 && <HomeCard  dropShipItems={dropShipItems}/> }
 
         <Grid container>
-          <Grid sm={12} sx={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}>
-            <DropShipItems showScroll={true} categoryType="winterwear" dropShipItems={dropShipItems} loading={loading} />
-
-          </Grid>
+      
           <Grid
             sm={12}
             sx={{ display: { xs: 'none', sm: 'block' } }}
@@ -85,7 +79,13 @@ const Tab1 = () => {
             </Typography>
             <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading} />
           </Grid>
+          <Grid sm={12} sx={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}>
+            <DropShipItems showScroll={true} categoryType="winterwear" dropShipItems={dropShipItems} loading={loading} />
 
+          </Grid>
         </Grid>
 
         {/* <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
