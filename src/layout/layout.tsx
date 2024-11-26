@@ -136,7 +136,6 @@ export default function DashboardLayout() {
           /> */}
           <Box
             sx={{
-              mt: APP_BAR,
             }}
           >
             <MobileTabNavigation

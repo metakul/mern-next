@@ -5,22 +5,13 @@ import FormLabel from '@mui/material/FormLabel';
 import Grid from '@mui/material/Grid2';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { styled } from '@mui/system';
+import { Address } from '../CheckOut/CheckOut';
 
 const FormGrid = styled(Grid)(() => ({
   display: 'flex',
   flexDirection: 'column',
 }));
 
-interface Address {
-  firstName: string;
-  lastName: string;
-  email: string;
-  address2?: string;
-  city: string;
-  state: string;
-  zip: string;
-  country: string;
-}
 
 interface AddressFormProps {
   address: Address;
@@ -38,46 +29,30 @@ export default function AddressForm({ address, setAddress }: AddressFormProps) {
   return (
     <Grid container spacing={3}>
       <FormGrid size={{ xs: 12, md: 6 }}>
-        <FormLabel htmlFor="first-name" required>
+        <FormLabel htmlFor="name" required>
           First name
         </FormLabel>
         <OutlinedInput
-          id="first-name"
-          name="firstName"
+          id="name"
+          name="name"
           type="text"
           placeholder="John"
-          autoComplete="first name"
+          autoComplete="name"
           required
           size="small"
-          value={address.firstName}
-          onChange={handleChange}
-        />
-      </FormGrid>
-      <FormGrid size={{ xs: 12, md: 6 }}>
-        <FormLabel htmlFor="last-name" required>
-          Last name
-        </FormLabel>
-        <OutlinedInput
-          id="last-name"
-          name="lastName"
-          type="text"
-          placeholder="Snow"
-          autoComplete="last name"
-          required
-          size="small"
-          value={address.lastName}
+          value={address.name}
           onChange={handleChange}
         />
       </FormGrid>
       <FormGrid size={{ xs: 12 }}>
         <FormLabel htmlFor="email" required>
-          Address line 1
+        Email
         </FormLabel>
         <OutlinedInput
           id="email"
           name="email"
           type="text"
-          placeholder="Street name and number"
+          placeholder="youremail@xyz.com"
           autoComplete="shipping address-line1"
           required
           size="small"
@@ -115,22 +90,7 @@ export default function AddressForm({ address, setAddress }: AddressFormProps) {
           onChange={handleChange}
         />
       </FormGrid>
-      <FormGrid size={{ xs: 6 }}>
-        <FormLabel htmlFor="state" required>
-          State
-        </FormLabel>
-        <OutlinedInput
-          id="state"
-          name="state"
-          type="text"
-          placeholder="NY"
-          autoComplete="State"
-          required
-          size="small"
-          value={address.state}
-          onChange={handleChange}
-        />
-      </FormGrid>
+    
       <FormGrid size={{ xs: 6 }}>
         <FormLabel htmlFor="zip" required>
           Zip / Postal code
@@ -147,22 +107,7 @@ export default function AddressForm({ address, setAddress }: AddressFormProps) {
           onChange={handleChange}
         />
       </FormGrid>
-      <FormGrid size={{ xs: 6 }}>
-        <FormLabel htmlFor="country" required>
-          Country
-        </FormLabel>
-        <OutlinedInput
-          id="country"
-          name="country"
-          type="text"
-          placeholder="United States"
-          autoComplete="shipping country"
-          required
-          size="small"
-          value={address.country}
-          onChange={handleChange}
-        />
-      </FormGrid>
+   
       <FormGrid size={{ xs: 12 }}>
       <FormControlLabel
           control={

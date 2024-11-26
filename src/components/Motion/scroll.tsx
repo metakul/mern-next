@@ -69,9 +69,6 @@ function Card({ item, hueA, hueB }: Props) {
                     />
                 </motion.div>
             </motion.div>
-            <h4>{item.name || "Unnamed Item"}</h4>
-            <p>Price: ₹{item.price?.toFixed(2) || "N/A"}</p>
-            <p>Quantity: {item.quantity}</p>
         </>
     );
 }
@@ -79,9 +76,10 @@ function Card({ item, hueA, hueB }: Props) {
 
 interface ScrollProps {
     parsedNotes: CartItem[];
+    loading:boolean
 }
 
-export default function Scroll({ parsedNotes }: ScrollProps) {
+export default function Scroll({ parsedNotes,loading }: ScrollProps) {
     const hues = [340, 20, 60, 80, 100, 205, 260, 290]; // Example hues for cards
 
     return (

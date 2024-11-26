@@ -186,7 +186,7 @@ const Subscribe: React.FC<SubscribeProps> = () => { // todo dont take totalPrice
   }
   return (
     <Box className="relative flex flex-col gap-4 w-full p-4">
-      {!isUserAuthenticated &&
+      {!contactVerified &&
         <>
           <Typography variant="h6">Verify Contact Number</Typography>
           <PasswordlessLoginForm onVerified={handleContactVerified} />

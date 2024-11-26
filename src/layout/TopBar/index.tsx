@@ -52,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet }) => {
   }
 
   return (
-    <AppBar elevation={0} color="transparent" >
+    <AppBar elevation={0} color="transparent" className="absolute" >
       <Toolbar>
 
         <Box

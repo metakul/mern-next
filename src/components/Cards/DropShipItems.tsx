@@ -78,7 +78,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
     <Container className="overflow-hidden mx-auto">
       {showScroll ? (
 
-        <Scroll parsedNotes={filteredItems as unknown as CartItem[]} />
+        <Scroll loading={loading} parsedNotes={filteredItems as unknown as CartItem[]} />
       ) : (
         <>
           <Grid container gap={0} sx={{ mb: 0 }}>
@@ -86,19 +86,18 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
             {filteredItems.map((item: IDropShipItem, index: number) => (
               <Grid
                 key={index}
-                xs={grid == 2 ? 12 : 6}
-                md={grid == 2 ? 12 : 6}
-                lg={grid == 2 ? 6 : 4}
-                className='p-4'
+                xs={grid =6}
+                sm={grid = 6}
+                md={grid =4}
+                lg={grid =4}
+                className='p-4 overflow-hidden'
               >
                 <Grid item xs={12}
                   className="flex"
                   onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
                 >
-                  <motion.div animate={{ x: [null, 100, 0] }} >
 
                     <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
-                  </motion.div>
                 </Grid>
                 <Grid container className="mt-2 px-2 sm:px-4 md:px-4 lg:px-6">
 
@@ -145,7 +144,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
       )}
 
 
-      {loading && (
+      {loading && !showScroll && (
         <Grid container spacing={2} sx={{ mb: 4 }}>
           {Array.from({ length: 3 }).map((_, index) => (
             <Grid key={index} item xs={grid == 2 ? 12 : 6}
@@ -163,6 +162,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
           ))}
         </Grid>
       )}
+      {!loading && 
       <div className="mx-auto flex flex-row justify-center">
         <Button
           variant="contained"
@@ -175,6 +175,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
           Load More
         </Button>
       </div>
+      }
     </Container>
   );
 };

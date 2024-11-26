@@ -15,9 +15,9 @@ const InstaBot = () => {
     }, [ isUserAuthenticated]);
 
     return (
-        <>
+        <div className='mt-20'>
         <ChatGpt />
-        </>
+        </div>
     );
 };
 

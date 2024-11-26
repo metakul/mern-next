@@ -35,14 +35,11 @@ export interface CustomJwtPayload {
 }
 
 export interface Address {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   address2?: string; // Optional field
   city: string;
-  state: string;
   zip: string;
-  country: string;
 }
 
 
@@ -81,14 +78,11 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const [address, setAddress] = React.useState<Address>({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     address2: '',
     city: '',
-    state: '',
     zip: '',
-    country: '',
   });
   const cartItems = useSelector(selectCartItems);
   const { totalQuantity, totalPrice } = useSelector(selectTotalQuantityAndPrice);
@@ -130,8 +124,8 @@ export default function Checkout() {
       proceedToPayment()
     }
     else{
-      const { firstName, lastName, email, city, state, zip, country } = address;
-      if (!firstName || !lastName || !email || !city || !state || !zip || !country) {
+      const { name, email, city, zip } = address;
+      if (!name || !email || !city || !zip) {
         toast.error('Please fill all required fields.');
         return;
       }
@@ -140,7 +134,7 @@ export default function Checkout() {
   };
 
   const proceedToPayment = () => {
-    const { firstName, email,city, state,zip,country } = address; //todo get all address fields
+    const { name, email,city,zip } = address; //todo get all address fields
 
     if (!contactVerified || !verifiedContact || !address || !email || verifiedContact==null) {
       toast.error('All fields (contact, address, and email) are required.');
@@ -149,6 +143,10 @@ export default function Checkout() {
 
     if (!isRazorpayLoaded) {
       toast.error('Razorpay script not loaded. Please try again later.');
+      return;
+    }
+    if (totalPrice==undefined) {
+      toast.error('Review the order Properly.');
       return;
     }
 
@@ -164,17 +162,17 @@ export default function Checkout() {
         contact: verifiedContact,
         email,
       },
-      description: firstName, email,city, state,zip,country,
+      description: `${name}, ${email},${city}, ${zip}`, 
       image: 'http://localhost:5173/logo.png',
       handler: (response: any) => {
         const orderDetails: DeliveryLocation = {
           consignee: {
-            name: firstName,
+            name: name,
             address: city ,
             city: city,
-            state: state,
+            state: "state",
             pin: zip,
-            country: country,
+            country: "India",
             phone: verifiedContact,
           },
         };
@@ -215,7 +213,7 @@ export default function Checkout() {
 
   return (
     // <AppTheme {...props}>
-    <Box>
+    <Box className=" mt-14 md:m-14 md:mt-24">
       <CssBaseline enableColorScheme />
       {/* <Box sx={{ position: 'fixed', top: '1rem', right: '1rem' }}>
         <ColorModeIconDropdown />

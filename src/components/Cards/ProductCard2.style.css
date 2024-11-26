@@ -1,0 +1,112 @@
+.card {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.left {
+  position: relative;
+  flex: 1;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+}
+
+.arrow-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.arrow-icon:first-of-type {
+  left: 10px;
+}
+
+.arrow-icon:last-of-type {
+  right: 10px;
+}
+
+.right {
+  flex: 2;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details {
+  margin-top: 16px;
+}
+
+.details .dis {
+  text-decoration: line-through;
+}
+
+.size-options,
+.color-options {
+  display: flex;
+  margin-top: 16px;
+  list-style: none;
+  padding: 0;
+}
+
+.size-options li,
+.color-options li {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.size-options li.bg {
+  background-color: #f0f0f0;
+}
+
+.color-options li {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.color-options .yellow {
+  background-color: yellow;
+}
+
+.color-options .black {
+  background-color: black;
+}
+
+.color-options .blue {
+  background-color: blue;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0 8px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+}

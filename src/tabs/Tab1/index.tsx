@@ -2,7 +2,6 @@ import { Box, Grid, Typography } from '@mui/material';
 // import MarqueeCryptoNew from '@/components/MarqueCrypto';
 // import InstallPWA from '@/PWA/InstallPwa';
 // import { getColors } from '@/layout/Theme/themes';
-import DropShipItems from './DropShipItems';
 // import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +10,10 @@ import { fetchCartApi, fetchDropShipItemsApi } from '@/lib/slices/DropShip/DropS
 import { AppDispatch } from '@/lib/store';
 import { DropShipStatusInfo } from '@/Datatypes/enums';
 import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
-import Scroll from '@/components/Motion/scroll';
+import ProductCard1 from '@/components/Cards/ProductCard1';
+import DropShipItems from '@/components/Cards/DropShipItems';
+import ProductCard2 from '@/components/Cards/ProductCard2';
+import HomeCard from '@/components/Cards/HomeCard';
 
 const Tab1 = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,12 +26,12 @@ const Tab1 = () => {
     dispatch(fetchCartApi({ isAuthenticated: isAuthenticatedUser }));
   }, [dispatch]);
   const handleLoadItems = async () => {
-  
+
     try {
       (dispatch as AppDispatch)(
         fetchDropShipItemsApi({
           pageSize: 10,
-          page:1,
+          page: 1,
           status: DropShipStatusInfo.APPROVED,
         })
       );
@@ -49,7 +51,7 @@ const Tab1 = () => {
 
       <Box sx={{
       }}>
-        <div className="relative bottom-16 w-screen  overflow-hidden">
+        <div className="relative  w-screen  overflow-hidden">
           {/* Video Background */}
           <video
             className=" w-[100vw] h-[95vh] object-cover pointer-events-none"
@@ -59,28 +61,30 @@ const Tab1 = () => {
             muted
             playsInline
           ></video>
-  
+
           {/* Hover Effect */}
           <div className="absolute inset-0 z-20 hover:cursor-pointer"></div>
         </div>
 
-        <Grid container>
-      <Grid sm={6} sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        }}>
-        <DropShipItems showScroll={true} categoryType="winterwear" dropShipItems={dropShipItems} loading={loading}/>
+        {dropShipItems.length>0 && <HomeCard  dropShipItems={dropShipItems}/> }
 
-      </Grid>
-      <Grid 
-  sm={6} 
-  sx={{ display: { xs: 'none', sm: 'block' } }}
->
-  <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
-    Hot Deals
-  </Typography>
-  <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading}/>
-</Grid>
+        <Grid container>
+          <Grid sm={12} sx={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}>
+            <DropShipItems showScroll={true} categoryType="winterwear" dropShipItems={dropShipItems} loading={loading} />
+
+          </Grid>
+          <Grid
+            sm={12}
+            sx={{ display: { xs: 'none', sm: 'block' } }}
+          >
+            <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+              Hot Deals
+            </Typography>
+            <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading} />
+          </Grid>
 
         </Grid>
 
@@ -91,7 +95,10 @@ const Tab1 = () => {
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Featured Items
         </Typography>
-        <DropShipItems dropShipItems={dropShipItems} loading={loading}/>
+
+        <ProductCard1 cartItems={dropShipItems} />
+
+        {/* <ProductCard2/> */}
       </Box>
     </>
   );

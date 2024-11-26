@@ -46,7 +46,7 @@ export default function ProfilePage() {
   );
 
   return (
-    <Container className="mt-16">
+    <Container className="mt-20">
       <>
         <BreadCrumbs currentPath="/profile" />
         <Box className="mt-4 mb-8">

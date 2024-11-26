@@ -1,7 +1,8 @@
 
 .swiper {
-  width: 16em;
   height: 360px;
+  padding: 0;
+  margin:0
 }
 
 @media (max-width: 786px) {
@@ -10,8 +11,6 @@
   }
 }
   .mySwiper{
-    margin-top: 16px;
-    margin-bottom: 16px;
   }
   .swiper-slide {
     text-align: center;

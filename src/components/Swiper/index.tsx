@@ -7,18 +7,25 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import './style.css';
-// import required modules
+// Import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Box } from '@mui/material';
 
 interface CustomSwiperProps {
   images: string[];
-  autoplayDelay?: number;
+  direction?: "horizontal" | "vertical" | undefined
+  minDelay?: number; // Minimum delay in ms
+  maxDelay?: number; // Maximum delay in ms
+  pagination?:boolean,
+  height?:string,
 }
 
-const CustomSwiper: React.FC<CustomSwiperProps> = ({ images, autoplayDelay = 2500 }) => {
+const CustomSwiper: React.FC<CustomSwiperProps> = ({direction, images, minDelay = 3000, maxDelay = 5000,pagination=true,height="h-[360px]" }) => {
   const progressCircle = useRef<SVGSVGElement | null>(null);
   const progressContent = useRef<HTMLSpanElement | null>(null);
+
+  // Generate a random autoplay delay within the range
+  const randomAutoplayDelay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
 
   const onAutoplayTimeLeft = (s: any, time: number, progress: number) => {
     if (progressCircle.current && progressContent.current) {
@@ -33,33 +40,29 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({ images, autoplayDelay = 250
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: autoplayDelay,
+          delay: randomAutoplayDelay,
           disableOnInteraction: false,
         }}
-        pagination={{
-          clickable: true,
-        }}
+        pagination={pagination === true ? { clickable: true } : undefined}
+        mousewheel={true}
+        direction={direction}
         navigation={false}
         modules={[Autoplay, Pagination]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className="mySwiper border border-jacarta-900  rounded-xl"
+        className={`mySwiper ${height}`}
       >
-
-        {images && images.map((src, index) => (
-          <Box>
-
-          <SwiperSlide key={index} 
-          >
-            <img src={src} alt={`Slide ${index + 1}`} className=" object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"/>
-          </SwiperSlide>
+        {images &&
+          images.map((src, index) => (
+            <Box key={index}>
+              <SwiperSlide>
+                <img
+                  src={src}
+                  alt={`Slide ${index + 1}`}
+                  className="object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
+                />
+              </SwiperSlide>
             </Box>
-        ))}
-        {/* <div className="autoplay-progress" slot="container-end">
-          <svg viewBox="0 0 48 48" ref={progressCircle}>
-            <circle cx="24" cy="24" r="20"></circle>
-          </svg>
-          <span ref={progressContent}></span>
-        </div> */}
+          ))}
       </Swiper>
     </>
   );

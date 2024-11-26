@@ -16,7 +16,7 @@ const whatiwear = () => {
   const isUserAuthenticated=useSelector(isAuthenticated)
 
   return (
-    <Container className="">
+    <Container className="mt-8">
       {/* <div className="relative">
         <img src="img/collections/collection_banner.jpg" alt="banner" className="h-[18.75rem] object-cover" />
       </div> */}
