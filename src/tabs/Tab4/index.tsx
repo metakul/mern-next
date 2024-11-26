@@ -48,7 +48,7 @@ const CartPage: React.FC<CartPageProps> = () => {
   // };
 
   return (
-    <Box sx={{}}>
+    <Box sx={{}} className=" mt-14 md:m-14 md:mt-24">
 
      
           {/* <Subscribe cartItems={cartItems} price={totalPrice} setShowOutlet={setShowOutlet} /> */}

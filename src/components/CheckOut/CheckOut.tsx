@@ -213,7 +213,7 @@ export default function Checkout() {
 
   return (
     // <AppTheme {...props}>
-    <Box className=" mt-14 md:m-14 md:mt-24">
+    <Box >
       <CssBaseline enableColorScheme />
       {/* <Box sx={{ position: 'fixed', top: '1rem', right: '1rem' }}>
         <ColorModeIconDropdown />
