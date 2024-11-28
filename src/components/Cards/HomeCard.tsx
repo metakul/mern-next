@@ -1,6 +1,5 @@
 import { IDropShipItem } from '@/Datatypes/interfaces/interface'
-import { Box, Typography } from '@mui/material'
-import React from 'react'
+import { Box } from '@mui/material'
 import CustomSwiper from '../Swiper'
 import { Pages } from '@/Datatypes/enums'
 import { useNavigate } from 'react-router-dom'

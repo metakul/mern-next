@@ -239,7 +239,7 @@ export default function Checkout() {
             borderColor: { sm: 'none', md: 'divider' },
             alignItems: 'start',
             pt: 6,
-            px: 10,
+            px: 2,
             gap: 4,
           }}
         >
@@ -255,7 +255,7 @@ export default function Checkout() {
               maxWidth: 500,
             }}
           >
-            <Info cartItems={cartItems} totalPrice={(activeStep >= 2 ? totalPrice + 20 : totalPrice).toString()}  />
+            <Info totalPrice={(activeStep >= 2 ? totalPrice + 20 : totalPrice).toString()}  />
           </Box>
         </Grid>
         <Grid

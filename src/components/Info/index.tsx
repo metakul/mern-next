@@ -13,10 +13,9 @@ import { AppDispatch } from '@/lib/store';
 
 interface InfoProps {
   totalPrice: string;
-  cartItems: CartItem[];
 }
 
-export default function Info({ totalPrice, cartItems }: InfoProps) {
+export default function Info({ totalPrice }: InfoProps) {
   const dispatch = useDispatch<AppDispatch>()
   const isAuthenticatedUser = useSelector(isAuthenticated)
 
@@ -32,17 +31,15 @@ export default function Info({ totalPrice, cartItems }: InfoProps) {
       <Typography variant="h4" gutterBottom>
       ₹ {totalPrice}
       </Typography>
-      <List disablePadding>
-        {cartItems && cartItems.length > 0 && (
+        {/* {cartItems && cartItems.length > 0 && ( */}
           <Box className="mt-4">
-            {cartItems.length > 0 && (
+            {/* {cartItems.length > 0 && ( */}
               <Box className="mt-4">
-                <CartItems parsedNotes={cartItems as CartItem[]} />
+                <CartItems/>
               </Box>
-            )}
+            {/* )} */}
           </Box>
-        )}
-      </List>
+        {/* )} */}
     </React.Fragment>
   );
 }
