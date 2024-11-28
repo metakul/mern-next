@@ -4,6 +4,7 @@ import { ApiError, ApiSuccess } from '../../../Datatypes/interfaces/interface';
 import Request from '@/Backend/axiosCall/apiCall';
 import { IDropShipItem } from '../../../Datatypes/interfaces/interface';
 import { addItemToCart, CartItem, loadCart, removeItemFromCart } from './AddToCartSlice';
+import { toast } from 'react-toastify';
 
 export const fetchDropShipItemsApi = createAsyncThunk(
   'dropShipCollection/setLoadedItems',
@@ -146,7 +147,6 @@ export const updateDropShipItemStatus = createAsyncThunk(
 
 // Async Thunks
 
-import { toast } from 'react-toastify';
 
 export const addToCartApi = createAsyncThunk(
   'cart/addToCartApi',
@@ -172,7 +172,9 @@ export const addToCartApi = createAsyncThunk(
         const existingCart = sessionStorage.getItem('cart');
         let cartItems = existingCart ? JSON.parse(existingCart) : [];
 
-        const existingItemIndex = cartItems.findIndex((cartItem: CartItem) => cartItem.id === item.id);
+        const existingItemIndex = cartItems.findIndex(
+          (cartItem: CartItem) => cartItem.id === item.id && cartItem.size === item.size
+        );
         if (existingItemIndex !== -1) {
           cartItems[existingItemIndex].quantity += item.quantity;
         } else {
@@ -183,7 +185,7 @@ export const addToCartApi = createAsyncThunk(
         dispatch(addItemToCart(item));
 
         // Show toast notification when item is added to cart in session storage
-        toast.success(`${item.name} has been added to your cart!`);
+        toast.success(`${item.name} (Size: ${item.size}) has been added to your cart!`);
 
         return { message: 'Item saved to cart in sessionStorage', item };
       } catch (error) {

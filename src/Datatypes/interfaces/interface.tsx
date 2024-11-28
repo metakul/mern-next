@@ -145,6 +145,7 @@ export interface IDropShipItem  {
   status?:string;
   price?:number;
   totalItemRemaining?:number;
+  sizes: { sizeName: string; totalItems: number }[];
 }
 
   export interface IBot {

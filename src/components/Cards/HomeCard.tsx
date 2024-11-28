@@ -33,8 +33,8 @@ function HomeCard({ dropShipItems }: HomeCardProps) {
             height={"h-[80vh] md:h-[100vh]"}
             onClick={(index) => handleImageClick(index, index === 0 ? 0 : 2)}
             images={[
-              `data:image/png;base64,${dropShipItems[0].image}`,
-              `data:image/png;base64,${dropShipItems[2].image}`,
+              `data:image/png;base64,${dropShipItems[0]?.image}`,
+              `data:image/png;base64,${dropShipItems[2]?.image}`,
             ]}
           />
         </div>
@@ -45,8 +45,8 @@ function HomeCard({ dropShipItems }: HomeCardProps) {
             height={"h-[50vh] w-[100vw] md:w-[50vw]"}
             onClick={(index) => handleImageClick(index, index === 0 ? 4 : 8)}
             images={[
-              `data:image/png;base64,${dropShipItems[4].image}`,
-              `data:image/png;base64,${dropShipItems[8].image}`,
+              `data:image/png;base64,${dropShipItems[4]?.image}`,
+              `data:image/png;base64,${dropShipItems[8]?.image}`,
             ]}
           />
           <div className='hidden md:block'>
@@ -57,8 +57,8 @@ function HomeCard({ dropShipItems }: HomeCardProps) {
             height={"h-[50vh]"}
             onClick={(index) => handleImageClick(index, index === 0 ? 7 : 1)}
             images={[
-              `data:image/png;base64,${dropShipItems[7].image}`,
-              `data:image/png;base64,${dropShipItems[1].image}`,
+              `data:image/png;base64,${dropShipItems[7]?.image}`,
+              `data:image/png;base64,${dropShipItems[1]?.image}`,
             ]}
           />
           </div>

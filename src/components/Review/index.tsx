@@ -14,13 +14,13 @@ export default function Review({ address }: { address: Address }) {
   const totalWithTax = totalPrice + tax;
 
   const formattedAddress = [
-    address.firstName + ' ' + address.lastName,
-    address.email,
+    address.name + ' ',
+    // address.email,
     address.address2,
     address.city,
-    address.state,
+    // address.state,
     address.zip,
-    address.country,
+    // address.country,
   ]
     .filter((line) => line) // Remove empty or undefined lines
     .join(', ');
@@ -54,7 +54,7 @@ export default function Review({ address }: { address: Address }) {
           <Typography variant="subtitle2" gutterBottom>
             Shipment details
           </Typography>
-          <Typography gutterBottom>{`${address.firstName} ${address.lastName}`}</Typography>
+          <Typography gutterBottom>{`${address.name}`}</Typography>
           <Typography gutterBottom sx={{ color: 'text.secondary' }}>
             {formattedAddress}
           </Typography>

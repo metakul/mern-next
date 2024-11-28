@@ -10,8 +10,8 @@ interface CustomTextFieldProps extends InputBaseComponentProps {
   type: string;
   label?: string;
   placeholder?: string;
-  error: string;
-  isError:boolean;
+  error?: string;
+  isError?:boolean;
   showPassword?: boolean;
   handleClickShowPassword?: () => void;
   handleMouseDownPassword?: (event: React.MouseEvent<HTMLButtonElement>) => void;

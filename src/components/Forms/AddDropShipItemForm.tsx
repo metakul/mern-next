@@ -2,12 +2,14 @@ import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/lib/store';
 import { IDropShipItem } from '@/Datatypes/interfaces/interface';
-import { Typography, Button, Grid } from '@mui/material';
+import { Typography, Button, Grid, IconButton, MenuItem, Select } from '@mui/material';
 import ImageUploader from '@/components/ImageUploader';
 import WYSIWYGEditor from '@/components/WYSWYGEditor';
 import 'react-quill/dist/quill.snow.css';
 import CustomTextField from '@/components/Elements/TextFeild';
 import { addDropShipItemApi } from '@/lib/slices/DropShip/DropShipAPI';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 interface AddDropShipItemProps {
   itemInfo?: IDropShipItem;
@@ -26,9 +28,10 @@ const newErrors: ErrorMessages = {
   categories: '',
   price: '',
   totalItemRemaining: '',
+  sizes: '',
 };
 
-const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo,formEvent }) => {
+const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo, formEvent }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<IDropShipItem>(
     itemInfo
@@ -41,6 +44,7 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo,formEven
           categories: [],
           price: undefined,
           totalItemRemaining: undefined,
+          sizes: [],
         }
   );
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -55,7 +59,8 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo,formEven
       categories: [],
       price: undefined,
       totalItemRemaining: undefined,
-      name: ''
+      name: '',
+      sizes: [],
     });
     setDescription('');
     setErrors(newErrors);
@@ -98,12 +103,15 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo,formEven
 
     const hasErrors = Object.values(errors).some((error) => !!error);
     if (!hasErrors) {
+
+      console.log(itemInfo);
+      
       (dispatch as AppDispatch)(
         addDropShipItemApi({
           newDropShipItemData: {
             ...formData,
             description,
-            id: itemInfo?.id,
+            id: itemInfo?.id || itemInfo?.dropShipItemsId,
             status: 'pending',
           },
           formEvent,
@@ -130,7 +138,22 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo,formEven
   const register: (e: string) => void = (e) => setFormData({ ...formData, image: e });
 
   const areAllFieldsFilled = () => {
-    return formData.title.trim() && formData.image && formData.author.trim() && formData.categories.length && formData.price !== undefined && formData.totalItemRemaining !== undefined;
+    return formData.title.trim() && formData.image && formData.author.trim() && formData.categories.length && formData.price !== undefined && formData.totalItemRemaining !== undefined && formData?.sizes?.length;
+  };
+
+  const handleSizeChange = (index: number, field: 'sizeName' | 'totalItems', value: string) => {
+    const updatedSizes = [...formData.sizes];
+    updatedSizes[index] = { ...updatedSizes[index], [field]: field === 'totalItems' ? parseInt(value, 10) : value };
+    setFormData({ ...formData, sizes: updatedSizes });
+  };
+
+  const addSize = () => {
+    setFormData({ ...formData, sizes: [...formData.sizes, { sizeName: '', totalItems: 0 }] });
+  };
+
+  const removeSize = (index: number) => {
+    const updatedSizes = formData.sizes.filter((_, i) => i !== index);
+    setFormData({ ...formData, sizes: updatedSizes });
   };
 
   return (
@@ -208,6 +231,48 @@ const AddDropShipItemForm: React.FC<AddDropShipItemProps> = ({ itemInfo,formEven
             error={errors.totalItemRemaining}
             isError={!!errors.totalItemRemaining}
           />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h3">Sizes</Typography>
+          {(formData?.sizes || []).map((size, index) => (
+            <Grid container spacing={1} key={index}>
+              <Grid item xs={5}>
+                <Select
+                  value={size.sizeName}
+                  onChange={(e) => handleSizeChange(index, 'sizeName', e.target.value as string)}
+                  displayEmpty
+                  fullWidth
+                >
+                  <MenuItem value="" disabled>
+                    Select Size
+                  </MenuItem>
+                  <MenuItem value="S">S</MenuItem>
+                  <MenuItem value="M">M</MenuItem>
+                  <MenuItem value="L">L</MenuItem>
+                  <MenuItem value="XL">XL</MenuItem>
+                  <MenuItem value="2XL">2XL</MenuItem>
+                </Select>
+              </Grid>
+              <Grid item xs={5}>
+                <CustomTextField
+                  id="totalItems"
+                  type="number"
+                  label="Total Items"
+                  value={size.totalItems}
+                  onChange={(e) => handleSizeChange(index, 'totalItems', e.currentTarget.value)}
+                  placeholder="Enter total items"
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <IconButton onClick={() => removeSize(index)}>
+                  <RemoveIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          ))}
+          <Button onClick={addSize} startIcon={<AddIcon />}>
+            Add Size
+          </Button>
         </Grid>
       </Grid>
       {areAllFieldsFilled() && (

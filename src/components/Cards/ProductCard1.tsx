@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./style.css";
-import { Box, Button, Typography, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Grid, Dialog, DialogContent, Container } from "@mui/material";
+import { Box, Button, Typography, IconButton, Grid, Dialog, DialogContent, Container } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DoneIcon from "@mui/icons-material/Done";
 import ClearIcon from "@mui/icons-material/Clear";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { IDropShipItem } from "@/Datatypes/interfaces/interface";
 import CustomSwiper from "../Swiper";
 
@@ -16,14 +15,20 @@ interface CartItem {
   image?: string;
 }
 
-const SizePicker = ({ onSelect }: { onSelect: (size: string) => void }) => {
+const SizePicker = ({ availableSizes, onSelect }: { availableSizes: string[], onSelect: (size: string) => void }) => {
   const sizes = ["S", "M", "L", "XL"];
   return (
     <Box className="size-picker">
       <Typography>Select a size:</Typography>
       <Box>
         {sizes.map((size) => (
-          <Button key={size} variant="outlined" onClick={() => onSelect(size)} className="size-button">
+          <Button
+            key={size}
+            variant="outlined"
+            onClick={() => onSelect(size)}
+            className="size-button"
+            disabled={!availableSizes.includes(size)}
+          >
             {size}
           </Button>
         ))}
@@ -68,49 +73,54 @@ const ProductCard1: React.FC<ProductCard1Props> = ({ cartItems }) => {
 
   return (
     <Container>
-    <Grid container className="">
-      {cartItems.map((item) => (
-        <Grid xs={6} md={4} key={item.id} className="p-4 ">
-          <Box key={item.id} className=" shadow-md overflow-hidden">
-            <Box className="relative border  rounded-xl">
-              <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
-            </Box>
-            <Box className="p-6">
-              {!addedItems.includes(item.id ?? '') ? (
-                <Box className="flex justify-between items-center">
-                  <Box>
-                    <Typography variant="h6" className="text-md ">{item.name || item.title}</Typography>
-                    <Typography variant="body1" className="text-gray-600">£{item.price}</Typography>
-                  </Box>
-                  <IconButton className="text-green-500" onClick={() => item.id && handleAddToCart(item.id)}>
-                    <AddShoppingCartIcon />
-                  </IconButton>
-                </Box>
-              ) : (
-                <Box className="flex items-center justify-between">
-                  <Box className="flex items-center">
-                    <DoneIcon className="text-green-500" />
-                    <Box className="ml-2">
-                      <Typography variant="h5" className="text-lg font-semibold">{item.name}</Typography>
-                      <Typography variant="body1" className="text-gray-600">Added to your cart</Typography>
+      <Grid container className="">
+        {cartItems.map((item) => (
+          <Grid xs={6} md={4} key={item.id} className="p-4 ">
+            <Box key={item.id} className="shadow-md overflow-hidden">
+              <Box className="relative border rounded-xl">
+                <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
+              </Box>
+              <Box className="p-6">
+                {!addedItems.includes(item.id ?? '') ? (
+                  <Box className="flex justify-between items-center">
+                    <Box>
+                      <Typography variant="h6" className="text-md ">{item.name || item.title}</Typography>
+                      <Typography variant="body1" className="text-gray-600">£{item.price}</Typography>
                     </Box>
+                    <IconButton className="text-green-500" onClick={() => item.id && handleAddToCart(item.id)}>
+                      <AddShoppingCartIcon />
+                    </IconButton>
                   </Box>
-                  <IconButton className="text-red-500" onClick={() => item.id && resetCart(item.id)}>
-                    <ClearIcon />
-                  </IconButton>
-                </Box>
-              )}
+                ) : (
+                  <Box className="flex items-center justify-between">
+                    <Box className="flex items-center">
+                      <DoneIcon className="text-green-500" />
+                      <Box className="ml-2">
+                        <Typography variant="h5" className="text-lg font-semibold">{item.name}</Typography>
+                        <Typography variant="body1" className="text-gray-600">Added to your cart</Typography>
+                      </Box>
+                    </Box>
+                    <IconButton className="text-red-500" onClick={() => item.id && resetCart(item.id)}>
+                      <ClearIcon />
+                    </IconButton>
+                  </Box>
+                )}
+              </Box>
             </Box>
-          </Box>
-        </Grid>
-      ))}
+          </Grid>
+        ))}
 
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogContent>
-          {currentItemId && <SizePicker onSelect={(size) => handleSizeSelect(currentItemId, size)} />}
-        </DialogContent>
-      </Dialog>
-    </Grid>
+        <Dialog open={openDialog} onClose={handleCloseDialog}>
+          <DialogContent>
+            {currentItemId && (
+              <SizePicker
+                availableSizes={cartItems.find(item => item.id === currentItemId)?.sizes || []}
+                onSelect={(size) => handleSizeSelect(currentItemId, size)}
+              />
+            )}
+          </DialogContent>
+        </Dialog>
+      </Grid>
     </Container>
   );
 };

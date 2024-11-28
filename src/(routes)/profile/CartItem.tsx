@@ -4,18 +4,10 @@ import { Box, Button, IconButton, ListItem, ListItemSecondaryAction, ListItemTex
 import { fetchSingleDropShipItemApi } from "@/lib/slices/DropShip/DropShipAPI"; // Update the import path
 import { AppDispatch } from "@/lib/store";
 import { isAuthenticated } from "@/lib/slices/authSlice";
-import { GridDeleteForeverIcon, GridDeleteIcon } from "@mui/x-data-grid";
 import { Pages } from "@/Datatypes/enums";
 import { useNavigate } from "react-router-dom";
 import { useShowOutlet } from "@/context/showOutletContext";
-
-interface CartItem {
-  id: string;
-  quantity: number;
-  price?: number;
-  name?: string;
-  image?: string;
-}
+import { CartItem } from "@/lib/slices/DropShip/AddToCartSlice";
 
 interface CartItemsProps {
   parsedNotes: CartItem[];
@@ -93,6 +85,9 @@ const CartItems: React.FC<CartItemsProps> = ({ parsedNotes }) => {
                 <ListItemText
                   primary={details.name}
                   secondary={` Price: ₹ ${details?.price?.toFixed(2)}`}
+                />
+                <ListItemText
+                  secondary={` Size: ${details?.size}`}
                 />
                 <ListItemText
                   secondary={` Quantity: ${details.quantity}`}

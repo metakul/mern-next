@@ -78,6 +78,22 @@ const HomePage: React.FC<HomePageProps> = () => {
             <meta name="twitter:description" content="Discover the best online shopping experience with whatiwearpers." />
           </Helmet>
 
+
+
+          <div className="relative  w-screen  overflow-hidden">
+          {/* Video Background */}
+          <video
+            className=" w-[100vw] h-[95vh] object-cover pointer-events-none"
+            src="https://video-previews.elements.envatousercontent.com/h264-video-previews/34b4f82d-339a-4c07-ba47-e8a87ded3de1/2733283.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          ></video>
+
+          {/* Hover Effect */}
+          <div className="absolute inset-0 z-20 hover:cursor-pointer"></div>
+        </div>
           <Tab1 />
         </Box>
         );

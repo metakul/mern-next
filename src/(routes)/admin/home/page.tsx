@@ -20,7 +20,7 @@ const ProtectedPage: React.FC<ProtectedPageProps> = () => {
   const selectedUserType = useSelector(selectUserType);
 
   return (
-    <Container>
+    <Container className="mt-24">
       <BreadCrumbs currentPath={`/`} />
       {isUserAuthenticated && selectedUserType === UserCategory.ROADIES_SUPER_ADMIN &&
         <DropShipItemsPage />

@@ -193,7 +193,7 @@ const Subscribe: React.FC<SubscribeProps> = () => { // todo dont take totalPrice
           {/* <VerifyOtpForm/> */}
         </>
       }
-      {contactVerified && isUserAuthenticated && (
+      {/* {contactVerified && isUserAuthenticated && (
         <>
           <Typography variant="h6">Your Address For Delivery</Typography>
 
@@ -229,7 +229,7 @@ const Subscribe: React.FC<SubscribeProps> = () => { // todo dont take totalPrice
           </Button>
           
         </>
-      )}
+      )} */}
     </Box>
   );
 };

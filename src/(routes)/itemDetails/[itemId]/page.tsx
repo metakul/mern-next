@@ -63,10 +63,13 @@ const SingleDropShipItemDetails = () => {
   const truncatedDescription = selectedDropShipItem?.description ?? '';
   const image = selectedDropShipItem?.image ?? '';
   const title = selectedDropShipItem?.title ?? '';
+  const sizes = selectedDropShipItem?.sizes ?? [];
   const author = selectedDropShipItem?.author ?? '';
   const categories = selectedDropShipItem?.categories ?? [];
 
   const approveDropShipItem = () => {
+
+    
     (dispatch as AppDispatch)(updateDropShipItemStatus({
       itemId: dropShipItemId,
       setIsUpdating,
@@ -105,6 +108,7 @@ const SingleDropShipItemDetails = () => {
                   dropShipItemsId: dropShipItemId,
                   title,
                   name:title,
+                  sizes:sizes,
                   description: truncatedDescription,
                   image: image,
                   author: author,
@@ -158,6 +162,7 @@ const SingleDropShipItemDetails = () => {
                   _id={dropShipItemId}
                   name={title}
                   image={image}
+                  sizes={sizes}
                   />
                 )}
                 <span className="inline-flex flex-wrap items-center space-x-1 text-accent">
