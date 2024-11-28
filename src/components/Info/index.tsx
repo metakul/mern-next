@@ -1,28 +1,17 @@
 import * as React from 'react';
 
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
+// import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
 import { Box } from '@mui/material';
-import CartItems from '@/(routes)/profile/CartItem';
-import { removeItemQuantityApi } from '@/lib/slices/DropShip/DropShipAPI';
-import { useDispatch, useSelector } from 'react-redux';
-import { isAuthenticated } from '@/lib/slices/authSlice';
-import { AppDispatch } from '@/lib/store';
-
+import CartItems from '../CartItems/CartItem';
 
 interface InfoProps {
   totalPrice: string;
 }
 
 export default function Info({ totalPrice }: InfoProps) {
-  const dispatch = useDispatch<AppDispatch>()
-  const isAuthenticatedUser = useSelector(isAuthenticated)
 
-  const handleRemoveItem = (id: string) => {
-    dispatch(removeItemQuantityApi({ itemId: id, isAuthenticated: isAuthenticatedUser })); // Dispatch action to remove an item
-  };
-
+ 
   return (
     <React.Fragment>
       <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>

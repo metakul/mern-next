@@ -1,40 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, IconButton, ListItem, ListItemText, Typography } from "@mui/material";
-import { fetchSingleDropShipItemApi, removeItemQuantityApi } from "@/lib/slices/DropShip/DropShipAPI"; // Update the import path
+import { Box, Button, ListItem, ListItemText, Typography } from "@mui/material";
+import { fetchSingleDropShipItemApi } from "@/lib/slices/DropShip/DropShipAPI"; // Update the import path
 import { AppDispatch } from "@/lib/store";
 import { isAuthenticated } from "@/lib/slices/authSlice";
 import { Pages } from "@/Datatypes/enums";
 import { useNavigate } from "react-router-dom";
 import { useShowOutlet } from "@/context/showOutletContext";
-import { CartItem, selectCartItems } from "@/lib/slices/DropShip/AddToCartSlice";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { CartItem } from "@/lib/slices/DropShip/AddToCartSlice";
 
+interface CartItemsProps {
+  parsedNotes: CartItem[];
+}
 
-const CartItems= ({ }) => {
-
-
+const ProfileCartItems: React.FC<CartItemsProps> = ({ parsedNotes }) => {
   const { setShowOutlet } = useShowOutlet();
   const dispatch = useDispatch<AppDispatch>();
   const [itemDetails, setItemDetails] = useState<Record<string, CartItem>>({});
   const [visibleCount, setVisibleCount] = useState(2); // Number of items to display initially
   const isUserAuthenticated = useSelector(isAuthenticated);
   const navigate = useNavigate();
-  const parsedNotes = useSelector(selectCartItems);
 
-  const handleRemoveItem = (id: string) => {
-    dispatch(removeItemQuantityApi({ itemId: id, isAuthenticated: isUserAuthenticated })); // Dispatch action to remove an item
-  };
 
-  useEffect(() => {
-    const updatedDetails = parsedNotes.reduce((acc, item) => {
-      acc[item.id] = itemDetails[item.id] || item;
-      return acc;
-    }, {} as Record<string, CartItem>);
-    setItemDetails(updatedDetails);
-  }, [parsedNotes, itemDetails]);
-
-  
   useEffect(() => {
     parsedNotes?.forEach((item) => {
       if (item.id && !itemDetails[item.id]) {
@@ -102,9 +89,7 @@ const CartItems= ({ }) => {
                   secondary={`Quantity: ${details.quantity}`}
                 />
               </Box>
-                <IconButton edge="end" aria-label="delete" onClick={() => handleRemoveItem(details.id)}>
-                  <DeleteIcon />
-                </IconButton>
+             
             </ListItem>
           </Box>
         );
@@ -118,4 +103,4 @@ const CartItems= ({ }) => {
   );
 };
 
-export default CartItems;
+export default ProfileCartItems;

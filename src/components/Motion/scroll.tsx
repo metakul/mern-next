@@ -6,7 +6,6 @@ import { Pages } from "@/Datatypes/enums";
 import { useNavigate } from "react-router-dom";
 import { useShowOutlet } from "@/context/showOutletContext";
 
-
 interface Props {
     item: CartItem;
     hueA: number;
@@ -72,7 +71,6 @@ function Card({ item, hueA, hueB }: Props) {
         </>
     );
 }
-
 
 interface ScrollProps {
     parsedNotes: CartItem[];

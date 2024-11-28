@@ -12,7 +12,7 @@ import { DropShipStatusInfo } from '@/Datatypes/enums';
 import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
 import ProductCard1 from '@/components/Cards/ProductCard1';
 import DropShipItems from '@/components/Cards/DropShipItems';
-import ProductCard2 from '@/components/Cards/ProductCard2';
+// import ProductCard2 from '@/components/Cards/ProductCard2';
 import HomeCard from '@/components/Cards/HomeCard';
 
 const Tab1 = () => {
@@ -46,17 +46,11 @@ const Tab1 = () => {
 
   return (
     <>
-
       {/* <MarqueeCryptoNew /> */}
-
       <Box sx={{
       }}>
-       
-
         {dropShipItems.length>0 && <HomeCard  dropShipItems={dropShipItems}/> }
-
         <Grid container>
-      
           <Grid
             sm={12}
             sx={{ display: { xs: 'none', sm: 'block' } }}
@@ -71,10 +65,8 @@ const Tab1 = () => {
             justifyContent: 'center',
           }}>
             <DropShipItems showScroll={true} categoryType="winterwear" dropShipItems={dropShipItems} loading={loading} />
-
           </Grid>
         </Grid>
-
         {/* <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Most Liked Shirt
         </Typography> */}
@@ -82,9 +74,7 @@ const Tab1 = () => {
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Featured Items
         </Typography>
-
         <ProductCard1 cartItems={dropShipItems} />
-
         {/* <ProductCard2/> */}
       </Box>
     </>

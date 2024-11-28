@@ -128,9 +128,6 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
                     {item.id && item.title && (
                       <AddToCart
                         _id={item.id}
-                        name={item.title}
-                        image={item.image}
-                        sizes={item.sizes}
                       />
                     )}
                   </Grid>

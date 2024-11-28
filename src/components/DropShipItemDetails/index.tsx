@@ -23,7 +23,7 @@ export interface SingleBlogInfoProps{
 
   const tabs = [
     { value: <OtherHousesOutlinedIcon />, content: <BlogDescription userType={userType} _id={_dropShipItemId}/>, label: "Read More" },
-    { value: <OtherHousesOutlinedIcon />, content: <AddToCart name={name} _id={_dropShipItemId} image={image}/>, label: "Price" },
+    { value: <OtherHousesOutlinedIcon />, content: <AddToCart _id={_dropShipItemId}/>, label: "Price" },
     // { value: <StoreOutlinedIcon />, content: <CryptoInfoPage _id={_blogId} cryptoSymbol={cryptoSymbol}/>, label: "Information" },
     { value: <CategoryOutlinedIcon />, content:<SocialProfiles/>, label: "Socials" },
   ];

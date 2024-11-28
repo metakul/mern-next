@@ -7,15 +7,26 @@ import { AppDispatch } from '@/lib/store';
 import { getColors } from '@/layout/Theme/themes';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import SizePicker from './SizePicker';
+import { useSelectedDropShipItem } from '@/lib/slices/DropShip/DropShipSlice';
 
 interface AddToCartProps {
   _id: string;
-  name: string;
-  image: string;
-  sizes: { sizeName: string; totalItems: number }[];
+  size?:string
 }
 
-const AddToCart: React.FC<AddToCartProps> = ({ _id, name, image, sizes }) => {
+const AddToCart: React.FC<AddToCartProps> = ({ _id, }) => {
+
+  const selectedDropShipItem = useSelector(useSelectedDropShipItem(_id));
+
+  let title:any, name: any, image: any, sizes: { sizeName: string; totalItems: number; }[] = [];
+  if (selectedDropShipItem) {
+      ({ name, image, sizes,title } = selectedDropShipItem);
+      // You can now use name, image, and sizes here
+      console.log(name, image, sizes);
+  } else {
+      // Handle the case where selectedDropShipItem is null or undefined
+      console.log("No item selected");
+  }
   const dispatch = useDispatch<AppDispatch>();
   const isAuthenticatedUser = useSelector(isAuthenticated);
   const [selectedSize, setSelectedSize] = useState<string>('');
@@ -28,7 +39,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ _id, name, image, sizes }) => {
   const handleSelectSize = (size: string) => {
     if (size) {
       setSelectedSize(size);
-      const item = { quantity: 1, id: _id, name: name, image: image, size: size };
+      const item = { quantity: 1, id: _id, name: name || title, image: image, size: size };
       dispatch(addToCartApi({ item, isAuthenticated: isAuthenticatedUser }));
     }
     setOpenSizePicker(false);
@@ -36,8 +47,8 @@ const AddToCart: React.FC<AddToCartProps> = ({ _id, name, image, sizes }) => {
 
   return (
     <Box sx={{ color: getColors().blueAccent[100] }}>
-      <Button onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>
-        Add to Cart
+      <Button onClick={handleAddToCart}>
+        <AddShoppingCartIcon/>
       </Button>
       <Dialog open={openSizePicker} onClose={() => setOpenSizePicker(false)}>
         <SizePicker sizes={sizes} onSelectSize={handleSelectSize} onClose={() => setOpenSizePicker(false)} />

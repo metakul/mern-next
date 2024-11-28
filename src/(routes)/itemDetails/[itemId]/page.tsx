@@ -160,9 +160,6 @@ const SingleDropShipItemDetails = () => {
                 {dropShipItemId && title && (
                   <AddToCart
                   _id={dropShipItemId}
-                  name={title}
-                  image={image}
-                  sizes={sizes}
                   />
                 )}
                 <span className="inline-flex flex-wrap items-center space-x-1 text-accent">

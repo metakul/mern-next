@@ -20,7 +20,7 @@ import { isAuthenticated } from '@/lib/slices/authSlice';
 import LogoutButton from '@/components/Elements/Buttons/LogoutButton';
 // import PasswordlessLoginForm from '@/components/Forms/PasswordLoginForm';
 import { selectTrackingInfo } from '@/lib/slices/DropShip/Payment/paymentSlice';
-import CartItems from './CartItem';
+import ProfileCartItems from './ProfileCartItems';
 import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
 // import { useShowOutlet } from '@/context/showOutletContext';
 // import UserAuthStepper from '@/components/Forms/Stepper';
@@ -84,7 +84,7 @@ export default function ProfilePage() {
           {!loading && filteredPayments && isUserAuthenticated &&(
             <Grid container spacing={4} className="mt-0">
               {filteredPayments.map((payment) => {
-                let parsedNotes: { id?: string; name?: string; quantity?: number; price?: any; image: any }[] = [];
+                let parsedNotes: { id?: string; size?:string, name?: string; quantity?: number; price?: any; image: any }[] = [];
                 try {
                   parsedNotes = payment.notes && Array.isArray(payment.notes)
                     ? payment.notes.map((note: string) => JSON.parse(note))
@@ -126,7 +126,7 @@ export default function ProfilePage() {
                           <Box className="mt-4">
                             {parsedNotes.length > 0 && (
                               <Box className="mt-4">
-                                <CartItems  parsedNotes={parsedNotes as CartItem[]} />
+                                <ProfileCartItems  parsedNotes={parsedNotes as CartItem[]} />
                               </Box>
                             )}
                           </Box>

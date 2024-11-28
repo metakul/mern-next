@@ -39,7 +39,7 @@ const SizePicker: React.FC<SizePickerProps> = ({ sizes, onSelectSize, onClose })
         onClick={handleSelectSize}
         className="w-full py-2 rounded-lg hover:bg-blue-600"
       >
-        Add To cart
+        Confirm Size
       </Button>
     </Box>
   );
