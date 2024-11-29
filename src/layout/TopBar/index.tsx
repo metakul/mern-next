@@ -13,20 +13,18 @@ import {
 
 // import app
 import { ColorModeContext, getColors } from "../Theme/themes";
-import { motion } from "framer-motion";
 // const NAV_WIDTH = 280;
 import "./style.css"
-import {
-  Menu,
-  styled,
-} from "@mui/material";
+
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { MenuRounded } from "@mui/icons-material";
 import InstallPWA from "@/PWA/InstallPwa";
 import { useSound } from "@/context/SoundContext";
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
+import Nav from "./Nav";
+import {motion} from "framer-motion"
 interface HeaderProps {
   setIsSidebarOpen: () => void;
   APP_BAR: string
@@ -94,18 +92,13 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet }) => {
               background: theme.palette.grey[100],
             }} />
           </div>
-          {/* <IconButton
-          onClick={() => setIsSidebarOpen()}
-          sx={{
-            mt:2,
-            color: getColors().blueAccent[100]
-          }}
-        >
-          <MenuRounded/>
-        </IconButton> */}
+      
 
         </Stack>
       </Toolbar>
+
+    
+    
     </AppBar>
   );
 }

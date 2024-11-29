@@ -7,11 +7,13 @@ import Offline from './PWA/Offline';
 // import { WalletAuthProvider } from './contexts/WalletAuthContext';
 import { ShowOutletProvider } from './context/showOutletContext';
 import { SoundProvider } from './context/SoundContext';
+import "./scss/main.scss";
 
 
 function App() {
   return (
     <StoreProvider>
+
       {/* <WalletAuthProvider> */}
       <ShowOutletProvider>
         <Offline>
@@ -24,6 +26,7 @@ function App() {
         </Offline>
       </ShowOutletProvider>
       {/* </WalletAuthProvider> */}
+
     </StoreProvider>
   );
 }

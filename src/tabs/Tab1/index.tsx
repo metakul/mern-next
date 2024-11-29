@@ -14,6 +14,7 @@ import ProductCard1 from '@/components/Cards/ProductCard1';
 import DropShipItems from '@/components/Cards/DropShipItems';
 // import ProductCard2 from '@/components/Cards/ProductCard2';
 import HomeCard from '@/components/Cards/HomeCard';
+import Products from '@/components/Products';
 
 const Tab1 = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -49,6 +50,8 @@ const Tab1 = () => {
       {/* <MarqueeCryptoNew /> */}
       <Box sx={{
       }}>
+
+        <Products/>
         {dropShipItems.length>0 && <HomeCard  dropShipItems={dropShipItems}/> }
         <Grid container>
           <Grid
