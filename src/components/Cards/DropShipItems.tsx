@@ -10,17 +10,18 @@ import AddToCart from '@/components/AddToCart';
 import { Link, useNavigate } from 'react-router-dom';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { Navigation } from "swiper/modules";
-import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
+// import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
 
 interface DropShipItemsProps {
   categoryType?: string;
+  dropShipItems:IDropShipItem[]
 }
 
-const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
+const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipItems}) => {
   const dispatch = useDispatch();
   const [page, setItemPage] = useState(1);
   const navigate = useNavigate();
-  const { dropShipItems } = useSelector(selectedDropShipItems);
+  // const { dropShipItems } = useSelector(selectedDropShipItems);
 
   const handleLoadItems = async () => {
 

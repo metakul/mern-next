@@ -6,10 +6,10 @@ import { Box, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuthenticated } from '@/lib/slices/authSlice';
-import { fetchCartApi, fetchDropShipItemsApi } from '@/lib/slices/DropShip/DropShipAPI';
+import { fetchCartApi, fetchDropShipItemsApi, fetchDropShipItemsByCategoryApi } from '@/lib/slices/DropShip/DropShipAPI';
 import { AppDispatch } from '@/lib/store';
 import { DropShipStatusInfo } from '@/Datatypes/enums';
-import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
+import { selectDropShipItemsByCategory, selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
 import ProductCard1 from '@/components/Cards/ProductCard1';
 import DropShipItems from '@/components/Cards/DropShipItems';
 // import ProductCard2 from '@/components/Cards/ProductCard2';
@@ -45,7 +45,32 @@ const Tab1 = () => {
   useEffect(() => {
     // Load items when the component mounts
     handleLoadItems();
+    handleLoadCategories();
   }, []);
+
+  const  categoryItemsHotDeals  = useSelector(selectDropShipItemsByCategory("hotdeals"));
+  const  categoryItemsWinter  = useSelector(selectDropShipItemsByCategory("winterwear"));
+
+  const handleLoadCategories = async () => {
+    try {
+      (dispatch as AppDispatch)(
+        fetchDropShipItemsByCategoryApi({
+          pageSize: 10,
+          page: 1,
+          category: "hotdeals"
+        })
+      );
+      (dispatch as AppDispatch)(
+        fetchDropShipItemsByCategoryApi({
+          pageSize: 10,
+          page: 1,
+          category: "winterwear"
+        })
+      );
+    } catch (error) {
+      console.error("Failed to fetch DropShip items:", error);
+    }
+  };
 
   return (
     <>
@@ -59,14 +84,14 @@ const Tab1 = () => {
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-2">
           Top Products
         </Typography>
-        <DropShipItems categoryType="discount" />
+        <DropShipItems dropShipItems={categoryItemsWinter} categoryType="winter" />
         <Categories />
         {dropShipItems.length > 0 && <HomeCard dropShipItems={dropShipItems} />}
 
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Hot Deals
         </Typography>
-        <DropShipItems categoryType="hotdeals" />
+        <DropShipItems dropShipItems={categoryItemsHotDeals} categoryType="hotdeals" />
         
         <Scroll parsedNotes={dropShipItems} loading/>
 

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { HomePageProps } from '@/Datatypes/interfaces/interface';
 
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import Tab1 from '@/tabs/Tab1';
 import { useSelector } from 'react-redux';
 import { isAuthenticated, selectUserType, } from '@/lib/slices/authSlice';
