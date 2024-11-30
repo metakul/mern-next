@@ -76,7 +76,7 @@ const InstallPWA = () => {
             background: getColors().grey[900]
           }}>
             <InstallMobileIcon className=" w-7 h-7"  sx={{
-              color: getColors().grey[100]
+              color: getColors().grey[200]
             }}
             />
           

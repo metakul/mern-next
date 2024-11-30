@@ -902,6 +902,7 @@
   }
   .tf-grid-layout-v2 {
     gap: 30px;
+    padding-bottom:10px;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     .widget-tab-4 {
       grid-column: span 4;
@@ -2801,7 +2802,7 @@
     margin-bottom: 60px;
   }
   .widget-tab-4 {
-    padding: 66px 79px 78px 56px;
+    padding: 16px 79px 30px 56px;
 
     .nav-tab-item {
       .nav-tab-link {

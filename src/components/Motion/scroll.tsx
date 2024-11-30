@@ -5,9 +5,10 @@ import { CartItem } from "@/lib/slices/DropShip/AddToCartSlice";
 import { Pages } from "@/Datatypes/enums";
 import { useNavigate } from "react-router-dom";
 import { useShowOutlet } from "@/context/showOutletContext";
+import { IDropShipItem } from "@/Datatypes/interfaces/interface";
 
 interface Props {
-    item: CartItem;
+    item: IDropShipItem;
     hueA: number;
     hueB: number;
 }
@@ -73,7 +74,7 @@ function Card({ item, hueA, hueB }: Props) {
 }
 
 interface ScrollProps {
-    parsedNotes: CartItem[];
+    parsedNotes: IDropShipItem[];
     loading:boolean
 }
 

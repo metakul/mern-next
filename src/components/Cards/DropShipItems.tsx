@@ -17,6 +17,7 @@ import Scroll from '@/components/Motion/scroll';
 import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { Navigation } from "swiper/modules";
+import QuickAdd from '../QuickAdd';
 
 interface DropShipItemsProps {
   categoryType?: string;
@@ -32,6 +33,13 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
   const [showItemPerPage] = useState(40);
   const [openedItemId, setOpenedItemId] = useState<string | null>(null);
   const [currentDomain, setCurrentDomain] = useState<string | null>(null);
+
+  const [quickAddItem, setQuickAddItem] = useState<IDropShipItem | null>(null);
+
+  const handleQuickAdd = (item: IDropShipItem) => {
+    setQuickAddItem(item);
+  };
+
 
   const handleLoadItems = async () => {
     try {
@@ -78,23 +86,21 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
     : dropShipItems;
 
   return (
-    <section className=" pt_0 mt-0">
-      <div className="container">
+      <div className="" >
         <div className="flat-title wow fadeInUp" data-wow-delay="0s">
-          <div className="d-flex gap-16 align-items-center">
-            <div className="nav-sw-arrow nav-prev-slider nav-prev-product  snbp114">
+          <div className="flex flex-1 items-center  gap-10 align-items-center">
+            <div className="nav-prev-slider nav-prev-product  snbp114">
               <span className="icon icon-arrow1-left" />
             </div>
             <Link
               to={`/product-style-05`}
-              className="tf-btn btn-line fs-12 fw-6"
+              className="tf-btn btn-line m-0 fs-12 fw-6 mt-0"
             >
               <Typography>
-
                 VIEW ALL
               </Typography>
             </Link>
-            <div className="nav-sw-arrow nav-next-slider nav-next-product snbn114">
+            <div className=" nav-next-slider nav-next-product snbn114">
               <span className="icon icon-arrow1-right" />
             </div>
           </div>
@@ -105,6 +111,9 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
               <Swiper
                 dir="ltr"
                 className="swiper tf-sw-product-sell wrap-sw-over"
+                style={{
+                  height: "500px"
+                }}
                 slidesPerView={4} // Equivalent to data-preview={4}
                 spaceBetween={30} // Equivalent to data-space-lg={30}
                 breakpoints={{
@@ -127,11 +136,13 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
               >
                 {filteredItems.map((item: IDropShipItem, index: number) => (
 
-                  <SwiperSlide key={index} className="swiper-slide">
+                  <SwiperSlide key={index} className="swiper-slide" >
 
-                    <div className="card-product fl-item  w-[14em] " key={item.id}>
+                    <div className="card-product fl-item  " key={item.id}>
                       <div className="card-product-wrapper">
-                        <Box onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)} className="product-img">
+                        <Box sx={{
+                          maxWidth:"230px"
+                        }} onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)} className="product-img">
                           <img
                             className="lazyload img-product"
                             data-src={item.image}
@@ -151,21 +162,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
                             height={1005}
                           />
                         </Box>
-                        <div className="list-product-btn">
-                          <a
-                            href="#quick_add"
-                            // onClick={() => setQuickAddItem(product.id)}
-                            data-bs-toggle="modal"
-                            className="box-icon  quick-add tf-btn-loading"
-                            style={{
-                              background: getColors().grey[900]
-                            }}
-                          >
-                            <span className="icon icon-bag" style={{
-                              color: getColors().grey[100]
-                            }} />
-                            <span className="tooltip">Quick Add</span>
-                          </a>
+                        <div className="">
                           <div style={{
                             background: getColors().grey[900]
                           }}>
@@ -176,20 +173,19 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
                               />
                             )}
                           </div>
-                          <a
-                            href="#quick_view"
-                            // onClick={() => setQuickViewItem(product)}
-                            data-bs-toggle="modal"
-                            className="box-icon  quickview tf-btn-loading"
-                            style={{
-                              background: getColors().grey[900]
-                            }}
-                          >
-                            <span className="icon icon-view" style={{
-                              color: getColors().grey[100]
-                            }} />
-                            <span className="tooltip">Quick View</span>
-                          </a>
+                          
+                          {/* <div style={{
+                            background: getColors().grey[900]
+                          }}>
+
+                            {item.id && item.title && (
+                              <AddToCart
+                                _id={item.id}
+                              />
+                            )}
+                          </div> */}
+                          
+                         
                         </div>
 
                         {item.sizes && (
@@ -210,13 +206,15 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
                     </div>
                   </SwiperSlide>
 
-                ))}
+))}
               </Swiper>
             </div>
           </div>
+
         </section>
+
+      {/* Render QuickAdd Modal */}
       </div>
-    </section>
 
 
   );

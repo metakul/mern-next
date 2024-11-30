@@ -83,7 +83,7 @@ const HomePage: React.FC<HomePageProps> = () => {
           <div className="relative  w-screen  overflow-hidden">
           {/* Video Background */}
           <video
-            className=" w-[100vw] h-[95vh] object-cover pointer-events-none"
+            className=" w-[100vw] h-[70vh] object-cover pointer-events-none"
             src="https://video-previews.elements.envatousercontent.com/h264-video-previews/34b4f82d-339a-4c07-ba47-e8a87ded3de1/2733283.mp4"
             autoPlay
             loop

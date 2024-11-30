@@ -63,7 +63,7 @@ export default function DashboardLayout() {
       ),
       content: <div>
       <Outlet />
-      <QuickAdd />
+      {/* <QuickAdd /> */}
       <QuickView />
       </div>,
       label: Tabs.tabTitle1,

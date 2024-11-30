@@ -8,6 +8,7 @@ import {
   Toolbar,
   // IconButton,
   useTheme,
+  Typography,
   // Typography,
 } from "@mui/material";
 
@@ -62,7 +63,11 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet }) => {
             justifyContent: "center",
           }}
         >
-          <img src={`/logo.png`} alt="logo" className="w-8 h-8 ml-4" />
+          <Typography variant="h4">
+
+          WIW
+          </Typography>
+          {/* <img src={`/logo.png`} alt="logo" className="w-9 h-8 ml-2" /> */}
         </Box>
 
         <Box sx={{ flexGrow: 1 }} />
@@ -79,7 +84,9 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet }) => {
         >
           <InstallPWA />
 
-          <button onClick={togglePlay}>
+          <button onClick={togglePlay}  style={{
+              color: getColors().grey[900]
+            }}>
             {isPlaying ? <PauseCircleFilledIcon/> : <PlayCircleFilledWhiteIcon/>}
           </button>
 

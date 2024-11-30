@@ -15,6 +15,8 @@ import DropShipItems from '@/components/Cards/DropShipItems';
 // import ProductCard2 from '@/components/Cards/ProductCard2';
 import HomeCard from '@/components/Cards/HomeCard';
 import Products from '@/components/Products';
+import Categories from '@/components/Categories';
+import Scroll from '@/components/Motion/scroll';
 
 const Tab1 = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -49,25 +51,30 @@ const Tab1 = () => {
     <>
       {/* <MarqueeCryptoNew /> */}
       <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}>
-
-<Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Top Products
         </Typography>
         <DropShipItems showScroll={true} dropShipItems={dropShipItems} loading={loading} />
-
+        <Categories />
         {dropShipItems.length > 0 && <HomeCard dropShipItems={dropShipItems} />}
 
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Hot Deals
         </Typography>
         <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading} />
-     
+        
+        <Scroll  parsedNotes={dropShipItems} loading/>
+
         {/* <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Most Liked Shirt
         </Typography> */}
         {/* <DropShipItems categoryType="shirt" dropShipItems={dropShipItems} loading={loading}/> */}
-        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+        <Typography variant="h3" sx={{ mt: 14 }} className="text-center mt-8 mb-4">
           Featured Items
         </Typography>
         <ProductCard1 cartItems={dropShipItems} />
