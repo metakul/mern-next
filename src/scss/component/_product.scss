@@ -1228,7 +1228,7 @@
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    z-index: 20;
+    // z-index: 20;
     .sold-out {
       @include flex(center, center);
       z-index: 100;

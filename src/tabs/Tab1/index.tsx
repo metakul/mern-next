@@ -17,6 +17,7 @@ import HomeCard from '@/components/Cards/HomeCard';
 import Products from '@/components/Products';
 import Categories from '@/components/Categories';
 import Scroll from '@/components/Motion/scroll';
+import CardWithPagination from '@/components/Cards/CardWithPagination';
 
 const Tab1 = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -46,7 +47,7 @@ const Tab1 = () => {
     // Load items when the component mounts
     handleLoadItems();
     handleLoadCategories();
-  }, []);
+  }, [dispatch]);
 
   const  categoryItemsHotDeals  = useSelector(selectDropShipItemsByCategory("hotdeals"));
   const  categoryItemsWinter  = useSelector(selectDropShipItemsByCategory("winterwear"));
@@ -99,12 +100,12 @@ const Tab1 = () => {
           Most Liked Shirt
         </Typography> */}
         {/* <DropShipItems categoryType="shirt" dropShipItems={dropShipItems} loading={loading}/> */}
+        {/* <ProductCard2/> */}
+      </Box>
         <Typography variant="h3" sx={{ mt: 14 }} className="text-center mt-8 mb-4">
           Featured Items
         </Typography>
-        <ProductCard1 cartItems={dropShipItems} />
-        {/* <ProductCard2/> */}
-      </Box>
+        <CardWithPagination cartItems={dropShipItems} />
     </>
   );
 };
