@@ -16,6 +16,7 @@ import {  SetStateAction, useEffect, useState } from 'react';
 // import { selectUserType } from '@/lib/slices/authSlice';
 import { BlogsStatusInfo } from '@/Datatypes/enums';
 import { getColors } from '@/layout/Theme/themes';
+import BlogImage from './Blogimage';
 const Blogs = () => {
   // const theme = useTheme()
   const dispatch = useDispatch()
@@ -48,7 +49,6 @@ const Blogs = () => {
 
   const blogLink = currentDomain ? `${currentDomain}` : '';
 
-
   useEffect(() => {
     // Load blogs when the component mounts
     handleLoadBlogs();
@@ -62,9 +62,6 @@ const Blogs = () => {
   return (
 
     <div className=" sm:w-full overflow-hidden mx-auto">
-
-  
-
     {
       (blogsData as Iblog[])?.map((blog: Iblog, index: number) => (
         <section key={index} className="relative py-4">
@@ -72,18 +69,9 @@ const Blogs = () => {
           <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
 
             <div className="rounded-[1.25rem]  p-4 flex-row justify-center">
-            <Box sx={{
-              display: "flex",
-              justifyContent: "center",
-              mb: 4
-            }}>
-              <img
-                src={`data:image/png;base64,${blog.image}`}
-                alt={"Post image"}
-                className=" w-[80%] lg:w-[70%] sm:h-[20em] object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
-                onClick={() => handleOpenBlogs(blog.blogId)}
-              />
-            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
+            <BlogImage blog={blog} handleOpenBlogs={handleOpenBlogs} />
+          </Box>
               <Grid container className='mt-8'>
 
                 <Grid item xs={8} md={8} lg={8}>

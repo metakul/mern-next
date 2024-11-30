@@ -21,6 +21,7 @@ import { selectUserType } from '@/lib/slices/authSlice';
 import { fetchSingleBlogApiSlice, updateBlogStatusSlice } from '@/lib/slices/Blogs/BlogApiSlice';
 import { Helmet } from "react-helmet";
 import {  useNavigate, useParams } from 'react-router-dom';
+import BlogImage from '@/tabs/Tab1/Blogimage';
 
 
 const SingleBlogDetails = () => {
@@ -176,11 +177,16 @@ const SingleBlogDetails = () => {
                   justifyContent: "center",
                   mb: 4
                 }}>
-                  <img
-                    src={`data:image/png;base64,${image}`}
-                    alt={"Post image"}
-                    className=" w-[80%] lg:w-[70%] sm:h-3/4 object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
-                  />
+                              <BlogImage blog={{
+                  blogId: blogId,
+                  title,
+                  description: truncatedDescription,
+                  image: image,
+                  author: author,
+                  categories: categories,
+                  cryptoSymbol: cryptoSymbol,
+                }}  />
+
                 </Box>
                 <span className="inline-flex flex-wrap items-center space-x-1 text-accent">
                   {categories.map((category, index) => (
