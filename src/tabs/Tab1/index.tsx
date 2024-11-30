@@ -56,19 +56,19 @@ const Tab1 = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-2">
           Top Products
         </Typography>
-        <DropShipItems showScroll={true} dropShipItems={dropShipItems} loading={loading} />
+        <DropShipItems categoryType="discount" />
         <Categories />
         {dropShipItems.length > 0 && <HomeCard dropShipItems={dropShipItems} />}
 
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Hot Deals
         </Typography>
-        <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading} />
+        <DropShipItems categoryType="hotdeals" />
         
-        <Scroll  parsedNotes={dropShipItems} loading/>
+        <Scroll parsedNotes={dropShipItems} loading/>
 
         {/* <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Most Liked Shirt

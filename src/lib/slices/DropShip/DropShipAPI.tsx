@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setLoadedItems, addItem, updateItem } from './DropShipSlice';
+import { setLoadedItems, addItem, updateItem, setDropShipItemsByCategory } from './DropShipSlice';
 import { ApiError, ApiSuccess } from '../../../Datatypes/interfaces/interface';
 import Request from '@/Backend/axiosCall/apiCall';
 import { IDropShipItem } from '../../../Datatypes/interfaces/interface';
@@ -34,6 +34,44 @@ export const fetchDropShipItemsApi = createAsyncThunk(
 
     } catch (error) {
       dispatch(setLoadedItems({
+        loading: false,
+      }));
+      const castedError = error as ApiError;
+      return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
+    }
+  }
+);
+
+export const fetchDropShipItemsByCategoryApi = createAsyncThunk(
+  'dropShipCollection/setDropShipItemsByCategory',
+  async ({ category, pageSize, page, setItemPage }: { category: string, pageSize?: number, page?: number, setItemPage?: (page: number) => void }, { rejectWithValue, dispatch }) => {
+    dispatch(setDropShipItemsByCategory({
+      category,
+      loading: true,
+    }));
+    try {
+      const response = await Request({
+        endpointId: "GET_DROPSHIP_ITEMS_BY_CATEGORY",
+        slug: `?category=${category}`,
+      });
+
+      const items: IDropShipItem[] = response;
+      dispatch(setDropShipItemsByCategory({ category, itemData: items, loading: false }));
+
+      const apiSuccess: ApiSuccess = {
+        statusCode: response.status,
+        message: 'Items fetched successfully',
+        data: response,
+      };
+      if (page && setItemPage) {
+        setItemPage(page + 1);
+      }
+
+      return apiSuccess;
+
+    } catch (error) {
+      dispatch(setDropShipItemsByCategory({
+        category,
         loading: false,
       }));
       const castedError = error as ApiError;

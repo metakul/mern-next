@@ -1,53 +1,34 @@
-import React, { JSXElementConstructor, ReactElement, ReactNode, useEffect, useState } from 'react';
-import { Button, Stack, Skeleton, Box, Grid, Container, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/lib/store';
 import { IDropShipItem } from '@/Datatypes/interfaces/interface';
-import ShareButton from '@/components/Elements/Buttons/ShareButton';
 import { getColors } from '@/layout/Theme/themes';
 import { fetchDropShipItemsApi } from '@/lib/slices/DropShip/DropShipAPI';
-import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
 import { DropShipStatusInfo, Pages } from '@/Datatypes/enums';
-import DropShipItemDetails from '@/components/DropShipItemDetails';
 import AddToCart from '@/components/AddToCart';
-import CustomSwiper from '@/components/Swiper';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from "framer-motion";
-import Scroll from '@/components/Motion/scroll';
-import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { Navigation } from "swiper/modules";
-import QuickAdd from '../QuickAdd';
+import { selectedDropShipItems } from '@/lib/slices/DropShip/DropShipSlice';
 
 interface DropShipItemsProps {
   categoryType?: string;
-  dropShipItems: IDropShipItem[]
-  loading: boolean
-  showScroll?: boolean
-  grid?: number
 }
 
-const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipItems, loading, showScroll, grid }) => {
+const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
   const dispatch = useDispatch();
   const [page, setItemPage] = useState(1);
-  const [showItemPerPage] = useState(40);
-  const [openedItemId, setOpenedItemId] = useState<string | null>(null);
-  const [currentDomain, setCurrentDomain] = useState<string | null>(null);
-
-  const [quickAddItem, setQuickAddItem] = useState<IDropShipItem | null>(null);
-
-  const handleQuickAdd = (item: IDropShipItem) => {
-    setQuickAddItem(item);
-  };
-
+  const navigate = useNavigate();
+  const { dropShipItems, loading } = useSelector(selectedDropShipItems);
 
   const handleLoadItems = async () => {
+
     try {
       (dispatch as AppDispatch)(
         fetchDropShipItemsApi({
           pageSize: 10,
-          page,
-          setItemPage,
+          page: 1,
           status: DropShipStatusInfo.APPROVED,
         })
       );
@@ -55,35 +36,14 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
       console.error("Failed to fetch DropShip items:", error);
     }
   };
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentDomain(window.location.origin);
-    }
-  }, []);
-  const navigate = useNavigate();
-
-  const handleNavigate = (href: string) => {
-    navigate(href);
-  };
-
-  const itemLink = currentDomain ? `${currentDomain}` : '';
-
   useEffect(() => {
     // Load items when the component mounts
     handleLoadItems();
   }, []);
 
-  const handleOpenItem = (id: string | null) => {
-    setOpenedItemId(id === openedItemId ? null : id);
+  const handleNavigate = (href: string) => {
+    navigate(href);
   };
-
-  // Filter items by categoryType if provided
-  const filteredItems = categoryType
-    ? dropShipItems.filter((item: IDropShipItem) =>
-      item.categories?.includes(categoryType)
-    )
-    : dropShipItems;
 
   return (
       <div className="" >
@@ -105,7 +65,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
             </div>
           </div>
         </div>
-        <section className="flat-spacing-2 pt_0">
+        <section className="flat-spacing-2 pt-0">
           <div className="container">
             <div className="hover-sw-nav hover-sw-2">
               <Swiper
@@ -134,7 +94,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
                   nextEl: ".snbn114",
                 }}
               >
-                {filteredItems.map((item: IDropShipItem, index: number) => (
+                {dropShipItems.map((item: IDropShipItem, index: number) => (
 
                   <SwiperSlide key={index} className="swiper-slide" >
 

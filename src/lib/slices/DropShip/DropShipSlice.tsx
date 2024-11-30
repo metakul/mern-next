@@ -3,11 +3,13 @@ import { IDropShipItem } from '../../../Datatypes/interfaces/interface';
 
 interface DropShipState {
   dropShipItems: IDropShipItem[];
+  dropShipItemsByCategory: { [category: string]: IDropShipItem[] };
   loading: boolean;
 }
 
 const initialState: DropShipState = {
   dropShipItems: [] as IDropShipItem[],
+  dropShipItemsByCategory: {} as { [category: string]: IDropShipItem[] },
   loading: false,
 };
 
@@ -25,6 +27,11 @@ const dropShipSlice = createSlice({
         });
       state.loading = action.payload.loading;
     },
+    setDropShipItemsByCategory: (state, action: PayloadAction<{ category: string; itemData?: IDropShipItem[]; loading: boolean }>) => {
+      const { category, itemData } = action.payload;
+      state.dropShipItemsByCategory[category] = itemData || [];
+      state.loading = action.payload.loading;
+    },
     addItem: (state, action: PayloadAction<IDropShipItem>) => {
       state.dropShipItems.push(action.payload);
     },
@@ -38,7 +45,7 @@ const dropShipSlice = createSlice({
   },
 });
 
-export const { setLoadedItems, addItem, updateItem } = dropShipSlice.actions;
+export const { setLoadedItems, setDropShipItemsByCategory, addItem, updateItem } = dropShipSlice.actions;
 
 export default dropShipSlice.reducer;
 
@@ -47,3 +54,6 @@ export const selectedDropShipItems = (state: { dropShipCollection: DropShipState
 
 export const useSelectedDropShipItem = (itemId: string | undefined) => (state: { dropShipCollection: DropShipState }) =>
   state.dropShipCollection.dropShipItems.find((item) => item.id === itemId);
+
+export const selectDropShipItemsByCategory = (category: string) =>(state: { dropShipCollection: DropShipState }) =>
+  state.dropShipCollection.dropShipItemsByCategory[category] || [];
