@@ -24,7 +24,7 @@ const ProductCard1: React.FC<ProductCard1Props> = ({ cartItems }) => {
                 <Box className="flex justify-between items-center">
                   <Box>
                     <Typography variant="h6" className="text-md ">{item.name || item.title}</Typography>
-                    <Typography variant="body1" className="text-gray-600">£{item.price}</Typography>
+                    <Typography variant="body1" className="text-gray-600">₹ {item.price}</Typography>
                   </Box>
                   {item.id &&
                     <IconButton className="text-green-500">

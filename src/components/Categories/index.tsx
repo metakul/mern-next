@@ -1,9 +1,13 @@
+import { Pages } from "@/Datatypes/enums";
 import { getColors } from "@/layout/Theme/themes";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { selectedDropShipItems } from "@/lib/slices/DropShip/DropShipSlice";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Categories() {
   const [activeTab, setActiveTab] = useState("dresses");
+  const { dropShipItems } = useSelector(selectedDropShipItems);
 
   const handleTabClick = (targetId: string) => {
     setActiveTab(targetId);
@@ -11,23 +15,32 @@ export default function Categories() {
   };
 
   const categories = [
-    { id: "dresses", label: "Dresses", count: 31, image: "/images/collections/collection-49.jpg" },
-    { id: "tops", label: "Tops", count: 14, image: "/images/collections/collection-50.jpg" },
-    { id: "shirtsBlouses", label: "Shirts Blouses", count: 31, image: "/images/collections/collection-51.jpg" },
-    { id: "pants", label: "Pants", count: 9, image: "/images/collections/collection-52.jpg" },
-    { id: "cardigans", label: "Cardigans", count: 23, image: "/images/collections/collection-53.jpg" },
-    { id: "blazers", label: "Blazers", count: 9, image: "/images/collections/collection-54.jpg" },
-    { id: "overalls", label: "Overalls", count: 23, image: "/images/collections/collection-55.jpg" },
+    { id: "dresses", label: "Dresses", count: 31, image: `data:image/png;base64,${dropShipItems[0]?.image}`,imageNo:0 },
+    { id: "jackets", label: "Jackets", count: 31, image: `data:image/png;base64,${dropShipItems[5]?.image}`, imageNo:5 },
+    { id: "shoes", label: "Shoes", count: 9, image: `data:image/png;base64,${dropShipItems[1]?.image}`,imageNo:1 },
+    { id: "tops", label: "Tops", count: 14, image: `data:image/png;base64,${dropShipItems[2]?.image}`,imageNo:2 },
+    { id: "men", label: "Men", count: 23, image: `data:image/png;base64,${dropShipItems[6]?.image}`,imageNo:6 },
+    { id: "overalls", label: "Overalls", count: 23, image: "/images/collections/collection-55.jpg" ,imageNo:5},
   ];
+
+  const navigate = useNavigate();
+  const handleNavigate = (href: string) => {
+    navigate(href);
+  };
+
+  const handleImageClick = (index: number, itemIndex: number) => {
+    const item = dropShipItems[itemIndex];
+    if (item && item.id) {
+      handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`);
+    }
+  };
 
   return (
     <section className="flat-spacing-8 mb-16 mt-8 wow fadeInUp" data-wow-delay="0s">
       <div className="container">
         <div className="tf-grid-layout-v2 flat-animate-tab md:flex">
           {/* Tabs */}
-          <ul className="widget-tab-4 scroll-snap" style={{
-            borderColor:getColors().grey[100]
-          }} role="tablist">
+          <ul className="widget-tab-4 scroll-snap" style={{ borderColor: getColors().grey[100] }} role="tablist">
             {categories.map((category) => (
               <li className="nav-tab-item" role="presentation" key={category.id}>
                 <div
@@ -51,23 +64,27 @@ export default function Categories() {
 
           {/* Tab Content */}
           <div className="tab-content">
-            {categories.map((category) => (
+            {categories.map((category, index) => (
               <div
                 className={`tab-pane ${activeTab === category.id ? "active show" : ""}`}
                 id={category.id}
                 role="tabpanel"
                 key={category.id}
               >
-                <Link to={category.label}className="fullwidth radius-10 o-hidden">
+                <div
+                  className="radius-10 o-hidden"
+                  onClick={() => handleImageClick(index, category.imageNo)}
+                  style={{ cursor: "pointer" }}
+                >
                   <img
                     className="lazyload"
                     data-src={category.image}
                     alt={`img-${category.label}`}
                     src={category.image}
-                    width={720}
-                    height={597}
+                    width={600}
+                    height={600}
                   />
-                </Link>
+                </div>
               </div>
             ))}
           </div>

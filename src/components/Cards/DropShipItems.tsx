@@ -20,7 +20,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
   const dispatch = useDispatch();
   const [page, setItemPage] = useState(1);
   const navigate = useNavigate();
-  const { dropShipItems, loading } = useSelector(selectedDropShipItems);
+  const { dropShipItems } = useSelector(selectedDropShipItems);
 
   const handleLoadItems = async () => {
 
@@ -49,7 +49,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
       <div className="" >
         <div className="flat-title wow fadeInUp" data-wow-delay="0s">
           <div className="flex flex-1 items-center  gap-10 align-items-center">
-            <div className="nav-prev-slider nav-prev-product  snbp114">
+            <div className={`nav-prev-slider nav-prev-product ${categoryType}snbp114`}>
               <span className="icon icon-arrow1-left" />
             </div>
             <Link
@@ -60,7 +60,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
                 VIEW ALL
               </Typography>
             </Link>
-            <div className=" nav-next-slider nav-next-product snbn114">
+            <div className={`nav-next-slider nav-next-product ${categoryType}snbn114`}>
               <span className="icon icon-arrow1-right" />
             </div>
           </div>
@@ -90,8 +90,8 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
                 }}
                 modules={[Navigation]}
                 navigation={{
-                  prevEl: ".snbp114",
-                  nextEl: ".snbn114",
+                  prevEl: `.${categoryType}snbp114`,
+                  nextEl: `.${categoryType}snbn114`,
                 }}
               >
                 {dropShipItems.map((item: IDropShipItem, index: number) => (
@@ -161,7 +161,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType }) => {
                         <Link to={`/product-detail/${item.id}`} className="title link">
                           {item.title}
                         </Link>
-                        <span className="price">${item.price ? item.price.toFixed(2) : 'N/A'}</span>
+                        <span className="price">₹ {item.price ? item.price.toFixed(2) : 'N/A'}</span>
                       </div>
                     </div>
                   </SwiperSlide>
