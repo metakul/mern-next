@@ -38,6 +38,7 @@ import ProfilePage from "@/(routes)/profile/page";
 import { useShowOutlet } from "@/context/showOutletContext";
 import QuickAdd from "@/components/QuickAdd";
 import Context from "@/context/Context";
+import QuickView from "@/components/QuickView";
 
 export default function DashboardLayout() {
   const [theme, colorMode] = useMode();
@@ -63,6 +64,7 @@ export default function DashboardLayout() {
       content: <div>
       <Outlet />
       <QuickAdd />
+      <QuickView />
       </div>,
       label: Tabs.tabTitle1,
     },

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Stack, Skeleton, Box, Grid, Container } from '@mui/material';
+import React, { JSXElementConstructor, ReactElement, ReactNode, useEffect, useState } from 'react';
+import { Button, Stack, Skeleton, Box, Grid, Container, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/lib/store';
 import { IDropShipItem } from '@/Datatypes/interfaces/interface';
@@ -11,10 +11,12 @@ import { DropShipStatusInfo, Pages } from '@/Datatypes/enums';
 import DropShipItemDetails from '@/components/DropShipItemDetails';
 import AddToCart from '@/components/AddToCart';
 import CustomSwiper from '@/components/Swiper';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 import Scroll from '@/components/Motion/scroll';
 import { CartItem } from '@/lib/slices/DropShip/AddToCartSlice';
+import { SwiperSlide, Swiper } from 'swiper/react';
+import { Navigation } from "swiper/modules";
 
 interface DropShipItemsProps {
   categoryType?: string;
@@ -56,7 +58,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
   const handleNavigate = (href: string) => {
     navigate(href);
   };
-  
+
   const itemLink = currentDomain ? `${currentDomain}` : '';
 
   useEffect(() => {
@@ -76,110 +78,147 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipIte
     : dropShipItems;
 
   return (
-    <Container className="overflow-hidden mx-auto">
-      {showScroll ? (
-
-        <Scroll loading={loading} parsedNotes={filteredItems as unknown as CartItem[]} />
-      ) : (
-        <>
-          <Grid container gap={0} sx={{ mb: 0 }}>
-
-            {filteredItems.map((item: IDropShipItem, index: number) => (
-              <Grid
-                key={index}
-                xs={grid = 6}
-                sm={grid = 6}
-                md={grid = 4}
-                lg={grid = 4}
-                className='p-4 overflow-hidden'
-              >
-                <Grid item xs={12}
-                  className="flex"
-                  onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
-                >
-
-                  <img
-                    src={`data:image/png;base64,${item.image}`}
-                    alt={`Slide ${index + 1}`}
-                    className="object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
-                  />
-                </Grid>
-                <Grid container className="mt-2 px-2 sm:px-4 md:px-4 lg:px-6">
-
-                  <Grid item xs={8}>
-                    <h2
-                      className="mb-2 font-display"
-                      style={{ overflow: 'hidden' }}
-                      onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}
-                    >
-                      {item.title} <br />
-                    </h2>
-                    <h2
-                      className=" font-display"
-                      style={{ overflow: 'hidden' }}
-                      onClick={() => handleOpenItem(item.id || '')}
-                    >
-                      Price: ₹{item.price}
-                    </h2>
-                  </Grid>
-
-                  <Grid item xs={4} className="mx-auto flex justify-center mb-2">
-
-                    {item.id && item.title && (
-                      <AddToCart
-                        _id={item.id}
-                      />
-                    )}
-                  </Grid>
-                  <DropShipItemDetails
-                    isDropShipItemInfoOpen={openedItemId === item.id}
-                    price={item.price}
-                    _dropShipItemId={item.id || ''}
-                    name={item.title}
-                    image={item.image}
-                  />
-                </Grid>
-              </Grid>
-            ))}
-          </Grid>
-        </>
-
-      )}
-
-
-      {loading && !showScroll && (
-        <Grid container spacing={2} sx={{ mb: 4 }}>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Grid key={index} item xs={grid == 2 ? 12 : 6}
-              md={grid == 2 ? 12 : 6}
-              lg={grid == 2 ? 6 : 4}
+    <section className=" pt_0 mt-0">
+      <div className="container">
+        <div className="flat-title wow fadeInUp" data-wow-delay="0s">
+          <div className="d-flex gap-16 align-items-center">
+            <div className="nav-sw-arrow nav-prev-slider nav-prev-product  snbp114">
+              <span className="icon icon-arrow1-left" />
+            </div>
+            <Link
+              to={`/product-style-05`}
+              className="tf-btn btn-line fs-12 fw-6"
             >
-              <Stack spacing={1} className="relative py-4 mt-4">
-                <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
-                  <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-                    <Skeleton variant="rounded" width="100%" height="400px" />
-                  </div>
-                </div>
-              </Stack>
-            </Grid>
-          ))}
-        </Grid>
-      )}
-      {!loading &&
-        <div className="mx-auto flex flex-row justify-center">
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: getColors().blueAccent[900],
-              color: getColors().blueAccent[100],
-            }}
-            onClick={handleLoadItems}
-          >
-            Load More
-          </Button>
+              <Typography>
+
+                VIEW ALL
+              </Typography>
+            </Link>
+            <div className="nav-sw-arrow nav-next-slider nav-next-product snbn114">
+              <span className="icon icon-arrow1-right" />
+            </div>
+          </div>
         </div>
-      }
-    </Container>
+        <section className="flat-spacing-2 pt_0">
+          <div className="container">
+            <div className="hover-sw-nav hover-sw-2">
+              <Swiper
+                dir="ltr"
+                className="swiper tf-sw-product-sell wrap-sw-over"
+                slidesPerView={4} // Equivalent to data-preview={4}
+                spaceBetween={30} // Equivalent to data-space-lg={30}
+                breakpoints={{
+                  1024: {
+                    slidesPerView: 4, // Equivalent to data-tablet={3}
+                  },
+                  640: {
+                    slidesPerView: 3, // Equivalent to data-tablet={3}
+                  },
+                  0: {
+                    slidesPerView: 2, // Equivalent to data-mobile={2}
+                    spaceBetween: 15, // Equivalent to data-space-md={15}
+                  },
+                }}
+                modules={[Navigation]}
+                navigation={{
+                  prevEl: ".snbp114",
+                  nextEl: ".snbn114",
+                }}
+              >
+                {filteredItems.map((item: IDropShipItem, index: number) => (
+
+                  <SwiperSlide key={index} className="swiper-slide">
+
+                    <div className="card-product fl-item  w-[14em] " key={item.id}>
+                      <div className="card-product-wrapper">
+                        <Box onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)} className="product-img">
+                          <img
+                            className="lazyload img-product"
+                            data-src={item.image}
+                            src={`data:image/png;base64,${item.image}`}
+                            alt="image-product"
+                            width={720}
+                            height={1005}
+                          />
+                          <img
+                            className="lazyload img-hover"
+                            data-src={
+                              item.image ? item.image : item.image
+                            }
+                            src={item.image ? `data:image/png;base64,${item.image}` : `data:image/png;base64,${item.image}`}
+                            alt="image-product"
+                            width={720}
+                            height={1005}
+                          />
+                        </Box>
+                        <div className="list-product-btn">
+                          <a
+                            href="#quick_add"
+                            // onClick={() => setQuickAddItem(product.id)}
+                            data-bs-toggle="modal"
+                            className="box-icon  quick-add tf-btn-loading"
+                            style={{
+                              background: getColors().grey[900]
+                            }}
+                          >
+                            <span className="icon icon-bag" style={{
+                              color: getColors().grey[100]
+                            }} />
+                            <span className="tooltip">Quick Add</span>
+                          </a>
+                          <div style={{
+                            background: getColors().grey[900]
+                          }}>
+
+                            {item.id && item.title && (
+                              <AddToCart
+                                _id={item.id}
+                              />
+                            )}
+                          </div>
+                          <a
+                            href="#quick_view"
+                            // onClick={() => setQuickViewItem(product)}
+                            data-bs-toggle="modal"
+                            className="box-icon  quickview tf-btn-loading"
+                            style={{
+                              background: getColors().grey[900]
+                            }}
+                          >
+                            <span className="icon icon-view" style={{
+                              color: getColors().grey[100]
+                            }} />
+                            <span className="tooltip">Quick View</span>
+                          </a>
+                        </div>
+
+                        {item.sizes && (
+                          <div className="size-list">
+                            {item.sizes.map((size: any) => (
+                              <span key={String(size)}>{String(size.sizeName)}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="card-product-info">
+                        <Link to={`/product-detail/${item.id}`} className="title link">
+                          {item.title}
+                        </Link>
+                        <span className="price">${item.price ? item.price.toFixed(2) : 'N/A'}</span>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+
   );
 };
 

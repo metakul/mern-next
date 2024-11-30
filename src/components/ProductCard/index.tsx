@@ -8,13 +8,9 @@ import { Link } from "react-router-dom";
 
 export const ProductCard = ({ product }:any) => {
   const [currentImage, setCurrentImage] = useState(product.imgSrc);
-  const { setQuickViewItem } = useContextElement();
   const {
+    setQuickViewItem,
     setQuickAddItem,
-    addToWishlist,
-    isAddedtoWishlist,
-    addToCompareItem,
-    isAddedtoCompareItem,
   } = useContextElement();
   useEffect(() => {
     setCurrentImage(product.imgSrc);
@@ -59,56 +55,6 @@ export const ProductCard = ({ product }:any) => {
             <span className="tooltip">Quick Add</span>
           </a>
           <a
-            onClick={() => addToWishlist(product.id)}
-            className="box-icon  wishlist btn-icon-action"
-            style={{
-              background:getColors().grey[100]
-            }}
-          >
-            <span
-              className={`icon icon-heart ${
-                isAddedtoWishlist(product.id) ? "added" : ""
-              }`}
-              style={{
-                color:getColors().grey[900]
-              }} 
-            />
-            <span className="tooltip">
-              {isAddedtoWishlist(product.id)
-                ? "Already Wishlisted"
-                : "Add to Wishlist"}
-            </span>
-            <span className="icon icon-delete"  />
-          </a>
-          <a
-            href="#compare"
-            data-bs-toggle="offcanvas"
-            aria-controls="offcanvasLeft"
-            onClick={() => addToCompareItem(product.id)}
-            className="box-icon  compare btn-icon-action"
-            style={{
-              background:getColors().grey[100]
-            }}
-          >
-            <span
-              className={`icon icon-compare  ${
-                isAddedtoCompareItem(product.id) ? "added" : ""
-              }` }
-              style={{
-                color:getColors().grey[900]
-              }} 
-            />
-            <span className="tooltip">
-              {" "}
-              {isAddedtoCompareItem(product.id)
-                ? "Already Compared"
-                : "Add to Compare"}
-            </span>
-            <span className="icon icon-check" style={{
-              color:getColors().grey[900]
-            }}  />
-          </a>
-          <a
             href="#quick_view"
             onClick={() => setQuickViewItem(product)}
             data-bs-toggle="modal"
@@ -123,15 +69,7 @@ export const ProductCard = ({ product }:any) => {
             <span className="tooltip">Quick View</span>
           </a>
         </div>
-
-        {/* // todo add sale time countdown */}
-        {/* {product.countdown && (
-          <div className="countdown-box">
-            <div className="js-countdown">
-              <CountdownComponent />
-            </div>
-          </div>
-        )} */}
+ 
         {product.sizes && (
           <div className="size-list">
             {product.sizes.map((size: boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Key | null | undefined) => (

@@ -46,9 +46,9 @@ const AddToCart: React.FC<AddToCartProps> = ({ _id, }) => {
   };
 
   return (
-    <Box sx={{ color: getColors().blueAccent[100] }}>
+    <Box >
       <Button onClick={handleAddToCart}>
-        <AddShoppingCartIcon/>
+        <AddShoppingCartIcon  sx={{ color: getColors().grey[100] }}/>
       </Button>
       <Dialog open={openSizePicker} onClose={() => setOpenSizePicker(false)}>
         <SizePicker sizes={sizes} onSelectSize={handleSelectSize} onClose={() => setOpenSizePicker(false)} />

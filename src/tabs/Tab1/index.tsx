@@ -51,25 +51,18 @@ const Tab1 = () => {
       <Box sx={{
       }}>
 
-        <Products/>
-        {dropShipItems.length>0 && <HomeCard  dropShipItems={dropShipItems}/> }
-        <Grid container>
-          <Grid
-            sm={12}
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
-              Hot Deals
-            </Typography>
-            <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading} />
-          </Grid>
-          <Grid sm={12} sx={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}>
-            <DropShipItems showScroll={true} categoryType="winterwear" dropShipItems={dropShipItems} loading={loading} />
-          </Grid>
-        </Grid>
+<Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+          Top Products
+        </Typography>
+        <DropShipItems showScroll={true} dropShipItems={dropShipItems} loading={loading} />
+
+        {dropShipItems.length > 0 && <HomeCard dropShipItems={dropShipItems} />}
+
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
+          Hot Deals
+        </Typography>
+        <DropShipItems grid={2} categoryType="hotdeals" dropShipItems={dropShipItems} loading={loading} />
+     
         {/* <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Most Liked Shirt
         </Typography> */}
