@@ -14,7 +14,7 @@ export default function ShopDefault() {
     <>
       <section className="flat-spacing-2 mt-24">
         <div className="container">
-          <div className=" grid grid-cols-3 items-center gap-4">
+          <div className=" grid grid-cols-2 md:grid-cols-3 items-center gap-4">
             <div className="tf-control-filter">
               <a
                 href="#filterShop"
