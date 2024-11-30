@@ -132,9 +132,10 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
             color: getColors().blueAccent[100]
           }}
         >
-        <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" />
+          <MenuIcon/>
+        {/* <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" /> */}
         </IconButton>
-          {address ? (
+          {/* {address ? (
             <>
               <FlexBetween>
                 <div className="flex justify-between items-center mt-2 sm:mt-2 md:mt-0 lg:mt-0 mx-2 ">
@@ -206,7 +207,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
                           Profile
                         </Typography>
                       </StyledMenuItem>
-                    </Paper>
+                    </Paper> */}
                     {/* <Paper>
 
                       <StyledMenuItem >
@@ -225,11 +226,11 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
                         <Typography>Log Out</Typography>
                       </StyledMenuItem>
                     </Paper> */}
-                  </StyledMenu>
+                  {/* </StyledMenu>
                 </div>
               </FlexBetween>
             </>
-          ) : null}
+          ) : null} */}
         </Stack>
       </Toolbar>
     </AppBar>
