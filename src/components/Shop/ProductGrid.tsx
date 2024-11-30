@@ -18,7 +18,7 @@ export default function ProductGrid({
       >
         {allproducts.length} product(s) found
       </div>
-      <div className="grid grid-cols-3  wrapper-shop" data-grid={`grid-${gridItems}`}>
+      <div className="grid grid-cols-2 md:grid-cols-3  wrapper-shop" data-grid={`grid-${gridItems}`}>
         {/* card product 1 */}
         {allproducts.map((elm, i) => (
           <ProductCard product={elm} key={i} />
