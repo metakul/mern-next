@@ -36,7 +36,7 @@ export default function Categories() {
   };
 
   return (
-    <section className="flat-spacing-8 mb-16 mt-8 wow fadeInUp container flex justify-center" data-wow-delay="0s">
+    <section className="flat-spacing-8 mb-16 mt-8 wow fadeInUp container flex justify-center hidden md:block" data-wow-delay="0s">
       <div className="">
         <div className="tf-grid-layout-v2 flat-animate-tab md:flex">
           {/* Tabs */}
@@ -63,7 +63,7 @@ export default function Categories() {
           </div>
 
           {/* Tab Content */}
-          <div className="tab-content max-h-2">
+          <div className="tab-content ">
             {categories.map((category, index) => (
               <div
                 className={`tab-pane ${activeTab === category.id ? "active show" : ""}`}
@@ -77,12 +77,10 @@ export default function Categories() {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    className="lazyload"
+                    className="lazyload max-h-[600px]" 
                     data-src={category.image}
                     alt={`img-${category.label}`}
                     src={category.image}
-                    width={600}
-                    height={600}
                   />
                 </div>
               </div>
