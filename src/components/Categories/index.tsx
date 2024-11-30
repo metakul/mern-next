@@ -36,8 +36,8 @@ export default function Categories() {
   };
 
   return (
-    <section className="flat-spacing-8 mb-16 mt-8 wow fadeInUp" data-wow-delay="0s">
-      <div className="container">
+    <section className="flat-spacing-8 mb-16 mt-8 wow fadeInUp container flex justify-center" data-wow-delay="0s">
+      <div className="">
         <div className="tf-grid-layout-v2 flat-animate-tab md:flex">
           {/* Tabs */}
           <ul className="widget-tab-4 scroll-snap" style={{ borderColor: getColors().grey[100] }} role="tablist">
@@ -63,7 +63,7 @@ export default function Categories() {
           </div>
 
           {/* Tab Content */}
-          <div className="tab-content">
+          <div className="tab-content max-h-2">
             {categories.map((category, index) => (
               <div
                 className={`tab-pane ${activeTab === category.id ? "active show" : ""}`}

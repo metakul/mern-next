@@ -20,7 +20,7 @@ const ProductCard1: React.FC<ProductCard1Props> = ({ cartItems }) => {
               <Box className="relative border rounded-xl">
                 <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
               </Box>
-              <Box className="p-6">
+              <Box className="p-2">
                 <Box className="flex justify-between items-center">
                   <Box>
                     <Typography variant="h6" className="text-md ">{item.name || item.title}</Typography>

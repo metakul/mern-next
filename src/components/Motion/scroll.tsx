@@ -54,7 +54,7 @@ function Card({ item, hueA, hueB }: Props) {
                     <img
                         src={item.image ? `data:image/png;base64,${item.image}` : "/placeholder.png"}
                         alt={item.name || "Product image"}
-                        className="w-[4em] h-[4em] object-cover rounded-md"
+                        className="w-[2em] h-[2em] md:w-[3em] md:h-[4em] object-cover rounded-md"
                         onClick={() => {
                             if (item && item.id && item.title) {
                                 const href = Pages.SINGLE_DROPSHIP_ITEM.replace(
@@ -82,7 +82,7 @@ export default function Scroll({ parsedNotes,loading }: ScrollProps) {
     const hues = [340, 20, 60, 80, 100, 205, 260, 290]; // Example hues for cards
 
     return (
-        <Container className="myCard">
+        <Container className="myCard container">
             {parsedNotes.map((item, index) => (
                 <Card
                     key={item.id}

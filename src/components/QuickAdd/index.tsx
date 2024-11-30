@@ -51,12 +51,9 @@ const QuickAdd: React.FC<QuickAddProps> = ({ _id, sizes, selectedSize, onSelectS
    
         <div className="p-4">
           <div className="header">
-            <span
-              className="icon-close icon-close-popup"
-              data-bs-dismiss="modal"
-            />
+          
           </div>
-          <div className="wrap">
+          <div className="">
             <div className="tf-product-info-item">
               <div className="image">
                 {item && (
