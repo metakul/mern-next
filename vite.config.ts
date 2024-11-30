@@ -31,8 +31,8 @@ const pwaOptions: Partial<VitePWAOptions> ={
     "logo.svg",
   ],
   manifest: {
-    name: "whatiwear",
-    short_name: "whatiwear",
+    name: "WhatIWear",
+    short_name: "WhatIWear",
     description: "whatiwear- A next gen professional shooping platform in Blockchain.",
     icons: [
       {

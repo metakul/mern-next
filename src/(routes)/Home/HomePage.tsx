@@ -61,7 +61,7 @@ const HomePage: React.FC<HomePageProps> = () => {
           />
 
 
-            <title>whatiwear</title>
+            <title>WhatIWear</title>
             <meta name="description" content="Discover the best online shopping experience with whatiwearpers." />
             <meta name="robots" content="index, follow" />
 

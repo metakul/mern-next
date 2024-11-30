@@ -4,6 +4,8 @@ import { Box, Typography, IconButton, Grid, Container } from "@mui/material";
 import { IDropShipItem } from "@/Datatypes/interfaces/interface";
 import CustomSwiper from "../Swiper";
 import AddToCart from "../AddToCart";
+import { Pages } from "@/Datatypes/enums";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCard1Props {
   cartItems: IDropShipItem[];
@@ -11,12 +13,16 @@ interface ProductCard1Props {
 
 const ProductCard1: React.FC<ProductCard1Props> = ({ cartItems }) => {
 
+  const navigate=useNavigate()
+  const handleNavigate = (href: string) => {
+    navigate(href);
+  };
   return (
     <Container>
       <Grid container className="">
         {cartItems.map((item) => (
           <Grid xs={6} md={4} key={item.id} className="p-4 ">
-            <Box key={item.id} className="shadow-md overflow-hidden">
+            <Box key={item.id} className="shadow-md overflow-hidden" onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}>
               <Box className="relative border rounded-xl">
                 <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
               </Box>

@@ -63,11 +63,8 @@ const Header: React.FC<HeaderProps> = ({ setShowOutlet }) => {
             justifyContent: "center",
           }}
         >
-          <Typography variant="h4">
-
-          WIW
-          </Typography>
-          {/* <img src={`/logo.png`} alt="logo" className="w-9 h-8 ml-2" /> */}
+       
+          <img src={`/logo.svg`} alt="logo" className="w-9 h-8 ml-2" />
         </Box>
 
         <Box sx={{ flexGrow: 1 }} />
