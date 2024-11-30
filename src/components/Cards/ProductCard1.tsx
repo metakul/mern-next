@@ -22,8 +22,8 @@ const ProductCard1: React.FC<ProductCard1Props> = ({ cartItems }) => {
       <Grid container className="">
         {cartItems.map((item) => (
           <Grid xs={6} md={4} key={item.id} className="p-4 ">
-            <Box key={item.id} className="shadow-md overflow-hidden" onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}>
-              <Box className="relative border rounded-xl">
+            <Box key={item.id} className="shadow-md overflow-hidden" >
+              <Box className="relative border rounded-xl" onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)}>
                 <CustomSwiper images={[`data:image/png;base64,${item.image}`, `data:image/png;base64,${item.image}`]} />
               </Box>
               <Box className="p-2">

@@ -25,7 +25,7 @@ function HomeCard({ dropShipItems }: HomeCardProps) {
   return (
     <Box sx={{ flexGrow: 1, m: 0, p: 0 }}>
       <div className="flex flex-wrap">
-        <div className="w-full md:w-[50vw] w-[50vw] h-[75vh] md:h-[100vh] hidden md:block">
+        <div className="w-full w-[50vw] md:w-[50vw] h-[40vh] md:h-[80vh]">
           <CustomSwiper
             pagination={false}
             direction="vertical"
