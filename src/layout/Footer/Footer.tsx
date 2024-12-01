@@ -34,7 +34,7 @@ export default function Footer1({ bgColor = "" }) {
     };
   }, []); // Empty dependency array means this will run only once on mount
 
-  const formRef = useRef();
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [success, setSuccess] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
 
@@ -46,20 +46,21 @@ export default function Footer1({ bgColor = "" }) {
   };
 
   const sendMail = () => {
-    emailjs
-      .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
-        publicKey: emailjsPublicKey,
+    if (formRef.current) {
+      emailjs
+        .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
       })
       .then((res) => {
         if (res.status === 200) {
           setSuccess(true);
           handleShowMessage();
-          formRef.current.reset();
+          formRef.current?.reset();
         } else {
           setSuccess(false);
           handleShowMessage();
         }
       });
+  }
   };
 
   return (
