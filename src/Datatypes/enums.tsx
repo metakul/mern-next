@@ -51,7 +51,10 @@ export enum Pages {
   SELL = "/SELL" ,
   ADD_DROPSHIP_ITEM = "/ADD_DROPSHIP_ITEM" ,
   SINGLE_DROPSHIP_ITEM = "/SINGLE_DROPSHIP_ITEM/:dropShipItemTitle/:id" ,
-  CATEGORY_PAGE = "/category/:categoryName" ,
+  CATEGORY_PAGE = "/category/:categoryName",
+  ABOUT_US = "/about-us",
+  OUR_STORE = "/our-store",
+  CONTACT_US = "/contact-1",
 }
 
 export enum HomePageInfo{

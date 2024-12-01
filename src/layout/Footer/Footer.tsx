@@ -6,10 +6,13 @@ import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { aboutLinks, footerLinks, paymentImages } from "@/data/footerLinks";
 import { Link, To } from "react-router-dom";
+import { useShowOutlet } from "@/context/showOutletContext";
 
 const emailjsPublicKey = import.meta.env.VITE_PUBLIC_EMAILJS_PUBLIC_KEY as string
 
 export default function Footer1({ bgColor = "" }) {
+
+  const {setShowOutlet}=useShowOutlet()
   useEffect(() => {
     const headings = document.querySelectorAll(".footer-heading-moblie");
 
@@ -153,7 +156,9 @@ export default function Footer1({ bgColor = "" }) {
                 <ul className="footer-menu-list tf-collapse-content">
                   {footerLinks.map((link: { href: To; text: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
                     <li key={index}>
-                      <Link to={link.href} className="footer-menu_item">
+                      <Link to={link.href}  onClick={()=>{
+                        setShowOutlet(true)
+                      }} className="footer-menu_item">
                         {link.text}
                       </Link>
                     </li>
@@ -170,7 +175,9 @@ export default function Footer1({ bgColor = "" }) {
                 <ul className="footer-menu-list tf-collapse-content">
                   {aboutLinks.slice(0, 4).map((link: { href: To; text: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
                     <li key={index}>
-                      <Link to={link.href} className="footer-menu_item">
+                      <Link to={link.href} onClick={()=>{
+                        setShowOutlet(true)
+                      }} className="footer-menu_item">
                         {link.text}
                       </Link>
                     </li>
