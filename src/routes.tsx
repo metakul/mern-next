@@ -1,5 +1,5 @@
 import React from "react";
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import ProfilePage from "./(routes)/profile/page";
 import { Pages } from "./Datatypes/enums";
 // import ShopPage from "./(routes)/shopping/page";
@@ -11,6 +11,7 @@ import AddBlogPage from "./(routes)/addBlog/page";
 import ChatGpt from "./Projects/ChatGpt/ChatGpt";
 import TermsAndConditions from "./(routes)/termAndCondition/page";
 import CategoryPage from "./(routes)/CategoryPage/page";
+import MiscPage from "./(routes)/common/misc";
 
 const Router: React.FC = () => {
 
@@ -51,9 +52,21 @@ const Router: React.FC = () => {
           path: Pages.CATEGORY_PAGE,
           element:  <CategoryPage/>,
         },
+        {
+          path: Pages.ABOUT_US ,
+          element:  <MiscPage/>,
+        },
+        {
+          path: Pages.CONTACT_US,
+          element:  <MiscPage/>,
+        },
+        {
+          path:Pages.OUR_STORE ,
+          element:  <MiscPage/>,
+        },
       ],
     },
-    // { path: "*", element: <Navigate to={Pages.HOME} /> },
+    { path: "*", element: <Navigate to={Pages.HOME} /> },
   ]);
 
   return routes;
