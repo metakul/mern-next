@@ -222,7 +222,6 @@ export default function Checkout() {
       <Grid
         container
         sx={{
-         
           mt: {
             xs: 4,
             sm: 0,
@@ -230,7 +229,7 @@ export default function Checkout() {
         }}
       >
         <Grid
-          size={{ xs: 12, sm: 5, lg: 4 }}
+          size={{ xs: 12, sm: 7, lg: 7 }}
           sx={{
             display: { xs: 'none', md: 'flex' },
             flexDirection: 'column',
@@ -245,21 +244,19 @@ export default function Checkout() {
         >
           {/* <SitemarkIcon /> */}
           WHAT-I-WEAR
-
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
               flexGrow: 1,
               width: '100%',
-              maxWidth: 500,
             }}
           >
             <Info totalPrice={(activeStep >= 2 ? totalPrice + 20 : totalPrice).toString()}  />
           </Box>
         </Grid>
         <Grid
-          size={{ sm: 12, md: 7, lg: 8 }}
+          size={{ sm: 12, md: 5, lg: 5 }}
           sx={{
             display: 'flex',
             flexDirection: 'column',

@@ -4,10 +4,11 @@ import { selectedDropShipItems } from "@/lib/slices/DropShip/DropShipSlice";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 export default function Categories() {
   const [activeTab, setActiveTab] = useState("dresses");
-  const { dropShipItems } = useSelector(selectedDropShipItems);
+  const { dropShipItems, loading } = useSelector(selectedDropShipItems);
 
   const handleTabClick = (targetId: string) => {
     setActiveTab(targetId);
@@ -15,12 +16,12 @@ export default function Categories() {
   };
 
   const categories = [
-    { id: "dresses", label: "Dresses", count: 31, image: `data:image/png;base64,${dropShipItems[0]?.image}`,imageNo:0 },
-    { id: "jackets", label: "Jackets", count: 31, image: `data:image/png;base64,${dropShipItems[5]?.image}`, imageNo:5 },
-    { id: "shoes", label: "Shoes", count: 9, image: `data:image/png;base64,${dropShipItems[1]?.image}`,imageNo:1 },
-    { id: "tops", label: "Tops", count: 14, image: `data:image/png;base64,${dropShipItems[2]?.image}`,imageNo:2 },
-    { id: "men", label: "Men", count: 23, image: `data:image/png;base64,${dropShipItems[6]?.image}`,imageNo:6 },
-    { id: "overalls", label: "Overalls", count: 23, image: "/images/collections/collection-55.jpg" ,imageNo:5},
+    { id: "dresses", label: "Dresses", count: 31, image: `data:image/png;base64,${dropShipItems[0]?.image}`, imageNo: 0 },
+    { id: "jackets", label: "Jackets", count: 31, image: `data:image/png;base64,${dropShipItems[5]?.image}`, imageNo: 5 },
+    { id: "shoes", label: "Shoes", count: 9, image: `data:image/png;base64,${dropShipItems[1]?.image}`, imageNo: 1 },
+    { id: "tops", label: "Tops", count: 14, image: `data:image/png;base64,${dropShipItems[2]?.image}`, imageNo: 2 },
+    { id: "winterwear", label: "Winterwear", count: 23, image: `data:image/png;base64,${dropShipItems[6]?.image}`, imageNo: 6 },
+    { id: "overalls", label: "Overalls", count: 23, image: "/images/collections/collection-55.jpg", imageNo: 5 },
   ];
 
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function Categories() {
   };
 
   return (
-    <section className=" container ">
+    <section className="container">
       <div className="flat-spacing-8 mb-8 mt-4 wow fadeInUp container flex justify-center hidden md:block" data-wow-delay="0s">
         <div className="tf-grid-layout-v2 flat-animate-tab md:flex">
           {/* Tabs */}
@@ -51,7 +52,7 @@ export default function Categories() {
                     {category.label}
                     <span className="count">{category.count}</span>
                   </span>
-                  <Link to="/shop-collection-sub" className="icon icon-arrow1-top-left mt-2" />
+                  <Link to={`/category/${category.id}`} className="icon icon-arrow1-top-left mt-2" />
                 </div>
               </li>
             ))}
@@ -64,27 +65,31 @@ export default function Categories() {
 
           {/* Tab Content */}
           <div className="tab-content h-[600px] w-[600px]">
-            {categories.map((category, index) => (
-              <div
-                className={`tab-pane ${activeTab === category.id ? "active show" : ""}`}
-                id={category.id}
-                role="tabpanel"
-                key={category.id}
-              >
+            {loading ? (
+              <Skeleton variant="rectangular" width={600} height={600} />
+            ) : (
+              categories.map((category, index) => (
                 <div
-                  className="radius-10 o-hidden"
-                  onClick={() => handleImageClick(index, category.imageNo)}
-                  style={{ cursor: "pointer" }}
+                  className={`tab-pane ${activeTab === category.id ? "active show" : ""}`}
+                  id={category.id}
+                  role="tabpanel"
+                  key={category.id}
                 >
-                  <img
-                    className="lazyload " 
-                    data-src={category.image}
-                    alt={`img-${category.label}`}
-                    src={category.image}
-                  />
+                  <div
+                    className="radius-10 o-hidden"
+                    onClick={() => handleImageClick(index, category.imageNo)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <img
+                      className="lazyload"
+                      data-src={category.image}
+                      alt={`img-${category.label}`}
+                      src={category.image}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

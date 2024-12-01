@@ -7,14 +7,15 @@ import { isAuthenticated } from "@/lib/slices/authSlice";
 import { Pages } from "@/Datatypes/enums";
 import { useNavigate } from "react-router-dom";
 import { useShowOutlet } from "@/context/showOutletContext";
-import { CartItem, selectCartItems } from "@/lib/slices/DropShip/AddToCartSlice";
+import { CartItem, selectCartItems, selectTotalQuantityAndPrice } from "@/lib/slices/DropShip/AddToCartSlice";
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import Cart from "./SingleItemCart"
 interface CartItemsProps {
   parsedNotes?: CartItem[];
 }
 
 const CartItems: React.FC<CartItemsProps> = ({ parsedNotes = [] }) => {
+
   const { setShowOutlet } = useShowOutlet();
   const dispatch = useDispatch<AppDispatch>();
   const [itemDetails, setItemDetails] = useState<Record<string, CartItem>>({});
@@ -22,6 +23,7 @@ const CartItems: React.FC<CartItemsProps> = ({ parsedNotes = [] }) => {
   const isUserAuthenticated = useSelector(isAuthenticated);
   const navigate = useNavigate();
   const cartItems = useSelector(selectCartItems);
+  const {  totalPrice } = useSelector(selectTotalQuantityAndPrice);
 
   const notesToDisplay = parsedNotes.length > 0 ? parsedNotes : cartItems;
 
@@ -70,10 +72,10 @@ const CartItems: React.FC<CartItemsProps> = ({ parsedNotes = [] }) => {
 
   return (
     <Box className="mt-4">
-      <Typography variant="h6" className="">
+      {/* <Typography variant="h6" className="">
         Cart Items:
-      </Typography>
-      {notesToDisplay?.slice(0, visibleCount).map((item, index) => {
+      </Typography> */}
+      {/* {notesToDisplay?.slice(0, visibleCount).map((item, index) => {
         const details = itemDetails[item.id] || item; // Fallback to original item if details aren't loaded
         return (
           <Box key={index} className="rounded-md mt-2">
@@ -107,7 +109,11 @@ const CartItems: React.FC<CartItemsProps> = ({ parsedNotes = [] }) => {
             </ListItem>
           </Box>
         );
-      })}
+      })} */}
+
+      <Cart cartProducts={notesToDisplay} totalPrice={totalPrice}/>
+
+      
       {visibleCount < notesToDisplay?.length && (
         <Button onClick={loadMore} variant="contained" className="mt-4">
           Load More

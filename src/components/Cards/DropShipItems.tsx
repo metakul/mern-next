@@ -14,10 +14,11 @@ import { Navigation } from "swiper/modules";
 
 interface DropShipItemsProps {
   categoryType?: string;
+  loading?: boolean;
   dropShipItems:IDropShipItem[]
 }
 
-const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipItems}) => {
+const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipItems,loading}) => {
   const dispatch = useDispatch();
   const [page, setItemPage] = useState(1);
   const navigate = useNavigate();

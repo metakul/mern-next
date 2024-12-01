@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -24,6 +24,7 @@ interface CustomSwiperProps {
 const CustomSwiper: React.FC<CustomSwiperProps> = ({direction, images, minDelay = 3000, maxDelay = 5000,pagination=true,height="h-[360px]", onClick }) => {
   const progressCircle = useRef<SVGSVGElement | null>(null);
   const progressContent = useRef<HTMLSpanElement | null>(null);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
   // Generate a random autoplay delay within the range
   const randomAutoplayDelay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
@@ -32,6 +33,18 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({direction, images, minDelay 
     if (progressCircle.current && progressContent.current) {
       progressCircle.current.style.setProperty('--progress', `${1 - progress}`);
       progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+    }
+  };
+
+  const handleMouseEnter = () => {
+    if (swiperInstance) {
+      swiperInstance.autoplay.stop();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (swiperInstance) {
+      swiperInstance.autoplay.start();
     }
   };
 
@@ -51,6 +64,8 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({direction, images, minDelay 
         modules={[Autoplay, Pagination]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className={`mySwiper ${height}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {images &&
           images.map((src, index) => (
@@ -60,7 +75,7 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({direction, images, minDelay 
                 onClick={() => onClick && onClick(index)}
                   src={src}
                   alt={`Slide ${index + 1}`}
-                  className="object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
+                  className="lazyload img-product object-cover transition-transform duration-[100ms] will-change-transform group-hover:scale-125"
                 />
               </SwiperSlide>
             </Box>

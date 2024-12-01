@@ -10,6 +10,7 @@ import SingleBlogDetails from "./(routes)/itemDetails/[itemId]/page";
 import AddBlogPage from "./(routes)/addBlog/page";
 import ChatGpt from "./Projects/ChatGpt/ChatGpt";
 import TermsAndConditions from "./(routes)/termAndCondition/page";
+import CategoryPage from "./(routes)/CategoryPage/page";
 
 const Router: React.FC = () => {
 
@@ -45,6 +46,10 @@ const Router: React.FC = () => {
         {
           path: Pages.TERMS_AND_CONDITIONS,
           element:  <TermsAndConditions/>,
+        },
+        {
+          path: Pages.CATEGORY_PAGE,
+          element:  <CategoryPage/>,
         },
       ],
     },

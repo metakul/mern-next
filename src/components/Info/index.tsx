@@ -14,12 +14,12 @@ export default function Info({ totalPrice }: InfoProps) {
  
   return (
     <React.Fragment>
-      <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
+      {/* <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
         Amount
       </Typography>
       <Typography variant="h4" gutterBottom>
       ₹ {totalPrice}
-      </Typography>
+      </Typography> */}
         {/* {cartItems && cartItems.length > 0 && ( */}
           <Box className="mt-4">
             {/* {cartItems.length > 0 && ( */}

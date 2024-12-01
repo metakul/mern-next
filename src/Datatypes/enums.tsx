@@ -51,6 +51,7 @@ export enum Pages {
   SELL = "/SELL" ,
   ADD_DROPSHIP_ITEM = "/ADD_DROPSHIP_ITEM" ,
   SINGLE_DROPSHIP_ITEM = "/SINGLE_DROPSHIP_ITEM/:dropShipItemTitle/:id" ,
+  CATEGORY_PAGE = "/category/:categoryName" ,
 }
 
 export enum HomePageInfo{
@@ -62,8 +63,8 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-const base_url_backend="https://backend-everything.onrender.com/v1"
-// const base_url_backend="http://localhost:5003/v1"
+// const base_url_backend="https://backend-everything.onrender.com/v1"
+const base_url_backend="http://localhost:5003/v1"
 // const base_url_rajorpay="https://api.razorpay.com/v1"
 
 // define endpoints here
@@ -79,7 +80,6 @@ const base_url_backend="https://backend-everything.onrender.com/v1"
     
     // main backend 
     // register user
-    
     RegisterUser: { apiId:9, withAuth:false, url: `${base_url_backend}/register`, method: 'POST', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Registering",successMessage:"Register SuccessFull. Login To Enter", errorMessage:"Oho, Retry or Join discord to get in touch."},
     
     // LOGIN USER

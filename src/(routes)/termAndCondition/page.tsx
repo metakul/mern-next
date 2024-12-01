@@ -1,15 +1,34 @@
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography, Box, Button } from "@mui/material";
+import PrintIcon from "@mui/icons-material/Print";
 
 const TermsAndConditions = () => {
+
+  const handlePrint = () => {
+    window.print();
+  };
   return (
-    <Container className="py-2">
-      <Box className=" shadow-lg rounded-lg ">
+    <Container className="mt-24">
+      <Box className=" shadow-lg rounded-lg p-6">
+        <Box    sx={{
+            display:"flex",
+            justifyContent:"space-between",
+          }}>
+
         <Typography variant="h2" className="font-bold mb-4">
           Terms and Conditions
-        </Typography>
+          </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handlePrint}
+          
+          >
+            <PrintIcon />
+          </Button>
+          </Box>
         <Typography sx={{
-         mt:2,
-         mb:2
+          mt:2,
+          mb:2
         }}
         >
           <strong>Effective Date:</strong> [20 NOVEMBER,2024]
