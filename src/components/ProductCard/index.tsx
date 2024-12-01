@@ -1,20 +1,11 @@
 "use client";
-import { useContextElement } from "@/context/Context";
 import { getColors } from "@/layout/Theme/themes";
-import { JSXElementConstructor, Key, ReactElement, ReactNode, useEffect, useState } from "react";
 // import CountdownComponent from "../common/Countdown";
 import { Link } from "react-router-dom";
+import AddToCart from "../AddToCart";
 
 
-export const ProductCard = ({ product }:any) => {
-  const [currentImage, setCurrentImage] = useState(product.imgSrc);
-  const {
-    setQuickViewItem,
-    setQuickAddItem,
-  } = useContextElement();
-  useEffect(() => {
-    setCurrentImage(product.imgSrc);
-  }, [product]);
+export const ProductCard = ({ product }: any) => {
 
   return (
     <div className="card-product fl-item  w-[10em]  " key={product.id}>
@@ -22,58 +13,37 @@ export const ProductCard = ({ product }:any) => {
         <Link to={`/product-detail/${product.id}`} className="product-img">
           <img
             className="lazyload img-product"
-            data-src={product.imgSrc}
-            src={currentImage}
+            data-src={product.image}
+            src={`data:image/png;base64,${product.image}`}
             alt="image-product"
             width={720}
             height={1005}
           />
           <img
             className="lazyload img-hover"
-            data-src={
-              product.imgHoverSrc ? product.imgHoverSrc : product.imgSrc
-            }
-            src={product.imgHoverSrc ? product.imgHoverSrc : product.imgSrc}
+            data-src={product.image ? product.image : product.image}
+            src={product.image ? `data:image/png;base64,${product.image}` : `data:image/png;base64,${product.image}`}
             alt="image-product"
             width={720}
             height={1005}
           />
         </Link>
         <div className="list-product-btn">
-          <a
-            href="#quick_add"
-            onClick={() => setQuickAddItem(product.id)}
-            data-bs-toggle="modal"
-            className="box-icon  quick-add tf-btn-loading"
-            style={{
-              background:getColors().grey[100]
-            }}
-          >
-            <span className="icon icon-bag ml-3"  style={{
-                color:getColors().grey[900]
-              }} />
-            <span className="tooltip">Quick Add</span>
-          </a>
-          <a
-            href="#quick_view"
-            onClick={() => setQuickViewItem(product)}
-            data-bs-toggle="modal"
-            className="box-icon  quickview tf-btn-loading"
-            style={{
-              background:getColors().grey[100]
-            }}
-          >
-            <span className="icon icon-view ml-2" style={{
-              color:getColors().grey[900]
-            }} />
-            <span className="tooltip">Quick View</span>
-          </a>
+          <div className="">
+            <div style={{ background: getColors().grey[900] }}>
+              {product.id && product.title && (
+                <AddToCart
+                  _id={product.id}
+                />
+              )}
+            </div>
+          </div>
         </div>
- 
+
         {product.sizes && (
           <div className="size-list">
-            {product.sizes.map((size: boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Key | null | undefined) => (
-              <span key={String(size)}>{String(size)}</span>
+            {product.sizes.map((size: any) => (
+              <span key={String(size)}>{String(size.sizeName)}</span>
             ))}
           </div>
         )}

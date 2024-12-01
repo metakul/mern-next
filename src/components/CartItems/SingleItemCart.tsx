@@ -1,5 +1,4 @@
 "use client";
-import { useContextElement } from "@/context/Context";
 import { isAuthenticated } from "@/lib/slices/authSlice";
 import { selectCartItems } from "@/lib/slices/DropShip/AddToCartSlice";
 import { removeItemQuantityApi } from "@/lib/slices/DropShip/DropShipAPI";
@@ -13,7 +12,6 @@ export default function Cart({cartProducts,totalPrice}:any) {
 
   const cartItems = useSelector(selectCartItems);
 
-  const { setCartProducts } = useContextElement();
   const dispatch = useDispatch<AppDispatch>()
   const isUserAuthenticated = useSelector(isAuthenticated);
 
@@ -27,12 +25,11 @@ export default function Cart({cartProducts,totalPrice}:any) {
       const itemIndex = items.indexOf(item);
       item.quantity = quantity;
       items[itemIndex] = item;
-      setCartProducts(items);
     }
   };
 
   return (
-    <section className="flat-spacing-11">
+    <section className="flat-spacing-2">
       <div className="container">
         {/* <div className="tf-page-cart text-center mt_140 mb_200">
               <h5 className="mb_24">Your cart is empty</h5>

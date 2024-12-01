@@ -1,15 +1,27 @@
-"use client";
 import { layouts } from "@/data/shop";
 import ProductGrid from "./ProductGrid";
 import { useState } from "react";
 import Pagination from "../Pagination";
 import ShopFilter from "./ShopFilter";
 import Sorting from "./Sorting";
+import { IDropShipItem } from "@/Datatypes/interfaces/interface";
 
-export default function ShopDefault() {
+
+interface ShopDefaultProps {
+  cartItems: IDropShipItem[];
+  loading?:boolean
+}
+
+const ShopDefault:React.FC<ShopDefaultProps>=({cartItems,loading})=> {
   const [gridItems, setGridItems] = useState(4);
-  const [products, setProducts] = useState([]);
-  const [finalSorted, setFinalSorted] = useState([]);
+  const [products, setProducts] = useState(cartItems);
+
+
+  //set sorting
+  const [finalSorted, setFinalSorted] = useState(cartItems);
+
+  console.log("finalSorted",cartItems);
+  
   return (
     <>
       <section className="flat-spacing-2 mt-8">
@@ -48,7 +60,7 @@ export default function ShopDefault() {
           </div>
           <div className="wrapper-control-shop">
             <div className="meta-filter-shop" />
-            <ProductGrid allproducts={finalSorted} gridItems={gridItems} />
+            <ProductGrid allproducts={cartItems} gridItems={gridItems} loading={loading}/>
             {/* pagination */}
             {finalSorted.length ? (
               <ul className="tf-pagination-wrap tf-pagination-list tf-pagination-btn">
@@ -64,3 +76,5 @@ export default function ShopDefault() {
     </>
   );
 }
+
+export default ShopDefault

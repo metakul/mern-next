@@ -44,41 +44,57 @@ export const fetchDropShipItemsApi = createAsyncThunk(
 
 export const fetchDropShipItemsByCategoryApi = createAsyncThunk(
   'dropShipCollection/setDropShipItemsByCategory',
-  async ({ category, pageSize, page, setItemPage }: { category: string, pageSize?: number, page?: number, setItemPage?: (page: number) => void }, { rejectWithValue, dispatch }) => {
+  async (
+    { category, pageSize, page, setItemPage }: { category: string; pageSize?: number; page?: number; setItemPage?: (page: number) => void },
+    { rejectWithValue, dispatch }
+  ) => {
+    // Set loading to true before fetching
     dispatch(setDropShipItemsByCategory({
       category,
       loading: true,
     }));
+
     try {
       const response = await Request({
         endpointId: "GET_DROPSHIP_ITEMS_BY_CATEGORY",
-        slug: `?category=${category}`,
+        slug: `?category=${category}&pageSize=${pageSize || 10}&page=${page || 1}`,
       });
 
       const items: IDropShipItem[] = response;
-      dispatch(setDropShipItemsByCategory({ category, itemData: items, loading: false }));
 
-      const apiSuccess: ApiSuccess = {
-        statusCode: response.status,
-        message: 'Items fetched successfully',
-        data: response,
-      };
+      // Dispatch items with loading set to false
+      dispatch(setDropShipItemsByCategory({
+        category,
+        itemData: items,
+        loading: false,
+      }));
+
+      // Handle pagination if applicable
       if (page && setItemPage) {
         setItemPage(page + 1);
       }
 
-      return apiSuccess;
+      return {
+        statusCode: response.status,
+        message: 'Items fetched successfully',
+        data: response,
+      };
 
     } catch (error) {
+      // Handle error and set loading to false
       dispatch(setDropShipItemsByCategory({
         category,
         loading: false,
       }));
+
       const castedError = error as ApiError;
-      return rejectWithValue(castedError?.error === "string" ? castedError?.error : 'Unknown Error');
+      return rejectWithValue(
+        castedError?.error === "string" ? castedError?.error : 'Unknown Error'
+      );
     }
   }
 );
+
 
 export const fetchSingleDropShipItemApi = createAsyncThunk(
   'dropShipCollection/setLoadedItems',

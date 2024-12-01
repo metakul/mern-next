@@ -5,12 +5,14 @@ import ShopDefault from '../Shop/ShopDefault';
 
 interface ProductCard1Props {
     cartItems: IDropShipItem[];
+    loading: boolean;
   }
   
 
-  const CardWithPagination:React.FC<ProductCard1Props>=({cartItems})=> {
+  const CardWithPagination:React.FC<ProductCard1Props>=({cartItems,loading})=> {
+
   return (
-      <ShopDefault/>
+      <ShopDefault cartItems={cartItems} loading={loading}/>
   )
 }
 

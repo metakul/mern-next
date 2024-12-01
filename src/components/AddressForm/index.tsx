@@ -28,9 +28,9 @@ export default function AddressForm({ address, setAddress }: AddressFormProps) {
 
   return (
     <Grid container spacing={3}>
-      <FormGrid size={{ xs: 12, md: 6 }}>
+      <FormGrid size={{ xs: 12, md: 12 }}>
         <FormLabel htmlFor="name" required>
-          First name
+          Name
         </FormLabel>
         <OutlinedInput
           id="name"
@@ -93,7 +93,7 @@ export default function AddressForm({ address, setAddress }: AddressFormProps) {
     
       <FormGrid size={{ xs: 6 }}>
         <FormLabel htmlFor="zip" required>
-          Zip / Postal code
+          Location code
         </FormLabel>
         <OutlinedInput
           id="zip"

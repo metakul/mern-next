@@ -36,9 +36,6 @@ import { selectTotalQuantityAndPrice } from "@/lib/slices/DropShip/AddToCartSlic
 import Footer from "./Footer/Footer";
 import ProfilePage from "@/(routes)/profile/page";
 import { useShowOutlet } from "@/context/showOutletContext";
-import QuickAdd from "@/components/QuickAdd";
-import Context from "@/context/Context";
-import QuickView from "@/components/QuickView";
 
 export default function DashboardLayout() {
   const [theme, colorMode] = useMode();
@@ -63,8 +60,6 @@ export default function DashboardLayout() {
       ),
       content: <div>
       <Outlet />
-      {/* <QuickAdd /> */}
-      <QuickView />
       </div>,
       label: Tabs.tabTitle1,
     },
@@ -121,8 +116,6 @@ export default function DashboardLayout() {
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Context>
-
           {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
           <ToastContainer />
           <Box
@@ -155,7 +148,6 @@ export default function DashboardLayout() {
           <Footer/>
           </Box>
           </Box>
-          </Context>
 
           <Analytics />
           <SpeedInsights />

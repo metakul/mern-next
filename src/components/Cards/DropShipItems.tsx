@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Skeleton, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/lib/store';
 import { IDropShipItem } from '@/Datatypes/interfaces/interface';
@@ -15,17 +15,16 @@ import { Navigation } from "swiper/modules";
 interface DropShipItemsProps {
   categoryType?: string;
   loading?: boolean;
-  dropShipItems:IDropShipItem[]
+  dropShipItems: IDropShipItem[]
 }
 
-const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipItems,loading}) => {
+const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType, dropShipItems, loading }) => {
   const dispatch = useDispatch();
   const [page, setItemPage] = useState(1);
   const navigate = useNavigate();
   // const { dropShipItems } = useSelector(selectedDropShipItems);
 
   const handleLoadItems = async () => {
-
     try {
       (dispatch as AppDispatch)(
         fetchDropShipItemsApi({
@@ -38,6 +37,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
       console.error("Failed to fetch DropShip items:", error);
     }
   };
+
   useEffect(() => {
     // Load items when the component mounts
     handleLoadItems();
@@ -48,28 +48,39 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
   };
 
   return (
-      <div className="container" >
-        <div className="flat-title mb-0 wow fadeInUp" data-wow-delay="0s">
-          <div className="flex flex-1 items-center  gap-10 align-items-center">
-            <div className={`nav-prev-slider nav-prev-product ${categoryType}snbp114`}>
-              <span className="icon icon-arrow1-left" />
-            </div>
-            <Link
-              to={`/product-style-05`}
-              className="tf-btn btn-line m-0 fs-12 fw-6 mt-0"
-            >
-              <Typography>
-                VIEW ALL
-              </Typography>
-            </Link>
-            <div className={`nav-next-slider nav-next-product ${categoryType}snbn114`}>
-              <span className="icon icon-arrow1-right" />
-            </div>
+    <div className="container">
+      <div className="flat-title mb-0 wow fadeInUp" data-wow-delay="0s">
+        <div className="flex flex-1 items-center gap-10 align-items-center">
+          <div className={`nav-prev-slider nav-prev-product ${categoryType}snbp114`}>
+            <span className="icon icon-arrow1-left" />
+          </div>
+          <Link
+            to={`/product-style-05`}
+            className="tf-btn btn-line m-0 fs-12 fw-6 mt-0"
+          >
+            <Typography>
+              VIEW ALL
+            </Typography>
+          </Link>
+          <div className={`nav-next-slider nav-next-product ${categoryType}snbn114`}>
+            <span className="icon icon-arrow1-right" />
           </div>
         </div>
-        <section className="flat-spacing-0 pt-0 ml-[auto]">
-          <div className="">
-            <div className="hover-sw-nav hover-sw-2">
+      </div>
+      <section className="flat-spacing-0 pt-0 ml-[auto]">
+        <div className="">
+          <div className="hover-sw-nav hover-sw-2">
+            {loading ? (
+              <Grid container spacing={2}>
+                {[...Array(3)].map((_, index) => (
+                  <Grid item xs={12} md={4} key={index}>
+                    <Skeleton variant="rectangular" height={250} sx={{
+                      mt:4
+                    }} />
+                  </Grid>
+                ))}
+              </Grid>
+            ) : (
               <Swiper
                 dir="ltr"
                 className="swiper tf-sw-product-sell wrap-sw-over"
@@ -97,14 +108,10 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
                 }}
               >
                 {dropShipItems.map((item: IDropShipItem, index: number) => (
-
-                  <SwiperSlide key={index} className="swiper-slide" >
-
-                    <div className="card-product fl-item  " key={item.id}>
+                  <SwiperSlide key={index} className="swiper-slide">
+                    <div className="card-product fl-item" key={item.id}>
                       <div className="card-product-wrapper">
-                        <Box sx={{
-                          maxWidth:"230px"
-                        }} onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)} className="product-img">
+                        <Box sx={{ maxWidth: "230px" }} onClick={() => item && item.id && handleNavigate(`${Pages.SINGLE_DROPSHIP_ITEM.replace(':dropShipItemTitle', item.title).replace(':id', item.id)}`)} className="product-img">
                           <img
                             className="lazyload img-product"
                             data-src={item.image}
@@ -115,9 +122,7 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
                           />
                           <img
                             className="lazyload img-hover"
-                            data-src={
-                              item.image ? item.image : item.image
-                            }
+                            data-src={item.image ? item.image : item.image}
                             src={item.image ? `data:image/png;base64,${item.image}` : `data:image/png;base64,${item.image}`}
                             alt="image-product"
                             width={720}
@@ -125,31 +130,14 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
                           />
                         </Box>
                         <div className="">
-                          <div style={{
-                            background: getColors().grey[900]
-                          }}>
-
+                          <div style={{ background: getColors().grey[900] }}>
                             {item.id && item.title && (
                               <AddToCart
                                 _id={item.id}
                               />
                             )}
                           </div>
-                          
-                          {/* <div style={{
-                            background: getColors().grey[900]
-                          }}>
-
-                            {item.id && item.title && (
-                              <AddToCart
-                                _id={item.id}
-                              />
-                            )}
-                          </div> */}
-                          
-                         
                         </div>
-
                         {item.sizes && (
                           <div className="size-list">
                             {item.sizes.map((size: any) => (
@@ -158,7 +146,6 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
                           </div>
                         )}
                       </div>
-
                       <div className="card-product-info">
                         <Link to={`/product-detail/${item.id}`} className="title link">
                           {item.title}
@@ -167,18 +154,13 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
                       </div>
                     </div>
                   </SwiperSlide>
-
-))}
+                ))}
               </Swiper>
-            </div>
+            )}
           </div>
-
-        </section>
-
-      {/* Render QuickAdd Modal */}
-      </div>
-
-
+        </div>
+      </section>
+    </div>
   );
 };
 

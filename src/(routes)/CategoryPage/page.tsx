@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/lib/store";
 import { fetchDropShipItemsByCategoryApi } from "@/lib/slices/DropShip/DropShipAPI";
-import { selectDropShipItemsByCategory } from "@/lib/slices/DropShip/DropShipSlice";
+import { selectDropShipItemsByCategory, selectedDropShipItems } from "@/lib/slices/DropShip/DropShipSlice";
 import DropShipItems from "@/components/Cards/DropShipItems";
 import { Typography, Box } from "@mui/material";
+import CardWithPagination from "@/components/Cards/CardWithPagination";
 
 const CategoryPage = () => {
   const { categoryName } = useParams<{ categoryName: string }>();
@@ -13,6 +14,7 @@ const CategoryPage = () => {
 
   // Fetch items based on the category name from URL
   const categoryItems = useSelector(selectDropShipItemsByCategory(categoryName || ""));
+  const { loadingByCategory } = useSelector(selectedDropShipItems);
 
   useEffect(() => {
     if (categoryName) {
@@ -41,11 +43,9 @@ const CategoryPage = () => {
         {categoryName?.toUpperCase()} Products
       </Typography>
 
-      {categoryItems?.length > 0 ? (
-        <DropShipItems dropShipItems={categoryItems} categoryType={categoryName || "unknown"} />
-      ) : (
-        <Typography variant="h6">No items available for this category.</Typography>
-      )}
+    <CardWithPagination cartItems={categoryItems} loading={categoryName ? loadingByCategory[categoryName] || false : false}/>
+    {/* <DropShipItems dropShipItems={categoryItems} categoryType={categoryName || "unknown"} loading={categoryName ? loadingByCategory[categoryName] : false}/> */}
+    
     </Box>
   );
 };

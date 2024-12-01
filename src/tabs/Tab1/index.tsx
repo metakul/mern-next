@@ -21,7 +21,7 @@ import CardWithPagination from '@/components/Cards/CardWithPagination';
 
 const Tab1 = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { dropShipItems, loading } = useSelector(selectedDropShipItems);
+  const { dropShipItems, loadingByCategory } = useSelector(selectedDropShipItems);
 
   const isAuthenticatedUser = useSelector(isAuthenticated);
 
@@ -85,14 +85,14 @@ const Tab1 = () => {
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-2">
           Top Products
         </Typography>
-        <DropShipItems dropShipItems={categoryItemsHotDeals} categoryType="hotdeals" />
+        <DropShipItems dropShipItems={categoryItemsHotDeals} categoryType="hotdeals"  loading={loadingByCategory["hotdeals"] || false} />
         <Categories />
         {dropShipItems.length > 0 && <HomeCard dropShipItems={dropShipItems} />}
 
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Hot Deals
         </Typography>
-        <DropShipItems dropShipItems={categoryItemsWinter} categoryType="jackets" />
+        <DropShipItems dropShipItems={categoryItemsWinter} categoryType="jackets"  loading={loadingByCategory["jackets"] || false}/>
         
         <Scroll parsedNotes={dropShipItems} loading/>
 

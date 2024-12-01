@@ -21,11 +21,9 @@ export default function Info({ totalPrice }: InfoProps) {
       ₹ {totalPrice}
       </Typography> */}
         {/* {cartItems && cartItems.length > 0 && ( */}
-          <Box className="mt-4">
+          <Box className="mt-2">
             {/* {cartItems.length > 0 && ( */}
-              <Box className="mt-4">
                 <CartItems/>
-              </Box>
             {/* )} */}
           </Box>
         {/* )} */}

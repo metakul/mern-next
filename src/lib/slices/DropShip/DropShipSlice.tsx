@@ -5,12 +5,14 @@ interface DropShipState {
   dropShipItems: IDropShipItem[];
   dropShipItemsByCategory: { [category: string]: IDropShipItem[] };
   loading: boolean;
+  loadingByCategory: { [category: string]: boolean };
 }
 
 const initialState: DropShipState = {
   dropShipItems: [] as IDropShipItem[],
   dropShipItemsByCategory: {} as { [category: string]: IDropShipItem[] },
   loading: false,
+  loadingByCategory: {},
 };
 
 const dropShipSlice = createSlice({
@@ -27,11 +29,18 @@ const dropShipSlice = createSlice({
         });
       state.loading = action.payload.loading;
     },
-    setDropShipItemsByCategory: (state, action: PayloadAction<{ category: string; itemData?: IDropShipItem[]; loading: boolean }>) => {
-      const { category, itemData } = action.payload;
+    setDropShipItemsByCategory: (
+      state,
+      action: PayloadAction<{ category: string; itemData?: IDropShipItem[]; loading: boolean }>
+    ) => {
+      const { category, itemData, loading } = action.payload;
       state.dropShipItemsByCategory[category] = itemData || [];
-      state.loading = action.payload.loading;
+      state.loadingByCategory[category] = loading; // Update the loading state for the category
     },
+    setCategoryLoading: (state, action: PayloadAction<{ category: string; loading: boolean }>) => {
+      state.loadingByCategory[action.payload.category] = action.payload.loading;
+    },
+
     addItem: (state, action: PayloadAction<IDropShipItem>) => {
       state.dropShipItems.push(action.payload);
     },
@@ -45,7 +54,7 @@ const dropShipSlice = createSlice({
   },
 });
 
-export const { setLoadedItems, setDropShipItemsByCategory, addItem, updateItem } = dropShipSlice.actions;
+export const { setLoadedItems,setCategoryLoading, setDropShipItemsByCategory, addItem, updateItem } = dropShipSlice.actions;
 
 export default dropShipSlice.reducer;
 
