@@ -48,7 +48,7 @@ export default function Footer1({ bgColor = "" }) {
   const sendMail = () => {
     if (formRef.current) {
       emailjs
-        .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
+        .sendForm(emailjsPublicKey, "template_fs3xchn", formRef.current, {
       })
       .then((res) => {
         if (res.status === 200) {
