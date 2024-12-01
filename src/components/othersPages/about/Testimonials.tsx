@@ -1,5 +1,5 @@
 import { testimonials16, thumbImages } from "@/data/testimonials";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
