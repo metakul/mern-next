@@ -47,8 +47,8 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
   };
 
   return (
-      <div className="" >
-        <div className="flat-title wow fadeInUp" data-wow-delay="0s">
+      <div className="container" >
+        <div className="flat-title mb-0 wow fadeInUp" data-wow-delay="0s">
           <div className="flex flex-1 items-center  gap-10 align-items-center">
             <div className={`nav-prev-slider nav-prev-product ${categoryType}snbp114`}>
               <span className="icon icon-arrow1-left" />
@@ -66,14 +66,14 @@ const DropShipItems: React.FC<DropShipItemsProps> = ({ categoryType ,dropShipIte
             </div>
           </div>
         </div>
-        <section className="flat-spacing-2 pt-0">
-          <div className="container">
+        <section className="flat-spacing-0 pt-0 ml-[auto]">
+          <div className="">
             <div className="hover-sw-nav hover-sw-2">
               <Swiper
                 dir="ltr"
                 className="swiper tf-sw-product-sell wrap-sw-over"
                 style={{
-                  height: "500px"
+                  height: "450px"
                 }}
                 slidesPerView={4} // Equivalent to data-preview={4}
                 spaceBetween={30} // Equivalent to data-space-lg={30}

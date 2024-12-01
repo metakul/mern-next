@@ -1,6 +1,7 @@
 import { products1 } from "@/data/products";
 import React from "react";
 import { ProductCard } from "../ProductCard";
+import { Box } from "@mui/material";
 
 export default function ProductGrid({
   gridItems = 4,
@@ -21,7 +22,10 @@ export default function ProductGrid({
       <div className="grid grid-cols-2 md:grid-cols-3  wrapper-shop" data-grid={`grid-${gridItems}`}>
         {/* card product 1 */}
         {allproducts.map((elm, i) => (
+          <Box className="flex justify-center"> 
+
           <ProductCard product={elm} key={i} />
+          </Box>
         ))}
       </div>{" "}
     </>

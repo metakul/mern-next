@@ -12,7 +12,7 @@ export default function ShopDefault() {
   const [finalSorted, setFinalSorted] = useState([]);
   return (
     <>
-      <section className="flat-spacing-2 mt-24">
+      <section className="flat-spacing-2 mt-8">
         <div className="container">
           <div className=" grid grid-cols-3 items-center gap-4">
             <div className="tf-control-filter">
@@ -22,11 +22,11 @@ export default function ShopDefault() {
                 aria-controls="offcanvasLeft"
                 className="tf-btn-filter"
               >
-                <span className="icon icon-filter" />
+                <span className="icon icon-filter pt-2" />
                 <span className="text">Filter</span>
               </a>
             </div>
-            <ul className="tf-control-layout d-flex justify-content-center">
+            <ul className="tf-control-layout d-flex justify-content-center pt-3">
               {layouts.map((layout, index) => (
                 <li
                   key={index}
@@ -41,7 +41,7 @@ export default function ShopDefault() {
               ))}
             </ul>
             <div className="tf-control-sorting d-flex justify-content-end">
-              <div className="tf-dropdown-sort" data-bs-toggle="dropdown">
+              <div className="tf-dropdown-sort " data-bs-toggle="dropdown">
                 <Sorting setFinalSorted={setFinalSorted} products={products} />
               </div>
             </div>

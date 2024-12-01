@@ -17,8 +17,8 @@ export const ProductCard = ({ product }:any) => {
   }, [product]);
 
   return (
-    <div className="card-product fl-item  w-[10em] " key={product.id}>
-      <div className="card-product-wrapper">
+    <div className="card-product fl-item  w-[10em]  " key={product.id}>
+      <div className="card-product-wrapper ">
         <Link to={`/product-detail/${product.id}`} className="product-img">
           <img
             className="lazyload img-product"
@@ -49,7 +49,7 @@ export const ProductCard = ({ product }:any) => {
               background:getColors().grey[100]
             }}
           >
-            <span className="icon icon-bag"  style={{
+            <span className="icon icon-bag ml-3"  style={{
                 color:getColors().grey[900]
               }} />
             <span className="tooltip">Quick Add</span>
@@ -63,7 +63,7 @@ export const ProductCard = ({ product }:any) => {
               background:getColors().grey[100]
             }}
           >
-            <span className="icon icon-view" style={{
+            <span className="icon icon-view ml-2" style={{
               color:getColors().grey[900]
             }} />
             <span className="tooltip">Quick View</span>

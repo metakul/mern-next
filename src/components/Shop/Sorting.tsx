@@ -29,7 +29,7 @@ export default function Sorting({ products = products1, setFinalSorted }:any) {
       {" "}
       <div className="btn-select">
         <span className="text-sort-value">{selectedOptions.text}</span>
-        <span className="icon icon-arrow-down" />
+        <span className="icon icon-arrow-down w-[2em] pt-1" />
       </div>
       <div className="dropdown-menu">
         {sortingOptions.map((item, index) => (

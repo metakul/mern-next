@@ -50,7 +50,7 @@ const Tab1 = () => {
   }, [dispatch]);
 
   const  categoryItemsHotDeals  = useSelector(selectDropShipItemsByCategory("hotdeals"));
-  const  categoryItemsWinter  = useSelector(selectDropShipItemsByCategory("winterwear"));
+  const  categoryItemsWinter  = useSelector(selectDropShipItemsByCategory("jackets"));
 
   const handleLoadCategories = async () => {
     try {
@@ -65,7 +65,7 @@ const Tab1 = () => {
         fetchDropShipItemsByCategoryApi({
           pageSize: 10,
           page: 1,
-          category: "winterwear"
+          category: "jackets"
         })
       );
     } catch (error) {
@@ -85,14 +85,14 @@ const Tab1 = () => {
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-2">
           Top Products
         </Typography>
-        <DropShipItems dropShipItems={categoryItemsWinter} categoryType="winter" />
+        <DropShipItems dropShipItems={categoryItemsHotDeals} categoryType="hotdeals" />
         <Categories />
         {dropShipItems.length > 0 && <HomeCard dropShipItems={dropShipItems} />}
 
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Hot Deals
         </Typography>
-        <DropShipItems dropShipItems={categoryItemsHotDeals} categoryType="hotdeals" />
+        <DropShipItems dropShipItems={categoryItemsWinter} categoryType="jackets" />
         
         <Scroll parsedNotes={dropShipItems} loading/>
 
@@ -102,7 +102,7 @@ const Tab1 = () => {
         {/* <DropShipItems categoryType="shirt" dropShipItems={dropShipItems} loading={loading}/> */}
         {/* <ProductCard2/> */}
       </Box>
-        <Typography variant="h3" sx={{ mt: 14 }} className="text-center mt-8 mb-4">
+        <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-4 mb-2">
           Featured Items
         </Typography>
         <CardWithPagination cartItems={dropShipItems} />

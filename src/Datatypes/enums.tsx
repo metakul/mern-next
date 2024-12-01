@@ -62,8 +62,8 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-const base_url_backend="https://backend-everything.onrender.com/v1"
-// const base_url_backend="http://localhost:5003/v1"
+// const base_url_backend="https://backend-everything.onrender.com/v1"
+const base_url_backend="http://localhost:5003/v1"
 // const base_url_rajorpay="https://api.razorpay.com/v1"
 
 // define endpoints here

@@ -23,7 +23,7 @@ function HomeCard({ dropShipItems }: HomeCardProps) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, m: 0, p: 0 }}>
+    <Box sx={{ flexGrow: 1, m: 0, p: 0,pt:4 }}>
       <div className="flex flex-wrap">
         <div className="w-full w-[50vw] md:w-[50vw] h-[40vh] md:h-[80vh]">
           <CustomSwiper
