@@ -1,7 +1,7 @@
 "use client";
 import { isAuthenticated } from "@/lib/slices/authSlice";
 import { selectCartItems } from "@/lib/slices/DropShip/AddToCartSlice";
-import { removeItemQuantityApi } from "@/lib/slices/DropShip/DropShipAPI";
+import { addToCartApi, removeItemQuantityApi } from "@/lib/slices/DropShip/DropShipAPI";
 import { AppDispatch } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -18,6 +18,22 @@ export default function Cart({cartProducts,totalPrice}:any) {
   const handleRemoveItem = (id: string) => {
     dispatch(removeItemQuantityApi({ itemId: id, isAuthenticated: isUserAuthenticated })); // Dispatch action to remove an item
   };
+
+  const handleAddToCart = (selectedDropShipItem:any) => {
+    if (cartItems) {
+      const cartItem = {
+        id:  selectedDropShipItem.id ,
+        name: selectedDropShipItem.name,
+        image: selectedDropShipItem.image,
+        size: selectedDropShipItem.size,
+        quantity: 1,
+        // color: currentColor.value,
+      };
+      dispatch(addToCartApi({ item: cartItem, isAuthenticated: isUserAuthenticated }));
+    }
+  };
+
+  
   const setQuantity = (id: any, quantity: number) => {
     if (quantity >= 1) {
       const item = cartProducts.filter((elm: { id: any; }) => elm.id == id)[0];
@@ -94,7 +110,7 @@ export default function Cart({cartProducts,totalPrice}:any) {
                           >
                             {elm.title}
                           </Link>
-                          <div className="cart-meta-variant">White / M</div>
+                          <div className="cart-meta-variant">Size : {elm.size}</div>
                           <span
                             className="remove-cart link remove"
                             onClick={() => handleRemoveItem(elm.id)}
@@ -145,7 +161,7 @@ export default function Cart({cartProducts,totalPrice}:any) {
                             <span
                               className="btn-quantity plus-btn"
                               onClick={() =>
-                                setQuantity(elm.id, elm.quantity + 1)
+                                handleAddToCart(elm)
                               }
                             >
                               <svg

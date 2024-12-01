@@ -2,13 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Quantity from "../Quantity";
-import { allProducts } from "@/data/products";
-import { colors, sizeOptions } from "@/data/singleProductOpotions";
 import { Link } from "react-router-dom";
 import { addToCartApi } from "@/lib/slices/DropShip/DropShipAPI";
 // import { isAddedToCartSelector } from "@/lib/slices/DropShip/DropShipSlice"; // Custom selector
 import { AppDispatch } from "@/lib/store";
 import { useSelectedDropShipItem } from "@/lib/slices/DropShip/DropShipSlice";
+import { isAuthenticated } from "@/lib/slices/authSlice";
 
 interface QuickAddProps {
   _id: string;
@@ -20,13 +19,14 @@ interface QuickAddProps {
 
 const QuickAdd: React.FC<QuickAddProps> = ({ _id, sizes, selectedSize, onSelectSize }) => {
   const selectedDropShipItem = useSelector(useSelectedDropShipItem(_id));
-
   const dispatch = useDispatch<AppDispatch>();
   const [item, setItem] = useState(selectedDropShipItem);
+  const isAuthenticatedUser = useSelector(isAuthenticated);
 
   // State for color and size
   // const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(selectedSize || sizes[0]?.sizeName);
+  const [quantity, setQuantity] = useState(1); // Quantity state in parent
 
   useEffect(() => {
     setCurrentSize(selectedSize);
@@ -40,10 +40,10 @@ const QuickAdd: React.FC<QuickAddProps> = ({ _id, sizes, selectedSize, onSelectS
         name: selectedDropShipItem.title,
         image: selectedDropShipItem.image,
         size: currentSize,
-        quantity: 1,
+        quantity: quantity,
         // color: currentColor.value,
       };
-      dispatch(addToCartApi({ item: cartItem, isAuthenticated: true }));
+      dispatch(addToCartApi({ item: cartItem, isAuthenticated: isAuthenticatedUser }));
     }
   };
 
@@ -106,9 +106,8 @@ const QuickAdd: React.FC<QuickAddProps> = ({ _id, sizes, selectedSize, onSelectS
               </div> */}
               <div className="variant-picker-item">
                 <div className="variant-picker-label">
-                  Size:{" "}
                   <span className="fw-6 variant-picker-label-value">
-                  Size: <span className="fw-6">{currentSize}</span>
+                  Size: <span className="fw-6">{currentSize ? currentSize : "Choose Size"}</span>
                   </span>
                 </div>
                 <form className="variant-picker-values">
@@ -117,7 +116,6 @@ const QuickAdd: React.FC<QuickAddProps> = ({ _id, sizes, selectedSize, onSelectS
                   key={size.sizeName}
                   onClick={() => {
                     setCurrentSize(size.sizeName);
-                    onSelectSize(size.sizeName);
                   }}
                   className={`style-text ${currentSize === size.sizeName ? 'selected' : ''}`}
                 >
@@ -129,7 +127,7 @@ const QuickAdd: React.FC<QuickAddProps> = ({ _id, sizes, selectedSize, onSelectS
             </div>
             <div className="tf-product-info-quantity mb_15">
               <div className="quantity-title fw-6">Quantity</div>
-              <Quantity />
+              <Quantity setQuantity={setQuantity} /> 
             </div>
             <div className="tf-product-info-buy-button">
               <form onSubmit={(e) => e.preventDefault()} className="">

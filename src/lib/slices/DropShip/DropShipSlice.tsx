@@ -35,7 +35,15 @@ const dropShipSlice = createSlice({
     ) => {
       const { category, itemData, loading } = action.payload;
       state.dropShipItemsByCategory[category] = itemData || [];
-      state.loadingByCategory[category] = loading; // Update the loading state for the category
+      state.loadingByCategory[category] = loading;
+      const loadedItems = action.payload.itemData;
+      loadedItems &&
+        loadedItems.forEach((item) => {
+          if (!state.dropShipItems.some((existingItem) => existingItem.id === item.id)) {
+            state.dropShipItems.push(item);
+          }
+        });
+      
     },
     setCategoryLoading: (state, action: PayloadAction<{ category: string; loading: boolean }>) => {
       state.loadingByCategory[action.payload.category] = action.payload.loading;

@@ -93,7 +93,7 @@ export default function AddressForm({ address, setAddress }: AddressFormProps) {
     
       <FormGrid size={{ xs: 6 }}>
         <FormLabel htmlFor="zip" required>
-          Location code
+          Zip code
         </FormLabel>
         <OutlinedInput
           id="zip"

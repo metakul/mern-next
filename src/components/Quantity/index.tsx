@@ -1,18 +1,21 @@
-"use client";
+import { useState, useEffect } from "react";
 
-import { useEffect, useState } from "react";
+interface QuantityProps {
+  setQuantity: (count: number) => void; // Expect a function to set quantity
+}
 
-export default function Quantity({ setQuantity = (count: number) => {} }) {
+const Quantity: React.FC<QuantityProps> = ({ setQuantity }) => {
   const [count, setCount] = useState(1);
+
   useEffect(() => {
-    setQuantity(count);
-  }, [count]);
+    setQuantity(count); // Update parent state on change
+  }, [count, setQuantity]);
 
   return (
     <div className="wg-quantity">
       <span
         className="btn-quantity minus-btn"
-        onClick={() => setCount((pre) => (pre == 1 ? 1 : pre - 1))}
+        onClick={() => setCount((prev) => (prev === 1 ? 1 : prev - 1))}
       >
         -
       </span>
@@ -25,10 +28,12 @@ export default function Quantity({ setQuantity = (count: number) => {} }) {
       />
       <span
         className="btn-quantity plus-btn"
-        onClick={() => setCount((pre) => pre + 1)}
+        onClick={() => setCount((prev) => prev + 1)}
       >
         +
       </span>
     </div>
   );
-}
+};
+
+export default Quantity;

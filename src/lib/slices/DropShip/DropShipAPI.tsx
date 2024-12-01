@@ -208,16 +208,17 @@ export const addToCartApi = createAsyncThunk(
     { item, isAuthenticated }: { item: CartItem; isAuthenticated: boolean },
     { rejectWithValue, dispatch }
   ) => {
-    console.log(item);
-
     if (isAuthenticated) {
       try {
         const response = await Request({
           endpointId: 'ADD_TO_CART',
           data: item,
         });
-        dispatch(addItemToCart(response));
-        return response;
+
+        const updatedItem = { ...response.data, quantity: item.quantity };
+
+        dispatch(addItemToCart(updatedItem));
+        return updatedItem;
       } catch (error) {
         return rejectWithValue('An error occurred while adding to cart.');
       }

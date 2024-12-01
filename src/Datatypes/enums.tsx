@@ -86,9 +86,9 @@ const base_url_backend="http://localhost:5003/v1"
     MAIN_LOGIN: {apiId:10,  withAuth:false,url: `${base_url_backend}/login`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Logging In",successMessage:"Logged In",errorMessage:"Error While Login"},
     
     // bots
-    GetBot: { apiId:11, withAuth:true, url: `${base_url_backend}/bots`, method: 'GET', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Loading My Bots",successMessage:"Bots retrievd successfully SuccessFull.", errorMessage:"Oho,Error fetching "},
+    GetBot: { apiId:11, withAuth:true, url: `${base_url_backend}/bots`, method: 'GET', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Loading My Bots",successMessage:"Bots retrievd successfully SuccessFull.", errorMessage:""},
     
-    create_bot: { apiId:12, withAuth:true, url: `${base_url_backend}/create_bot`, method: 'POST', headers: {  }, loadingMessage:"Loading My Bots",successMessage:"Bots retrievd successfully SuccessFull.", errorMessage:"Oho,Error fetching "},
+    create_bot: { apiId:12, withAuth:true, url: `${base_url_backend}/create_bot`, method: 'POST', headers: {  }, loadingMessage:"Loading My Bots",successMessage:"Bots retrievd successfully SuccessFull.", errorMessage:""},
     CHATGPT: { 
       apiId: 13, 
       isChatGpt: true,
@@ -106,7 +106,7 @@ const base_url_backend="http://localhost:5003/v1"
     // DROPSHIP API
     GET_DROPSHIP_ITEMS: { apiId:15, withAuth:false, url: `${base_url_backend}/DropShip/dropShipType`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
     GET_DROPSHIP_ITEMS_BY_CATEGORY: { apiId:151, withAuth:false, url: `${base_url_backend}/DropShip/dropShipCategory`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"Welcome",successMessage:"",errorMessage:""},
-    GET_SINGLE_DROPSHIP_ITEM: { apiId:16, withAuth:false, url: `${base_url_backend}/DropShip`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"",successMessage:"",errorMessage:"Error Loading Items"},
+    GET_SINGLE_DROPSHIP_ITEM: { apiId:16, withAuth:false, url: `${base_url_backend}/DropShip`, method: 'GET', headers: { 'Content-Type': 'application/json'},loadingMessage:"",successMessage:"",errorMessage:""},
     ADD_DROPSHIP_ITEM: { apiId:17, withAuth:true, url: `${base_url_backend}/DropShip`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Adding New Item",successMessage:"Item Added Successfully",errorMessage:"Error Adding Items"},
     UPDATE_DROPSHIP_ITEM_STATUS: { apiId:18, withAuth:true, url: `${base_url_backend}/DropShip/updateStatus`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Item",successMessage:"Item Status Updates SuccessFully",errorMessage:"Error Updating Item Status"},
     EDIT_DROPSHIP_ITEM: { apiId:19, withAuth:true, url: `${base_url_backend}/DropShip`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Item",successMessage:"Item Updated successfully",errorMessage:"Error Updating Item"},
@@ -131,7 +131,7 @@ const base_url_backend="http://localhost:5003/v1"
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       loadingMessage: 'Adding item to cart...',
-      successMessage: 'Item added to cart successfully!',
+      successMessage: '',
       errorMessage: 'Failed to add item to cart.',
     },
     REMOVE_ITEM_FROM_CART: {
@@ -141,7 +141,7 @@ const base_url_backend="http://localhost:5003/v1"
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       loadingMessage: 'Removing item to cart...',
-      successMessage: 'Item Removed from cart successfully!',
+      successMessage: '',
       errorMessage: 'Failed to remove item from cart.',
     },
     GET_CART: {
