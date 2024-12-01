@@ -231,9 +231,9 @@ export default function Cart({cartProducts,totalPrice}:any) {
                     aria-controls="shipping"
                   >
                     <h3 className="shipping-calculator-title">
-                      Estimate Shipping
+                      Estimate Shipping: 0.00
                     </h3>
-                    <span className="shipping-calculator_accordion-icon" />
+                    {/* <span className="shipping-calculator_accordion-icon" /> */}
                   </summary>
                   <div className="collapse" id="shipping">
                     <div className="accordion-shipping-content">
@@ -403,7 +403,7 @@ export default function Cart({cartProducts,totalPrice}:any) {
                 <div className="tf-cart-totals-discounts">
                   <h3>Subtotal</h3>
                   <span className="total-value">
-                  ₹ {totalPrice.toFixed(2)} USD
+                  ₹ {totalPrice.toFixed(2)}
                   </span>
                 </div>
           
