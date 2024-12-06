@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BlogsState, CryptoData, Iblog } from '../../../Datatypes/interfaces/interface';
-import { blogs } from './blogInitialState'; // Adjust the path
+// import { blogs } from './blogInitialState'; // Adjust the path
 
 const initialState: BlogsState = {
-  blogs: blogs as Iblog[],
+  blogs: [] as Iblog[],
   loading:false
 };
 
