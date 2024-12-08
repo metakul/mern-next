@@ -70,7 +70,7 @@ const QuickAdd: React.FC<QuickAddProps> = ({ _id, sizes, selectedSize, onSelectS
                 {item && <Link to={`/product-detail/${item.id}`}>{item.title}</Link>}
                 <div className="tf-product-info-price">
                   {item && item.price !== undefined && (
-                    <div className="price">${item.price.toFixed(2)}</div>
+                    <div className="price">₹{item.price.toFixed(2)}</div>
                   )}
                 </div>
               </div>
@@ -136,12 +136,12 @@ const QuickAdd: React.FC<QuickAddProps> = ({ _id, sizes, selectedSize, onSelectS
                   onClick={handleAddToCart}
                 >
                   <span>
-                    Add To Cart
+                    Add To Cart 
                     {/* {isAddedToCart ? "Already Added - " : "Add to cart - "} */}
                   </span>
-                  {item && item.price !== undefined && (
-                    <span className="tf-qty-price">${item.price.toFixed(2)}</span>
-                  )}
+                  {/* {item && item.price !== undefined && (
+                    <span className="tf-qty-price"> ₹{item.price.toFixed(2)}</span>
+                  )} */}
                 </a>
                 <div className="tf-product-btn-wishlist btn-icon-action">
                   <i className="icon-heart" />

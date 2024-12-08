@@ -94,7 +94,7 @@ const Tab1 = () => {
         </Typography>
         <DropShipItems dropShipItems={categoryItemsWinter} categoryType="jackets"  loading={loadingByCategory["jackets"] || false}/>
         
-        <Scroll parsedNotes={dropShipItems} loading/>
+        {/* <Scroll parsedNotes={dropShipItems} loading/> */}
 
         {/* <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-8 mb-4">
           Most Liked Shirt
@@ -105,7 +105,7 @@ const Tab1 = () => {
         <Typography variant="h3" sx={{ mt: 4 }} className="text-center mt-4 mb-2">
           Featured Items
         </Typography>
-        <CardWithPagination cartItems={dropShipItems} />
+        <CardWithPagination cartItems={dropShipItems} loading={loadingByCategory["hotdeals"] || false} />
     </>
   );
 };

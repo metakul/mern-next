@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUserDispatcher, sendOtp, verifyOtp } from '@/lib/slices/authApiSlice';
 import { AppDispatch } from '@/lib/store';
 import { authLoading, isAuthenticated, SelectConactVerified, SelectContact, selectToken, selectTrxId } from '@/lib/slices/authSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   Box,
@@ -12,68 +14,56 @@ import {
   InputLabel,
   OutlinedInput,
   Stack,
-  TextField,
   Typography,
 } from '@mui/material';
 import ChooseLocation from '../Location/ChooseLocation';
 import { jwtDecode } from 'jwt-decode';
 import { accountStatus, UserCategory } from '@/Datatypes/enums';
+import { Address } from '../CheckOut/CheckOut';
 
 interface LoginProps {
   onVerified?: (phoneNumber: string) => void;
+  address: Address;
 }
 
 interface FormData {
   address: string | { latitude: number; longitude: number };
-  email: string;
-  name: string;
 }
 
 interface CustomJwtPayload {
   phoneNumber: string;
   email: string;
-  name: string
+  name: string;
 }
 
-const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified }) => {
+const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified, address }) => {
   const dispatch = useDispatch<AppDispatch>();
   const isAuthLoading = useSelector(authLoading);
-  const trxId = useSelector(selectTrxId); // Retrieve trxId from Redux state
+  const trxId = useSelector(selectTrxId);
   const isUserAuthenticated = useSelector(isAuthenticated);
   const isContactVerified = useSelector(SelectConactVerified);
-  const [formData, setFormData] = useState<FormData>({ address: '', email: '', name: '' });
+  const [formData, setFormData] = useState<FormData>({ address: '' });
   const [openMap, setOpenMap] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [contactVerified, setContactVerified] = useState(isContactVerified);
 
   const verifiedContactState = useSelector(SelectContact);
-  const [verifiedContact, setVerifiedContact] = useState<string>(verifiedContactState); // Store verified contact
+  const [verifiedContact, setVerifiedContact] = useState<string>(verifiedContactState);
 
+  const myToken = useSelector(selectToken);
 
-
-  const myToken = useSelector(selectToken)
-
-
-  React.useEffect(() => {
-
+  useEffect(() => {
     if (isUserAuthenticated) {
       const decodedToken = jwtDecode<CustomJwtPayload>(myToken);
-      console.log("Decoded Token:", decodedToken)
-      setVerifiedContact(decodedToken?.phoneNumber)
-      setFormData((prevData) => ({
-        ...prevData,
-        email: decodedToken?.email,
-        name: decodedToken?.name,
-      }));
-      setContactVerified(true)
-
+      setVerifiedContact(decodedToken?.phoneNumber);
+      setContactVerified(true);
     }
-  }, [isUserAuthenticated,verifiedContactState]);
+  }, [isUserAuthenticated, verifiedContactState]);
 
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [otp, setOtp] = useState<string>('');
-  const [otpSent, setOtpSent] = useState(false); // Track if OTP is sent
+  const [otpSent, setOtpSent] = useState(false);
 
   const handleAddressChange = (address: string | { latitude: number; longitude: number } | null) => {
     if (address) {
@@ -93,16 +83,16 @@ const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified }) => {
     try {
       if (!phoneNumber) {
         setError('Phone number is required');
+        toast.error('Phone number is required');
         return;
       }
       setError('');
-      await dispatch(
-        sendOtp({ phoneNumber })
-      ).unwrap(); // Trigger the OTP API
-      setVerifiedContact(phoneNumber)
-      setOtpSent(true); // Mark OTP as sent
+      await dispatch(sendOtp({ phoneNumber })).unwrap();
+      setVerifiedContact(phoneNumber);
+      setOtpSent(true);
     } catch (error) {
       setError('Failed to send OTP');
+      toast.error('Failed to send OTP');
     }
   };
 
@@ -110,6 +100,7 @@ const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified }) => {
     try {
       if (!otp) {
         setError('OTP is required');
+        toast.error('OTP is required');
         return;
       }
       setError('');
@@ -120,48 +111,48 @@ const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified }) => {
           deviceId: '550e8400-e29b-41d4-a716-446655440000',
           phoneNumber,
         })
-      ).unwrap(); // Trigger the Verify OTP API
-
-      onVerified && onVerified(phoneNumber); // Trigger success callback
+      ).unwrap();
+      onVerified && onVerified(phoneNumber);
     } catch (error) {
       setError('Failed to verify OTP');
+      toast.error('Failed to verify OTP');
     }
   };
+
   const handleRegister = async () => {
     try {
       if (!otp) {
         setError('OTP is required');
+        toast.error('OTP is required');
         return;
       }
       setError('');
 
-      const { email, name, address } = formData
-
-      
-
       if (!isUserAuthenticated) {
-        dispatch(registerUserDispatcher({ email, name, phoneNumber: verifiedContact, address, accountStatus: accountStatus.Pending, category: UserCategory.Verifier }))
+        dispatch(
+          registerUserDispatcher({
+            email: address.email,
+            name: address.name,
+            phoneNumber: verifiedContact,
+            address: `${address.address2}, ${address.city}, ${address.zip}` ,
+            accountStatus: accountStatus.Pending,
+            category: UserCategory.Verifier,
+          })
+        );
       }
 
-      onVerified && onVerified(phoneNumber); // Trigger success callback
+      onVerified && onVerified(phoneNumber);
     } catch (error) {
       setError('Failed to verify OTP');
+      toast.error('Failed to verify OTP');
     }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
   };
 
   return (
     <div>
       <form noValidate>
         <Grid container spacing={1}>
-          {!isContactVerified &&
+          {!isContactVerified && (
             <Grid item xs={12}>
               <Stack spacing={1}>
                 <InputLabel htmlFor="phone-number">Phone Number</InputLabel>
@@ -174,12 +165,10 @@ const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified }) => {
                   fullWidth
                   error={!!error && !otpSent}
                 />
-                {error && !otpSent && (
-                  <FormHelperText error>{error}</FormHelperText>
-                )}
+                {error && !otpSent && <FormHelperText error>{error}</FormHelperText>}
               </Stack>
             </Grid>
-          }
+          )}
 
           {otpSent && !isContactVerified && (
             <Grid item xs={12}>
@@ -194,36 +183,13 @@ const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified }) => {
                   fullWidth
                   error={!!error && otpSent}
                 />
-                {error && otpSent && (
-                  <FormHelperText error>{error}</FormHelperText>
-                )}
+                {error && otpSent && <FormHelperText error>{error}</FormHelperText>}
               </Stack>
-
             </Grid>
           )}
-          {!isUserAuthenticated && isContactVerified &&
-            <Grid item xs={12}>
-              <TextField
-                label="Name"
-                variant="outlined"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                fullWidth
-                error={!!error && !formData.name}
-                helperText={!!error && !formData.name ? 'Name is required.' : ''}
-              />
-              <TextField
-                label="Email"
-                variant="outlined"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                fullWidth
-                error={!!error && !formData.email}
-                helperText={!!error && !formData.email ? 'Email is required.' : ''}
-              />
 
+          {/* {!isUserAuthenticated && isContactVerified && (
+            <Grid item xs={12}>
               {openMap && <ChooseLocation setAddress={handleAddressChange} open={openMap} handleClose={toggleMapInfo} />}
 
               <Box
@@ -244,13 +210,12 @@ const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified }) => {
                 )}
               </Box>
             </Grid>
-          }
+          )} */}
 
           <Grid item xs={12}>
-            {
-              !isContactVerified ? (
-                !otpSent ? (
-                  <Button
+            {!isContactVerified ? (
+              !otpSent ? (
+                <Button
                   disableElevation
                   fullWidth
                   size="large"
@@ -261,36 +226,32 @@ const PasswordlessLoginForm: React.FC<LoginProps> = ({ onVerified }) => {
                 >
                   Send OTP
                 </Button>
-                ) : (
-                  <Button
-                    disableElevation
-                    fullWidth
-                    size="large"
-                    onClick={handleVerifyOtp}
-                    variant="contained"
-                    color="primary"
-                    disabled={isAuthLoading}
-                  >
-                    Verify OTP
-                  </Button>
-                )
               ) : (
-               
-                   <Button
-                   disableElevation
-                   fullWidth
-                   size="large"
-                   onClick={handleRegister}
-                   variant="contained"
-                   color="primary"
-                   disabled={isAuthLoading}
-                 >
-                   Register
-                 </Button>
+                <Button
+                  disableElevation
+                  fullWidth
+                  size="large"
+                  onClick={handleVerifyOtp}
+                  variant="contained"
+                  color="primary"
+                  disabled={isAuthLoading}
+                >
+                  Verify OTP
+                </Button>
               )
-            }
-
-
+            ) : (
+              <Button
+                disableElevation
+                fullWidth
+                size="large"
+                onClick={handleRegister}
+                variant="contained"
+                color="primary"
+                disabled={isAuthLoading}
+              >
+                Register
+              </Button>
+            )}
           </Grid>
         </Grid>
       </form>

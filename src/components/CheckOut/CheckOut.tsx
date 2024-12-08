@@ -52,7 +52,7 @@ function getStepContent(step: number, address: Address, setAddress: React.Dispat
     case 0:
       return <AddressForm address={address} setAddress={setAddress} />;
     case 1:
-      return <Subscribe />;
+      return <Subscribe address={address}/>;
     case 2:
       return <Review address={address} />;
     default:

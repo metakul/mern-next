@@ -16,6 +16,7 @@ import {jwtDecode} from "jwt-decode";
 import { useShowOutlet } from '@/context/showOutletContext';
 import VerifyOtpForm from '../Forms/Stepper/VerifyOtpForm';
 import PasswordlessLoginForm from '../Forms/PasswordLoginForm';
+import { Address } from '../CheckOut/CheckOut';
 
 interface CustomJwtPayload {
   phoneNumber: string;
@@ -32,9 +33,10 @@ interface FormData {
 }
 
 interface SubscribeProps {
+  address:Address
 }
 
-const Subscribe: React.FC<SubscribeProps> = () => { // todo dont take totalPrice From here
+const Subscribe: React.FC<SubscribeProps> = ({address}) => { // todo dont take totalPrice From here
   const navigate = useNavigate();
   const {setShowOutlet} =useShowOutlet()
   const cartItems=useSelector(selectCartItems)
@@ -182,14 +184,14 @@ const Subscribe: React.FC<SubscribeProps> = () => { // todo dont take totalPrice
   };
 
   const handleContactVerified = (contact: string) => {
-    toast.success('Contact verified successfully!');
+    // toast.success('Contact verified successfully!');
   }
   return (
     <Box className="relative flex flex-col gap-4 w-full p-4">
       {!contactVerified &&
         <>
           <Typography variant="h6">Verify Contact Number</Typography>
-          <PasswordlessLoginForm onVerified={handleContactVerified} />
+          <PasswordlessLoginForm address={address} onVerified={handleContactVerified} />
           {/* <VerifyOtpForm/> */}
         </>
       }
