@@ -1,7 +1,7 @@
 import { Pages } from "@/Datatypes/enums";
 import {
   HomeOutlined,
-  ShoppingCartOutlined,
+  // ShoppingCartOutlined,
   PublicOutlined,
   TodayOutlined,
   // AdminPanelSettingsOutlined,
@@ -9,7 +9,7 @@ import {
   // Checkroom
 } from "@mui/icons-material";
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-
+import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
 export const navConfig = [
   {
     text: "Dashboard",
@@ -64,11 +64,11 @@ export const navConfig = [
   //   icon:null,
   //   to: "",
   // },
-  // {
-  //   text: "Profile",
-  //   icon: <AdminPanelSettingsOutlined />,
-  //   to: "/Profile",
-  // },
+  {
+    text: "Exchange",
+    icon: < SwapHorizontalCircleIcon/>,
+    to: Pages.DEX_PAGE,
+  },
   {
     text: "Create Own NFT",
     icon: <PublicOutlined />,

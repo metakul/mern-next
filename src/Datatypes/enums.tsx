@@ -48,6 +48,7 @@ export enum Pages {
   CHAT_GPT = "/ChatGpt" ,
   MARKETPLACE = "/Marketplace" ,
   SELL = "/SELL" ,
+  DEX_PAGE = "/exchange" ,
 }
 
 export enum HomePageInfo{
@@ -59,7 +60,8 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
+// const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
+const base_url_backend="http://localhost:5002/v1"
 
 // define endpoints here
   export const ApiEndpoint: Record<string, any> = {

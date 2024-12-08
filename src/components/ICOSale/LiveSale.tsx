@@ -142,14 +142,7 @@ const Home = () => {
               tokenSymbol="MATIC"
               tokenBalance= {"10"}
             />
-            <button
-              onClick={() => 
-                currentFrom === "native"
-                  ? setCurrentFrom("token")
-                  : setCurrentFrom("native")
-              }
-              className={styles.toggleButton}
-            >↓</button>
+       
             <SwapInput
               current={currentFrom as string}
               type="token"
