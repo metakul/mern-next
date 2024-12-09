@@ -7,9 +7,9 @@ import { ApiSuccess } from '../../../Datatypes/interfaces/interface';
 
 export const fetchSingleCryptoDispatcher = createAsyncThunk(
   'FetchCryptoInfo',
-  async ({ cryptoSymbol,currency }: CryptoInfoProps, { rejectWithValue,dispatch }) => {
-    dispatch(fetchSingleCryptoInfo({_id:cryptoSymbol || "", loading: true, cryptoData: {
-      cryptoSymbol:cryptoSymbol,
+  async ({ cryptoAddress,currency }: CryptoInfoProps, { rejectWithValue,dispatch }) => {
+    dispatch(fetchSingleCryptoInfo({_id:cryptoAddress || "", loading: true, cryptoData: {
+      cryptoAddress:cryptoAddress,
       currency:currency,
       price:"loading",
       marketCap:"loading",
@@ -17,19 +17,19 @@ export const fetchSingleCryptoDispatcher = createAsyncThunk(
  
     try {
       const response = await Request({
-        endpointId:"FetchCryptoInfo",
-        slug: `/${cryptoSymbol}/${currency}`,
-        data: { cryptoSymbol },
+        endpointId: "FetchCryptoInfo",
+        slug: `?address=${cryptoAddress}`,
+        data: { cryptoAddress },
       })
       
       //todo add propoer data for cryptoInfo
       const cryptoData: CryptoData = {
-        cryptoSymbol:cryptoSymbol,
-        currency: response?.asset_id_quote,
-        price: response?.rate,
+        cryptoAddress:cryptoAddress,
+        // currency: response?.asset_id_quote,
+        price: response.token,
         marketCap: response?.time
       };
-      dispatch(fetchSingleCryptoInfo({_id:cryptoSymbol || "",cryptoData,loading:false}));
+      dispatch(fetchSingleCryptoInfo({_id:cryptoAddress || "",cryptoData,loading:false}));
 
       const apiSuccess: ApiSuccess = {
         statusCode: response.status,

@@ -18,6 +18,7 @@ import MarketPlace from "./(routes)/Marketplace/page";
 import SaleInfo from "./components/SaleInfo";
 import Sell from "./(routes)/Marketplace/SellPage";
 import DEXPage from "./(routes)/dex/page";
+import Swap from "./(routes)/swap/page";
 
 
 
@@ -77,6 +78,10 @@ const Router: React.FC = () => {
         {
           path: Pages.DEX_PAGE,
           element:  <DEXPage/>,
+        },
+        {
+          path: Pages.SWAP_PAGE,
+          element:  <Swap/>,
         },
         // {
         //   path: Pages.MARKETPLACE,

@@ -10,6 +10,8 @@ import {
 } from "@mui/icons-material";
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+
 export const navConfig = [
   {
     text: "Dashboard",
@@ -69,6 +71,11 @@ export const navConfig = [
     icon: < SwapHorizontalCircleIcon/>,
     to: Pages.DEX_PAGE,
   },
+  // {
+  //   text: "Quick Swap",
+  //   icon: < CurrencyExchangeIcon/>,
+  //   to: Pages.SWAP_PAGE,
+  // },
   {
     text: "Create Own NFT",
     icon: <PublicOutlined />,

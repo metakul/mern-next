@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import toastStyle from '@/util/toastConfig';
 const chatGptApiKey = import.meta.env.VITE_OPENAI_API_KEY; 
 
-const Request = async ({ endpointId, slug, data, headers }: RequestOptions) => {
+const Request = async ({ endpointId, slug, data, headers, params }: RequestOptions) => {
   const storedAccessToken = Cookies.get('access');  // Retrieve stored access token
   const endpoint = ApiEndpoint[endpointId];
 
@@ -19,7 +19,6 @@ const Request = async ({ endpointId, slug, data, headers }: RequestOptions) => {
     fullUrl += `${slug}`;  // Append additional slug to URL if provided
   }
 
-  
   const axiosConfig: AxiosRequestConfig = {
     method: endpoint.method,
     url: fullUrl,
@@ -27,7 +26,8 @@ const Request = async ({ endpointId, slug, data, headers }: RequestOptions) => {
       ...endpoint.headers,
       // Use the appropriate Authorization header based on the endpoint type
       Authorization: endpoint.isChatGpt ? `Bearer ${chatGptApiKey}` : endpoint.withAuth ? `Bearer ${storedAccessToken}` : undefined
-    }
+    },
+    params: params  // Add query parameters if provided
   };
 
   // Check and set appropriate data for non-GET requests

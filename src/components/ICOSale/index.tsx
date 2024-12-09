@@ -44,7 +44,7 @@ const IcoSale: React.FC<IcoSaleProps> = ({ data }) => {
   const updatedIcoData = {
     ...data,
     reachedAmount: isTimeZero(remainingTime) ? "$19,550,000" : "0",
-    reachedPercentage: isTimeZero(remainingTime) ? "25" : "0",
+    reachedPercentage: isTimeZero(remainingTime) ? "5" : "0",
   };
   return (
     <div>
@@ -96,13 +96,13 @@ const IcoSale: React.FC<IcoSaleProps> = ({ data }) => {
               )}
               <div>
                 <>
-                  <div className="mb-2 flex justify-between ">
+                  {/* <div className="mb-2 flex justify-between ">
                     <span>
                       <span className='text-jacarta-500'>  Reached: </span><span className="text-green">{updatedIcoData.reachedAmount}</span>
                     </span>
                     <Typography >{data.hardcapAmount}</Typography>
-                  </div>
-                  <div className="rounded bg-accent-lighter">
+                  </div> */}
+                  <div className="rounded bg-accent-lighter mt-6">
                     <div className="h-4 rounded bg-accent" style={{ width: `${updatedIcoData.reachedPercentage}%` }}></div>
                   </div>
                   <div className="mt-2 flex justify-between text-jacarta-400">
@@ -126,7 +126,7 @@ const icoData = {
   countdownDate: "2024-01-01T19:40:30",
   reachedAmount: "$19,550,000",
   hardcapAmount: "$70,000,000",
-  reachedPercentage: 32,
+  reachedPercentage: 2,
 };
 
 export default () => <IcoSale data={icoData} />;

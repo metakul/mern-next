@@ -1,7 +1,10 @@
-import { toEther, toWei, useAddress, useBalance, useContract, useContractRead, useContractWrite, useSDK, useTokenBalance } from "@thirdweb-dev/react";
+import { ConnectWallet, toEther, toWei, useAddress, useBalance, useContract, useContractRead, useContractWrite, useSDK, useTokenBalance } from "@thirdweb-dev/react";
 import styles from "./Style.module.css";
 import { useEffect, useState } from "react";
 import SwapInput from "./SwapInput";
+import { Box, Typography } from "@mui/material";
+import { getColors } from "@/layout/Theme/themes";
+import { toast } from "react-toastify";
 
 const kullToken = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
 const dexAddress = import.meta.env.VITE_PUBLIC_DEX_CONTRACT_ADDRESS as string
@@ -28,11 +31,11 @@ const Home = () => {
   const { data: contractTokenBalance } = useTokenBalance(tokenContract, DEX_CONTRACT);
 
   // State for the contract balance and the values to swap
-  const [contractBalance, setContractBalance] = useState<String>("0");
-  const [nativeValue, setNativeValue] = useState<String>("0");
-  const [tokenValue, setTokenValue] = useState<String>("0");
-  const [currentFrom, setCurrentFrom] = useState<String>("native");
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [contractBalance, setContractBalance] = useState<string>("0");
+  const [nativeValue, setNativeValue] = useState<string>("0");
+  const [tokenValue, setTokenValue] = useState<string>("0");
+  const [currentFrom, setCurrentFrom] = useState<string>("native");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { mutateAsync: swapNativeToken } = useContractWrite(
     dexContract,
@@ -53,10 +56,10 @@ const Home = () => {
     "getAmountOfTokens",
     currentFrom === "native"
       ? [
-          toWei(nativeValue as string || "0"),
-          toWei(contractBalance as string || "0"),
-          contractTokenBalance?.value,
-        ]
+        toWei(nativeValue as string || "0"),
+        toWei(contractBalance as string || "0"),
+        contractTokenBalance?.value,
+      ]
       : [
         toWei(tokenValue as string || "0"),
         contractTokenBalance?.value,
@@ -78,14 +81,20 @@ const Home = () => {
   const executeSwap = async () => {
     setIsLoading(true);
     try {
-      if(currentFrom === "native") {
-        await swapNativeToken({
-          overrides: {
-            value: toWei(nativeValue as string || "0"),
-          }
-        });
+      if (currentFrom === "native") {
 
-        alert("Swap executed successfully");
+        if (nativeBalance && nativeBalance?.displayValue > nativeValue ) {
+          await swapNativeToken({
+            overrides: {
+              value: toWei(nativeValue as string || "0"),
+            }
+          });
+          toast.success("Swap executed successfully");
+        }
+        else{
+          toast.error("Not enough Balance")
+        }
+
       } else {
         await approveTokenSpending({
           args: [
@@ -93,15 +102,15 @@ const Home = () => {
             toWei(tokenValue as string || "0"),
           ]
         });
-       await swapTokenToNative({
+        await swapTokenToNative({
           args: [
             toWei(tokenValue as string || "0")
           ]
         });
-        alert("Swap executed successfully");
+        toast.success("Swap executed successfully");
       }
     } catch (error) {
-      alert("An error occurred while trying to execute the swap");
+      toast.error("An error occurred while trying to execute the swap");
     } finally {
       setIsLoading(false);
     }
@@ -115,8 +124,8 @@ const Home = () => {
 
   // Update the amount to get based on the value
   useEffect(() => {
-    if(!amountToGet) return;
-    if(currentFrom === "native") {
+    if (!amountToGet) return;
+    if (currentFrom === "native") {
       setTokenValue(toEther(amountToGet));
     } else {
       setNativeValue(toEther(amountToGet));
@@ -127,12 +136,17 @@ const Home = () => {
     <main className={styles.main}>
       <div className={styles.container}>
         <div style={{
-          backgroundColor: "#111",
+          backgroundColor: getColors().secondary[900],
           padding: "1rem",
           borderRadius: "10px",
         }}>
-          <div 
-            >
+          <Box sx={{
+            display: "flex",
+            gap: "1rem",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+          >
             <SwapInput
               current={currentFrom as string}
               type="native"
@@ -140,9 +154,17 @@ const Home = () => {
               value={nativeValue as string}
               setValue={setNativeValue}
               tokenSymbol="MATIC"
-              tokenBalance= {"10"}
+              cryptoSign="POL"
+              tokenBalance={nativeBalance?.displayValue}
             />
-       
+            <button
+              onClick={() =>
+                currentFrom === "native"
+                  ? setCurrentFrom("token")
+                  : setCurrentFrom("native")
+              }
+              className="button"
+            >↓</button>
             <SwapInput
               current={currentFrom as string}
               type="token"
@@ -150,25 +172,37 @@ const Home = () => {
               value={tokenValue as string}
               setValue={setTokenValue}
               tokenSymbol={symbol as string}
+              cryptoSign={symbol as string}
               tokenBalance={tokenBalance?.displayValue}
             />
-          </div>
+          </Box>
           {address ? (
             <div style={{
             }}>
               <button
                 onClick={executeSwap}
-                disabled={isLoading as boolean}
+                disabled={isLoading || nativeValue == "0" || tokenValue == "0" || nativeValue == "" || tokenValue == ""}
                 className={`${styles.swapButton} mt-6`}
-              >{
-                isLoading
-                  ? "Loading..."
-                  : "Swap"  
-              }</button>
+              >
+                {isLoading ? "Swapping..." : "Swap"}
+              </button>
             </div>
           ) : (
-            <p className="mt-6 text-center">Connect wallet to exchange.</p>
+            <ConnectWallet />
           )}
+
+          <Box >
+
+            <br />
+            <Typography>
+
+              Total Liquidity Added : {contractBalance} $POL
+            </Typography>
+            <br />
+            <Typography>
+              Total Token Remaining : {contractTokenBalance ? contractTokenBalance.displayValue.toString() : "Loading"} $KULL
+            </Typography>
+          </Box>
         </div>
       </div>
     </main>

@@ -49,6 +49,7 @@ export enum Pages {
   MARKETPLACE = "/Marketplace" ,
   SELL = "/SELL" ,
   DEX_PAGE = "/exchange" ,
+  SWAP_PAGE = "/quick-swap" ,
 }
 
 export enum HomePageInfo{
@@ -60,8 +61,8 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
-// const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
-const base_url_backend="http://localhost:5002/v1"
+const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
+// const base_url_backend="http://localhost:5003/v1"
 
 // define endpoints here
   export const ApiEndpoint: Record<string, any> = {
@@ -72,7 +73,8 @@ const base_url_backend="http://localhost:5002/v1"
     ADD_BLOG: { apiId:5, withAuth:true, url: `${base_url_backend}/blogs`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"Adding New Blog",successMessage:"Blog Added Successfully",errorMessage:"Error Loading Blogs"},
     UPDATE_BLOG_STATUS: { apiId:6, withAuth:true, url: `${base_url_backend}/blogs/updateStatus`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Approving Blog",successMessage:"Blog Status Updates SuccessFully",errorMessage:"Error Approving Blogs"},
     EDIT_BLOG: { apiId:7, withAuth:true, url: `${base_url_backend}/blogs`, method: 'PATCH', headers: { 'Content-Type': 'application/json'},loadingMessage:"Editing Blog",successMessage:"Blog Updated successfully",errorMessage:"Error Updating Blog"},
-    FetchCryptoInfo: { apiId:8, withAuth:false, url: "https://rest.coinapi.io/v1/exchangerate", method: 'GET', headers: { "X-CoinAPI-Key":"7bcdeaf0-f41c-4538-ad46-e7a15d4da51c"}, loadingMessage:"",successMessage:"",errorMessage:"",showmsg:false},
+    FetchCryptoInfo: { apiId:8, withAuth:false, url: `${base_url_backend}/tokenPriceSingle` , method: 'GET', headers: { 'Content-Type': 'application/json' }, loadingMessage:"",successMessage:"",errorMessage:"",showmsg:false},
+    tokenPrice: { apiId:81, withAuth:false, url: `${base_url_backend}/tokenPrice` , method: 'GET', headers: { 'Content-Type': 'application/json' }, loadingMessage:"",successMessage:"",errorMessage:"",showmsg:false},
     
     
     // main backend 
