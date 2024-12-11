@@ -11,6 +11,7 @@ import {
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import ApiIcon from '@mui/icons-material/Api';
 
 export const navConfig = [
   {
@@ -67,19 +68,19 @@ export const navConfig = [
   //   to: "",
   // },
   {
+    text: "Create Own NFT",
+    icon: <PublicOutlined />,
+    to: Pages.CREATE_NFT
+  },
+  {
     text: "Exchange",
     icon: < SwapHorizontalCircleIcon/>,
     to: Pages.DEX_PAGE,
   },
-  // {
-  //   text: "Quick Swap",
-  //   icon: < CurrencyExchangeIcon/>,
-  //   to: Pages.SWAP_PAGE,
-  // },
   {
-    text: "Create Own NFT",
-    icon: <PublicOutlined />,
-    to: Pages.CREATE_NFT
+    text: "Quick Swap",
+    icon: < CurrencyExchangeIcon/>,
+    to: Pages.SWAP_PAGE,
   },
   // {
   //   text: "Buy Nft Own NFT",
@@ -117,6 +118,16 @@ export const navConfig = [
   //   icon:<Checkroom/>,
   //   to: "/laundry",
   // },
+  {
+    text: "API",
+    icon:null,
+    to: "",
+  },
+  {
+    text: "MetaKul API",
+    icon:<ApiIcon/>,
+    to: Pages.API_PAGE
+  },
 ];
 
 export default navConfig;

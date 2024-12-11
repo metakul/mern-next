@@ -50,6 +50,7 @@ export enum Pages {
   SELL = "/SELL" ,
   DEX_PAGE = "/exchange" ,
   SWAP_PAGE = "/quick-swap" ,
+  API_PAGE = "/metakul-api" ,
 }
 
 export enum HomePageInfo{

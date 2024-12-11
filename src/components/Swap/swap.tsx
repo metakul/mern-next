@@ -250,7 +250,7 @@ const handleClose = () => {
                 <Button sx={{
                     background:getColors().secondary[800],
                     mt:4
-                }} className="swapButton" disabled={!tokenOneAmount || !isConnected} onClick={fetchDexSwap}>Swap</Button>
+                }} className="swapButton" disabled={!tokenOneAmount || !isConnected} onClick={fetchDexSwap}>{!tokenOneAmount ? "Swap" : "Coming Soon"}</Button>
             </Box>
         </>
     );

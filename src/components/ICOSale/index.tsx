@@ -60,13 +60,20 @@ const IcoSale: React.FC<IcoSaleProps> = ({ data }) => {
                 $KULL ICO Pre-Sale is <span className="text-accent"> {isTimeZero(remainingTime) ? "LIVE":"Coming Soon!"}</span>
               </h2>
               <p className="mb-2 text-lg text-jacarta-500 dark:text-jacarta-300">
-                Discount Tier 1: {data.discountTier}%
+                How to get $KULL
               </p>
-            
+              <p className="mb-2 text-sm text-jacarta-500 dark:text-jacarta-300">
+                1. Connect your wallet
+              </p>
+              <p className="mb-2 text-sm text-jacarta-500 dark:text-jacarta-300">
+                2. Buy Or Deposit $POL to your smart wallet
+              </p>
+              <p className="mb-2 text-sm text-jacarta-500 dark:text-jacarta-300">
+                3. Check the Amout to receive and Click Swap 
+              </p>
             </div>
             <div>
               {isTimeZero(remainingTime) ? (
-
                 <LiveSale />
               ) : (
                 <div
