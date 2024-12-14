@@ -33,7 +33,6 @@ export default function Sell() {
 							style: toastStyle,
 						}
 					);
-					console.log(err);
 				})
 				.finally(() => {
 					setLoading(false);

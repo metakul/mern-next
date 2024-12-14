@@ -114,7 +114,6 @@ const handleClose = () => {
         if (allowance.data.allowance === "0") {
             const approve = await axios.get(`https://api.1inch.io/v5.0/1/approve/transaction?tokenAddress=${tokenOne.address}`)
             setTxDetails(approve.data);
-            console.log("not approved")
             return
         }
 

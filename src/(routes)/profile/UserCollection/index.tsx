@@ -17,7 +17,7 @@ export default function index({collectionAddress}:any) {
                   id="onSaleCollectionsFilter"
                   data-bs-toggle="dropdown"
                   data-bs-auto-close="outside"
-                  aria-expanded="false"
+                  
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ export default function index({collectionAddress}:any) {
                   className="dropdown-toggle group group flex h-9 items-center rounded-lg border border-jacarta-100 bg-white px-4 font-display text-sm font-semibold text-jacarta-700 transition-colors hover:border-transparent hover:bg-accent hover:text-white dark:border-jacarta-600 dark:bg-jacarta-700 dark:text-white dark:hover:bg-accent"
                   id="onSaleCategoriesFilter"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
