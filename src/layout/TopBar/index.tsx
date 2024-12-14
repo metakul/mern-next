@@ -94,6 +94,16 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
     }} >
       <Toolbar>
         
+      <IconButton
+          onClick={() => setIsSidebarOpen()}
+          sx={{
+            mt:2,
+            color: getColors().blueAccent[100]
+          }}
+        >
+          <MenuIcon/>
+        {/* <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" /> */}
+        </IconButton>
         <Box
           onClick={() => navigate("/")}
           sx={{ cursor: "pointer",mt: 2}}
@@ -125,16 +135,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSidebarOpen, APP_BAR }) => {
               background: theme.palette.grey[100],
             }} />
           </div>
-          <IconButton
-          onClick={() => setIsSidebarOpen()}
-          sx={{
-            mt:2,
-            color: getColors().blueAccent[100]
-          }}
-        >
-          <MenuIcon/>
-        {/* <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" /> */}
-        </IconButton>
+        
           {/* {address ? (
             <>
               <FlexBetween>

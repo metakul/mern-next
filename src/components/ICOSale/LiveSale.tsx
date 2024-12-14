@@ -200,8 +200,8 @@ const Home = () => {
             </Typography>
             <br />
             <Typography>
-              Total Token Remaining : {contractTokenBalance ? contractTokenBalance?.displayValue?.toString() : "Loading"} $KULL
-            </Typography>
+            Total Token Remaining : {contractTokenBalance ? Number(contractTokenBalance.displayValue).toFixed(4) : "Loading"} $KULL
+               </Typography>
           </Box>
         </div>
       </div>
