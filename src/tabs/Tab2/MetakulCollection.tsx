@@ -209,7 +209,7 @@ const MetakulCollection = () => {
                     className="dropdown-toggle group group flex h-9 items-center rounded-lg border border-jacarta-100  px-4 font-display text-sm font-semibold  transition-colors hover:border-transparent      "
                     id="blockchainFilter"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    // 
 
                   >
                     <svg
@@ -234,7 +234,7 @@ const MetakulCollection = () => {
                     className="dropdown-toggle group group flex h-9 items-center rounded-lg border border-jacarta-100  px-4 font-display text-sm font-semibold  transition-colors hover:border-transparent      "
                     id="categoriesFilter"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    
 
                   >
                     <svg
@@ -258,7 +258,7 @@ const MetakulCollection = () => {
                     className="dropdown-toggle group group flex h-9 items-center rounded-lg border border-jacarta-100  px-4 font-display text-sm font-semibold  transition-colors hover:border-transparent      "
                     id="categoriesFilter"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    
 
                   >
                     <svg
@@ -282,7 +282,7 @@ const MetakulCollection = () => {
                     className="dropdown-toggle group group flex h-9 items-center rounded-lg border border-jacarta-100  px-4 font-display text-sm font-semibold  transition-colors hover:border-transparent      "
                     id="categoriesFilter"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    
 
                   >
                     <svg
@@ -306,7 +306,7 @@ const MetakulCollection = () => {
                     className="dropdown-toggle group group flex h-9 items-center rounded-lg border border-jacarta-100  px-4 font-display text-sm font-semibold  transition-colors hover:border-transparent      "
                     id="saleTypeFilter"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    
 
                   >
                     <svg
@@ -331,7 +331,7 @@ const MetakulCollection = () => {
                     id="priceRangeFilter"
                     data-bs-toggle="dropdown"
                     data-bs-auto-close="outside"
-                    aria-expanded="false"
+                    
 
                   >
                     <svg

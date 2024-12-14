@@ -39,7 +39,7 @@ const CryptoTable: React.FC = () => {
   return (
     <Container>
       <IcoSale/>
-
+{/* 
       <Typography variant='h3' sx={{
         alignItems:"center",
         textAlign:"center",
@@ -100,7 +100,7 @@ const CryptoTable: React.FC = () => {
         Scroll to Load More....</Box>
         </Scrollbar>
 
-      </section>
+      </section> */}
     </Container>
   );
 };

@@ -13,6 +13,7 @@ export const fetchBlogApiSlice = createAsyncThunk(
     dispatch(setLoadedBlogs({
       loading: true,
     }));
+    
     try {
       const response = await Request({
         endpointId: "GETBLOG",
@@ -173,17 +174,17 @@ export const updateBlogStatusSlice = createAsyncThunk(
 
 export const fetchCryptoDispatcher = createAsyncThunk(
   'FetchCryptoInfo',
-  async ({ cryptoSymbol, _id, currency }: CryptoInfoProps, { rejectWithValue, dispatch }) => {
+  async ({ cryptoAddress, _id, currency }: CryptoInfoProps, { rejectWithValue, dispatch }) => {
     try {
       const response = await Request({
         endpointId: "FetchCryptoInfo",
-        slug: `/${cryptoSymbol}/${currency}`,
-        data: { cryptoSymbol },
+        slug: `?address=${cryptoAddress}`,
+        data: { cryptoAddress },
       })
 
       //todo add propoer data for cryptoInfo
       const cryptoData: CryptoData = {
-        cryptoSymbol: response.asset_id_base,
+        cryptoAddress: response.asset_id_base,
         currency: response.asset_id_quote,
         price: response.rate,
         marketCap: response.time

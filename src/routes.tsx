@@ -18,8 +18,9 @@ import MarketPlace from "./(routes)/Marketplace/page";
 import SaleInfo from "./components/SaleInfo";
 import Sell from "./(routes)/Marketplace/SellPage";
 import Gurukul from "./(routes)/Learning/Gurukul";
-
-
+import DEXPage from "./(routes)/dex/page";
+import Swap from "./(routes)/swap/page";
+import ApiPage from "./(routes)/apiPage/page";
 
 const Router: React.FC = () => {
 
@@ -75,6 +76,18 @@ const Router: React.FC = () => {
           element:  <ChatGpt/>,
         },
         {
+          path: Pages.DEX_PAGE,
+          element:  <DEXPage/>,
+        },
+        {
+          path: Pages.SWAP_PAGE,
+          element:  <Swap/>,
+        },
+        {
+          path: Pages.API_PAGE,
+          element:  <ApiPage/>,
+        },
+          { 
           path: Pages.GURUKUL,
           element:  <Gurukul/>,
         },

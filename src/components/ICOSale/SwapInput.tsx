@@ -1,6 +1,5 @@
 import styles from "./Style.module.css";
-import { TextField } from "@mui/material";
-
+import { TextField, InputAdornment } from "@mui/material";
 
 type Props = {
     type: "native" | "token";
@@ -10,6 +9,7 @@ type Props = {
     setValue: (value: string) => void;
     max?: string;
     value: string;
+    cryptoSign?: string; // New prop
 };
 
 export default function SwapInput({
@@ -20,6 +20,7 @@ export default function SwapInput({
     value,
     current,
     max,
+    cryptoSign, // New prop
 }: Props) {
     const truncate = (value: string) => {
         if (value === undefined) return;
@@ -38,15 +39,14 @@ export default function SwapInput({
                 onChange={(e) => setValue(e.target.value)}
                 disabled={current !== type} 
                 className={styles.swapInput}
+                InputProps={{
+                    endAdornment: <InputAdornment position="end">{cryptoSign}</InputAdornment>,
+                }}
             /> 
             <div style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
             }}>
                 <p style={{
                     fontSize: "12px",
-                    marginBottom: "-5px",
                 }}>{tokenSymbol}</p>
                 <p style={{
                     fontSize: "10px",

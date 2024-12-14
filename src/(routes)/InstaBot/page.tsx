@@ -23,6 +23,12 @@ const InstaBot = () => {
 
     return (
         <Container>
+
+            <Typography variant='h4' sx={{
+                my:4
+            }}> 
+                Only For Admin
+            </Typography>
             {!address ? (
                 <ConnectWallet />
             ) : (

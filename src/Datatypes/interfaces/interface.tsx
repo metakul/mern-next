@@ -51,6 +51,7 @@ export interface RequestOptions {
   slug?:string;
   data?:object;
   headers?:any;
+  params?:any;
 }
 
 // api response success
@@ -141,7 +142,7 @@ export interface Iblog  {
   }
 
 export interface CryptoData {
-  cryptoSymbol?:string;
+  cryptoAddress?:string;
   currency?: string;
   price: number | string;
   marketCap: number | string;
@@ -150,7 +151,7 @@ export interface CryptoData {
 //crypto comp
 export interface CryptoInfoProps{
   _id: string;
-  cryptoSymbol?:string;
+  cryptoAddress?:string;
   currency?:string
 }
 

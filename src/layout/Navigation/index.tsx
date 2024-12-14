@@ -8,10 +8,10 @@ import NavItem from './NavItem/NavItem';
 //css
 import { DrawerHeader } from './style.css';
 import { SwipeableDrawer } from '@mui/material';
-import {
-    Menu as MenuIcon,
-  } from "@mui/icons-material";
-
+// import {
+//     Menu as MenuIcon,
+//   } from "@mui/icons-material";
+  import CloseIcon from '@mui/icons-material/Close';
 export interface MiniDrawerProps {
     isSidebarOpen: boolean;
     setIsSidebarOpen: () => void;
@@ -42,7 +42,8 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ setIsSidebarOpen, isNonMobile, 
                         } }                >
                     <DrawerHeader>
                     <IconButton onClick={() => setIsSidebarOpen()} >
-                    <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" />
+                    {/* <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" /> */}
+                    <CloseIcon/>
 
                         </IconButton>
                     </DrawerHeader>
@@ -55,7 +56,8 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ setIsSidebarOpen, isNonMobile, 
                     <Divider />
                     <DrawerHeader>
                         <IconButton onClick={() => setIsSidebarOpen()} >
-                        <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" />
+                        {/* <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" /> */}
+                        <CloseIcon/>
 
                         </IconButton>
                     </DrawerHeader>

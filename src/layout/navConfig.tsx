@@ -1,7 +1,7 @@
 import { Pages } from "@/Datatypes/enums";
 import {
   HomeOutlined,
-  ShoppingCartOutlined,
+  // ShoppingCartOutlined,
   PublicOutlined,
   TodayOutlined,
   // AdminPanelSettingsOutlined,
@@ -9,7 +9,10 @@ import {
   // Checkroom
 } from "@mui/icons-material";
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import SchoolIcon from '@mui/icons-material/School';
+import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import ApiIcon from '@mui/icons-material/Api';
+
 export const navConfig = [
   {
     text: "Dashboard",
@@ -64,15 +67,20 @@ export const navConfig = [
   //   icon:null,
   //   to: "",
   // },
-  // {
-  //   text: "Profile",
-  //   icon: <AdminPanelSettingsOutlined />,
-  //   to: "/Profile",
-  // },
   {
     text: "Create Own NFT",
     icon: <PublicOutlined />,
     to: Pages.CREATE_NFT
+  },
+  {
+    text: "Exchange",
+    icon: < SwapHorizontalCircleIcon/>,
+    to: Pages.DEX_PAGE,
+  },
+  {
+    text: "Quick Swap",
+    icon: < CurrencyExchangeIcon/>,
+    to: Pages.SWAP_PAGE,
   },
   // {
   //   text: "Buy Nft Own NFT",
@@ -105,20 +113,25 @@ export const navConfig = [
     icon:<SmartToyIcon/>,
     to: Pages.INSTA_BOT
   },
+  {
+    text: "MetaKul Learning",
+    icon:<ApiIcon/>,
+    to: Pages.GURUKUL
+  },
   // {
   //   text: "LAUNDRY",
   //   icon:<Checkroom/>,
   //   to: "/laundry",
   // },
   {
-    text: "Learn",
+    text: "API",
     icon:null,
     to: "",
   },
   {
-    text: "Gurukul",
-    icon:<SchoolIcon/>,
-    to: Pages.GURUKUL
+    text: "MetaKul API",
+    icon:<ApiIcon/>,
+    to: Pages.API_PAGE
   },
 ];
 
