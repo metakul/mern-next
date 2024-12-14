@@ -113,6 +113,11 @@ export const navConfig = [
     icon:<SmartToyIcon/>,
     to: Pages.INSTA_BOT
   },
+  {
+    text: "MetaKul Learning",
+    icon:<ApiIcon/>,
+    to: Pages.GURUKUL
+  },
   // {
   //   text: "LAUNDRY",
   //   icon:<Checkroom/>,

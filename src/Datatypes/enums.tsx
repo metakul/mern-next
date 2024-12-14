@@ -51,6 +51,7 @@ export enum Pages {
   DEX_PAGE = "/exchange" ,
   SWAP_PAGE = "/quick-swap" ,
   API_PAGE = "/metakul-api" ,
+ GURUKUL = "/gurukul" ,
 }
 
 export enum HomePageInfo{
@@ -62,6 +63,7 @@ export enum ProtectedPageInfo{
   pageTitle="Dashboard",
   pageDescription="This is Protected page",
 }
+
 const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
 // const base_url_backend="http://localhost:5003/v1"
 
