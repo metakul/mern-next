@@ -61,7 +61,7 @@ export const renderCustomStyles = (node: any, index: number) => {
             key={index}
             src={node.getAttribute('src')}
             alt={node.getAttribute('alt') || 'Image'}
-            className="max-w-full h-auto my-4"
+            className=" h-auto my-4  max-w-full"
           />
         );
       case 'i':

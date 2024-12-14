@@ -11,8 +11,8 @@ export interface Topic {
   }
   
   export const courses: Courses = {
-    ReactJsCourse: [
-      { id: 1, title: "Introduction to React", content: "Content for React Introduction" },
+    UniswapCourse: [
+      { id: 1, title: "Introduction to Uniswap", content: "Content for React Introduction" },
       { id: 2, title: "Components", content: "Content for React Components" },
       { id: 3, title: "State and Props", content: "Content for State and Props" },
     ],

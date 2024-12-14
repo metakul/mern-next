@@ -21,6 +21,7 @@ import Gurukul from "./(routes)/Learning/Gurukul";
 import DEXPage from "./(routes)/dex/page";
 import Swap from "./(routes)/swap/page";
 import ApiPage from "./(routes)/apiPage/page";
+import AddCoursePage from "./(routes)/AddCourse/page";
 
 const Router: React.FC = () => {
 
@@ -90,6 +91,10 @@ const Router: React.FC = () => {
           { 
           path: Pages.GURUKUL,
           element:  <Gurukul/>,
+        },
+          { 
+          path: Pages.ADD_COURSE,
+          element:  <AddCoursePage/>,
         },
         // {
         //   path: Pages.MARKETPLACE,

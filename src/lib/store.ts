@@ -7,6 +7,7 @@ import chatReducer from "./slices/Chatgpt/ChatGptSlice"
 import cryptoCollectionRedcuer from "./slices/CryptoSlices/CryptoSlice"
 import userReducer from "./slices/RegisterUsers/RegisterSlice"
 import botsSlice from "./slices/InstaBot/BotSlice"
+import coursesCollectionReducer from "./slices/CoursesSlices/CoursesSlice"
 
 export const makeStore = () => {
   return configureStore({
@@ -18,6 +19,7 @@ export const makeStore = () => {
         user:userReducer,
         botsSlice:botsSlice,
         chat: chatReducer,
+        coursesCollection:coursesCollectionReducer
     }, 
     // middleware:getDefaultMiddlerware =>
     //   getDefaultMiddlerware().concat(logger),

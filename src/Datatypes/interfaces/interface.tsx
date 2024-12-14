@@ -197,3 +197,22 @@ export interface IUser extends IloginUser {
     subcategory?: string;
     permissions?: string[];
 }
+
+
+//course interface
+export interface ITopic {
+  id: number;
+  title: string;
+  content: string;
+}
+
+export interface ICourse {
+  id?: string;
+  name: string;
+  topics: ITopic[];
+}
+
+export interface CoursesState {
+  courses: ICourse[];
+  loading: boolean;
+}

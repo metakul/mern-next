@@ -51,7 +51,8 @@ export enum Pages {
   DEX_PAGE = "/exchange" ,
   SWAP_PAGE = "/quick-swap" ,
   API_PAGE = "/metakul-api" ,
- GURUKUL = "/gurukul" ,
+ GURUKUL = "/learning/:courseId/:topicId" ,
+ ADD_COURSE="/add-course"
 }
 
 export enum HomePageInfo{
@@ -106,8 +107,17 @@ const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1
 
     //random
     increaseTotalDownloadCount: { apiId:14, withAuth:true, url: `${base_url_backend}/increaseTotalDownloadCount`, method: 'POST', headers: { 'Content-Type': 'application/json'},loadingMessage:"",successMessage:"",errorMessage:""},
-
-  }
+    
+    
+  // courses
+  ADD_COURSE: { apiId:15, withAuth:true, url: `${base_url_backend}/courses`, method: 'POST', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Adding New Course", successMessage:"", errorMessage:"" },
+  GET_ALL_COURSES: { apiId:16, withAuth:false, url: `${base_url_backend}/courses`, method: 'GET', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Loading Courses", successMessage:"", errorMessage:"" },
+  GET_COURSE_BY_ID: { apiId:17, withAuth:false, url: `${base_url_backend}/courses/{courseId}`, method: 'GET', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Loading Course", successMessage:"", errorMessage:"" },
+  DELETE_COURSE: { apiId:18, withAuth:true, url: `${base_url_backend}/courses/{courseId}`, method: 'DELETE', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Deleting Course", successMessage:"", errorMessage:"" },
+  ADD_TOPICS_TO_COURSE: { apiId:19, withAuth:true, url: `${base_url_backend}/courses`, method: 'POST', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Adding Topics", successMessage:"", errorMessage:"" },
+  DELETE_TOPIC_FROM_COURSE: { apiId: 20, withAuth: true, url: `${base_url_backend}/courses`, method: 'DELETE', headers: { 'Content-Type': 'application/json' }, loadingMessage: "Deleting Topic", successMessage: "", errorMessage: "" },
+  UPDATE_TOPIC_IN_COURSE: { apiId: 21, withAuth: true, url: `${base_url_backend}/courses`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, loadingMessage: "Updating Topic", successMessage: "", errorMessage: "" },
+};
 
   
 export enum BlogsStatusInfo {

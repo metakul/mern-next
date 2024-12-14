@@ -77,11 +77,11 @@ export const navConfig = [
     icon: < SwapHorizontalCircleIcon/>,
     to: Pages.DEX_PAGE,
   },
-  {
-    text: "Quick Swap",
-    icon: < CurrencyExchangeIcon/>,
-    to: Pages.SWAP_PAGE,
-  },
+  // {
+  //   text: "Quick Swap",
+  //   icon: < CurrencyExchangeIcon/>,
+  //   to: Pages.SWAP_PAGE,
+  // },
   // {
   //   text: "Buy Nft Own NFT",
   //   icon: <PublicOutlined />,
@@ -116,7 +116,7 @@ export const navConfig = [
   {
     text: "MetaKul Learning",
     icon:<ApiIcon/>,
-    to: Pages.GURUKUL
+    to: `/learning/675dba4764f9afdd2d3083bd/675dba47f907a9e5cd3dcf5a`
   },
   // {
   //   text: "LAUNDRY",
