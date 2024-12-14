@@ -116,7 +116,7 @@ export const navConfig = [
   {
     text: "MetaKul Learning",
     icon:<ApiIcon/>,
-    to: `/learning/675dba4764f9afdd2d3083bd/675dba47f907a9e5cd3dcf5a`
+    to: `/learning/675dddec2166d8d6e14fcb19/675dddec53986d28c87fadf3`
   },
   // {
   //   text: "LAUNDRY",
