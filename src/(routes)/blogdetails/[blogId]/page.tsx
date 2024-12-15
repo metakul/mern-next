@@ -99,21 +99,20 @@ const SingleBlogDetails = () => {
       <Helmet>
         <meta charSet="utf-8" />
         <title>{title}</title>
-        <link rel="canonical" href="https://metakul.live/" />
-        <meta name="description" content={truncatedDescription} />
+        <meta name="description" content={title} />
         <meta name="keywords" content={categories.join(', ')} />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={truncatedDescription} />
-        <meta property="og:url" content="https://metakul.live/" />
+        <meta property="og:description" content={title} />
+        <meta property="og:url" content="https://metakul.com/" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={truncatedDescription} />
+        <meta name="twitter:description" content={title} />
 
       </Helmet>
       {truncatedDescription ? (
