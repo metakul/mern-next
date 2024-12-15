@@ -1,6 +1,7 @@
 import React from "react";
 import "./blogdescription.css"
 import CodeBlock from "@/components/CodeBlock/CodeBlock";
+import { toast } from "react-toastify";
 export const renderCustomStyles = (node: any, index: number) => {
   if (node.nodeType === 1) { // Node.ELEMENT_NODE
 
@@ -146,9 +147,11 @@ export const calculateReadingTime = (description: string) => {
   return `${minutes} min read`;
 };
 
+const websiteUrl = import.meta.env.VITE_PUBLIC_APP_URL as string;
+
 // Handle share functionality
 export const handleShare = (link: string) => {
-  const fullLink = `https://yourwebsite.com${link}`;
+  const fullLink = `${websiteUrl}/${link}`;
 
   if (navigator.share) {
     navigator.share({
@@ -160,11 +163,11 @@ export const handleShare = (link: string) => {
   } else {
     navigator.clipboard.writeText(fullLink)
       .then(() => {
-        alert('Link copied to clipboard');
+        toast.success('Link copied. Share it with your friends!');
       })
       .catch((error) => {
         console.error('Error copying link', error);
-        alert('Failed to copy the link');
+        toast.error('Failed to copy the link');
       });
   }
 };

@@ -12,6 +12,8 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ApiIcon from '@mui/icons-material/Api';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
 
 export const navConfig = [
   {
@@ -42,7 +44,7 @@ export const navConfig = [
   },
   {
     text: "Profile",
-    icon: <PieChartOutlined />,
+    icon: <AccountBoxIcon />,
     to: Pages.PROFILE
   },
   // {
@@ -105,7 +107,7 @@ export const navConfig = [
   },
   {
     text: "ChatGpt",
-    icon:<SmartToyIcon/>,
+    icon:<PsychologyAltIcon/>,
     to: Pages.CHAT_GPT
   },
   {

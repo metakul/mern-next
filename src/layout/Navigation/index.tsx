@@ -33,13 +33,16 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ setIsSidebarOpen, isNonMobile, 
            
                 <SwipeableDrawer
                         variant="persistent"
-                        open={isSidebarOpen} onClose={function (_event: React.SyntheticEvent<{}, Event>): void {
+                        open={isSidebarOpen}
+                         onClose={function (_event: React.SyntheticEvent<{}, Event>): void {
                             isSidebarOpen
                             
-                        } } onOpen={function (_event: React.SyntheticEvent<{}, Event>): void {
+                        } }
+                         onOpen={function (_event: React.SyntheticEvent<{}, Event>): void {
                             isSidebarOpen
 
-                        } }                >
+                        } }
+                                        >
                     <DrawerHeader>
                     <IconButton onClick={() => setIsSidebarOpen()} >
                     {/* <img src={`/Images/main-menu.png`} alt="logo" className="w-8 h-8 ml-4" /> */}

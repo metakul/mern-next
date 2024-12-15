@@ -192,13 +192,12 @@ const CoursePage: React.FC = () => {
         )}
       </Box>
 
-          {parseHTML(selectedTopic?.content).map((node, index) => renderCustomStyles(node, index))}
+          {selectedTopic?.content && parseHTML(selectedTopic?.content).map((node, index) => renderCustomStyles(node, index))}
 
       <Box display="flex" flex="1" p={0}>
         <Box flex="1" p={0}>
           {selectedTopic && (
             <>
-              <Typography variant="h2">{selectedTopic.title}</Typography>
               {userType === UserCategory.SUPER_ADMIN && (
                 <Box>
                   <Button onClick={() => handleEditTopic(selectedTopic)}>Edit</Button>
