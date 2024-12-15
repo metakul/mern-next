@@ -143,7 +143,7 @@ const CoursePage: React.FC = () => {
   };
 
   const generateShareableLink = () => {
-    return `${window.location.origin}/courses/${selectedCourse}/topics/${selectedTopic?.id}`;
+    return `${window.location.origin}/learning/${selectedCourse}/${selectedTopic?.id}`;
   };
 
   const handleShare = () => {
