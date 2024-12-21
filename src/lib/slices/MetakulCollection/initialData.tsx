@@ -23,12 +23,12 @@ export const nftData = [
     "description": "The Innovative Polygon Metaverse Reforming Vedic Education via blockchain. All holders from 1st Gen will take major decision for the METAKUL DAO Org.",
     "dna": "a1b3d5b97fd0ef1a95b6cef99bc707a7be822445",
     "edition": 1,
-    "external_url": "https://metakul.in",
+    "external_url": "https://metakul.com",
     "id": "0",
     "image": "https://ed7a4b64885c72be1dc347066f4e51ce.ipfscdn.io/ipfs/bafybeibagl7z4riq6k5dqzeh2liwvz2gncew7jeq6iceajn3ghb47gkwdy/2.png",
     "name": "METAKUL #1",
     "uri": "ipfs://QmPGpW8wzjbEdeadBffwhbSsRvTt3ysFTebHrW2zLotWBq/0",
-    "historyLink":"https://metakul.live"
+    "historyLink":"https://metakul.com"
   },
   {
     "owner": "0x35d117AC4C0f84888a6949BfcBd3201267b572C3",
@@ -55,7 +55,7 @@ export const nftData = [
     "description": "The Innovative Polygon Metaverse Reforming Vedic Education via blockchain. All holders from 1st Gen will take a major decision for the METAKUL DAO Org.",
     "dna": "1cac14c49b3c59ef33c3e4ef5834589bbedfd943",
     "edition": 2,
-    "external_url": "https://metakul.in",
+    "external_url": "https://metakul.com",
     "id": "1",
     "image": "https://ed7a4b64885c72be1dc347066f4e51ce.ipfscdn.io/ipfs/bafybeibagl7z4riq6k5dqzeh2liwvz2gncew7jeq6iceajn3ghb47gkwdy/2.png",
     "name": "METAKUL #2",
@@ -86,7 +86,7 @@ export const nftData = [
     "description": "The Innovative Polygon Metaverse Reforming Vedic Education via blockchain. All holders from 1st Gen will take major decisions for the METAKUL DAO Org.",
     "dna": "799178f21da7af9d18010d39d17be89ca7f31215",
     "edition": 3,
-    "external_url": "https://metakul.in",
+    "external_url": "https://metakul.com",
     "id": "2",
     "image": "https://ed7a4b64885c72be1dc347066f4e51ce.ipfscdn.io/ipfs/bafybeibagl7z4riq6k5dqzeh2liwvz2gncew7jeq6iceajn3ghb47gkwdy/3.png",
     "name": "METAKUL #3",

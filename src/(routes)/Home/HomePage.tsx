@@ -47,7 +47,7 @@ const HomePage: React.FC<HomePageProps> = () => {
 
         <meta
           property="og:url"
-          content="https://metakul.live/"
+          content="https://metakul.com/"
           data-react-helmet="true"
         />
           <meta
@@ -71,7 +71,7 @@ const HomePage: React.FC<HomePageProps> = () => {
             <meta property="og:title" content="metakul" />
             <meta property="og:description" content="Discover a gasless blockchain platform with METAKUL NFTs, offering seamless transactions and passive crypto income through innovative staking and digital asset ownership." />
 
-            <meta property="og:url" content="https://metakul.live/" />
+            <meta property="og:url" content="https://metakul.com/" />
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
