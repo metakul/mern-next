@@ -1,39 +1,42 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 // import BannerInfo from './bannerInfo'
 import UserCollection from './UserCollection/index'
 import CreatedNft from './UserCollection/index'
 import { NftTabs } from "@/Datatypes/enums";
 import { ConnectWallet, useAddress, useContract } from '@thirdweb-dev/react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Card, Container, Typography } from '@mui/material';
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import StakingTabNavigation from '@/components/MobileTabNav/StakingTab';
 import SocialProfiles from '@/components/SocialProfile';
 import ContractInfo from '@/components/ContractInfo/ContractInfo';
+import copy from "clipboard-copy";
+import { toast } from 'react-toastify';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 const nftMinterAddress = import.meta.env.VITE_PUBLIC_NFT_MINTER_CONTRACT as string
 const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
 const thirdwebDashboard = import.meta.env.VITE_THIRDWEB_DASHBOARD as string
 
-
 export default function ProfilePage() {
   const [showOutlet/*, setShowOutlet*/] = useState<boolean>(false);
   const address = useAddress()
-  const { contract } = useContract(tokenContractAddress);
+  const { contract:tokenContract } = useContract(tokenContractAddress);
   const [balance, setBalance] = useState<string>("Loading...")
+  const [isIconClicked, setIsIconClicked] = useState(false);
 
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        if (address && contract) {
+        if (address && tokenContract) {
 
-          const userBalance = await contract?.erc20.balance();
+          const userBalance = await tokenContract?.erc20.balance();
 
           setBalance(userBalance?.displayValue);
         }
-        else{
+        else {
           setBalance("Connect Wallet to view balance")
         }
       } catch (error) {
@@ -41,13 +44,14 @@ export default function ProfilePage() {
       }
     };
 
-    if (address !== null && contract) {
+    if (address !== null && tokenContract) {
       fetchBalance();
     }
 
-  }, [address, contract]);
+  }, [address, tokenContract]);
+  
   const tabs = [
- 
+
     {
       value: <button
         className="nav-link relative flex items-center whitespace-nowrap py-3 px-6 text-jacarta-400 hover:text-jacarta-700 dark:hover:text-white"
@@ -102,55 +106,85 @@ export default function ProfilePage() {
       content: <CreatedNft collectionAddress={nftMinterAddress} type={"ownerCreatedNft"} />,
       label: NftTabs.tabTitle2
     },
- 
   ];
 
 
+  const handleCopySmartWalletAddress = () => {
+    if (address) {
+      setIsIconClicked(true);
+
+      copy(address)
+        .then(() => {
+          toast.success("Copied");
+        })
+        .catch(() => {
+          toast.error("Copy failed");
+        });
+      setIsIconClicked(false);
+    }
+  };
+
+  const iconClickedStyle = {
+    transform: isIconClicked ? 'scale(0.8)' : 'scale(1)',
+    transition: 'transform 0.3s',
+    ml: 2
+  };
+
   return (
     <Container sx={{
-      mt:16
     }}>
-        <>
-          {/* <BannerInfo /> */}
-          <BreadCrumbs currentPath={"/profile"} />
-          <Box sx={{
-            width: '100%',
-            height: '100%',
-            padding: '0 1rem',
-            margin: '0 auto',
-            mt:4,
-            mb:8,
-          }}>
-            
-            <Typography variant="h4" className="text-center mt-4 mb-4">
-            {balance} $KULL
-            </Typography>
-            <Typography variant="h5" sx={{mt:4}} className="text-center mt-8 mb-4">
-              Know More and Earn :
-            </Typography>
-            <SocialProfiles/>
-      <ContractInfo urlBase={`${thirdwebDashboard}/${tokenContractAddress}`} buttonText="ERC20 Contract" />
+      {/* <BannerInfo /> */}
+      <BreadCrumbs currentPath={"/profile"} />
+      <Card sx={{
+        p: 4,
+        mt: 2
+      }}>
+        <Box sx={{
+          width: '100%',
+          height: '100%',
+          padding: '0 1rem',
+          margin: '0 auto',
+        }}>
+          <Typography
+            className='text-center mt-4 mb-4'
+            variant="h4"
+            color="textSecondary"
+          >
+            {address && address.slice(0, 3) + "..." + address.slice(-4)}
+            <ContentCopyOutlinedIcon
+              onClick={handleCopySmartWalletAddress}
+              sx={iconClickedStyle}
+            />
+          </Typography>
 
-          </Box>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '100%',
-            height: '100%',
-            padding: '0 1rem',
-            margin: '0 auto',
-            mt:16
-          }}>
-            <Typography variant="h3" className=" mt-4 mb-4">
-              My NFTs 
+          {balance &&
+            <Typography variant="h4" sx={{
+              p:1
+            }} className="text-center mt-4 mb-4">
+              {parseFloat(balance).toFixed(4)} $KULL
             </Typography>
+          }
+          <Typography variant="h5" sx={{ mt: 2 }} className="text-center mt-8 mb-4">
+            Know More and Earn :
+          </Typography>
+          <SocialProfiles />
+          <ContractInfo urlBase={`${thirdwebDashboard}/${tokenContractAddress}`} buttonText="ERC20 Contract" />
+        </Box>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+          padding: '0 1rem',
+          margin: '0 auto',
+        }}>
+          <Typography variant="h3" className=" mt-4 mb-4">
+            My NFTs
+          </Typography>
           <ConnectWallet />
-          </Box>
-
-          <StakingTabNavigation showOutlet={showOutlet} position={"top"} tabs={tabs} />
-        </>
-  
-
+        </Box>
+        <StakingTabNavigation showOutlet={showOutlet} position={"top"} tabs={tabs} />
+      </Card>
     </Container>
   )
 }

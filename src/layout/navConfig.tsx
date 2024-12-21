@@ -79,11 +79,11 @@ export const navConfig = [
     icon: < SwapHorizontalCircleIcon/>,
     to: Pages.DEX_PAGE,
   },
-  // {
-  //   text: "Quick Swap",
-  //   icon: < CurrencyExchangeIcon/>,
-  //   to: Pages.SWAP_PAGE,
-  // },
+  {
+    text: "Quick Swap",
+    icon: < CurrencyExchangeIcon/>,
+    to: Pages.SWAP_PAGE,
+  },
   // {
   //   text: "Buy Nft Own NFT",
   //   icon: <PublicOutlined />,
