@@ -14,6 +14,7 @@ import ContractInfo from '@/components/ContractInfo/ContractInfo';
 import copy from "clipboard-copy";
 import { toast } from 'react-toastify';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
+import WalletAction from '@/components/WalletAction';
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 const nftMinterAddress = import.meta.env.VITE_PUBLIC_NFT_MINTER_CONTRACT as string
@@ -164,9 +165,11 @@ export default function ProfilePage() {
               {parseFloat(balance).toFixed(4)} $KULL
             </Typography>
           }
+          <WalletAction/>
           <Typography variant="h5" sx={{ mt: 2 }} className="text-center mt-8 mb-4">
             Know More and Earn :
           </Typography>
+
           <SocialProfiles />
           <ContractInfo urlBase={`${thirdwebDashboard}/${tokenContractAddress}`} buttonText="ERC20 Contract" />
         </Box>
