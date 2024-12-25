@@ -8,7 +8,7 @@ import {
   PieChartOutlined,
   // Checkroom
 } from "@mui/icons-material";
-import SmartToyIcon from '@mui/icons-material/SmartToy';
+// import SmartToyIcon from '@mui/icons-material/SmartToy';
 import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ApiIcon from '@mui/icons-material/Api';
@@ -110,11 +110,11 @@ export const navConfig = [
     icon:<PsychologyAltIcon/>,
     to: Pages.CHAT_GPT
   },
-  {
-    text: "InstaBot",
-    icon:<SmartToyIcon/>,
-    to: Pages.INSTA_BOT
-  },
+  // {
+  //   text: "InstaBot",
+  //   icon:<SmartToyIcon/>,
+  //   to: Pages.INSTA_BOT
+  // },
   {
     text: "MetaKul Learning",
     icon:<ApiIcon/>,
