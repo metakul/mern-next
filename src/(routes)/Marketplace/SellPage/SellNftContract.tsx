@@ -40,15 +40,15 @@ export default function SellNftContract({ nftContractAddress= nftMinterContractA
 					error: "Error while Auctioning",
 				}
 				);
-				const apiCAll = await Request({
-					endpointId: "ADD_NFT_INFO_WHILE_SELLING_IN_MARKETPLACE",
-					slug: `/${id}`,
-					data: {
-						address,
-						nftContractAddress,
-						marketPlaceContractAddress
-					},
-				});
+				// const apiCAll = await Request({
+				// 	endpointId: "ADD_NFT_INFO_WHILE_SELLING_IN_MARKETPLACE",
+				// 	slug: `/${id}`,
+				// 	data: {
+				// 		address,
+				// 		nftContractAddress,
+				// 		marketPlaceContractAddress
+				// 	},
+				// });
 				ownedNfts = await nftDropContract.erc721.getOwned(address);
 			} else {
 				toast.error("Failed to initiate staking");
