@@ -1,20 +1,21 @@
 import React, { useMemo, useState } from 'react';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
-import { Button, CircularProgress, Menu, MenuItem, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Menu, MenuItem, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Pages } from '@/Datatypes/enums';
 import { getColors } from '@/layout/Theme/themes';
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 interface Props {
   isLoading?:boolean
   balance: BalanceItem[];
   loadingMessage: string;
   handleNftButtonText?: string;
-  onHandleButtonClick?: (id: string) => void;
+  onHandleButtonClick?: (id: string,nftContractAddress?:string) => void;
   address?: string;
+  buyoutBidAmount?: string;
 }
 
-const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick,address }) => {
+const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNftButtonText, onHandleButtonClick,address,buyoutBidAmount }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [staking, setStaking] = useState<boolean>(false);
   
@@ -53,34 +54,23 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
     ): balance && balance.length > 0 ? (
         balance.map((item: BalanceItem, index: number) => (
           <article className='flex justify-center ' key={index}>
-          <div className="flex flex-col justify-center items-center ml-[auto] mr-[auto] rounded-2.5xl border border-jacarta-100 p-[1.5rem] transition-shadow hover:shadow-lg">
+          <div className="flex flex-col justify-center items-center ml-[auto] mr-[auto] rounded-2.5xl border border-jacarta-100 p-[1rem] transition-shadow hover:shadow-lg ">
               <figure className="relative">
                   <img
                     src={item?.metadata?.image}
                     alt={`item ${index + 1}`}
-                    className=" rounded-t-2.5xl border max-w-[160px] md:max-w-[200px] object-cover"
+                    className=" rounded-t-2.5xl border   object-cover min-w-[140px] max-w-[140px] md:min-w-[200px] md:max-w-[200px] min-h-[120px] md:in-h-[120px] md:min-h-[160px] max-h-[200px] max-h-[120px]"
                     loading="lazy"
                   />
-                <div className="absolute top-3 right-3 flex items-center space-x-1 rounded-md  p-2">
-                  <span
-                    className="js-likes relative cursor-pointer before:absolute before:h-4 before:w-4 before:bg-cover before:bg-center before:bg-no-repeat before:opacity-0"
-                    data-tippy-content="Favorite"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="24"
-                      height="24"
-                      className="h-4 w-4 fill-jacarta-500 hover:fill-red"
-                    >
-                      <path fill="none" d="M0 0H24V24H0z" />
-                      <path
-                        d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z"
-                      />
-                    </svg>
-                  </span>
+                <Box className="absolute top-3 right-3 flex items-center space-x-1 rounded-md  p-2"
+                sx={{
+                  onHover: {
+                    backgroundColor: getColors().redAccent[100],
+                  },
+                }}>
+                  <FavoriteBorderIcon/>
                   <span className="text-sm"></span>
-                </div>
+                </Box>
               </figure>
               <div className="mt-4 ml-4 flex items-center justify-between">
                   <span className="font-display text-base hover:text-accent">{item?.metadata?.name}</span>
@@ -124,7 +114,7 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                 </div>
               </div>
               {onHandleButtonClick &&
-              <div className="mt-4 flex items-center justify-between ml-4">
+              <div className="mt-4 flex items-center justify-between ">
                 {item && item?.metadata?.id ? (
                  <Button
                  sx={{
@@ -144,6 +134,9 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                    try {
                      setStaking(true);
                      setButtonText("Staking Now");
+                     if (item && item.metadata && address) {
+                       await onHandleButtonClick(item.metadata.id,address);
+                     }
                      if (item && item.metadata) {
                        await onHandleButtonClick(item.metadata.id);
                      }
@@ -165,7 +158,7 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
                        color: getColors().blueAccent[100],
                      }}
                    >
-                     {buttonText}
+                     {buttonText} <br/> {buyoutBidAmount && `(${buyoutBidAmount} $KULL)`}
                    </Typography>
                  )}
                </Button>
@@ -182,9 +175,9 @@ const NftCard: React.FC<Props> = ({isLoading, loadingMessage, balance, handleNft
           <Typography >
             Visit to Mint Your Own NFT
           </Typography>
-          <Typography color="primary" onClick={() => handleNavigate(Pages.MINT)}>
+          <Typography color="primary" onClick={() => handleNavigate(Pages.CREATE_NFT)}>
           <Button >
-          Claim Now
+          Create Now
 
           </Button>
           </Typography>

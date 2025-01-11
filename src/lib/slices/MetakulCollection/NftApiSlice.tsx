@@ -17,6 +17,8 @@ export const LoadNftSlice = createAsyncThunk(
   'NftCollection/load',
   async ({ collectionAddress }: CollectionInfo, { rejectWithValue, dispatch }) => {
     try {
+      console.log("collectionAddress",collectionAddress);
+      
       const contract =  await toast.promise(
         sdk.getContract(collectionAddress),{
            pending: "Loading Nfts" ,
@@ -33,6 +35,8 @@ export const LoadNftSlice = createAsyncThunk(
         message: 'Fetch Nft Request successful',
         data: nfts,
       };
+      console.log("apiSuccess",apiSuccess);
+      
       return apiSuccess;
 
     } catch (error) {

@@ -75,6 +75,16 @@ export const navConfig = [
     to: Pages.CREATE_NFT
   },
   {
+    text: "Buy Nft",
+    icon: <PublicOutlined />,
+    to: Pages.MARKETPLACE
+  },
+  {
+    text: "Sell Your NFT",
+    icon: <PublicOutlined />,
+    to: Pages.SELL,
+  },
+  {
     text: "Exchange",
     icon: < SwapHorizontalCircleIcon/>,
     to: Pages.DEX_PAGE,
@@ -84,16 +94,6 @@ export const navConfig = [
     icon: < CurrencyExchangeIcon/>,
     to: Pages.SWAP_PAGE,
   },
-  // {
-  //   text: "Buy Nft Own NFT",
-  //   icon: <PublicOutlined />,
-  //   to: Pages.MARKETPLACE
-  // },
-  // {
-  //   text: "Sell Your NFT",
-  //   icon: <PublicOutlined />,
-  //   to: Pages.SELL,
-  // },
   // {
   //   text: "Career",
   //   icon: <CalendarMonthOutlined />,

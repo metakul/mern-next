@@ -14,14 +14,13 @@ import CreateNft from "./(routes)/create_nft/page";
 import ShopPage from "./(routes)/shopping/page";
 import AddBlogPage from "./(routes)/addBlog/page";
 import ChatGpt from "./Projects/ChatGpt/ChatGpt";
-import MarketPlace from "./(routes)/Marketplace/page";
-import SaleInfo from "./components/SaleInfo";
-import Sell from "./(routes)/Marketplace/SellPage";
+import SellPage from "./(routes)/Marketplace/SellPage";
 import Gurukul from "./(routes)/Learning/Gurukul";
 import DEXPage from "./(routes)/dex/page";
 import Swap from "./(routes)/swap/page";
 import ApiPage from "./(routes)/apiPage/page";
 import AddCoursePage from "./(routes)/AddCourse/page";
+import BuyPage from "./(routes)/Marketplace/BuyPage";
 
 const Router: React.FC = () => {
 
@@ -96,14 +95,14 @@ const Router: React.FC = () => {
           path: Pages.ADD_COURSE,
           element:  <AddCoursePage/>,
         },
-        // {
-        //   path: Pages.MARKETPLACE,
-        //   element:  <MarketPlace/>,
-        // },
-        // {
-        //   path: Pages.SELL,
-        //   element:  <Sell/>,
-        // },
+        {
+          path: Pages.MARKETPLACE,
+          element:  <BuyPage/>,
+        },
+        {
+          path: Pages.SELL,
+          element:  <SellPage/>,
+        },
       
       ],
     },
