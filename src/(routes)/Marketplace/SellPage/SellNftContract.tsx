@@ -56,7 +56,7 @@ export default function SellNftContract({ nftContractAddress= nftMinterContractA
 
 	return (
 		<>
-			<div className="grid grid-cols-2 gap-[2rem] md:grid-cols-2 lg:grid-cols-4">
+			<div className="grid grid-cols-2 gap-[2rem] md:grid-cols-3 lg:grid-cols-4">
 				<NftCard isLoading={isLoading} loadingMessage={""} balance={ownedNfts as BalanceItem[]} handleNftButtonText="Sell" onHandleButtonClick={sellNft} address={nftContractAddress} />
 			</div>
 		</>
