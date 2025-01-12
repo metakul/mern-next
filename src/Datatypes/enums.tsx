@@ -117,6 +117,10 @@ const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1
   ADD_TOPICS_TO_COURSE: { apiId:19, withAuth:true, url: `${base_url_backend}/courses`, method: 'POST', headers: { 'Content-Type': 'application/json'}, loadingMessage:"Adding Topics", successMessage:"", errorMessage:"" },
   DELETE_TOPIC_FROM_COURSE: { apiId: 20, withAuth: true, url: `${base_url_backend}/courses`, method: 'DELETE', headers: { 'Content-Type': 'application/json' }, loadingMessage: "Deleting Topic", successMessage: "", errorMessage: "" },
   UPDATE_TOPIC_IN_COURSE: { apiId: 21, withAuth: true, url: `${base_url_backend}/courses`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, loadingMessage: "Updating Topic", successMessage: "", errorMessage: "" },
+  
+
+  // NFT
+  ADD_NFT_INFO_WHILE_SELLING_IN_MARKETPLACE: { apiId: 22, withAuth: false, url: `${base_url_backend}/add_nft_transfer_info`, method: 'POST', headers: { 'Content-Type': 'application/json' }, loadingMessage: "Saving Nft info", successMessage: "", errorMessage: "" },
 };
 
   

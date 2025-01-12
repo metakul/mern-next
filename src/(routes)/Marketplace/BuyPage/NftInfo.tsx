@@ -41,9 +41,9 @@ const address=useAddress()
 			if (response) {
 			  await toast.promise(
 				response, {
-				pending: "Auctioning Now",
-				success: "Auctioned Successfully",
-				error: "Error while Auctioning",
+				pending: "Buying Now",
+				success: "Bought Successfully",
+				error: "Error while Buying",
 			  }
 			  );
 	  

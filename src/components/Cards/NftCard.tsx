@@ -132,10 +132,10 @@ const NftCard: React.FC<Props> = ({ isLoading, loadingMessage, balance, handleNf
                       try {
                         setStaking(true);
                         setButtonText("Staking Now");
-                        if (item && item.metadata && address) {
+                        if (item && item?.metadata && address) {
                           await onHandleButtonClick(item.metadata.id, address);
                         }
-                        if (item && item.metadata) {
+                        if (item && item?.metadata) {
                           await onHandleButtonClick(item.metadata.id);
                         }
                         setStaking(false);
