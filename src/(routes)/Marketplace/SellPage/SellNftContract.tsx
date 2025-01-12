@@ -32,7 +32,6 @@ export default function SellNftContract({ nftContractAddress= nftMinterContractA
 
 		if (nftDropContract && marketPlaceContract) {
 			const response = marketPlaceContract.call("createAuction", [[nftContractAddress, id, "1", tokenAddress, "10", "15", "10000", "20000", currentUnixTime, "1739179773"]]);
-			if (response) {
 				await toast.promise(
 					response, {
 					pending: "Auctioning Now",
@@ -50,9 +49,6 @@ export default function SellNftContract({ nftContractAddress= nftMinterContractA
 				// 	},
 				// });
 				ownedNfts = await nftDropContract.erc721.getOwned(address);
-			} else {
-				toast.error("Failed to initiate staking");
-			}
 		} else {
 			toast.error("Contract is not available");
 		}

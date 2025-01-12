@@ -62,7 +62,6 @@ const address=useAddress()
 	return (
 		<div className="">
 			<NftCard isLoading={isLoading} balance={[nft] as BalanceItem[]} loadingMessage='' handleNftButtonText={"Buy Now"} onHandleButtonClick={sellNft} address={nftDropContractAddress} buyoutBidAmount={buyoutBidAmount} />
-
 		</div>
 	);
 };

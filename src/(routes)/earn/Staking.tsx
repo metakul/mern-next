@@ -13,8 +13,6 @@ import { BalanceItem } from '@/Datatypes/interfaces/interface';
 import { ethers } from "ethers";
 
 import NftCard from '@/components/Cards/NftCard';
-import BreadCrumbs from '@/components/Elements/BreadCrumbs';
-
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
@@ -35,7 +33,7 @@ const Staking = () => {
     "nft-drop"
   );
 
-  const { contract, } = useContract(stakingContractAddress);
+  const { contract:stakingContract, } = useContract(stakingContractAddress);
   let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
 
   const [claimableRewards, setClaimableRewards] = useState();
@@ -43,9 +41,9 @@ const Staking = () => {
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        if (address && nftDropContract) {
+        if (address && stakingContract) {
 
-          const stakeInfo = await contract?.call("getStakeInfo", [address]);
+          const stakeInfo = await stakingContract?.call("getStakeInfo", [address]);
           setClaimableRewards(stakeInfo[1]);
         }
       } catch (error) {
@@ -58,7 +56,7 @@ const Staking = () => {
       fetchBalance();
     }
 
-  }, [address, contract, nftDropContract]);
+  }, [address, stakingContract, nftDropContract]);
 
   async function stakeNft(id: unknown) {
     if (!address) return;
@@ -67,8 +65,8 @@ const Staking = () => {
     if (!isApproved) {
       await nftDropContract?.setApprovalForAll(stakingContractAddress, true);
     }
-    if (nftDropContract && contract) {
-      const response = contract.call("stake", [[id]]);
+    if (nftDropContract && stakingContract) {
+      const response = stakingContract.call("stake", [[id]]);
       if (response) {
         await toast.promise(
           response, {
@@ -91,16 +89,14 @@ const Staking = () => {
     <Container className=''>
 
       <Grid container sx={{ mt: 4 }}>
-        <Grid item xs={6} sx={{
+        <Grid item xs={12} md={6} sx={{
           mb: 4
         }}>
           <Typography variant="h3">
             NFT Staking
           </Typography>
         </Grid>
-        <Grid item xs={6} sx={{
-          display: "flex",
-          justifyContent: "flex-end"
+        <Grid item xs={12} md={6} sx={{
         }} >
           {address && claimableRewards &&
             <>

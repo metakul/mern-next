@@ -24,9 +24,9 @@ const Mywallet = () => {
     tokenContractAddress,
     "token"
   );
-  const { contract } = useContract(stakingContractAddress);
+  const { contract:stakingContract } = useContract(stakingContractAddress);
   const { data: tokenBalance } = useTokenBalance(tokenContract, address);
-  const { data: stakedTokens } = useContractRead(contract, "getStakeInfo", [
+  const { data: stakedTokens } = useContractRead(stakingContract, "getStakeInfo", [
     address,
   ]);
 
@@ -34,10 +34,10 @@ const Mywallet = () => {
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        if (address && nftDropContract) {
+        if (address && stakingContract) {
           setLoading(false);
 
-          const stakeInfo = await contract?.call("getStakeInfo", [address]);
+          const stakeInfo = await stakingContract?.call("getStakeInfo", [address]);
           setClaimableRewards(stakeInfo[1]);
         }
       } catch (error) {
@@ -51,19 +51,17 @@ const Mywallet = () => {
       fetchBalance();
     }
 
-  }, [address, contract, nftDropContract]);
+  }, [address, stakingContract, nftDropContract]);
 
   return (
     <Container className=''>
       <Grid container sx={{ mt: 4 }}>
-        <Grid item xs={6} sx={{ mb: 4 }}>
+        <Grid item xs={12} md={6} sx={{ mb: 4 }}>
           <Typography variant="h3">
             NFT Unstaking
           </Typography>
         </Grid>
-        <Grid item xs={6} sx={{
-          display: "flex",
-          justifyContent: "flex-end"
+        <Grid item xs={12} md={6} sx={{
         }}>
           {address && claimableRewards &&
             <>
