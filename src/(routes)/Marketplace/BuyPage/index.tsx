@@ -71,7 +71,7 @@ const BuyPage = () => {
 				<div className="text-center ">
 					<figure className="mb-4">
 					</figure>
-					<h2 className=" font-sans  mb-2 font-display text-4xl font-medium ">Metakul NFT Marketplace</h2>
+					<h2 className=" font-sans  mb-8 font-display text-2xl font-medium ">Metakul NFT Marketplace</h2>
 				</div>
 			</div>
 			<div className="grid grid-cols-2 gap-[2rem] md:grid-cols-3 lg:grid-cols-4">
