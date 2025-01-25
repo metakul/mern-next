@@ -1,7 +1,7 @@
 
 
 
-import { Container } from '@mui/material';
+import { Container, Skeleton, Stack } from '@mui/material';
 import { useContract } from '@thirdweb-dev/react';
 import { useEffect, useState } from 'react';
 import NftInfo from './NftInfo';
@@ -85,7 +85,32 @@ const BuyPage = () => {
 						// auctionCreator={nft.auctionCreator}
 					/>
 				))}
-				{loading && <div>Loading...</div>}
+				{loading && 
+				<>
+				   <Stack  spacing={1} className="relative py-4 mt-4">
+				   <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+					 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
+					   <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+					 </div>
+				   </div>
+				 </Stack>
+				   <Stack  spacing={1} className="relative py-4 mt-4">
+				   <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+					 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
+					   <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+					 </div>
+				   </div>
+				 </Stack>
+				   <Stack  spacing={1} className="relative py-4 mt-4">
+				   <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+					 <div className="rounded-[1.25rem] p-4 flex-row justify-center">
+					   <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+					 </div>
+				   </div>
+				 </Stack>
+				</>
+
+				}
 			</div>
 		</Container>
 	);

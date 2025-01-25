@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
-import { Box, Button, CircularProgress, Menu, MenuItem, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Menu, MenuItem, Skeleton, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Pages } from '@/Datatypes/enums';
 import { getColors } from '@/layout/Theme/themes';
@@ -50,7 +50,29 @@ const NftCard: React.FC<Props> = ({ isLoading, loadingMessage, balance, handleNf
     <>
       {isLoading ? (
         // Show loading spinner or message
-        <div className="spinner">{loadingMessage}</div>
+        <>
+        <Stack  spacing={1} className="relative py-4 mt-4">
+        <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+        <div className="rounded-[1.25rem] p-4 flex-row justify-center">
+          <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+        </div>
+        </div>
+      </Stack>
+        <Stack  spacing={1} className="relative py-4 mt-4">
+        <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+        <div className="rounded-[1.25rem] p-4 flex-row justify-center">
+          <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+        </div>
+        </div>
+      </Stack>
+        <Stack  spacing={1} className="relative py-4 mt-4">
+        <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
+        <div className="rounded-[1.25rem] p-4 flex-row justify-center">
+          <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+        </div>
+        </div>
+      </Stack>
+     </>
       ) : balance && balance.length > 0 ? (
         balance.map((item: BalanceItem, index: number) => (
           <Box className="flex flex-col justify-center items-center  rounded-2.5xl border border-jacarta-100 p-[1rem] transition-shadow hover:shadow-lg  ">
