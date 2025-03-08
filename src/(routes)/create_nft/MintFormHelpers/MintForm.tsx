@@ -1,4 +1,4 @@
-"use client"
+
 import { SetStateAction, useState } from "react";
 import {  Container, TextField, Typography } from "@mui/material";
 import * as s from "./MintFormCss";

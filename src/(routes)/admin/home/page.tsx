@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useEffect } from "react";
 import { ProtectedPageProps } from "@/Datatypes/interfaces/interface";
 import { useSelector } from "react-redux";

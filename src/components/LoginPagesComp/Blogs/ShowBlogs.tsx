@@ -1,5 +1,5 @@
 
-"use client"
+
 import  React, { useState, useEffect } from 'react';
 import { Box, Container, Paper } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
