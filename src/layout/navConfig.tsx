@@ -12,7 +12,6 @@ import {
 import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ApiIcon from '@mui/icons-material/Api';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
 
 export const navConfig = [
@@ -42,11 +41,11 @@ export const navConfig = [
     icon: <PieChartOutlined />,
     to: Pages.EARN,
   },
-  {
-    text: "Profile",
-    icon: <AccountBoxIcon />,
-    to: Pages.PROFILE
-  },
+  // {
+  //   text: "Profile",
+  //   icon: <AccountBoxIcon />,
+  //   to: Pages.PROFILE
+  // },
   // {
   //   text: "Shopping",
   //   icon: <ShoppingCartOutlined />,

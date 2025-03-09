@@ -6,25 +6,23 @@ import UserCollection from './UserCollection/index'
 import CreatedNft from './UserCollection/index'
 import { NftTabs } from "@/Datatypes/enums";
 import { ConnectWallet, useAddress, useContract } from '@thirdweb-dev/react';
-import { Box, Card, Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import BreadCrumbs from '@/components/Elements/BreadCrumbs';
 import StakingTabNavigation from '@/components/MobileTabNav/StakingTab';
-import SocialProfiles from '@/components/SocialProfile';
-import ContractInfo from '@/components/ContractInfo/ContractInfo';
 import copy from "clipboard-copy";
 import { toast } from 'react-toastify';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
-import WalletAction from '@/components/WalletAction';
+import BalanceCard from '@/components/Cards/BalanceCard';
+import { getColors } from '@/layout/Theme/themes';
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 const nftMinterAddress = import.meta.env.VITE_PUBLIC_NFT_MINTER_CONTRACT as string
 const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
-const thirdwebDashboard = import.meta.env.VITE_THIRDWEB_DASHBOARD as string
 
 export default function ProfilePage() {
   const [showOutlet/*, setShowOutlet*/] = useState<boolean>(false);
   const address = useAddress()
-  const { contract:tokenContract } = useContract(tokenContractAddress);
+  const { contract: tokenContract } = useContract(tokenContractAddress);
   const [balance, setBalance] = useState<string>("Loading...")
   const [isIconClicked, setIsIconClicked] = useState(false);
 
@@ -50,7 +48,7 @@ export default function ProfilePage() {
     }
 
   }, [address, tokenContract]);
-  
+
   const tabs = [
 
     {
@@ -136,58 +134,61 @@ export default function ProfilePage() {
     }}>
       {/* <BannerInfo /> */}
       <BreadCrumbs currentPath={"/profile"} />
-      <Card sx={{
-        p: 4,
-        mt: 2
-      }}>
+
+      {address ?
         <Box sx={{
           width: '100%',
           height: '100%',
           padding: '0 1rem',
-          margin: '0 auto',
+          margin: ' auto',
+          display: "flex",
+          mb:4,
+          my:2,
+          py:2,
+          borderRadius:"20px",
+          justifyContent: "center",
+          flexDirection: "column",
+          background:getColors().secondary[900]
         }}>
           <Typography
-            className='text-center mt-4 mb-4'
+            className='text-center mt-4 pb-4'
             variant="h4"
             color="textSecondary"
           >
-            {address && address.slice(0, 3) + "..." + address.slice(-4)}
-            <ContentCopyOutlinedIcon
+            My Address: {address.slice(0, 3) + "..." + address.slice(-4)}
+            {address && <ContentCopyOutlinedIcon
               onClick={handleCopySmartWalletAddress}
               sx={iconClickedStyle}
             />
+            }
           </Typography>
 
-          {balance &&
-            <Typography variant="h4" sx={{
-              p:1
-            }} className="text-center mt-4 mb-4">
-              {parseFloat(balance).toFixed(4)} $KULL
-            </Typography>
-          }
-          <WalletAction/>
-          <Typography variant="h5" sx={{ mt: 2 }} className="text-center mt-8 mb-4">
-            Know More and Earn :
-          </Typography>
-
-          <SocialProfiles />
-          <ContractInfo urlBase={`${thirdwebDashboard}/${tokenContractAddress}`} buttonText="ERC20 Contract" />
+          <BalanceCard tokenAddress={tokenContractAddress} tokenName={"KULL"} balance={balance} />
+          <BalanceCard tokenName={"POL"} />
+          <BalanceCard tokenName={"USDT"}  />
         </Box>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-          height: '100%',
-          padding: '0 1rem',
-          margin: '0 auto',
-        }}>
-          <Typography variant="h3" className=" mt-4 mb-4">
-            My NFTs
+        : <>
+          <Typography variant='h3' sx={{
+            textAlign:"center",
+            py:4
+          }}> 
+            Connect Your wallet to view all Your crypto Balance
           </Typography>
-          <ConnectWallet />
-        </Box>
-        <StakingTabNavigation showOutlet={showOutlet} position={"top"} tabs={tabs} />
-      </Card>
+        </>}
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        height: '100%',
+        padding: '0 1rem',
+        margin: '0 auto',
+      }}>
+        <Typography variant="h3" className=" mt-4 mb-4">
+          My NFTs
+        </Typography>
+        <ConnectWallet />
+      </Box>
+      <StakingTabNavigation showOutlet={showOutlet} position={"top"} tabs={tabs} />
     </Container>
   )
 }

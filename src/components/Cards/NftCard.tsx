@@ -54,21 +54,21 @@ const NftCard: React.FC<Props> = ({ isLoading, loadingMessage, balance, handleNf
         <Stack  spacing={1} className="relative py-4 mt-4">
         <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
         <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-          <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+          <Skeleton variant="rounded" width={'200px'} height={'300px'} />
         </div>
         </div>
       </Stack>
         <Stack  spacing={1} className="relative py-4 mt-4">
         <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
         <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-          <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+          <Skeleton variant="rounded" width={'200px%'} height={'300px'} />
         </div>
         </div>
       </Stack>
         <Stack  spacing={1} className="relative py-4 mt-4">
         <div className="flex flex-col rounded-2.5xl border border-jacarta-300 transition-shadow shadow-lg justify-center">
         <div className="rounded-[1.25rem] p-4 flex-row justify-center">
-          <Skeleton variant="rounded" width={'100%'} height={'300px'} />
+          <Skeleton variant="rounded" width={'200px%'} height={'300px'} />
         </div>
         </div>
       </Stack>

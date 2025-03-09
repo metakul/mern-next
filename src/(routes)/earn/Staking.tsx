@@ -1,5 +1,4 @@
 
-import { useEffect, useState } from 'react';
 import {
   Box,
   Container,
@@ -7,27 +6,20 @@ import {
   Typography,
 } from '@mui/material';
 // import { ethers } from "ethers";
-import { ConnectWallet, Web3Button, useAddress, useContract, useOwnedNFTs, useTokenBalance } from '@thirdweb-dev/react';
+import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react';
 import { toast } from 'react-toastify';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
-import { ethers } from "ethers";
 
 import NftCard from '@/components/Cards/NftCard';
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
-const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
 const stakingContractAddress = import.meta.env.VITE_PUBLIC_STAKING_CONTRACT_ADDRESS as string
 
 
 const Staking = () => {
   const address = useAddress()
 
-  const { contract: tokenContract } = useContract(
-    tokenContractAddress,
-    "token"
-  );
 
-  const { data: tokenBalance } = useTokenBalance(tokenContract, address);
   const { contract: nftDropContract } = useContract(
     nftDropContractAddress,
     "nft-drop"
@@ -36,27 +28,6 @@ const Staking = () => {
   const { contract:stakingContract, } = useContract(stakingContractAddress);
   let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
 
-  const [claimableRewards, setClaimableRewards] = useState();
-
-  useEffect(() => {
-    const fetchBalance = async () => {
-      try {
-        if (address && stakingContract) {
-
-          const stakeInfo = await stakingContract?.call("getStakeInfo", [address]);
-          setClaimableRewards(stakeInfo[1]);
-        }
-      } catch (error) {
-        toast.error("Error Loading Rewards")
-      }
-    };
-
-    // Check if address is not null before fetching balance
-    if (address !== null && nftDropContract) {
-      fetchBalance();
-    }
-
-  }, [address, stakingContract, nftDropContract]);
 
   async function stakeNft(id: unknown) {
     if (!address) return;
@@ -96,26 +67,7 @@ const Staking = () => {
             NFT Staking
           </Typography>
         </Grid>
-        <Grid item xs={12} md={6} sx={{
-        }} >
-          {address && claimableRewards &&
-            <>
-              <Typography className="mt-4" >
-                Claimable Balance: <b>
-                  {/* {claimableRewards} */}
-                  {ethers.utils.formatUnits(claimableRewards, 18)}
-                </b>{" "}
-                {tokenBalance?.symbol}
-              </Typography>
-            </>
-          }
-          <Web3Button
-            action={(contract: { call: (arg0: string) => unknown; }) => contract.call("claimRewards")}
-            contractAddress={stakingContractAddress}
-          >
-            Claim Rewards
-          </Web3Button>
-        </Grid>
+      
       </Grid>
       {address ? (
         <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4 mt-4">
@@ -135,7 +87,6 @@ const Staking = () => {
           </Typography>
         </Box>
       )}
-
     </Container>
   );
 };

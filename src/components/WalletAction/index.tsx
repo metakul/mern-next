@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Dialog, DialogContent } from "@mui/material";
 import TransferPage from "./Send";
 
-const WalletAction = () => {
+const WalletAction = ({tokenAddress}:any) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

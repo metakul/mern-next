@@ -28,10 +28,10 @@ const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positio
     let activeItem = menu.querySelector(".active") as HTMLElement;
 
     function clickItem(item: HTMLElement | null, index: number) {
-      if (index === 3 && setIsSidebarOpen) {
-        setIsSidebarOpen();
-        return;
-      }
+      // if (index === 3 && setIsSidebarOpen) {
+      //   setIsSidebarOpen();
+      //   return;
+      // }
 
       if (activeItem === item) return;
 
@@ -88,11 +88,11 @@ const MobileTabNavigation: React.FC<MobileTabNavigationProps> = ({ tabs, positio
       </menu>
       {tabs.map(({ content }, index) => (
         // Render CustomTabPanel only if it’s not the fourth tab
-        index !== 3 && (
+        // index !== 3 && (
           <CustomTabPanel isNonMobile={true} key={index} value={value} position={position} index={index}>
             {content}
           </CustomTabPanel>
-        )
+        // )
       ))}
       <div className="svg-container">
         <svg viewBox="0 0 202.9 45.5">

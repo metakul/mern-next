@@ -44,7 +44,7 @@ const MetakulCollection = () => {
   };
 
   return (
-    <Container className="">
+    <Container className="container">
       {/* <div className="relative">
         <img src="img/collections/collection_banner.jpg" alt="banner" className="h-[18.75rem] object-cover" />
       </div> */}

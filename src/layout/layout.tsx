@@ -40,8 +40,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./Theme/themes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import ProfilePage from "@/(routes)/profile/page";
-import { /*MenuBookRounded,*/ MenuRounded } from "@mui/icons-material";
+import ProfilePage from "@/(routes)/profile/page";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 const smartWalletOptions = {
   factoryAddress: "0x2ace847964fe70d38ea6dad726e3a230dca244bd",
@@ -119,22 +119,22 @@ export default function DashboardLayout() {
     },
     {
       value: (
-        <MenuRounded
+        <AccountBoxIcon
           sx={{
             color: "white",
           }}
         />
       ),
-      content: null,
+      content: <ProfilePage/>,
       label: Tabs.tabTitle4,
     },
   ];
 
   return (
-    <>
+    <Box {...swipeHandlers} sx={{ overflow: "hidden", position: "relative" }}>
       {/* <canvas className="webgl"></canvas> */}
       <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme} {...swipeHandlers} >
+        <ThemeProvider theme={theme}  >
           <CssBaseline />
           {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
           <ThirdwebProvider
@@ -206,6 +206,7 @@ export default function DashboardLayout() {
                 flexGrow: 1,
                 mt: 10,
                 mr: "auto",
+                ml:isNonMobile ? 4 : 0,
               }}
             >
               <MobileTabNavigation
@@ -233,6 +234,6 @@ export default function DashboardLayout() {
         `}
             </style>
       </ColorModeContext.Provider>
-    </>
+    </Box>
   );
 }
