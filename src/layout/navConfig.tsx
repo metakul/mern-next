@@ -6,6 +6,9 @@ import {
   TodayOutlined,
   // AdminPanelSettingsOutlined,
   PieChartOutlined,
+  ReceiptLongOutlined,
+  CalendarMonthOutlined,
+  ToysOutlined,
   // Checkroom
 } from "@mui/icons-material";
 // import SmartToyIcon from '@mui/icons-material/SmartToy';
@@ -56,12 +59,6 @@ export const navConfig = [
     icon: null,
     to: "",
   },
-  // {
-  //   text: "Learn Web3",
-  //   icon: <ReceiptLongOutlined />,
-  //   to: "blogs",
-  // },
-
 
   // {
   //   text: "Extras",
@@ -93,11 +90,6 @@ export const navConfig = [
     icon: < CurrencyExchangeIcon/>,
     to: Pages.SWAP_PAGE,
   },
-  // {
-  //   text: "Career",
-  //   icon: <CalendarMonthOutlined />,
-  //   to: "/Career",
-  // },
     
   {
     text: "Metakul utilities",
@@ -111,7 +103,7 @@ export const navConfig = [
   },
   // {
   //   text: "InstaBot",
-  //   icon:<SmartToyIcon/>,
+  //   icon:<ToysOutlined/>,
   //   to: Pages.INSTA_BOT
   // },
   {

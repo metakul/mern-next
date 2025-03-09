@@ -63,10 +63,10 @@ const Router: React.FC = () => {
           path: Pages.CREATE_NFT,
           element:  <CreateNft/>,
         },
-        {
-          path: Pages.SHOPPING,
-          element:  <ShopPage/>,
-        },
+        // {
+        //   path: Pages.SHOPPING,
+        //   element:  <ShopPage/>,
+        // },
         {
           path: Pages.ADD_BLOG,
           element:  <AddBlogPage/>,

@@ -29,10 +29,7 @@ const InstaBot = () => {
             }}> 
                 Only For Admin
             </Typography>
-            {!address ? (
-                <ConnectWallet />
-            ) : (
-                <>
+          
 
                     {!isUserAuthenticated ? (
                         <RegisterPage />
@@ -62,8 +59,7 @@ const InstaBot = () => {
                             )}
                         </>
                     )}
-                </>
-            )}
+            
         </Container>
     );
 };
