@@ -6,9 +6,9 @@ import {
   TodayOutlined,
   // AdminPanelSettingsOutlined,
   PieChartOutlined,
-  ReceiptLongOutlined,
-  CalendarMonthOutlined,
-  ToysOutlined,
+  // ReceiptLongOutlined,
+  // CalendarMonthOutlined,
+  // ToysOutlined,
   // Checkroom
 } from "@mui/icons-material";
 // import SmartToyIcon from '@mui/icons-material/SmartToy';
@@ -116,16 +116,16 @@ export const navConfig = [
   //   icon:<Checkroom/>,
   //   to: "/laundry",
   // },
-  {
-    text: "API",
-    icon:null,
-    to: "",
-  },
-  {
-    text: "MetaKul API",
-    icon:<ApiIcon/>,
-    to: Pages.API_PAGE
-  },
+  // {
+  //   text: "API",
+  //   icon:null,
+  //   to: "",
+  // },
+  // {
+  //   text: "MetaKul API",
+  //   icon:<ApiIcon/>,
+  //   to: Pages.API_PAGE
+  // },
 ];
 
 export default navConfig;

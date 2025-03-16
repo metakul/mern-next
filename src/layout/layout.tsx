@@ -205,8 +205,6 @@ export default function DashboardLayout() {
               sx={{
                 flexGrow: 1,
                 mt: 10,
-                mr: "auto",
-                ml:isNonMobile ? 4 : 0,
               }}
             >
               <MobileTabNavigation

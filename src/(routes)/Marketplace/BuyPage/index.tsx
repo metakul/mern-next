@@ -38,7 +38,7 @@ const BuyPage = () => {
 			
 			const totalAuctionDecimal = parseInt(totalAuctions._hex, 16)-1
 			
-			const response = await marketPlaceContract.call("getAllValidAuctions", [0, totalAuctionDecimal])
+			const response = await marketPlaceContract.call("getAllAuctions", [0, totalAuctionDecimal])
 			console.log("response",response);
 			
 			// Extract 'assetContract' from each auction object in the response
