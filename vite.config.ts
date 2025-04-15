@@ -199,7 +199,7 @@ if (selfDestroying)
 export default defineConfig(({ mode }) => {
   // Load environment variables for the current build mode
   const env = loadEnv(mode, __dirname);
-
+  
   return {
     define: {
       _global: {},
@@ -208,6 +208,7 @@ export default defineConfig(({ mode }) => {
       react(),
       VitePWA(pwaOptions),
     ],
+
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
