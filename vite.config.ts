@@ -31,6 +31,7 @@ const pwaOptions: Partial<VitePWAOptions> ={
     "logo.svg",
   ],
   manifest: {
+    id: "/",
     name: "METAKUL",
     short_name: "Metakul",
     description: "Metakul- A next gen professional education platform in Blockchain.",
@@ -159,8 +160,11 @@ const pwaOptions: Partial<VitePWAOptions> ={
     theme_color: "#ffffff",
     background_color: "#ffffff",
     display: "standalone",
-    start_url: "/",
-    scope: ".",
+    start_url: "https://app.metakul.com/",
+    scope: "https://app.metakul.com/",
+    lang: "en",
+    orientation: "portrait",
+    categories: ["games", "finance", "navigation", "web3", "blockchain", "erc4337", "gasless", "smart wallet"]
   },
 }
 const replaceOptions = { __DATE__: new Date().toISOString() }
