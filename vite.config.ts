@@ -164,7 +164,14 @@ const pwaOptions: Partial<VitePWAOptions> ={
     scope: "https://app.metakul.com/",
     lang: "en",
     orientation: "portrait",
-    categories: ["games", "finance", "navigation", "web3", "blockchain", "erc4337", "gasless", "smart wallet"]
+    categories: ["games", "finance", "navigation", "web3", "blockchain", "erc4337", "gasless", "smart wallet"],
+    dir: "ltr",
+    launch_handler: {
+      client_mode: "auto"
+    },
+    prefer_related_applications: false,
+    related_applications: [],
+    scope_extensions: []
   },
 }
 const replaceOptions = { __DATE__: new Date().toISOString() }
