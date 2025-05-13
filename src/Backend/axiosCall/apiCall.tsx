@@ -39,7 +39,6 @@ const Request = async ({ endpointId, slug, data, headers, params }: RequestOptio
     const response = await axios(axiosConfig);
 
     // Log response data for debugging
-    console.log("Response Data:", response.data);
 
     // Handle unsuccessful response
     if (response.status < 200 || response.status >= 300) {
