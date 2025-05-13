@@ -3,7 +3,7 @@ import { Box, Button, Container, Typography, TextField } from "@mui/material";
 import { useContract, useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { toast } from 'react-toastify';
 import { transferCrypto } from "@/lib/helpers";
-import { TransferCryptoInterface } from "@/Datatypes/interfaces/interface";
+// import { TransferCryptoInterface } from "@/Datatypes/interfaces/interface";
 import { ethers } from "ethers";
 
 const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string;
@@ -47,7 +47,7 @@ const TransferPage = () => {
       return;
     }
 
-    const transferCryptoHandler: TransferCryptoInterface = {
+    const transferCryptoHandler: any = {
       to,
       amount: ethers.utils.parseUnits(amount.toString(), 18),
       transfer

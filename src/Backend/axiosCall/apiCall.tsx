@@ -59,7 +59,6 @@ const Request = async ({ endpointId, slug, data, headers, params }: RequestOptio
       toast.error(endpoint?.errorMessage,{style: toastStyle,position: "bottom-center"});
     }
 
-    console.error("Request error:", error);
     throw error;  // Re-throw the error for further handling
   }
 };

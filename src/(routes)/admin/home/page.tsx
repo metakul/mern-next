@@ -16,9 +16,9 @@ import BlogsPage from "@/components/LoginPagesComp/Blogs"; // Regular import for
 import { useNavigate } from "react-router-dom";
 import { UserCategory } from "@/Datatypes/enums";
 import BreadCrumbs from "@/components/Elements/BreadCrumbs";
-import ContractInfo from "@/components/ContractInfo/ContractInfo";
+// import ContractInfo from "@/components/ContractInfo/ContractInfo";
 
-const herokuDeployment = import.meta.env.VITE_HEROKU_DEPLOYMENT as string
+// const herokuDeployment = import.meta.env.VITE_HEROKU_DEPLOYMENT as string
 
 const ProtectedPage: React.FC<ProtectedPageProps> = () =>
   // props
@@ -73,7 +73,7 @@ const ProtectedPage: React.FC<ProtectedPageProps> = () =>
           <BreadCrumbs currentPath={`/`} />
 
         <BlogsPage />
-   <ContractInfo urlBase={`${herokuDeployment}`} buttonText="Heroku Deployment" />
+   {/* <ContractInfo urlBase={`${herokuDeployment}`} buttonText="Heroku Deployment" /> */}
 
       </Container>
     );

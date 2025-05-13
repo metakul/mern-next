@@ -25,16 +25,7 @@ import Tab3 from "@/tabs/Tab3/temp";
 import { Outlet } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 
-//provider:
-import {
-  ThirdwebProvider,
-  metamaskWallet,
-  coinbaseWallet,
-  walletConnect,
-  // localWallet,
-  embeddedWallet,
-  smartWallet,
-} from "@thirdweb-dev/react";
+
 import { CssBaseline, ThemeProvider } from "@mui/material";
 //theme
 import { ColorModeContext, useMode } from "./Theme/themes";
@@ -42,13 +33,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "@/(routes)/profile/page";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-
-const smartWalletOptions = {
-  factoryAddress: "0x2ace847964fe70d38ea6dad726e3a230dca244bd",
-  gasless: true,
-};
-
-const clientId = import.meta.env.VITE_PUBLIC_THIRDWEB_CLIENT_ID;
 
 export default function DashboardLayout() {
   const [theme, colorMode] = useMode();
@@ -137,34 +121,7 @@ export default function DashboardLayout() {
         <ThemeProvider theme={theme}  >
           <CssBaseline />
           {/* <Box sx={{ background: getColors().backgroundUrl }}> */}
-          <ThirdwebProvider
-            activeChain="polygon"
-            clientId={clientId}
-            supportedWallets={[
-              smartWallet(metamaskWallet(), smartWalletOptions),
-              smartWallet(
-                coinbaseWallet({ recommended: true }),
-                smartWalletOptions
-              ),
-              smartWallet(walletConnect(), smartWalletOptions),
-              // smartWallet(localWallet(), smartWalletOptions),
-              smartWallet(
-                embeddedWallet({
-                  auth: {
-                    options: [
-                      "email",
-                      "google",
-                      "apple",
-                      "facebook",
-                      "email",
-                      "phone",
-                    ],
-                  },
-                }),
-                smartWalletOptions
-              ),
-            ]}
-          >
+       
             {/* Swipe Right Hint */}
             {showSwipeHint && (
               <Box
@@ -213,7 +170,6 @@ export default function DashboardLayout() {
                 setIsSidebarOpen={handleSideBarState}
               />
             </Container>
-          </ThirdwebProvider>
           {/* </Box> */}
         </ThemeProvider>
             {/* CSS Keyframes for Animation */}

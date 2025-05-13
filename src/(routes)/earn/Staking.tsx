@@ -6,18 +6,31 @@ import {
   Typography,
 } from '@mui/material';
 // import { ethers } from "ethers";
-import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react';
+import { useAddress, useContract, useOwnedNFTs, useTokenBalance, Web3Button } from '@thirdweb-dev/react';
 import { toast } from 'react-toastify';
 import { BalanceItem } from '@/Datatypes/interfaces/interface';
+import {  ethers } from 'ethers';
 
 import NftCard from '@/components/Cards/NftCard';
+import { useEffect, useState } from 'react';
 
 const nftDropContractAddress = import.meta.env.VITE_PUBLIC_NFT_DROP_CONTRACT_ADDRESS as string
 const stakingContractAddress = import.meta.env.VITE_PUBLIC_STAKING_CONTRACT_ADDRESS as string
+const tokenContractAddress = import.meta.env.VITE_PUBLIC_TOKEN_CONTRACT_ADDRESS as string
 
 
 const Staking = () => {
   const address = useAddress()
+  const [claimableRewards, setClaimableRewards] = useState();
+
+
+  
+  const { contract: tokenContract } = useContract(
+    tokenContractAddress,
+    "token"
+  );
+
+  const { data: tokenBalance } = useTokenBalance(tokenContract, address);
 
 
   const { contract: nftDropContract } = useContract(
@@ -27,6 +40,25 @@ const Staking = () => {
 
   const { contract:stakingContract, } = useContract(stakingContractAddress);
   let { data: ownedNfts } = useOwnedNFTs(nftDropContract, address);
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        if (address && stakingContract) {
+
+          const stakeInfo = await stakingContract?.call("getStakeInfo", [address]);
+          setClaimableRewards(stakeInfo[1]);
+        }
+      } catch (error) {
+      }
+    };
+
+    // Check if address is not null before fetching balance
+    if (address !== null) {
+      fetchBalance();
+    }
+
+  }, [address, stakingContract]);
 
 
   async function stakeNft(id: unknown) {
@@ -69,6 +101,27 @@ const Staking = () => {
         </Grid>
       
       </Grid>
+      <Grid item xs={12} md={6} sx={{
+        }} >
+          {address && stakingContractAddress && claimableRewards &&
+            <>
+              <Typography className="mt-4" >
+                Claimable Balance: <b>
+                  {/* {claimableRewards} */}
+                  {ethers.utils.formatUnits(claimableRewards, 18)}
+                </b>{" "}
+                {tokenBalance?.symbol}
+              </Typography>
+            </>
+          }
+          <Web3Button
+            action={(contract: { call: (arg0: string) => unknown; }) => contract.call("claimRewards")}
+            contractAddress={stakingContractAddress}
+          >
+            Claim Rewards
+          </Web3Button>
+        </Grid>
+
       {address ? (
         <div className="grid grid-cols-1 gap-[1rem] md:grid-cols-2 lg:grid-cols-4 mt-4">
 
