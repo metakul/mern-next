@@ -5,10 +5,14 @@ import Router from './routes';
 import StoreProvider from './lib/StoreProvider';
 import Offline from './PWA/Offline';
 // import { WalletAuthProvider } from './contexts/WalletAuthContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
+const queryClient = new QueryClient();
 function App() {
+
   return (
+    <QueryClientProvider client={queryClient}>
     <StoreProvider>
       {/* <WalletAuthProvider> */}
 
@@ -19,6 +23,7 @@ function App() {
     </Offline>
       {/* </WalletAuthProvider> */}
     </StoreProvider>
+    </QueryClientProvider>
   );
 }
 
