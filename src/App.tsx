@@ -8,7 +8,14 @@ import Offline from './PWA/Offline';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 function App() {
 
   return (
