@@ -66,7 +66,7 @@ export enum ProtectedPageInfo{
 }
 
 // const base_url_backend="https://backend-everything-37ada44e5086.herokuapp.com/v1"
-const base_url_backend="http://localhost:5003/v1"
+const base_url_backend="https://metakul.com/v1"
 
 // define endpoints here
   export const ApiEndpoint: Record<string, any> = {
